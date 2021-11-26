@@ -235,8 +235,8 @@ bindsym $mod+Shift+Tab workspace prev
 
 # Startup Once
 
-exec --no-startup-id /home/arbab/.config/i3/startup.sh
+exec --no-startup-id /home/arbab/.config/i3/startup.sh &> /tmp/statup.sh>>dump.txt
 
 # Startup Always
 
-exec_always --no-startup-id /home/arbab/.config/i3/exec_always.sh
+exec_always --no-startup-id /home/arbab/.config/i3/exec_always.sh &> /tmp/exec_always>>dump.txt
