@@ -26,4 +26,8 @@ nm-applet &
 
 # SysTray App For KdeConnect
 
-kdeconnect-indicator
+kdeconnect-indicator $
+
+# Dunst Startup Script
+
+/home/arbab/.config/dunst/load.sh
