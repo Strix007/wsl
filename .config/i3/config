@@ -135,6 +135,7 @@ assign     [class="Alacritty"]                   $ws2
 assign     [class="Thunar"]                      $ws3
 assign     [class="Org.gnome.Nautilus"]          $ws3
 assign     [class="Code - Insiders"]             $ws4
+assign     [class="Code"]                        $ws4
 assign     [class="Steam"]                       $ws6
 assign     [class="Spotify"]                     $ws10
 for_window [class="Spotify"]   move to workspace $ws10
