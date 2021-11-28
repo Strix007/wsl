@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# Playerctl Daemon For Behavior Based On Player In Order Of Their Last Activity
+
+playerctld daemon &
+
 # Wallpaper Uitlity (Currently: Nitrogen)
 
-nitrogen --restore
+nitrogen --restore &
 
 # Rclone
 
@@ -26,7 +30,7 @@ nm-applet &
 
 # SysTray App For KdeConnect
 
-kdeconnect-indicator $
+kdeconnect-indicator &
 
 # Dunst Startup Script
 

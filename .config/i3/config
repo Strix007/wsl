@@ -11,22 +11,23 @@ font pango:System San Fransisco 11
 
 floating_modifier $mod
 
-# Use Function Keys To Control Spotify
+# Use Function Keys To Control All Players Using playerctl
  
 # Previous Song
  
-bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioPrev exec playerctl previous
  
 # Toggle Play/Pause
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+bindsym XF86AudioPlay exec playerctl play-pause
  
 # Next Song
  
-bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioNext exec playerctl next
 
 # Use $mod+Shift+x to Lock Desktop Using A Custom i3lock Script
 
-bindsym $mod+shift+x exec --no-startup-id /home/arbab/.config/i3/i3lock.sh
+bindsym $mod+shift+x exec --no-startup-id /home/arbab/.config/i3lock/lock.sh
 
 # Start A Terminal (Current: Alacritty)
 
@@ -38,8 +39,8 @@ bindsym $mod+q kill
 
 # Start A Program Launcher (Currently Rofi)
 
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+d exec --no-startup-id --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme /home/arbab/.config/rofi/launcher/launcher.rasi
+bindsym $mod+Shift+d exec --no-startup-id --no-startup-id rofi -show run -theme /home/arbab/.config/rofi/launcher/launcher.rasi
 
 # Change Focus
 
