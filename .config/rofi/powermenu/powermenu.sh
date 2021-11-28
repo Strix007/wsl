@@ -1,12 +1,26 @@
-
 #!/usr/bin/env bash
 
-theme="column_alt"
-dir="$HOME/.config/rofi/powermenu"
+## Author  : Aditya Shakya
+## Mail    : adi1090x@gmail.com
+## Github  : @adi1090x
+## Twitter : @adi1090x
+
+# Available Styles
+# >> Created and tested on : rofi 1.6.0-1
+#
+# column_circle     column_square     column_rounded     column_alt
+# card_circle     card_square     card_rounded     card_alt
+# dock_circle     dock_square     dock_rounded     dock_alt
+# drop_circle     drop_square     drop_rounded     drop_alt
+# full_circle     full_square     full_rounded     full_alt
+# row_circle      row_square      row_rounded      row_alt
+
+theme="card_square"
+dir="/home/arbab/.config/rofi/powermenu"
 
 # random colors
-#styles=($(ls -p --hide="colors.rasi" $dir/styles))
-#color="${styles[$(( $RANDOM % 8 ))]}"
+styles=($(ls -p --hide="colors.rasi" $dir/styles))
+color="${styles[$(( $RANDOM % 8 ))]}"
 
 # comment this line to disable random colors
 #sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
@@ -66,11 +80,7 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/i3lock ]]; then
-			/home/arbab/.config/rofi/powermenu/i3lock.sh
-		elif [[ -f /usr/bin/betterlockscreen ]]; then
-			betterlockscreen -l
-		fi
+			/home/arbab/.config/i3lock/lock.sh
         ;;
     $suspend)
 		ans=$(confirm_exit &)
