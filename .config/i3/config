@@ -42,6 +42,16 @@ bindsym $mod+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme /home/arbab/.config/rofi/launcher/launcher.rasi
 bindsym $mod+Shift+d exec --no-startup-id --no-startup-id rofi -show run -theme /home/arbab/.config/rofi/launcher/launcher.rasi
 
+# Using A Script Using Rofi To Take Screenshots
+
+# Execute The Script
+
+bindsym $mod+g exec --no-startup-id sh /home/arbab/.config/rofi/screenshot/screenshot.sh
+
+# Stop The Recording 
+
+bindsym $mod+Shift+g exec --no-startup-id sh /home/arbab/.config/rofi/screenshot/screenshot.sh -s
+
 # Change Focus
 
 bindsym $mod+Left focus left

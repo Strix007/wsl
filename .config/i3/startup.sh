@@ -34,4 +34,4 @@ kdeconnect-indicator &
 
 # Dunst Startup Script
 
-/home/arbab/.config/dunst/load.sh
+/home/arbab/.config/dunst/load.sh &> /tmp/dunst-welcome_debug.txt
