@@ -27,11 +27,11 @@ bindsym XF86AudioNext exec playerctl next
 
 # Use $mod+Shift+x to Lock Desktop Using A Custom i3lock Script
 
-bindsym $mod+shift+x exec --no-startup-id /home/arbab/.config/i3lock/lock.sh
+bindsym $mod+Shift+x exec /home/arbab/.config/i3lock/lock.sh
 
 # Start A Terminal (Current: Alacritty)
 
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec alacritty
 
 # Kill Focused Window
 
@@ -39,18 +39,30 @@ bindsym $mod+q kill
 
 # Start A Program Launcher (Currently Rofi)
 
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme /home/arbab/.config/rofi/launcher/launcher.rasi
-bindsym $mod+Shift+d exec --no-startup-id --no-startup-id rofi -show run -theme /home/arbab/.config/rofi/launcher/launcher.rasi
+bindsym $mod+d exec rofi -show drun -theme /home/arbab/.config/rofi/launcher/launcher.rasi
+bindsym $mod+Shift+d exec rofi -show run -theme /home/arbab/.config/rofi/launcher/launcher.rasi
 
 # Using A Script Using Rofi To Take Screenshots
 
 # Execute The Script
 
-bindsym $mod+g exec --no-startup-id sh /home/arbab/.config/rofi/screenshot/screenshot.sh
+bindsym $mod+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh
 
 # Stop The Recording 
 
-bindsym $mod+Shift+g exec --no-startup-id sh /home/arbab/.config/rofi/screenshot/screenshot.sh -s
+bindsym $mod+Shift+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh --stop
+
+# Switch To Specific Application Using Rofi Show Window
+
+bindsym $mod+t exec rofi -show window -theme /home/arbab/.config/rofi/applist/applist.rasi
+
+# ToDo List Using Rofi
+
+bindsym $mod+l exec --no-startup-id rofi -modi ToDo:/home/arbab/.config/rofi/todo/todo.sh -theme /home/arbab/.config/rofi/todo/todo.rasi -show
+
+# Powermenu Script Using Rofi
+
+bindsym $mod+Shift+q exec /home/arbab/.config/rofi/powermenu/powermenu.sh
 
 # Change Focus
 
@@ -116,7 +128,7 @@ set $ws10 "10: Spotify"
 # Switch To Workspace
 
 bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
+bindsym $mod+2 workspace $ws2; exec /home/arbab/.config/i3/scripts/bindings/alacritty.sh
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
@@ -124,7 +136,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+0 workspace $ws10; exec /home/arbab/.config/i3/scripts/bindings/spotify.sh
 
 # Mmove Focused Container To Workspace
 
@@ -223,20 +235,16 @@ hide_edge_borders both
 
 # Kill Picom Incase Of A Bad Config Or A Crash
 
-bindsym $mod+Shift+p exec --no-startup-id killall picom
-
-# Powermenu Script Using Rofi
-
-bindsym $mod+Shift+q exec --no-startup-id ~/.config/rofi/powermenu/powermenu.sh
+bindsym $mod+Shift+p exec killall picom
 
 # Bind Filemanager (Currently: Nautilus, Backup: Thunar)
 
-bindsym $mod+z exec --no-startup-id nautilus
-bindsym $mod+Shift+z exec --no-startup-id thunar
+bindsym $mod+z exec nautilus
+bindsym $mod+Shift+z exec thunar
 
 # Bind Browser (Currently: Firefox)
 
-bindsym $mod+c exec --no-startup-id firefox
+bindsym $mod+c exec firefox
 
 # Workspace Cycle
 
@@ -247,8 +255,8 @@ bindsym $mod+Shift+Tab workspace prev
 
 # Startup Once
 
-exec --no-startup-id /home/arbab/.config/i3/startup.sh &> /tmp/statup.sh>>dump.txt
+exec --no-startup-id /home/arbab/.config/i3/scripts/startup.sh
 
 # Startup Always
 
-exec_always --no-startup-id /home/arbab/.config/i3/exec_always.sh &> /tmp/exec_always>>dump.txt
+exec_always --no-startup-id /home/arbab/.config/i3/scripts/exec_always.sh
