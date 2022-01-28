@@ -25,7 +25,9 @@ colors:
     magenta: "#c795ae"
     cyan: "#95aec7"
     white: "#f3f4f5"
-background_opacity: 0.75
+window:
+ opacity: 0.75
 font:
   normal:
-    family: Source Code Pro
+    family: JetBrains Mono
+theme: Ashes.dark
