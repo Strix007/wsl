@@ -10,7 +10,7 @@ nitrogen --restore &
 
 # Rclone
 
-rclone mount --daemon Drive_arbabashruff: $home/Mount/arbabashruff@gmail.com/ &
+rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/ &
 
 # Xfce Power Manager
 
