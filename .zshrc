@@ -1,75 +1,34 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
+
 export ZSH="/home/arbab/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH Prompt Theme
+
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Autocompletion
 
-# Uncomment the following line to use case-sensitive completion.
- CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Automatically Update
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Check For Updates
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=1
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Command Correction
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+ENABLE_CORRECTION="true"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Wait For Completion
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
+# Plugins
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	zsh-syntax-highlighting
 	zsh-autosuggestions	
@@ -77,37 +36,28 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Enviorment Variables
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export LANG=en_US.UTF-8 
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+if [[ -n $SSH_CONNECTION ]]; then # Editor For SSH And Local Separately
+  export EDITOR='nvim'
+else
+  export EDITOR='nvim'
+fi
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export ARCHFLAGS="-arch x86_64"   # Compilation Flag
 
-export EDITOR='nvim'
+export MONITOR="HDMI2"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# KEYBINDING TYPE
 
-# Lines configured by zsh-newuser-install
-bindkey -v
-# End of lines configured by zsh-newuser-install
+bindkey -v 
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
+# ALIASES
 
 alias vim="nvim"
+alias svim="sudo -e nvim"
 alias lmatrix="cmatrix | lolcat"
 alias zshconfig="nvim ~/.zshrc"
 alias zshreload="source $HOME/.zshrc"
@@ -118,10 +68,7 @@ alias ga="git add ."
 alias fetch="sudo neofetch"
 alias rm-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias app-img-exec="chmod u+x"
-alias lcat="lolcat"
-alias alcat="lolcat -a"
-alias train="sl"
-alias anitrain="sl | lolcat"
+alias train="sl | lolcat"
 alias vs="code"
 alias ls="exa -a"
 alias la="exa -la"
