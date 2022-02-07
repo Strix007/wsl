@@ -8,11 +8,6 @@
 theme="card_square"
 dir="/home/arbab/.config/rofi/powermenu"
 
-# random colors
-styles=($(ls -p --hide="colors.rasi" $dir/styles))
-color="${styles[$(( $RANDOM % 8 ))]}"
-
-
 rofi_command="rofi -theme $dir/$theme"
 
 # Options
@@ -38,6 +33,7 @@ msg() {
 
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+uptime=$(uptime -p | sed -e 's/up //g')
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
 case $chosen in
