@@ -6,7 +6,7 @@ picom --experimental-backend &
 
 # Polybar Launch Script
 
-/home/arbab/.config/polybar/launch.sh
+/home/arbab/.config/polybar/scripts/i3-launch.sh
 
 # Implement Dwindle
 

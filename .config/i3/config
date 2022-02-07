@@ -52,14 +52,6 @@ bindsym $mod+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh
 
 bindsym $mod+Shift+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh --stop
 
-# Switch To Specific Application Using Rofi Show Window
-
-bindsym $mod+t exec rofi -show window -theme /home/arbab/.config/rofi/applist/applist.rasi
-
-# ToDo List Using Rofi
-
-bindsym $mod+l exec --no-startup-id rofi -modi ToDo:/home/arbab/.config/rofi/todo/todo.sh -theme /home/arbab/.config/rofi/todo/todo.rasi -show
-
 # Powermenu Script Using Rofi
 
 bindsym $mod+Shift+q exec /home/arbab/.config/rofi/powermenu/powermenu.sh
@@ -121,9 +113,8 @@ set $ws4  "4: Developement"
 set $ws5  "5: Applications"
 set $ws6  "6: Gaming"
 set $ws7  "7"
-set $ws8  "8"
-set $ws9  "9: Background Processes"
-set $ws10 "10: Spotify"
+set $ws8  "8: Background Processes"
+set $ws9  "9: Spotify"
 
 # Switch To Workspace
 
@@ -135,8 +126,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10; exec /home/arbab/.config/i3/scripts/bindings/spotify.sh
+bindsym $mod+9 workspace $ws9; exec /home/arbab/.config/i3/scripts/bindings/spotify.sh
 
 # Mmove Focused Container To Workspace
 
@@ -149,7 +139,6 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Assign Specific Appilications To Workspaces
 
@@ -160,8 +149,8 @@ assign     [class="Org.gnome.Nautilus"]          $ws3
 assign     [class="Code - Insiders"]             $ws4
 assign     [class="Code"]                        $ws4
 assign     [class="Steam"]                       $ws6
-assign     [class="Spotify"]                     $ws10
-for_window [class="Spotify"]   move to workspace $ws10
+assign     [class="Spotify"]                     $ws9
+for_window [class="Spotify"]   move to workspace $ws9
 
 # Restart i3 (Preserve Session)
 
@@ -244,7 +233,7 @@ bindsym $mod+Shift+z exec thunar
 
 # Bind Browser (Currently: Firefox)
 
-bindsym $mod+c exec firefox
+bindsym $mod+b exec firefox
 
 # Workspace Cycle
 

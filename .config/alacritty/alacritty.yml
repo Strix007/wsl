@@ -26,7 +26,7 @@ colors:
     cyan: "#95aec7"
     white: "#f3f4f5"
 window:
- opacity: 0.75
+  opacity: 0.75
 font:
   normal:
     family: JetBrains Mono
