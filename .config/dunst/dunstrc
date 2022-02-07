@@ -45,7 +45,7 @@
 	class                = Dunst
 	startup_notification = false
 	force_xinerama       = false
-	corner_radius        = 0
+	corner_radius        = 10
 
 [experimental]
 
