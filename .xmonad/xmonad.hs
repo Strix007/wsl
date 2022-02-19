@@ -35,6 +35,7 @@ import XMonad.Layout.Spiral
 
 -- LAYOUT MODIFIERS
 
+import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.MultiToggle
@@ -91,36 +92,49 @@ myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \6159
 
 myScratchPads =
 
-  [ 
-    
-      NS "terminal"    spawnTerm findTerm manageTerm
-    , NS "spotify-tui" spawnSpt  findSpt  manageSpt
-  
+  [
+
+      NS "terminal"    spawnTerm findTerm manageTerm -- Alacritty
+    , NS "spotify-tui" spawnSpt  findSpt  manageSpt  -- Spotify-TUI
+    , NS "calculator"  spawnCalc findCalc manageCalc -- Qalculate
+
   ]
 
-  where 
+  where
 
-    spawnTerm = myTerminal ++ " -t scratchpad --class scratchpad,ScratchPad"
-    findTerm  = resource   =? "scratchpad"
+    spawnTerm  = myTerminal ++ " -t scratchpad --class scratchpad,ScratchPad"
+    findTerm   = resource   =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
-    
+
      where
-    
+
         h = 0.9
         w = 0.9
         t = 0.95 -h
         l = 0.95 -w
 
-    spawnSpt = myTerminal ++ " -t spt --class spt,SPT -e spt"
-    findSpt  = resource   =? "spt"
+    spawnSpt  = myTerminal ++ " -t spt --class spt,SPT -e spt"
+    findSpt   = resource   =? "spt"
     manageSpt = customFloating $ W.RationalRect l t w h
-    
+
      where
-    
+
         h = 0.9
         w = 0.9
         t = 0.95 -h
         l = 0.95 -w
+    
+    spawnCalc  = "qalculate-gtk"
+    findCalc   = className =? "Qalculate-gtk"
+    manageCalc = customFloating $ W.RationalRect l t w h
+
+     where
+
+        h = 0.5
+        w = 0.4
+        t = 0.75 -h
+        l = 0.70 -w
+
 
 -- KEYBINDINGS
 
@@ -155,7 +169,7 @@ myKeys =
 
                 , ("M-<Left>",        windows W.focusUp)                                                                    -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
                 , ("M-<Right>",       windows W.focusDown)                                                                  -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
-                
+
                 -- LAYOUT WINDOW SWAPS
 
                 , ("M-S-<Left>",      windows W.swapUp)                                                                     -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
@@ -184,15 +198,16 @@ myKeys =
 
                 -- SCRATCHPADS
 
-                , ("M-s <Return>",    namedScratchpadAction myScratchPads "terminal")                                       -- Spawn A Terminal As A ScratchPad
+                , ("M-s M-<Return>",  namedScratchpadAction myScratchPads "terminal")                                       -- Spawn A Terminal As A ScratchPad
                 , ("M-s s",           namedScratchpadAction myScratchPads "spotify-tui")                                    -- Spawn A TUI Spotify Client As A ScratchPad
+                , ("M-s c",           namedScratchpadAction myScratchPads "calculator")                                     -- Spawn A Calculator As A ScratchPad
 
                 -- FUNCTION KEYS
 
                 , ("<XF86AudioPrev>", spawn "playerctl previous")                                                           -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
                 , ("<XF86AudioPlay>", spawn "playerctl play-pause")                                                         -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
                 , ("<XF86AudioNext>", spawn "playerctl next")                                                               -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
-                
+
                 -- ROFI
 
                 , ("M-d",             spawn "rofi -show drun -theme /home/arbab/.config/rofi/launcher/drun/launcher.rasi")  -- Launcher -Drun
@@ -222,9 +237,9 @@ myKeys =
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) =
   M.fromList
-    
-    [ 
-      
+
+    [
+
       -- Mod-Button1, Set The Window To Floating Mode And Move By Dragging
 
 
@@ -235,11 +250,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
       ),
 
       -- Mod-Button2, Raise The Window To The Top Of The Stack
-      
+
       ((modm, button2), \w -> focus w >> windows W.shiftMaster),
 
       -- Mod-Button3, Set The Window To Floating Mode And Resize By Dragging
-      
+
       ( (modm, button3),
         \w ->
             focus w >> mouseResizeWindow w
@@ -247,38 +262,58 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
       )
 
       -- You May Also Bind Events To The Mouse Scroll Wheel (button4 And button5)
-    
+
     ]
 
 -- LAYOUTS
 
-myLayout = smartBorders $ avoidStruts $ spacingRaw True (Border 0 10 10 10) True (Border 10 10 10 10) True $ mouseResize $ windowArrange $ mkToggle (FULL ?? EOT) $ spiral (6 / 7)
-  where
+-- MYLAYOUT VARIABLES
 
-    -- Default Tiling Algorithm Partitions The Screen Into Two Panes
+mySpacing n = spacingRaw True (Border 0 n n n) True (Border n n n n) True -- Window Spacing Where Integer "n" Is The Gap Between The Windows
 
-    tiled = Tall nmaster delta ratio
+-- BUNDLED LAYOUTS
 
-    -- The Default Number Of Windows In The Master Pane
-    
-    nmaster = 1
+spirals        = renamed [Replace "spirals"] 
+                  $ smartBorders
+                  $ mySpacing 10
+                  $ spiral (6/7)
 
-    -- Default Proportion Of Screen Occupied By Master Pane
-    
-    ratio = 1 / 2
+masterAndStack = renamed [Replace "masterAndStack"]
+                  $ smartBorders
+                  $ mySpacing 10
+                  $ tiled
 
-    -- Percent Of Screen To Increment By When Resizing Panes
-    
-    delta = 3 / 100
+                      where
+                      
+                        -- Default Tiling Algorithm Partitions The Screen Into Two Panes
+                    
+                        tiled = Tall nmaster delta ratio
+                    
+                        -- The Default Number Of Windows In The Master Pane
+                    
+                        nmaster = 1
+                    
+                        -- Default Proportion Of Screen Occupied By Master Pane
+                    
+                        ratio = 1 / 2
+                    
+                        -- Percent Of Screen To Increment By When Resizing Panes
+                    
+                        delta = 3 / 100
+  
 
+myLayout =  avoidStruts $ mouseResize $ windowArrange $ mkToggle (FULL ?? EOT) $ 
+                                                                                      spirals
+                                                                                  ||| masterAndStack
+  
 -- WINDOW RULES
 
 myManageHook =
-  
+
   composeAll
 
-    [ 
-      
+    [
+
       -- FLOATS
 
        className  =? "confirm"                             --> doFloat
@@ -292,11 +327,10 @@ myManageHook =
      , className  =? "toolbar"                             --> doFloat
      , className  =? "Lxpolkitr"                           --> doFloat
      , className  =? "Yad"                                 --> doCenterFloat
-     , className  =? "qBittorrent"                         --> doCenterFloat
      , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
      , isFullscreen                                        --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat  -- Float Firefox Dialog
-     
+
      -- ASSIGN WORKSPACES
 
      , title      =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 0 )
@@ -330,18 +364,22 @@ myEventHook = fullscreenEventHook
 
 myLogHook :: D.Client -> PP
 myLogHook dbus =
+
   def
 
     -- Polybar Formatting 
     -- Check https://hackage.haskell.org/package/xmonad-contrib-0.17.0/docs/XMonad-Hooks-DynamicLog.html#t:PP
 
-    { 
-      ppOutput  = dbusOutput dbus,
-      ppOrder = \(ws:_) -> [ws],
-      ppCurrent = wrap "%{u#5e81ac F#f3f4f5}%{+u}" "%{-u F-}",
-      ppUrgent  = wrap "%{F#db104e}" "%{F-}",
-      ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
-    
+    {
+
+        ppOutput  = dbusOutput dbus
+      , ppCurrent = wrap "%{u#5e81ac F#f3f4f5}%{+u}" "%{-u F-}"
+      , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
+      , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
+      , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP         -- Filter Out "NPS" Workspace
+      , ppOrder   = \(ws:l:t:_) -> [ws,"  ",l,"  "]                                   -- Xmonad-Log Output With Workspaces And Current Layout
+      -- , ppOrder   = \(ws:l:t:_) -> [ws,"%{F#f3f4f5} | %{F-}",l,"%{F#f3f4f5} | %{F-}"] -- Xmonad-Log Output With Workspaces And Current Layout With Seperators Between Workspaces, Layouts And PolyWins 
+      , ppSep     = ""
     }
 
 -- Xmobar-Log
@@ -359,8 +397,8 @@ dbusOutput dbus str = do
 
 -- STARTUP ACTIONS
 
-myStartupHook = 
-  
+myStartupHook =
+
   do
 
     spawnOnce "playerctld daemon"                                                             -- Playerctl Daemon
