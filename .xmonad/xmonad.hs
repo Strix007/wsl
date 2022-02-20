@@ -273,13 +273,11 @@ mySpacing n = spacingRaw True (Border 0 n n n) True (Border n n n n) True -- Win
 
 -- BUNDLED LAYOUTS
 
-spirals        = renamed [Replace "spirals"] 
-                  $ smartBorders
+spirals        = renamed [Replace "Spiral"] 
                   $ mySpacing 10
                   $ spiral (6/7)
 
-masterAndStack = renamed [Replace "masterAndStack"]
-                  $ smartBorders
+masterAndStack = renamed [Replace "MasterAndStack"]
                   $ mySpacing 10
                   $ tiled
 
@@ -302,9 +300,13 @@ masterAndStack = renamed [Replace "masterAndStack"]
                         delta = 3 / 100
   
 
-myLayout =  avoidStruts $ mouseResize $ windowArrange $ mkToggle (FULL ?? EOT) $ 
-                                                                                      spirals
-                                                                                  ||| masterAndStack
+myLayout =   avoidStruts
+           $ mouseResize
+           $ windowArrange
+           $ smartBorders 
+           $ mkToggle (FULL ?? EOT)
+           $ spirals
+         ||| masterAndStack
   
 -- WINDOW RULES
 
@@ -327,9 +329,9 @@ myManageHook =
      , className  =? "toolbar"                             --> doFloat
      , className  =? "Lxpolkitr"                           --> doFloat
      , className  =? "Yad"                                 --> doCenterFloat
-     , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
+     , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat 
      , isFullscreen                                        --> doFullFloat
-     , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat  -- Float Firefox Dialog
+     , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
 
      -- ASSIGN WORKSPACES
 
@@ -376,9 +378,8 @@ myLogHook dbus =
       , ppCurrent = wrap "%{u#5e81ac F#f3f4f5}%{+u}" "%{-u F-}"
       , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
       , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
-      , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP         -- Filter Out "NPS" Workspace
-      , ppOrder   = \(ws:l:t:_) -> [ws,"  ",l,"  "]                                   -- Xmonad-Log Output With Workspaces And Current Layout
-      -- , ppOrder   = \(ws:l:t:_) -> [ws,"%{F#f3f4f5} | %{F-}",l,"%{F#f3f4f5} | %{F-}"] -- Xmonad-Log Output With Workspaces And Current Layout With Seperators Between Workspaces, Layouts And PolyWins 
+      , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP -- Filter Out "NPS" Workspace
+      , ppOrder   = \(ws:l:t:_) -> [ws,"  ",l,"  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
       , ppSep     = ""
     }
 
@@ -409,7 +410,7 @@ myStartupHook =
     spawnOnce "volumeicon"                                                                    -- Pulseaudio Volume Manager In SysTray
     spawnOnce "nm-applet"                                                                     -- NetworkManager Systray Utility
     spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
-    spawnOnce "/home/arbab/.config/dunst/load.sh"                                             -- Dunst Startup Script
+    spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                     -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                 -- Compositor
     spawnOnce "polybar mainbar-xmonad"                                                        -- Dock 
     setWMName "LG3D"
