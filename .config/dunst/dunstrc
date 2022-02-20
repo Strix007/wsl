@@ -90,8 +90,12 @@ format = "Discord\n%s\n%b"
 [Youtube Music]
 
    history_ignore = yes
-   appname = "Youtube Music"
-   format = "<b><span foreground='#BF616A'></span> %a</b>\n%s"
-   max_icon_size = 128
-   timeout = 10
-   frame_color="#BF616A"
+   appname        = "Youtube Music"
+   format         = "<b><span foreground='#BF616A'></span> %a</b>\n%s"
+   max_icon_size  = 128
+   timeout        = 10
+   frame_color    ="#BF616A"
+
+[play_sound]
+    summary = "*"
+    script  = /home/arbab/.config/dunst/scripts/alert.sh
