@@ -77,8 +77,8 @@ myBorderWidth =  2 -- Border Width
 
 -- Format Border
 
-myNormalBorderColor  = "#3B4252"  -- Unfocused Window
-myFocusedBorderColor = "#5E81AC"  -- Focused Window
+myFocusedBorderColor   = "#5E81AC" -- Focused Window
+myUnfocusedBorderColor = "#3B4252" -- Unfocused Window
 
 -- Mod Key
 
@@ -143,85 +143,87 @@ myKeys =
                 [
                   -- CORE
 
-                  ("M-S-c",           restart "xmonad" True)                                                                -- Recompile Xmonad
-                , ("M1-<F4>",         io exitSuccess)                                                                       -- Exit Xmonad
-
-                 -- Actions
-
-                , ("C-S-<Escape>",    spawn "sh /home/arbab/.config/i3lock/lock.sh")                                        -- Custom Lockscript Using i3lock
-
-                 -- KILL
-
-                , ("M-q",             kill)                                                                                 -- Kill Focused Window
-                , ("M-C-q",           killAll)                                                                              -- Kill All Windows On Workspace
-
-                -- LAYOUTS
-
-                , ("M-<Space>",       sendMessage NextLayout)                                                               -- Change Xmonad Layout  
-                , ("M-n",             refresh)                                                                              -- Restore Default Layouts
-                , ("M-<Tab>",         moveTo Next NonEmptyWS)                                                               -- Cycle Through The Next Non-Empty Workspace
-                , ("M-S-<Tab>",       moveTo Prev NonEmptyWS)                                                               -- Cycle Through The Previours Non-Empty Workspace
-                , ("M-f",             sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts)                              -- Toggle FULLSCREEN Layout And Avoid Struts
-                , ("M-C-f",           withFocused toggleFloat)                                                              -- Toggle Float On Focused Window
-                , ("M-.",             warpToWindow (1%10) (1%10))                                                           -- Move Pointer To Focused Window                       
-
-                -- LAYOUT WINDOW FOCUS
-
-                , ("M-<Left>",        windows W.focusUp)                                                                    -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
-                , ("M-<Right>",       windows W.focusDown)                                                                  -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
-
-                -- LAYOUT WINDOW SWAPS
-
-                , ("M-S-<Left>",      windows W.swapUp)                                                                     -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
-                , ("M-S-<Right>",     windows W.swapDown)                                                                   -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
-                , ("M-m",             dwmpromote)                                                                           -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
-
-                -- MOVE WINDOWS
-
-                , ("M-M1-<Up>",       sendMessage (MoveUp        10))                                                       -- Arrow Key <M+ALT+Up>    To Move The Focused Window Position By 10 At The "Up"    Side
-                , ("M-M1-<Down>",     sendMessage (MoveDown      10))                                                       -- Arrow Key <M+ALT+Down>  To Move The Focused Window Position By 10 At The "Down"  Side
-                , ("M-M1-<Left>",     sendMessage (MoveLeft      10))                                                       -- Arrow Key <M+ALT+Left>  To Move The Focused Window Position By 10 At The "Left"  Side
-                , ("M-M1-<Right>",    sendMessage (MoveRight     10))                                                       -- Arrow Key <M+ALT+Right> To Move The Focused Window Position By 10 At The "Right" Side
+                  ("M-S-c",           restart "xmonad" True)                                                                                                                  -- Recompile Xmonad
+                , ("M1-<F4>",         io exitSuccess)                                                                                                                         -- Exit Xmonad
+                                                
+                 -- Actions                                                  
+                                                
+                , ("C-S-<Escape>",    spawn "sh /home/arbab/.config/i3lock/lock.sh")                                                                                          -- Custom Lockscript Using i3lock
+                                                
+                 -- KILL                                                  
+                                                
+                , ("M-q",             kill)                                                                                                                                   -- Kill Focused Window
+                , ("M-C-q",           killAll)                                                                                                                                -- Kill All Windows On Workspace
+                                                
+                -- LAYOUTS                                                  
+                                                
+                , ("M-<Space>",       sendMessage NextLayout)                                                                                                                 -- Change Xmonad Layout  
+                , ("M-n",             refresh)                                                                                                                                -- Restore Default Layouts
+                , ("M-<Tab>",         moveTo Next NonEmptyWS)                                                                                                                 -- Cycle Through The Next Non-Empty Workspace
+                , ("M-S-<Tab>",       moveTo Prev NonEmptyWS)                                                                                                                 -- Cycle Through The Previours Non-Empty Workspace
+                , ("M-f",             sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts)                                                                                -- Toggle FULLSCREEN Layout And Avoid Struts
+                , ("M-C-f",           withFocused toggleFloat)                                                                                                                -- Toggle Float On Focused Window
+                , ("M-.",             warpToWindow (1%10) (1%10))                                                                                                             -- Move Pointer To Focused Window                       
+                                                
+                -- LAYOUT WINDOW FOCUS                                                  
+                                                
+                , ("M-<Left>",        windows W.focusUp)                                                                                                                      -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
+                , ("M-<Right>",       windows W.focusDown)                                                                                                                    -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
+                                                
+                -- LAYOUT WINDOW SWAPS                                                  
+                                                
+                , ("M-S-<Left>",      windows W.swapUp)                                                                                                                       -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
+                , ("M-S-<Right>",     windows W.swapDown)                                                                                                                     -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
+                , ("M-m",             dwmpromote)                                                                                                                             -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
+                                                
+                -- MOVE WINDOWS                                                  
+                                                
+                , ("M-M1-<Up>",       sendMessage (MoveUp        10))                                                                                                         -- Arrow Key <M+ALT+Up>    To Move The Focused Window Position By 10 At The "Up"    Side
+                , ("M-M1-<Down>",     sendMessage (MoveDown      10))                                                                                                         -- Arrow Key <M+ALT+Down>  To Move The Focused Window Position By 10 At The "Down"  Side
+                , ("M-M1-<Left>",     sendMessage (MoveLeft      10))                                                                                                         -- Arrow Key <M+ALT+Left>  To Move The Focused Window Position By 10 At The "Left"  Side
+                , ("M-M1-<Right>",    sendMessage (MoveRight     10))                                                                                                         -- Arrow Key <M+ALT+Right> To Move The Focused Window Position By 10 At The "Right" Side
 
                 -- RESIZE WINDOWS
 
-                , ("M-C-<Up>",        sendMessage (IncreaseUp    10))                                                       -- Arrow Key <M+C+Up>      To Increase The Focused Window Size By 10 At The "Up"    Side
-                , ("M-C-<Down>",      sendMessage (IncreaseDown  10))                                                       -- Arrow Key <M+C+Down>    To Increase The Focused Window Size By 10 At The "Down"  Side
-                , ("M-C-<Left>",      sendMessage (IncreaseLeft  10))                                                       -- Arrow Key <M+C+Left>    To Increase The Focused Window Size By 10 At The "Left"  Side
-                , ("M-C-<Right>",     sendMessage (IncreaseRight 10))                                                       -- Arrow Key <M+C+Right>   To Increase The Focused Window Size By 10 At The "Right" Side
-                , ("M-S-C-<Up>",      sendMessage (DecreaseUp    10))                                                       -- Arrow Key <M+S+C+Up>    To Decrease The Focused Window Size By 10 At The "Up"    Side
-                , ("M-S-C-<Down>",    sendMessage (DecreaseDown  10))                                                       -- Arrow Key <M+S+C+Down>  To Decrease The Focused Window Size By 10 At The "Down"  Side
-                , ("M-S-C-<Left>",    sendMessage (DecreaseLeft  10))                                                       -- Arrow Key <M+S+C+Left>  To Decrease The Focused Window Size By 10 At The "Left"  Side
-                , ("M-S-C-<Right>",   sendMessage (DecreaseRight 10))                                                       -- Arrow Key <M+S+C+Right> To Decrease The Focused Window Size By 10 At The "Right" Side
-                , ("M-<Up>",          sendMessage (IncMasterN    1))                                                        -- Arrow Key <M+Up>   To Increase Windows In Master Pane
-                , ("M-<Down>",        sendMessage (IncMasterN  (-1)))                                                       -- Arrow Key <M+Down> To Decrease Windows In Master Pane
-
-                -- SCRATCHPADS
-
-                , ("M-s M-<Return>",  namedScratchpadAction myScratchPads "terminal")                                       -- Spawn A Terminal As A ScratchPad
-                , ("M-s s",           namedScratchpadAction myScratchPads "spotify-tui")                                    -- Spawn A TUI Spotify Client As A ScratchPad
-                , ("M-s c",           namedScratchpadAction myScratchPads "calculator")                                     -- Spawn A Calculator As A ScratchPad
-
-                -- FUNCTION KEYS
-
-                , ("<XF86AudioPrev>", spawn "playerctl previous")                                                           -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
-                , ("<XF86AudioPlay>", spawn "playerctl play-pause")                                                         -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
-                , ("<XF86AudioNext>", spawn "playerctl next")                                                               -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
-
-                -- ROFI
-
-                , ("M-d",             spawn "rofi -show drun -theme /home/arbab/.config/rofi/launcher/drun/launcher.rasi")  -- Launcher -Drun
-                , ("M-S-d",           spawn "rofi -show run -theme /home/arbab/.config/rofi/launcher/run/launcher.rasi")    -- Launcher -Run
-                , ("M-g",             spawn "sh /home/arbab/.config/rofi/screenshot/screenshot.sh")                         -- Screenshot Menu Using Rofi
-                , ("M-S-g",           spawn "sh /home/arbab/.config/rofi/screenshot/screenshot.sh --stop")                  -- Stop Recording On The Screenshot Menu Using Rofi
-                , ("M-S-q",           spawn "sh /home/arbab/.config/rofi/powermenu/powermenu.sh")                           -- Powermenu Using Rofi
-
-                -- APPLICATIONS
-
-                , ("M-<Return>",      spawn myTerminal)                                                                     -- Alacritty
-                , ("M-b",             spawn myBrowser)                                                                      -- Spawn Browser
-                , ("M-z",             spawn myGUIFileExplorer)                                                              -- Spawn FileManager
-                , ("M-S-z",           spawn "thunar")                                                                       -- Spawn Backup FileManager
+                , ("M-C-<Up>",        sendMessage (IncreaseUp    10))                                                                                                         -- Arrow Key <M+C+Up>      To Increase The Focused Window Size By 10 At The "Up"    Side
+                , ("M-C-<Down>",      sendMessage (IncreaseDown  10))                                                                                                         -- Arrow Key <M+C+Down>    To Increase The Focused Window Size By 10 At The "Down"  Side
+                , ("M-C-<Left>",      sendMessage (IncreaseLeft  10))                                                                                                         -- Arrow Key <M+C+Left>    To Increase The Focused Window Size By 10 At The "Left"  Side
+                , ("M-C-<Right>",     sendMessage (IncreaseRight 10))                                                                                                         -- Arrow Key <M+C+Right>   To Increase The Focused Window Size By 10 At The "Right" Side
+                , ("M-S-C-<Up>",      sendMessage (DecreaseUp    10))                                                                                                         -- Arrow Key <M+S+C+Up>    To Decrease The Focused Window Size By 10 At The "Up"    Side
+                , ("M-<KP_Add>",      sendMessage (IncreaseUp    10) >> sendMessage (IncreaseDown  10) >> sendMessage (IncreaseLeft  10) >> sendMessage (IncreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Increase THe Focused Window Size By 10 At      All    Sides
+                , ("M-S-C-<Down>",    sendMessage (DecreaseDown  10))                                                                                                         -- Arrow Key <M+S+C+Down>  To Decrease The Focused Window Size By 10 At The "Down"  Side
+                , ("M-S-C-<Left>",    sendMessage (DecreaseLeft  10))                                                                                                         -- Arrow Key <M+S+C+Left>  To Decrease The Focused Window Size By 10 At The "Left"  Side
+                , ("M-S-C-<Right>",   sendMessage (DecreaseRight 10))                                                                                                         -- Arrow Key <M+S+C+Right> To Decrease The Focused Window Size By 10 At The "Right" Side
+                , ("M-<KP_Subtract>", sendMessage (DecreaseUp    10) >> sendMessage (DecreaseDown  10) >> sendMessage (DecreaseLeft  10) >> sendMessage (DecreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Decrease THe Focused Window Size By 10 At      All    Sides
+                , ("M-<Up>",          sendMessage (IncMasterN    1))                                                                                                          -- Arrow Key <M+Up>   To Increase Windows In Master Pane
+                , ("M-<Down>",        sendMessage (IncMasterN  (-1)))                                                                                                         -- Arrow Key <M+Down> To Decrease Windows In Master Pane
+                                                  
+                -- SCRATCHPADS                                                  
+                                                  
+                , ("M-s M-<Return>",  namedScratchpadAction myScratchPads "terminal")                                                                                         -- Spawn A Terminal As A ScratchPad
+                , ("M-s s",           namedScratchpadAction myScratchPads "spotify-tui")                                                                                      -- Spawn A TUI Spotify Client As A ScratchPad
+                , ("M-s c",           namedScratchpadAction myScratchPads "calculator")                                                                                       -- Spawn A Calculator As A ScratchPad
+                                                  
+                -- FUNCTION KEYS                                                  
+                                                  
+                , ("<XF86AudioPrev>", spawn "playerctl previous")                                                                                                             -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
+                , ("<XF86AudioPlay>", spawn "playerctl play-pause")                                                                                                           -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
+                , ("<XF86AudioNext>", spawn "playerctl next")                                                                                                                 -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
+                                                  
+                -- ROFI                                                  
+                                                  
+                , ("M-d",             spawn "rofi -show drun -theme /home/arbab/.config/rofi/launcher/drun/launcher.rasi")                                                    -- Launcher -Drun
+                , ("M-S-d",           spawn "rofi -show run -theme /home/arbab/.config/rofi/launcher/run/launcher.rasi")                                                      -- Launcher -Run
+                , ("M-g",             spawn "sh /home/arbab/.config/rofi/screenshot/screenshot.sh")                                                                           -- Screenshot Menu Using Rofi
+                , ("M-S-g",           spawn "sh /home/arbab/.config/rofi/screenshot/screenshot.sh --stop")                                                                    -- Stop Recording On The Screenshot Menu Using Rofi
+                , ("M-S-q",           spawn "sh /home/arbab/.config/rofi/powermenu/powermenu.sh")                                                                             -- Powermenu Using Rofi
+                                                  
+                -- APPLICATIONS                                                  
+                                                  
+                , ("M-<Return>",      spawn myTerminal)                                                                                                                       -- Alacritty
+                , ("M-b",             spawn myBrowser)                                                                                                                        -- Spawn Browser
+                , ("M-z",             spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager
+                , ("M-S-z",           spawn "thunar")                                                                                                                         -- Spawn Backup FileManager
 
                 ]
 
@@ -425,14 +427,14 @@ main = do
                     {
                       -- User Set Variables
 
-                      terminal           = myTerminal,           -- Alacritty
-                      focusFollowsMouse  = myFocusFollowsMouse,  -- True
-                      clickJustFocuses   = myClickJustFocuses,   -- False
-                      borderWidth        = myBorderWidth,        -- 2
-                      modMask            = myModMask,            -- Super
-                      workspaces         = myWorkspaces,         -- 1-9
-                      normalBorderColor  = myNormalBorderColor,  -- #3B4252
-                      focusedBorderColor = myFocusedBorderColor, -- #5E81AC
+                      terminal           = myTerminal,              -- Alacritty
+                      focusFollowsMouse  = myFocusFollowsMouse,     -- True
+                      clickJustFocuses   = myClickJustFocuses,      -- False
+                      borderWidth        = myBorderWidth,           -- 2
+                      modMask            = myModMask,               -- Super
+                      workspaces         = myWorkspaces,            -- 1-9
+                      normalBorderColor  = myUnfocusedBorderColor,  -- #3B4252
+                      focusedBorderColor = myFocusedBorderColor,    -- #5E81AC
 
                       -- BINDINGS
 
