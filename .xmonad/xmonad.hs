@@ -189,8 +189,8 @@ myKeys =
                 , ("M-C-<Down>",         sendMessage (IncreaseDown  10))                                                                                                         -- Arrow Key <M+C+Down>    To Increase The Focused Window Size By 10 At The "Down"  Side
                 , ("M-C-<Left>",         sendMessage (IncreaseLeft  10))                                                                                                         -- Arrow Key <M+C+Left>    To Increase The Focused Window Size By 10 At The "Left"  Side
                 , ("M-C-<Right>",        sendMessage (IncreaseRight 10))                                                                                                         -- Arrow Key <M+C+Right>   To Increase The Focused Window Size By 10 At The "Right" Side
-                , ("M-S-C-<Up>",         sendMessage (DecreaseUp    10))                                                                                                         -- Arrow Key <M+S+C+Up>    To Decrease The Focused Window Size By 10 At The "Up"    Side
                 , ("M-<KP_Add>",         sendMessage (IncreaseUp    10) >> sendMessage (IncreaseDown  10) >> sendMessage (IncreaseLeft  10) >> sendMessage (IncreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Increase THe Focused Window Size By 10 At      All    Sides
+                , ("M-S-C-<Up>",         sendMessage (DecreaseUp    10))                                                                                                         -- Arrow Key <M+S+C+Up>    To Decrease The Focused Window Size By 10 At The "Up"    Side
                 , ("M-S-C-<Down>",       sendMessage (DecreaseDown  10))                                                                                                         -- Arrow Key <M+S+C+Down>  To Decrease The Focused Window Size By 10 At The "Down"  Side
                 , ("M-S-C-<Left>",       sendMessage (DecreaseLeft  10))                                                                                                         -- Arrow Key <M+S+C+Left>  To Decrease The Focused Window Size By 10 At The "Left"  Side
                 , ("M-S-C-<Right>",      sendMessage (DecreaseRight 10))                                                                                                         -- Arrow Key <M+S+C+Right> To Decrease The Focused Window Size By 10 At The "Right" Side
@@ -202,8 +202,8 @@ myKeys =
 
                 , ("M-C-<KP_Add>",       incWindowSpacing 10)                                                                                                                    -- Decrease Window Spacing
                 , ("M-C-<KP_Subtract>",  decWindowSpacing 10)                                                                                                                    -- Increase Window Spacing
-                , ("M-M1-<KP_Add>",      decScreenSpacing 10)                                                                                                                    -- Decrease Screen Spacing
-                , ("M-M1-<KP_Subtract>", incScreenSpacing 10)                                                                                                                    -- Increase Screen Spacing
+                , ("M-M1-<KP_Add>",      incScreenSpacing 10)                                                                                                                    -- Decrease Screen Spacing
+                , ("M-M1-<KP_Subtract>", decScreenSpacing 10)                                                                                                                    -- Increase Screen Spacing
 
                 -- SCRATCHPADS                                                  
 
