@@ -1,4 +1,4 @@
-# Path To Your OhMyZsh Installation
+# Path to your oh-my-zsh installation.
 
 export ZSH="/home/arbab/.oh-my-zsh"
 
@@ -6,20 +6,11 @@ export ZSH="/home/arbab/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-# Autocompletion
-
-ENABLE_CORRECTION="true"       # Autocorrection
+ENABLE_CORRECTION="false"      # Autocorrection
 CASE_SENSITIVE="true"          # Case Sensitive Autocomple
 HYPHEN_INSENSITIVE="true"      # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
 DISABLE_UPDATE_PROMPT="true"   # Enable Or Disable Update Prompt
 COMPLETION_WAITING_DOTS="true" # Dot Buffer
-
-# Source OhMyZsh
-
-source $ZSH/oh-my-zsh.sh
-
-
-export UPDATE_ZSH_DAYS=1 # Check For OhMyZsh Updates Every n Days
 
 # Plugins
 
@@ -28,19 +19,21 @@ plugins=(
 	zsh-autosuggestions	
 			)
 
+source $ZSH/oh-my-zsh.sh
 
 # Enviorment Variables
 
+export MONITOR="HDMI2"
 export LANG=en_US.UTF-8 
+export ARCHFLAGS="-arch x86_64" # Compilation Flag
 
-if [[ -n $SSH_CONNECTION ]]; then # Editor For SSH And Local Separately
+# Editor For SSH And Local Separately
+
+if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
   export EDITOR='nvim'
 fi
-
-export ARCHFLAGS="-arch x86_64" # Compilation Flag
-export DISPLAY="HDMI2"          # Display
 
 # KEYBINDING TYPE
 
