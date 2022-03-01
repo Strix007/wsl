@@ -86,7 +86,7 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
-myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \61598  ", "  \61723  ", "  \62060  ", "  \61642  ", "  \61884  "]
+myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \61598  ", "  \61723  ", "  \62060  ", "  \61643  ", "  \61884  "]
 
 -- SCRATCHPADS
 
@@ -231,6 +231,7 @@ myKeys =
                 , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser
                 , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager
                 , ("M-S-z",              spawn "thunar")                                                                                                                         -- Spawn Backup FileManager
+                , ("M-r p",              spawn "/home/arbab/.config/polybar/scripts/launch.sh")                                                                                  -- Restart Polybar
 
                 ]
 
@@ -422,7 +423,7 @@ myStartupHook =
     spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
     spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                     -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                 -- Compositor
-    spawnOnce "polybar mainbar-xmonad --config=/home/arbab/.config/polybar/config.ini"        -- Dock
+    spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                 -- Dock
     setWMName "LG3D"
 
 main :: IO ()
