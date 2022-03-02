@@ -5,5 +5,5 @@ while pgrep -x polybar >/dev/null; do sleep 1; done # Wait Until The Processes H
 
 # Launch
 
-polybar mainbar-$(wmctrl -m | grep Name: | awk '{print $2}') --config=/home/arbab/.config/polybar/config.ini &
-echo "Polybar For $(wmctrl -m | grep Name: | awk '{print $2}') Has Been Launched"
+polybar mainbar-$(echo $DESKTOP_SESSION) --config=/home/arbab/.config/polybar/config.ini &
+echo "Polybar For $(echo $DESKTOP_SESSION) Has Been Launched"
