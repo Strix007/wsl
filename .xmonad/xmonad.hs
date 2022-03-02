@@ -24,6 +24,7 @@ import XMonad.Actions.MouseResize
 import XMonad.ManageHook
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ServerMode
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
@@ -284,11 +285,11 @@ mySpacing n = spacingRaw True (Border n n n n) True (Border n n n n) True -- Win
 -- BUNDLED LAYOUTS
 
 spirals        = renamed [Replace "Spiral"]
-                  $ mySpacing 10
+                  $ mySpacing 5
                   $ spiral (6/7)
 
 masterAndStack = renamed [Replace "MasterAndStack"]
-                  $ mySpacing 10 
+                  $ mySpacing 5 
                     tiled
 
                       where
@@ -370,7 +371,7 @@ toggleFloat w =
 
 -- EVENTHOOK
 
-myEventHook = fullscreenEventHook
+myEventHook = fullscreenEventHook <+> docksEventHook <+> serverModeEventHook
 
 -- LOGHOOK WITH DBUS FOR POLYBAR
 
