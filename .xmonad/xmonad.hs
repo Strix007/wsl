@@ -414,11 +414,11 @@ myStartupHook =
 
   do
 
+    spawnOnce "lxsession"                                                                     -- Session Utility
     spawnOnce "playerctld daemon"                                                             -- Playerctl Daemon
+    spawnOnce "xfce4-power-manager"                                                           -- Xfce Power Manager
     spawnOnce "nitrogen --restore"                                                            -- Wallpaper Utility
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/" -- Mount Drive Account On Local Machine
-    spawnOnce "xfce4-power-manager"                                                           -- Xfce Power Manager
-    spawnOnce "lxsession"                                                                     -- Session Utility
     spawnOnce "volumeicon"                                                                    -- Pulseaudio Volume Manager In SysTray
     spawnOnce "nm-applet"                                                                     -- NetworkManager Systray Utility
     spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
