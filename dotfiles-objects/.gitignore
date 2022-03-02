@@ -5,3 +5,4 @@
 .xmonad/xmonadctl
 .xmonad/xmonadctl.hi
 .xmonad/xmonadctl.o
+.xmonad/xmonadctl.hs
