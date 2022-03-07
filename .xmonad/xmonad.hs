@@ -417,14 +417,14 @@ myStartupHook =
     spawnOnce "lxsession"                                                                     -- Session Utility
     spawnOnce "playerctld daemon"                                                             -- Playerctl Daemon
     spawnOnce "xfce4-power-manager"                                                           -- Xfce Power Manager
-    spawnOnce "nitrogen --restore"                                                            -- Wallpaper Utility
-    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/" -- Mount Drive Account On Local Machine
-    spawnOnce "volumeicon"                                                                    -- Pulseaudio Volume Manager In SysTray
     spawnOnce "nm-applet"                                                                     -- NetworkManager Systray Utility
+    spawnOnce "nitrogen --restore"                                                            -- Wallpaper Utility
+    spawnOnce "volumeicon"                                                                    -- Pulseaudio Volume Manager In SysTray
     spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
     spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                     -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                 -- Compositor
     spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                 -- Dock
+    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/" -- Mount Drive Account On Local Machine
     setWMName "LG3D"
 
 main :: IO ()
@@ -437,25 +437,25 @@ main = do
                     {
                       -- User Set Variables
 
-                      terminal           = myTerminal,              -- Alacritty
-                      focusFollowsMouse  = myFocusFollowsMouse,     -- True
-                      clickJustFocuses   = myClickJustFocuses,      -- False
-                      borderWidth        = myBorderWidth,           -- 2
-                      modMask            = myModMask,               -- Super
-                      workspaces         = myWorkspaces,            -- 1-9
-                      normalBorderColor  = myUnfocusedBorderColor,  -- #3B4252
-                      focusedBorderColor = myFocusedBorderColor,    -- #5E81AC
+                        terminal           = myTerminal              -- Alacritty
+                      , focusFollowsMouse  = myFocusFollowsMouse     -- True
+                      , clickJustFocuses   = myClickJustFocuses      -- False
+                      , borderWidth        = myBorderWidth           -- 2
+                      , modMask            = myModMask               -- Super
+                      , workspaces         = myWorkspaces            -- 1-9
+                      , normalBorderColor  = myUnfocusedBorderColor  -- #3B4252
+                      , focusedBorderColor = myFocusedBorderColor    -- #5E81AC
 
                       -- BINDINGS
 
-                      mouseBindings = myMouseBindings,
+                      , mouseBindings = myMouseBindings
 
                       -- HOOKS AND LAYOUTS
 
-                      layoutHook      = myLayout,
-                      manageHook      = myManageHook,
-                      handleEventHook = myEventHook,
-                      logHook         = dynamicLogWithPP (myLogHook dbus),
-                      startupHook     = myStartupHook
+                      , layoutHook      = myLayout
+                      , manageHook      = myManageHook
+                      , handleEventHook = myEventHook
+                      , logHook         = dynamicLogWithPP (myLogHook dbus)
+                      , startupHook     = myStartupHook
 
                     } `additionalKeysP` myKeys
