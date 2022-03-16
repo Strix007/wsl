@@ -61,7 +61,7 @@ myGUIFileExplorer, myBrowser, myTerminal :: String
 
 myTerminal        = "alacritty" -- Global Terminal         Variable
 myBrowser         = "firefox"   -- Global Browser          Variable
-myGUIFileExplorer = "nautilus"  -- Global GUI FileExplorer Variable
+myGUIFileExplorer = "thunar"    -- Global GUI FileExplorer Variable
 
 -- Change Focus To The Window Where The Mouse Is 
 
@@ -95,17 +95,20 @@ myScratchPads =
 
   [
 
-      NS "terminal"    spawnTerm findTerm manageTerm -- Alacritty
-    , NS "spotify-tui" spawnSpt  findSpt  manageSpt  -- Spotify-TUI
-    , NS "calculator"  spawnCalc findCalc manageCalc -- Qalculate
+      NS "terminal"    spawnTerminal    findTerminal    manageTerminal    -- Alacritty
+    , NS "spotify-tui" spawnSpt         findSpt         manageSpt         -- Spotify-TUI
+    , NS "calculator"  spawnCalculator  findCalculator  manageCalculator  -- Qalculate
+    , NS "fileManager" spawnFileManager findFileManager manageFileManager -- Ranger
 
   ]
 
   where
 
-    spawnTerm  = myTerminal ++ " -t scratchpad --class scratchpad,ScratchPad"
-    findTerm   = resource   =? "scratchpad"
-    manageTerm = customFloating $ W.RationalRect l t w h
+    -- The Flags Are To Be Changed Depending On The Terminal
+
+    spawnTerminal  = myTerminal ++ " " ++ "-t" ++ " " ++ "Terminal" ++ " " ++ "--class" ++ " " ++ "scratchpadterminal,ScratchPadTerminal"
+    findTerminal   = resource =? "scratchpadterminal"
+    manageTerminal = customFloating $ W.RationalRect l t w h
 
      where
 
@@ -114,7 +117,10 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
-    spawnSpt  = myTerminal ++ " -t spt --class spt,SPT -e spt"
+    -- The Flags Are To Be Changed Depending On The Terminal
+
+
+    spawnSpt  = myTerminal ++ " " ++ "-t" ++ " " ++ "Spotify" ++ " " ++ "--class" ++ " " ++ "spt,SPT" ++ " " ++ "-e" ++ " " ++ "spt"
     findSpt   = resource   =? "spt"
     manageSpt = customFloating $ W.RationalRect l t w h
 
@@ -125,9 +131,9 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
-    spawnCalc  = "qalculate-gtk"
-    findCalc   = className =? "Qalculate-gtk"
-    manageCalc = customFloating $ W.RationalRect l t w h
+    spawnCalculator  = "qalculate-gtk"
+    findCalculator   = className =? "Qalculate-gtk"
+    manageCalculator = customFloating $ W.RationalRect l t w h
 
      where
 
@@ -135,6 +141,20 @@ myScratchPads =
         w = 0.4
         t = 0.75 -h
         l = 0.70 -w
+
+   -- The Flags Are To Be Changed Depending On The Terminal
+
+    spawnFileManager = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
+    findFileManager   = resource   =? "ranger"
+    manageFileManager = customFloating $ W.RationalRect l t w h
+
+     where
+
+        h = 0.9
+        w = 0.9
+        t = 0.95 -h
+        l = 0.95 -w
+
 
 
 -- KEYBINDINGS
@@ -208,9 +228,10 @@ myKeys =
 
                 -- SCRATCHPADS                                                  
 
-                , ("M-s M-<Return>",     namedScratchpadAction myScratchPads "terminal")                                                                                         -- Spawn A Terminal As A ScratchPad
-                , ("M-s s",              namedScratchpadAction myScratchPads "spotify-tui")                                                                                      -- Spawn A TUI Spotify Client As A ScratchPad
-                , ("M-s c",              namedScratchpadAction myScratchPads "calculator")                                                                                       -- Spawn A Calculator As A ScratchPad
+                , ("M-s M-<Return>",     namedScratchpadAction myScratchPads "terminal")                                                                                         -- Spawn A Terminal           As A ScratchPad (Alacritty)
+                , ("M-s s",              namedScratchpadAction myScratchPads "spotify-tui")                                                                                      -- Spawn A TUI Spotify Client As A ScratchPad (SPT)
+                , ("M-s c",              namedScratchpadAction myScratchPads "calculator")                                                                                       -- Spawn A Calculator         As A ScratchPad (Qalculate)
+                , ("M-s z",              namedScratchpadAction myScratchPads "fileManager")                                                                                      -- Spawn A TUI FileManager    As A ScratchPad (Ranger)
 
                 -- FUNCTION KEYS                                                     
 
@@ -228,10 +249,10 @@ myKeys =
 
                 -- APPLICATIONS                                                     
 
-                , ("M-<Return>",         spawn myTerminal)                                                                                                                       -- Alacritty
-                , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser
-                , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager
-                , ("M-S-z",              spawn "thunar")                                                                                                                         -- Spawn Backup FileManager
+                , ("M-<Return>",         spawn myTerminal)                                                                                                                       -- Spawn Terminal           (Alacritty)
+                , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser            (Firefox)
+                , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager        (Thunar)
+                , ("M-S-z",              spawn "pcmanfm")                                                                                                                        -- Spawn Backup FileManager (PcManFm)
                 , ("M-r p",              spawn "/home/arbab/.config/polybar/scripts/launch.sh")                                                                                  -- Restart Polybar
 
                 ]
@@ -350,6 +371,7 @@ myManageHook =
      , className  =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
      , className  =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
      , className  =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
+     , className  =? "Pcmanfm"             --> doShift ( myWorkspaces !! 2 )
      , className  =? "Code"                --> doShift ( myWorkspaces !! 3 )
      , className  =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
      , className  =? "Steam"               --> doShift ( myWorkspaces !! 5 )
@@ -433,7 +455,7 @@ main = do
     -- Request access to the DBus name
     D.requestName dbus (D.busName_ "org.xmonad.Log")
         [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
-    xmonad $ withUrgencyHook NoUrgencyHook $ ewmh $ docks $ def
+    xmonad . ewmh . withUrgencyHook NoUrgencyHook $ docks $ def
                     {
                       -- User Set Variables
 
@@ -455,7 +477,7 @@ main = do
                       , layoutHook      = myLayout
                       , manageHook      = myManageHook
                       , handleEventHook = myEventHook
-                      , logHook         = dynamicLogWithPP (myLogHook dbus)
+                      , logHook         = dynamicLogWithPP $ myLogHook dbus
                       , startupHook     = myStartupHook
 
                     } `additionalKeysP` myKeys
