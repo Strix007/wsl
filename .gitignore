@@ -5,3 +5,8 @@
 .xmonad/xmonadctl
 .xmonad/xmonadctl.hi
 .xmonad/xmonadctl.o
+.config/mpd/database
+.config/mpd/pid
+.config/mpd/playlists
+.config/mpd/state
+.config/mpd/sticker.sql
