@@ -57,11 +57,12 @@ import qualified Codec.Binary.UTF8.String as UTF8
 
 -- User Set Variables
 
-myGUIFileExplorer, myBrowser, myTerminal :: String
+myGUIFileExplorer, myBrowser, myTerminal, myMPDClient :: String
 
 myTerminal        = "alacritty" -- Global Terminal         Variable
 myBrowser         = "firefox"   -- Global Browser          Variable
-myGUIFileExplorer = "thunar"    -- Global GUI FileExplorer Variable
+myGUIFileExplorer = "nautilus"  -- Global GUI FileExplorer Variable
+myMPDClient       = "ncmpcpp"   -- Global MPD Client       Variable
 
 -- Change Focus To The Window Where The Mouse Is 
 
@@ -99,6 +100,7 @@ myScratchPads =
     , NS "spotify-tui" spawnSpt         findSpt         manageSpt         -- Spotify-TUI
     , NS "calculator"  spawnCalculator  findCalculator  manageCalculator  -- Qalculate
     , NS "fileManager" spawnFileManager findFileManager manageFileManager -- Ranger
+    , NS "musicPlayer" spawnMusicPlayer findMusicPlayer manageMusicPlayer -- NCMPCPP And MPD
 
   ]
 
@@ -142,7 +144,7 @@ myScratchPads =
         t = 0.75 -h
         l = 0.70 -w
 
-   -- The Flags Are To Be Changed Depending On The Terminal
+    -- The Flags Are To Be Changed Depending On The Terminal
 
     spawnFileManager = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
     findFileManager   = resource   =? "ranger"
@@ -155,6 +157,18 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
+    -- The Flags Are To Be Changed Depending On The Terminal
+
+    spawnMusicPlayer  = myTerminal ++ " " ++ "-t" ++ " " ++ "MusicPlayer"  ++ " " ++ "--class" ++ " " ++ "mpd-client,MPD-CLIENT" ++ " " ++ "-e" ++ " " ++ myMPDClient
+    findMusicPlayer   = resource =? "mpd-client"
+    manageMusicPlayer = customFloating $ W.RationalRect l t w h
+
+     where
+
+        h = 0.9
+        w = 0.9
+        t = 0.95 -h
+        l = 0.95 -w
 
 
 -- KEYBINDINGS
@@ -232,6 +246,7 @@ myKeys =
                 , ("M-s s",              namedScratchpadAction myScratchPads "spotify-tui")                                                                                      -- Spawn A TUI Spotify Client As A ScratchPad (SPT)
                 , ("M-s c",              namedScratchpadAction myScratchPads "calculator")                                                                                       -- Spawn A Calculator         As A ScratchPad (Qalculate)
                 , ("M-s z",              namedScratchpadAction myScratchPads "fileManager")                                                                                      -- Spawn A TUI FileManager    As A ScratchPad (Ranger)
+                , ("M-s x",              namedScratchpadAction myScratchPads "musicPlayer")                                                                                      -- Spawn A TUI MusicPlayer    As A ScratchPad (NCMPCPP And MPD)
 
                 -- FUNCTION KEYS                                                     
 
@@ -251,8 +266,8 @@ myKeys =
 
                 , ("M-<Return>",         spawn myTerminal)                                                                                                                       -- Spawn Terminal           (Alacritty)
                 , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser            (Firefox)
-                , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager        (Thunar)
-                , ("M-S-z",              spawn "pcmanfm")                                                                                                                        -- Spawn Backup FileManager (PcManFm)
+                , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager        (Nautilus)
+                , ("M-S-z",              spawn "thunar")                                                                                                                         -- Spawn Backup FileManager (Thunar)
                 , ("M-r p",              spawn "/home/arbab/.config/polybar/scripts/launch.sh")                                                                                  -- Restart Polybar
 
                 ]
