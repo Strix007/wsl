@@ -316,16 +316,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
 -- MYLAYOUT VARIABLES
 
-mySpacing n = spacingRaw True (Border n n n n) True (Border n n n n) True -- Window Spacing Where Integer "n" Is The Gap Between The Windows
+mySpacing n = spacingRaw False (Border n n n n) True (Border n n n n) True -- Window Spacing Where Integer "n" Is The Gap Between The Windows
 
 -- BUNDLED LAYOUTS
 
 spirals        = renamed [Replace "Spiral"]
-                  $ mySpacing 5
+                  $ mySpacing 3
                   $ spiral (6/7)
 
 masterAndStack = renamed [Replace "MasterAndStack"]
-                  $ mySpacing 5 
+                  $ mySpacing 3
                     tiled
 
                       where
@@ -376,6 +376,7 @@ myManageHook =
      , className  =? "toolbar"                             --> doFloat
      , className  =? "Lxpolkitr"                           --> doFloat
      , className  =? "Yad"                                 --> doCenterFloat
+     , title      =? "xeyes"                               --> doCenterFloat
      , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
      , isFullscreen                                        --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
@@ -460,6 +461,7 @@ myStartupHook =
     spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
     spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                     -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                 -- Compositor
+    spawnOnce "mpd --kill;mpd"                                                                -- MusicPlayerDaemon
     spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                 -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/" -- Mount Drive Account On Local Machine
     setWMName "LG3D"

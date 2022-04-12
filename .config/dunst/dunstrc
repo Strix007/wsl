@@ -96,6 +96,6 @@ format = "Discord\n%s\n%b"
    timeout        = 10
    frame_color    ="#BF616A"
 
-[play_sound]
-    summary = "*"
-    script  = /home/arbab/.config/dunst/scripts/alert.sh
+#[play_sound]
+#    summary = "*"
+#    script  = /home/arbab/.config/dunst/scripts/alert.sh

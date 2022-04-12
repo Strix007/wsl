@@ -75,3 +75,10 @@ alias fetch="neofetch"
 alias train="sl | lolcat"
 alias speed="speedtest-cli"
 alias xclass="xprop | grep WM_CLASS"
+
+# Verbose 
+
+alias mv='mv -v'
+alias cp='cp -vr'
+alias rm='rm -vr'
+export PATH=$PATH:/home/arbab/.spicetify

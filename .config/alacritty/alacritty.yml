@@ -1,34 +1,34 @@
+# Colors (Nord)
 colors:
-  name: Ashes (dark)
-  author: Chris Kempson
+  # Default colors
   primary:
-    background: "#1c2023"
-    foreground: "#c7ccd1"
-  cursor:
-    text: "#1c2023"
-    cursor: "#c7ccd1"
+    background: '0x2E3440'
+    foreground: '0xD8DEE9'
+
+  # Normal colors
   normal:
-    black: "#1c2023"
-    red: "#c7ae95"
-    green: "#95c7ae"
-    yellow: "#aec795"
-    blue: "#ae95c7"
-    magenta: "#c795ae"
-    cyan: "#95aec7"
-    white: "#c7ccd1"
+    black:   '0x3B4252'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan:    '0x88C0D0'
+    white:   '0xE5E9F0'
+
+  # Bright colors
   bright:
-    black: "#747c84"
-    red: "#c7ae95"
-    green: "#95c7ae"
-    yellow: "#aec795"
-    blue: "#ae95c7"
-    magenta: "#c795ae"
-    cyan: "#95aec7"
-    white: "#f3f4f5"
+    black:   '0x4C566A'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan:    '0x8FBCBB'
+    white:   '0xECEFF4'
+
 window:
   opacity: 0.75
 font:
   normal:
     family: JetBrains Mono
-theme: Ashes.dark
-
