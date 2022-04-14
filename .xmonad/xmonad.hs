@@ -183,7 +183,7 @@ myKeys =
 
                  -- Actions                                                  
 
-                , ("C-S-<Escape>",       spawn "/home/arbab/.config/i3lock/lock.sh")                                                                                             -- Custom Lockscript Using i3lock
+                , ("C-S-<Escape>",       spawn "/home/arbab/i3lock/lock.sh")                                                                                             -- Custom Lockscript Using i3lock
 
                  -- KILL                                                     
 
@@ -378,6 +378,7 @@ myManageHook =
      , className  =? "Yad"                                 --> doCenterFloat
      , title      =? "xeyes"                               --> doCenterFloat
      , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
+     , title      =? "Unlock Login Keyring"                --> doCenterFloat
      , isFullscreen                                        --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
 

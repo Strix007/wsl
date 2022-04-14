@@ -58,7 +58,7 @@ case $chosen in
         fi
         ;;
     $lock)
-			sh /home/arbab/.config/i3lock/lock.sh
+			sh /home/arbab/i3lock/lock.sh
         ;;
     $suspend)
 		ans=$(confirm_exit &)
