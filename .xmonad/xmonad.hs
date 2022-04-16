@@ -146,7 +146,7 @@ myScratchPads =
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
-    spawnFileManager = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
+    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
     findFileManager   = resource   =? "ranger"
     manageFileManager = customFloating $ W.RationalRect l t w h
 
