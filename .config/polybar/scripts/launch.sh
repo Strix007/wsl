@@ -1,7 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-killall -q polybar                                  # Terminate Already Running Bar Instances
-while pgrep -x polybar >/dev/null; do sleep 1; done # Wait Until The Processes Have Been Shutdown
+killall -q polybar;                                  # Terminate Already Running Bar Instances
 
 # Launch
 

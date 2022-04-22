@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The name of polybar bar which houses the main spotify module and the control modules.
-PARENT_BAR="mainbar-i3"
+PARENT_BAR="mainbar-$(echo $DESKTOP_SESSION)"
 PARENT_BAR_PID=$(pgrep -a "polybar" | grep "$PARENT_BAR" | cut -d" " -f1)
 
 # Set the source audio player here.
@@ -14,7 +14,7 @@ PLAYER="spotify"
 # Format of the information displayed
 # Eg. {{ artist }} - {{ album }} - {{ title }}
 # See more attributes here: https://github.com/altdesktop/playerctl/#printing-properties-and-metadata
-FORMAT="{{ title }} - {{ artist }}"
+FORMAT="{{ artist }} - {{ title }}"
 
 # Sends $2 as message to all polybar PIDs that are part of $1
 update_hooks() {
@@ -37,15 +37,15 @@ if [ "$1" == "--status" ]; then
     echo "$STATUS"
 else
     if [ "$STATUS" = "Stopped" ]; then
-        echo "No music is playing"
+        echo ""
     elif [ "$STATUS" = "Paused"  ]; then
         update_hooks "$PARENT_BAR_PID" 2
-        playerctl --player=$PLAYER metadata --format "$FORMAT"
-    elif [ "$STATUS" = "No player is running"  ]; then
+        playerctl status --player=$PLAYER metadata --format "$FORMAT"
+    elif [ "$STATUS" = ""  ]; then
         echo "$STATUS"
     else
         update_hooks "$PARENT_BAR_PID" 1
-        playerctl --player=$PLAYER metadata --format "$FORMAT"
+        playerctl --ignore-player=mpd --player=$PLAYER metadata --format "$FORMAT"
     fi
 fi
 

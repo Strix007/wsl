@@ -24,8 +24,6 @@ wm_border_width=1 # setting this might be required for accurate resize position
 
 # --- }}}
 
-sleep 50;
-
 main() {
 	# If no argument passed...
 	if [ -z "$2" ]; then
