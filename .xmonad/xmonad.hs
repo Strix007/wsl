@@ -268,7 +268,7 @@ myKeys =
                 , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser            (Firefox)
                 , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager        (Nautilus)
                 , ("M-S-z",              spawn "thunar")                                                                                                                         -- Spawn Backup FileManager (Thunar)
-                , ("M-r p",              spawn "/home/arbab/.config/polybar/scripts/launch.sh")                                                                                  -- Restart Polybar
+                , ("M-r p",              spawn "polybar-msg cmd restart")                                                                                                        -- Restart Polybar
 
                 ]
 
