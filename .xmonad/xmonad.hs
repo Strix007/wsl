@@ -89,7 +89,7 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
-myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \61598  ", "  \61723  ", "  \62060  ", "  \61643  ", "  \61884  "]
+myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
 
 -- SCRATCHPADS
 
@@ -440,7 +440,7 @@ myLogHook dbus =
       , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
       , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
       , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP -- Filter Out "NPS" Workspace
-      , ppOrder   = \(ws:l:t:_) -> [ws,"  ",l,"  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
+      , ppOrder   = \(ws:l:t:_) -> [ws,"  ","%{A1:/home/arbab/.xmonad/xmonadctl 25:}" ++ l ++ "%{A}","  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
       , ppSep     = ""
 
     }
