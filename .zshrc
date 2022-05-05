@@ -60,11 +60,11 @@ alias svim="sudo -e nvim"
 
 alias g="git"
 alias ga="git add ."
-alias clone="git clone"
 alias gpb="git push origin"
 alias gm="ga && git commit -m"
 alias gp="git push -u origin main"
 alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias gmus="/usr/bin/git --git-dir=$HOME/gmus/ --work-tree=$HOME"
 
 # Misc
 
@@ -81,4 +81,5 @@ alias xclass="xprop | grep WM_CLASS"
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
-export PATH=$PATH:/home/arbab/.spicetify
+
+[ -f "/home/arbab/.ghcup/env" ] && source "/home/arbab/.ghcup/env" # ghcup-env

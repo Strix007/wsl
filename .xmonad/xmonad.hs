@@ -41,6 +41,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.WindowArranger
+import XMonad.Layout.WindowNavigation
 import XMonad.Layout.MultiToggle.Instances
 
 -- UTILITIES
@@ -196,6 +197,9 @@ myKeys =
                 , ("M-n",                refresh)                                                                                                                                -- Restore Default Layouts
                 , ("M-<Tab>",            moveTo Next NonEmptyWS)                                                                                                                 -- Cycle Through The Next Non-Empty Workspace
                 , ("M-S-<Tab>",          moveTo Prev NonEmptyWS)                                                                                                                 -- Cycle Through The Previours Non-Empty Workspace
+                , ("M-C-<Tab>",          nextScreen)                                                                                                                             -- Cycle To The Next Screen
+                , ("M1-C-<Tab>",         shiftNextScreen)                                                                                                                        -- Move  To The Next Screen
+                , ("M1-S-<Tab>",         swapNextScreen)                                                                                                                        -- Move  To The Next Screen
                 , ("M-f",                sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts)                                                                                -- Toggle FULLSCREEN Layout And Avoid Struts
                 , ("M-C-f",              withFocused toggleFloat)                                                                                                                -- Toggle Float On Focused Window
                 , ("M-.",                warpToWindow (1%10) (1%10))                                                                                                             -- Move Pointer To Focused Window                       
@@ -206,7 +210,8 @@ myKeys =
                 , ("M-<Right>",          windows W.focusDown)                                                                                                                    -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
 
                 -- LAYOUT WINDOW SWAPS                                                     
-
+                , ("M-<Up>",             sendMessage (IncMasterN    1))                                                                                                          -- Arrow Key <M+Up>      To Increase Windows In Master Pane
+                , ("M-<Down>",           sendMessage (IncMasterN  (-1)))                                                                                                         -- Arrow Key <M+Down>    To Decrease Windows In Master Pane
                 , ("M-S-<Left>",         windows W.swapUp)                                                                                                                       -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
                 , ("M-S-<Right>",        windows W.swapDown)                                                                                                                     -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
                 , ("M-m",                dwmpromote)                                                                                                                             -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
@@ -230,8 +235,6 @@ myKeys =
                 , ("M-S-C-<Left>",       sendMessage (DecreaseLeft  10))                                                                                                         -- Arrow Key <M+S+C+Left>  To Decrease The Focused Window Size By 10 At The "Left"  Side
                 , ("M-S-C-<Right>",      sendMessage (DecreaseRight 10))                                                                                                         -- Arrow Key <M+S+C+Right> To Decrease The Focused Window Size By 10 At The "Right" Side
                 , ("M-<KP_Subtract>",    sendMessage (DecreaseUp    10) >> sendMessage (DecreaseDown  10) >> sendMessage (DecreaseLeft  10) >> sendMessage (DecreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Decrease THe Focused Window Size By 10 At      All    Sides
-                , ("M-<Up>",             sendMessage (IncMasterN    1))                                                                                                          -- Arrow Key <M+Up>   To Increase Windows In Master Pane
-                , ("M-<Down>",           sendMessage (IncMasterN  (-1)))                                                                                                         -- Arrow Key <M+Down> To Decrease Windows In Master Pane
 
                 -- RESIZE GAPS
 
@@ -350,7 +353,7 @@ masterAndStack = renamed [Replace "MasterAndStack"]
 myLayout =   avoidStruts
            $ mouseResize
            $ windowArrange
-           $ smartBorders
+           $ lessBorders Screen
            $ mkToggle (FULL ?? EOT)
            $ spirals
          ||| masterAndStack
@@ -372,7 +375,6 @@ myManageHook =
      , className  =? "error"                               --> doFloat
      , className  =? "notification"                        --> doFloat
      , className  =? "pinentry-gtk-2"                      --> doFloat
-     , className  =? "splash"                              --> doFloat
      , className  =? "toolbar"                             --> doFloat
      , className  =? "Lxpolkitr"                           --> doFloat
      , className  =? "Yad"                                 --> doCenterFloat
@@ -381,6 +383,15 @@ myManageHook =
      , title      =? "Unlock Login Keyring"                --> doCenterFloat
      , isFullscreen                                        --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
+
+
+     -- BORDERS
+
+     , className =? "scratchpadterminal" --> hasBorder False
+     , className =? "spt"                --> hasBorder False
+     , className =? "qalculate-gtk"      --> hasBorder False
+     , className =? "ranger"             --> hasBorder False
+     , className =? "mpd-client"         --> hasBorder False
 
      -- ASSIGN WORKSPACES
 
@@ -453,18 +464,20 @@ myStartupHook =
 
   do
 
-    spawnOnce "lxsession"                                                                     -- Session Utility
-    spawnOnce "playerctld daemon"                                                             -- Playerctl Daemon
-    spawnOnce "xfce4-power-manager"                                                           -- Xfce Power Manager
-    spawnOnce "nm-applet"                                                                     -- NetworkManager Systray Utility
-    spawnOnce "nitrogen --restore"                                                            -- Wallpaper Utility
-    spawnOnce "volumeicon"                                                                    -- Pulseaudio Volume Manager In SysTray
-    spawnOnce "kdeconnect-indicator"                                                          -- SysTray KDE-Indicator
-    spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                     -- Dunst Startup Script
-    spawnOnce "picom --experimental-backends"                                                 -- Compositor
-    spawnOnce "mpd --kill;mpd"                                                                -- MusicPlayerDaemon
-    spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                 -- Dock
-    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/" -- Mount Drive Account On Local Machine
+    spawnOnce "xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI3 --off --output VIRTUAL1 --off" -- Multi-Screen Xrandr
+    spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
+    spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
+    spawnOnce "xfce4-power-manager"                                                                                                                                                                                                   -- Xfce Power Manager
+    spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
+    spawnOnce "nitrogen --restore"                                                                                                                                                                                                    -- Wallpaper Utility
+    spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
+    spawnOnce "kdeconnect-indicator"                                                                                                                                                                                                  -- SysTray KDE-Indicator
+    spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
+    spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
+    spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
+    spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
+    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
+    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/ign_unsplash45.png --bg-fill /home/arbab/Documents/Wallpapers/ign_unsplash40.png"                                                                                       -- Set Background Multi-Screen
     setWMName "LG3D"
 
 main :: IO ()
