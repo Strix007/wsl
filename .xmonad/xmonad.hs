@@ -381,6 +381,7 @@ myManageHook =
      , title      =? "xeyes"                               --> doCenterFloat
      , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
      , title      =? "Unlock Login Keyring"                --> doCenterFloat
+     , title      =? "File Operation Progress"             --> doCenterFloat
      , isFullscreen                                        --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
 
