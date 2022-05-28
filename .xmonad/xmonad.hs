@@ -293,23 +293,23 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
       -- Mod-Button1, Set The Window To Floating Mode And Move By Dragging
 
 
-      ( (modm, button1),
-        \w ->
-            focus w >> mouseMoveWindow w
-              >> windows W.shiftMaster
-      ),
+        ( (modm, button1),
+          \w ->
+              focus w >> mouseMoveWindow w
+                >> windows W.shiftMaster
+        )
 
       -- Mod-Button2, Raise The Window To The Top Of The Stack
 
-      ((modm, button2), \w -> focus w >> windows W.shiftMaster),
+      , ((modm, button3), \w -> spawn "/home/arbab/xmenu/xmenu.sh")
 
       -- Mod-Button3, Set The Window To Floating Mode And Resize By Dragging
 
-      ( (modm, button3),
-        \w ->
-            focus w >> mouseResizeWindow w
-              >> windows W.shiftMaster
-      )
+      , ( (modm .|. shiftMask, button3),
+          \w ->
+              focus w >> mouseResizeWindow w
+                >> windows W.shiftMaster
+        )
 
       -- You May Also Bind Events To The Mouse Scroll Wheel (button4 And button5)
 
@@ -382,7 +382,7 @@ myManageHook =
      , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
      , title      =? "Unlock Login Keyring"                --> doCenterFloat
      , title      =? "File Operation Progress"             --> doCenterFloat
-     , isFullscreen                                        --> doFullFloat
+     , isFullscreen                                        --> doFullFloat   
      , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
 
 
@@ -478,7 +478,7 @@ myStartupHook =
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
-    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/ign_unsplash45.png --bg-fill /home/arbab/Documents/Wallpapers/ign_unsplash40.png"                                                                                       -- Set Background Multi-Screen
+    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_unsplash45.png --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_unsplash40.png"                                                                                       -- Set Background Multi-Screen
     setWMName "LG3D"
 
 main :: IO ()
