@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-deprecations #-}
 -- IMPORTS
 
 -- CORE
@@ -89,9 +90,11 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
-myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
+-- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
 
 -- SCRATCHPADS
+
+myWorkspaces = [  "  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
 
 myScratchPads =
 
@@ -440,8 +443,8 @@ myLogHook dbus =
       , ppCurrent = wrap "%{u#5e81ac F#f3f4f5}%{+u}" "%{-u F-}"
       , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
       , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
-      , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP -- Filter Out "NPS" Workspace
       , ppOrder   = \(ws:l:t:_) -> [ws,"  ","%{A1:/home/arbab/.xmonad/xmonadctl 25:}" ++ l ++ "%{A}","  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
+      -- , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP -- Filter Out "NPS" Workspace
       , ppSep     = ""
 
     }
@@ -450,10 +453,11 @@ myLogHook dbus =
 
 dbusOutput :: D.Client -> String -> IO ()
 dbusOutput dbus str = do
-    let signal = (D.signal objectPath interfaceName memberName) {
-            D.signalBody = [D.toVariant $ UTF8.decodeString str]
-        }
-    D.emit dbus signal
+  let signal =
+        (D.signal objectPath interfaceName memberName)
+          { D.signalBody = [D.toVariant $ UTF8.decodeString str]
+          }
+  D.emit dbus signal
   where
     objectPath = D.objectPath_ "/org/xmonad/Log"
     interfaceName = D.interfaceName_ "org.xmonad.Log"
