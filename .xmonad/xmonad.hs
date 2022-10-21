@@ -30,6 +30,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.WindowSwallowing
 
 -- LAYOUTS
 
@@ -50,12 +51,14 @@ import XMonad.Layout.MultiToggle.Instances
 import XMonad.Util.EZConfig
 import XMonad.Util.SpawnOnce
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.WorkspaceCompare
 
 -- For Polybar
 
 import qualified DBus as D
 import qualified DBus.Client as D
 import qualified Codec.Binary.UTF8.String as UTF8
+import Text.XHtml (title)
 
 -- User Set Variables
 
@@ -91,10 +94,13 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 -- WORKSPACES
 
 -- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
+-- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}9%{A}  "]
+-- myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \61598  ", "  \61723  ", "  \62060  ", "  \61643  ", "  \61884  "]
+-- myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = ["  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
+
 
 -- SCRATCHPADS
-
-myWorkspaces = [  "  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
 
 myScratchPads =
 
@@ -113,7 +119,7 @@ myScratchPads =
     -- The Flags Are To Be Changed Depending On The Terminal
 
     spawnTerminal  = myTerminal ++ " " ++ "-t" ++ " " ++ "Terminal" ++ " " ++ "--class" ++ " " ++ "scratchpadterminal,ScratchPadTerminal"
-    findTerminal   = resource =? "scratchpadterminal"
+    findTerminal   = XMonad.ManageHook.title =? "Terminal"
     manageTerminal = customFloating $ W.RationalRect l t w h
 
      where
@@ -126,8 +132,8 @@ myScratchPads =
     -- The Flags Are To Be Changed Depending On The Terminal
 
 
-    spawnSpt  = myTerminal ++ " " ++ "-t" ++ " " ++ "Spotify" ++ " " ++ "--class" ++ " " ++ "spt,SPT" ++ " " ++ "-e" ++ " " ++ "spt"
-    findSpt   = resource   =? "spt"
+    spawnSpt  = myTerminal ++ " " ++ "-t" ++ " " ++ "SpotifyTUI" ++ " " ++ "--class" ++ " " ++ "spt,SPT" ++ " " ++ "-e" ++ " " ++ "spt"
+    findSpt   = XMonad.ManageHook.title =? "SpotifyTUI"
     manageSpt = customFloating $ W.RationalRect l t w h
 
      where
@@ -138,7 +144,7 @@ myScratchPads =
         l = 0.95 -w
 
     spawnCalculator  = "qalculate-gtk"
-    findCalculator   = className =? "Qalculate-gtk"
+    findCalculator   = XMonad.ManageHook.title =? "Qalculate!"
     manageCalculator = customFloating $ W.RationalRect l t w h
 
      where
@@ -151,7 +157,7 @@ myScratchPads =
     -- The Flags Are To Be Changed Depending On The Terminal
 
     spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
-    findFileManager   = resource   =? "ranger"
+    findFileManager   = XMonad.ManageHook.title =? "FileManager"
     manageFileManager = customFloating $ W.RationalRect l t w h
 
      where
@@ -164,7 +170,7 @@ myScratchPads =
     -- The Flags Are To Be Changed Depending On The Terminal
 
     spawnMusicPlayer  = myTerminal ++ " " ++ "-t" ++ " " ++ "MusicPlayer"  ++ " " ++ "--class" ++ " " ++ "mpd-client,MPD-CLIENT" ++ " " ++ "-e" ++ " " ++ myMPDClient
-    findMusicPlayer   = resource =? "mpd-client"
+    findMusicPlayer   = XMonad.ManageHook.title =? "MusicPlayer"
     manageMusicPlayer = customFloating $ W.RationalRect l t w h
 
      where
@@ -371,43 +377,44 @@ myManageHook =
 
       -- FLOATS
 
-       className  =? "confirm"                             --> doFloat
-     , className  =? "file_progress"                       --> doFloat
-     , className  =? "dialog"                              --> doFloat
-     , className  =? "download"                            --> doFloat
-     , className  =? "error"                               --> doFloat
-     , className  =? "notification"                        --> doFloat
-     , className  =? "pinentry-gtk-2"                      --> doFloat
-     , className  =? "toolbar"                             --> doFloat
-     , className  =? "Lxpolkitr"                           --> doFloat
-     , className  =? "Yad"                                 --> doCenterFloat
-     , title      =? "xeyes"                               --> doCenterFloat
-     , title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
-     , title      =? "Unlock Login Keyring"                --> doCenterFloat
-     , title      =? "File Operation Progress"             --> doCenterFloat
-     , isFullscreen                                        --> doFullFloat   
-     , (className =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
+       className                    =? "confirm"                             --> doFloat
+     , className                    =? "file_progress"                       --> doFloat
+     , className                    =? "dialog"                              --> doFloat
+     , className                    =? "download"                            --> doFloat
+     , className                    =? "error"                               --> doFloat
+     , className                    =? "notification"                        --> doFloat
+     , className                    =? "pinentry-gtk-2"                      --> doFloat
+     , className                    =? "toolbar"                             --> doFloat
+     , className                    =? "Lxpolkitr"                           --> doFloat
+     , className                    =? "Yad"                                 --> doCenterFloat
+     , XMonad.ManageHook.title      =? "xeyes"                               --> doCenterFloat
+     , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
+     , XMonad.ManageHook.title      =? "Unlock Login Keyring"                --> doCenterFloat
+     , XMonad.ManageHook.title      =? "File Operation Progress"             --> doCenterFloat
+     , isFullscreen                                                          --> doFullFloat   
+     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
 
 
      -- BORDERS
 
-     , className =? "scratchpadterminal" --> hasBorder False
-     , className =? "spt"                --> hasBorder False
-     , className =? "qalculate-gtk"      --> hasBorder False
-     , className =? "ranger"             --> hasBorder False
-     , className =? "mpd-client"         --> hasBorder False
+     , className =? "scratchpadterminal"    --> hasBorder False
+     , className =? "spt"                   --> hasBorder False
+     , className =? "qalculate-gtk"         --> hasBorder False
+     , className =? "ranger"                --> hasBorder False
+     , className =? "mpd-client"            --> hasBorder False
+     , className =? "Qalculate-gtk"         --> hasBorder False
 
      -- ASSIGN WORKSPACES
 
-     , title      =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 0 )
-     , className  =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
-     , className  =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
-     , className  =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
-     , className  =? "Pcmanfm"             --> doShift ( myWorkspaces !! 2 )
-     , className  =? "Code"                --> doShift ( myWorkspaces !! 3 )
-     , className  =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
-     , className  =? "Steam"               --> doShift ( myWorkspaces !! 5 )
-     , className  =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
+     , XMonad.ManageHook.title      =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 0 )
+     , className                    =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
+     , className                    =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
+     , className                    =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
+     , className                    =? "Pcmanfm"             --> doShift ( myWorkspaces !! 2 )
+     , className                    =? "Code"                --> doShift ( myWorkspaces !! 3 )
+     , className                    =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
+     , className                    =? "Steam"               --> doShift ( myWorkspaces !! 5 )
+     , className                    =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
 
     ] <+> namedScratchpadManageHook myScratchPads
 
@@ -425,14 +432,15 @@ toggleFloat w =
 
 -- EVENTHOOK
 
-myEventHook = fullscreenEventHook <+> docksEventHook <+> serverModeEventHook
+myEventHook = fullscreenEventHook <+> docksEventHook <+> serverModeEventHook <+> swallowEventHook (className =? "Alacritty") (return True) <+> swallowEventHookSub (className =? "Alacritty") (return True)
 
 -- LOGHOOK WITH DBUS FOR POLYBAR
 
 myLogHook :: D.Client -> PP
 myLogHook dbus =
 
-  def
+  filterOutWsPP [scratchpadWorkspaceTag]
+  $ def
 
     -- Polybar Formatting 
     -- Check https://hackage.haskell.org/package/xmonad-contrib-0.17.0/docs/XMonad-Hooks-DynamicLog.html#t:PP
@@ -444,7 +452,6 @@ myLogHook dbus =
       , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
       , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
       , ppOrder   = \(ws:l:t:_) -> [ws,"  ","%{A1:/home/arbab/.xmonad/xmonadctl 25:}" ++ l ++ "%{A}","  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
-      -- , ppSort    = (.namedScratchpadFilterOutWorkspace) <$> ppSort defaultPP -- Filter Out "NPS" Workspace
       , ppSep     = ""
 
     }
@@ -474,7 +481,6 @@ myStartupHook =
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
     spawnOnce "xfce4-power-manager"                                                                                                                                                                                                   -- Xfce Power Manager
     spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
-    spawnOnce "nitrogen --restore"                                                                                                                                                                                                    -- Wallpaper Utility
     spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
     spawnOnce "kdeconnect-indicator"                                                                                                                                                                                                  -- SysTray KDE-Indicator
     spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
@@ -485,13 +491,15 @@ myStartupHook =
     spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_unsplash45.png --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_unsplash40.png"                                                                                       -- Set Background Multi-Screen
     setWMName "LG3D"
 
+myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH
+
 main :: IO ()
 main = do
     dbus <- D.connectSession
     -- Request access to the DBus name
     D.requestName dbus (D.busName_ "org.xmonad.Log")
         [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
-    xmonad . ewmh . withUrgencyHook NoUrgencyHook $ docks $ def
+    xmonad . addEwmhWorkspaceSort (pure myFilter) . ewmh . withUrgencyHook NoUrgencyHook $ docks $ def
                     {
                       -- User Set Variables
 
