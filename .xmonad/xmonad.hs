@@ -386,6 +386,7 @@ myManageHook =
      , className                    =? "pinentry-gtk-2"                      --> doFloat
      , className                    =? "toolbar"                             --> doFloat
      , className                    =? "Lxpolkitr"                           --> doFloat
+     , className                    =? "scrcpy"                              --> doFloat
      , className                    =? "Yad"                                 --> doCenterFloat
      , XMonad.ManageHook.title      =? "xeyes"                               --> doCenterFloat
      , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
@@ -403,6 +404,7 @@ myManageHook =
      , className =? "ranger"                --> hasBorder False
      , className =? "mpd-client"            --> hasBorder False
      , className =? "Qalculate-gtk"         --> hasBorder False
+     , className =? "scrcpy"                --> hasBorder False
 
      -- ASSIGN WORKSPACES
 
