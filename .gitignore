@@ -12,6 +12,7 @@
 .config/mpd/state
 .config/mpd/sticker.sql
 .config/spicetify/Backup
+.config/mpv/watch_later
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
