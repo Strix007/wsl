@@ -4,6 +4,7 @@
 .xmonad/xmonad.o
 .xmonad/xmonadctl
 .xmonad/xmonadctl.hi
+.xmonad/build-x86_64-linux
 .xmonad/xmonadctl.o
 .config/mpd/database
 .config/mpd/pid
@@ -11,3 +12,9 @@
 .config/mpd/state
 .config/mpd/sticker.sql
 .config/spicetify/Backup
+xmenu/Makefile
+xmenu/texput.log
+xmenu/xmenu
+xmenu/xmenu.1
+xmenu/xmenu.c
+xmenu/xmenu.o
