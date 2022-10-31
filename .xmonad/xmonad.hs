@@ -38,6 +38,7 @@ import XMonad.Layout.Spiral
 
 -- LAYOUT MODIFIERS
 
+import XMonad.Layout.Hidden
 import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
@@ -51,6 +52,7 @@ import XMonad.Layout.MultiToggle.Instances
 import XMonad.Util.EZConfig
 import XMonad.Util.SpawnOnce
 import XMonad.Util.NamedScratchpad
+
 import XMonad.Util.WorkspaceCompare
 
 -- For Polybar
@@ -193,7 +195,7 @@ myKeys =
 
                  -- Actions                                                  
 
-                , ("C-S-<Escape>",       spawn "/home/arbab/i3lock/lock.sh")                                                                                             -- Custom Lockscript Using i3lock
+                , ("C-S-<Escape>",       spawn "/home/arbab/i3lock/lock.sh")                                                                                                     -- Custom Lockscript Using i3lock
 
                  -- KILL                                                     
 
@@ -208,17 +210,20 @@ myKeys =
                 , ("M-S-<Tab>",          moveTo Prev NonEmptyWS)                                                                                                                 -- Cycle Through The Previours Non-Empty Workspace
                 , ("M-C-<Tab>",          nextScreen)                                                                                                                             -- Cycle To The Next Screen
                 , ("M1-C-<Tab>",         shiftNextScreen)                                                                                                                        -- Move  To The Next Screen
-                , ("M1-S-<Tab>",         swapNextScreen)                                                                                                                        -- Move  To The Next Screen
+                , ("M1-S-<Tab>",         swapNextScreen)                                                                                                                         -- Move  To The Next Screen
                 , ("M-f",                sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts)                                                                                -- Toggle FULLSCREEN Layout And Avoid Struts
                 , ("M-C-f",              withFocused toggleFloat)                                                                                                                -- Toggle Float On Focused Window
                 , ("M-.",                warpToWindow (1%10) (1%10))                                                                                                             -- Move Pointer To Focused Window                       
+                , ("M-h",                withFocused hideWindow)                                                                                                                 -- Hide Focused Window                       
+                , ("M-S-h",              popOldestHiddenWindow)                                                                                                                  -- Pop Oldest Hidden Window                       
 
                 -- LAYOUT WINDOW FOCUS                                                     
 
                 , ("M-<Left>",           windows W.focusUp)                                                                                                                      -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
                 , ("M-<Right>",          windows W.focusDown)                                                                                                                    -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
 
-                -- LAYOUT WINDOW SWAPS                                                     
+                -- LAYOUT WINDOW SWAPS
+
                 , ("M-<Up>",             sendMessage (IncMasterN    1))                                                                                                          -- Arrow Key <M+Up>      To Increase Windows In Master Pane
                 , ("M-<Down>",           sendMessage (IncMasterN  (-1)))                                                                                                         -- Arrow Key <M+Down>    To Decrease Windows In Master Pane
                 , ("M-S-<Left>",         windows W.swapUp)                                                                                                                       -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
@@ -333,10 +338,12 @@ mySpacing n = spacingRaw False (Border n n n n) True (Border n n n n) True -- Wi
 -- BUNDLED LAYOUTS
 
 spirals        = renamed [Replace "Spiral"]
+                  $ hiddenWindows
                   $ mySpacing 3
                   $ spiral (6/7)
 
 masterAndStack = renamed [Replace "MasterAndStack"]
+                  $ hiddenWindows
                   $ mySpacing 3
                     tiled
 
@@ -393,22 +400,26 @@ myManageHook =
      , XMonad.ManageHook.title      =? "Unlock Login Keyring"                --> doCenterFloat
      , XMonad.ManageHook.title      =? "File Operation Progress"             --> doCenterFloat
      , isFullscreen                                                          --> doFullFloat   
-     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> doFloat       -- Float Firefox Dialog
+     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> doFloat
+     , (className                   =? "code" <&&> resource =? "Dialog")     --> doFloat       
 
 
      -- BORDERS
 
-     , className =? "scratchpadterminal"    --> hasBorder False
-     , className =? "spt"                   --> hasBorder False
-     , className =? "qalculate-gtk"         --> hasBorder False
-     , className =? "ranger"                --> hasBorder False
-     , className =? "mpd-client"            --> hasBorder False
-     , className =? "Qalculate-gtk"         --> hasBorder False
-     , className =? "scrcpy"                --> hasBorder False
+     , className                    =? "scratchpadterminal"                  --> hasBorder False
+     , className                    =? "spt"                                 --> hasBorder False
+     , className                    =? "qalculate-gtk"                       --> hasBorder False
+     , className                    =? "ranger"                              --> hasBorder False
+     , className                    =? "mpd-client"                          --> hasBorder False
+     , className                    =? "Qalculate-gtk"                       --> hasBorder False
+     , className                    =? "scrcpy"                              --> hasBorder False
+     , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> hasBorder False
+     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> hasBorder False 
+     , (className                   =? "code" <&&> resource =? "Dialog")     --> hasBorder False 
 
      -- ASSIGN WORKSPACES
 
-     , XMonad.ManageHook.title      =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 0 )
+     , className                    =? "firefox"             --> doShift ( myWorkspaces !! 0 )
      , className                    =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
      , className                    =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
      , className                    =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
@@ -417,6 +428,7 @@ myManageHook =
      , className                    =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
      , className                    =? "Steam"               --> doShift ( myWorkspaces !! 5 )
      , className                    =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
+     , XMonad.ManageHook.title      =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
 
     ] <+> namedScratchpadManageHook myScratchPads
 
