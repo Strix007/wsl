@@ -26,6 +26,7 @@ source $ZSH/oh-my-zsh.sh
 export MONITOR="HDMI2"
 export LANG=en_US.UTF-8 
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
+export PAGER="most"
 
 # Editor For SSH And Local Separately
 
@@ -64,7 +65,6 @@ alias gpb="git push origin"
 alias gm="ga && git commit -m"
 alias gp="git push -u origin main"
 alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-alias gmus="/usr/bin/git --git-dir=$HOME/gmus/ --work-tree=$HOME"
 
 # Misc
 
@@ -81,5 +81,3 @@ alias xclass="xprop | grep WM_CLASS"
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
-
-[ -f "/home/arbab/.ghcup/env" ] && source "/home/arbab/.ghcup/env" # ghcup-env
