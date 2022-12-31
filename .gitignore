@@ -13,6 +13,7 @@
 .config/mpd/sticker.sql
 .config/spicetify/Backup
 .config/mpv/watch_later
+.config/rofi/.history
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
