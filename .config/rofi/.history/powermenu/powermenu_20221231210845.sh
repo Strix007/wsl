@@ -4,6 +4,10 @@
 ## Github : @adi1090x
 #
 ## Rofi   : Power Menu
+#
+## Available Styles
+#
+## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/"
@@ -69,8 +73,6 @@ run_cmd() {
 				i3-msg exit
 			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-			elif [[ "$DESKTOP_SESSION" == "xmonad" ]]; then
-				./.xmonad/xmonadctl 39
 			fi
 		fi
 	else

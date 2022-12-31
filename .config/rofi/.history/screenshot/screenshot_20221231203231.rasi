@@ -1,24 +1,11 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-
-/*****----- Configuration -----*****/
-configuration {
-	modi:                       "run";
-    show-icons:                 false;
-    display-run:                "Run:";
-	drun-display-format:        "{name}";
+* {
+    background:     #2E3440FF;
+    background-alt: #383E4AFF;
+    foreground:     #E5E9F0FF;
+    selected:       #81A1C1FF;
+    active:         #A3BE8CFF;
+    urgent:         #BF616AFF;
 }
-
-/*****----- Global Properties -----*****/
-
-@import                          "/home/arbab/.config/rofi/shared/colors.rasi"
-
 * {
     border-colour:               var(selected);
     handle-colour:               var(foreground);
@@ -49,9 +36,9 @@ configuration {
 window {
     /* properties for window widget */
     transparency:                "real";
-    location:                    west;
-    anchor:                      west;
-    fullscreen:                  false;
+    location:                    east;
+    anchor:                      east;
+    fullscreen:                  true;
     width:                       450px;
     height:                      100%;
     x-offset:                    0px;

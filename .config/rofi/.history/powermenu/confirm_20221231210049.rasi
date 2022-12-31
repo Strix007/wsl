@@ -13,7 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "/home/arbab/.config/rofi/shared/colors.rasi"
+@import                          "shared/colors.rasi"
 
 /*****----- Main Window -----*****/
 window {

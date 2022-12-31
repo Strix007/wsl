@@ -4,10 +4,14 @@
 ## Github : @adi1090x
 #
 ## Rofi   : Power Menu
+#
+## Available Styles
+#
+## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
 dir="$HOME/.config/rofi/powermenu/"
-theme='powermenu'
+theme='style-5'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -35,7 +39,7 @@ confirm_cmd() {
 	rofi -dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme ${dir}/confirm.rasi
+		-theme ${dir}/shared/confirm.rasi
 }
 
 # Ask for confirmation
@@ -45,7 +49,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$logout" | rofi_cmd
+	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
@@ -69,8 +73,6 @@ run_cmd() {
 				i3-msg exit
 			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-			elif [[ "$DESKTOP_SESSION" == "xmonad" ]]; then
-				./.xmonad/xmonadctl 39
 			fi
 		fi
 	else
@@ -88,7 +90,11 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		/home/arbab/i3lock/lock.sh
+		if [[ -x '/usr/bin/betterlockscreen' ]]; then
+			betterlockscreen -l
+		elif [[ -x '/usr/bin/i3lock' ]]; then
+			i3lock
+		fi
         ;;
     $suspend)
 		run_cmd --suspend

@@ -9,16 +9,26 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "run";
-    show-icons:                 false;
-    display-run:                "Run:";
-	drun-display-format:        "{name}";
+	modi:                       "drun";
+    show-icons:                 true;
+    icon-theme: 				"Papirus";
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w} · {c} · {t}";
 }
 
 /*****----- Global Properties -----*****/
-
-@import                          "/home/arbab/.config/rofi/shared/colors.rasi"
-
+* {
+    background:     #2E3440FF;
+    background-alt: #383E4AFF;
+    foreground:     #E5E9F0FF;
+    selected:       #81A1C1FF;
+    active:         #A3BE8CFF;
+    urgent:         #BF616AFF;
+}
 * {
     border-colour:               var(selected);
     handle-colour:               var(foreground);
@@ -49,11 +59,10 @@ configuration {
 window {
     /* properties for window widget */
     transparency:                "real";
-    location:                    west;
-    anchor:                      west;
+    location:                    center;
+    anchor:                      center;
     fullscreen:                  false;
-    width:                       450px;
-    height:                      100%;
+    width:                       400px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -62,7 +71,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               8px;
     border-color:                @border-colour;
     cursor:                      "default";
     /* Backgroud Colors */
@@ -70,24 +79,24 @@ window {
     /* Backgroud Image */
     //background-image:          url("/path/to/image.png", none);
     /* Simple Linear Gradient */
-    // background-image:          linear-gradient(red, orange, pink, purple);
+    //background-image:          linear-gradient(red, orange, pink, purple);
     /* Directional Linear Gradient */
-    // background-image:          linear-gradient(to bottom, pink, yellow, magenta);
+    //background-image:          linear-gradient(to bottom, pink, yellow, magenta);
     /* Angle Linear Gradient */
-    // background-image:          linear-gradient(45, cyan, purple, indigo);
+    //background-image:          linear-gradient(45, cyan, purple, indigo);
 }
 
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     20px;
+    spacing:                     10px;
     margin:                      0px;
     padding:                     40px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
     border-color:                @border-colour;
     background-color:            transparent;
-    children:                    [ "inputbar", "message", "listview" ];
+    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
 }
 
 /*****----- Inputbar -----*****/
@@ -95,11 +104,11 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     8px;
+    padding:                     0px;
     border:                      0px solid;
-    border-radius:               4px;
+    border-radius:               0px;
     border-color:                @border-colour;
-    background-color:            @alternate-background;
+    background-color:            transparent;
     text-color:                  @foreground-colour;
     children:                    [ "prompt", "entry" ];
 }
@@ -153,10 +162,10 @@ case-indicator {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       10;
+    lines:                       12;
     cycle:                       true;
     dynamic:                     true;
-    scrollbar:                   false;
+    scrollbar:                   true;
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
@@ -250,9 +259,9 @@ mode-switcher{
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               4px;
+    border-radius:               0px;
     border-color:                @border-colour;
-    background-color:            @alternate-background;
+    background-color:            transparent;
     text-color:                  @foreground-colour;
 }
 button {
@@ -260,13 +269,13 @@ button {
     border:                      0px solid;
     border-radius:               4px;
     border-color:                @border-colour;
-    background-color:            transparent;
+    background-color:            @alternate-background;
     text-color:                  inherit;
     cursor:                      pointer;
 }
 button selected {
-    background-color:            var(normal-foreground);
-    text-color:                  var(normal-background);
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
 }
 
 /*****----- Message -----*****/
@@ -297,7 +306,7 @@ textbox {
 error-message {
     padding:                     10px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               4px;
     border-color:                @border-colour;
     background-color:            @background-colour;
     text-color:                  @foreground-colour;

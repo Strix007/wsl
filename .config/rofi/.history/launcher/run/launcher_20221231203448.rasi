@@ -17,8 +17,14 @@ configuration {
 
 /*****----- Global Properties -----*****/
 
-@import                          "/home/arbab/.config/rofi/shared/colors.rasi"
-
+* {
+    background:     #2E3440FF;
+    background-alt: #383E4AFF;
+    foreground:     #E5E9F0FF;
+    selected:       #81A1C1FF;
+    active:         #A3BE8CFF;
+    urgent:         #BF616AFF;
+}
 * {
     border-colour:               var(selected);
     handle-colour:               var(foreground);
@@ -53,7 +59,7 @@ window {
     anchor:                      west;
     fullscreen:                  false;
     width:                       450px;
-    height:                      100%;
+    height:                      50%;
     x-offset:                    0px;
     y-offset:                    0px;
 
