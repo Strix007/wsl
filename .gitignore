@@ -14,6 +14,7 @@
 .config/spicetify/Backup
 .config/mpv/watch_later
 .config/rofi/.history
+.config/rofi/bookmarks/.bookmarks
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
