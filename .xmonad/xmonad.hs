@@ -68,10 +68,10 @@ myGUIFileExplorer, myBrowser, myTerminal, myMPDClient :: String
 
 myTerminal        = "alacritty" -- Global Terminal         Variable
 myBrowser         = "firefox"   -- Global Browser          Variable
-myGUIFileExplorer = "nautilus"  -- Global GUI FileExplorer Variable
+myGUIFileExplorer = "thunar"  -- Global GUI FileExplorer Variable
 myMPDClient       = "ncmpcpp"   -- Global MPD Client       Variable
 
--- Change Focus To The Window Where The Mouse Is 
+-- Change Focus To The Window Where The Mouse Is
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse =  True
@@ -91,15 +91,15 @@ myUnfocusedBorderColor = "#3B4252" -- Unfocused Window
 
 -- Mod Key
 
-myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"  
+myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
 -- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
--- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}9%{A}  "]
--- myWorkspaces = ["  \62057  ", "  \61728  ", "  \61564  ", "  \61729  ", "  \61598  ", "  \61723  ", "  \62060  ", "  \61643  ", "  \61884  "]
+-- myWorkspaces = ["\61506", "\61728", "\61564", "\61729", "\61598", "\61723", "\62060", "\61643", "\61884"]
 -- myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-myWorkspaces = ["  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
+-- myWorkspaces = ["  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
+myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}9%{A}  "]
 
 
 -- SCRATCHPADS
@@ -193,18 +193,18 @@ myKeys =
                   ("M-S-c",              restart "xmonad" True)                                                                                                                  -- Recompile Xmonad
                 , ("M1-<F4>",            io exitSuccess)                                                                                                                         -- Exit Xmonad
 
-                 -- Actions                                                  
+                 -- Actions
 
                 , ("C-S-<Escape>",       spawn "/home/arbab/i3lock/lock.sh")                                                                                                     -- Custom Lockscript Using i3lock
 
-                 -- KILL                                                     
+                 -- KILL
 
                 , ("M-q",                kill)                                                                                                                                   -- Kill Focused Window
                 , ("M-C-q",              killAll)                                                                                                                                -- Kill All Windows On Workspace
 
-                -- LAYOUTS                                                     
+                -- LAYOUTS
 
-                , ("M-<Space>",          sendMessage NextLayout)                                                                                                                 -- Change Xmonad Layout  
+                , ("M-<Space>",          sendMessage NextLayout)                                                                                                                 -- Change Xmonad Layout
                 , ("M-n",                refresh)                                                                                                                                -- Restore Default Layouts
                 , ("M-<Tab>",            moveTo Next NonEmptyWS)                                                                                                                 -- Cycle Through The Next Non-Empty Workspace
                 , ("M-S-<Tab>",          moveTo Prev NonEmptyWS)                                                                                                                 -- Cycle Through The Previours Non-Empty Workspace
@@ -213,11 +213,11 @@ myKeys =
                 , ("M1-S-<Tab>",         swapNextScreen)                                                                                                                         -- Move  To The Next Screen
                 , ("M-f",                sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts)                                                                                -- Toggle FULLSCREEN Layout And Avoid Struts
                 , ("M-C-f",              withFocused toggleFloat)                                                                                                                -- Toggle Float On Focused Window
-                , ("M-.",                warpToWindow (1%10) (1%10))                                                                                                             -- Move Pointer To Focused Window                       
-                , ("M-h",                withFocused hideWindow)                                                                                                                 -- Hide Focused Window                       
-                , ("M-S-h",              popOldestHiddenWindow)                                                                                                                  -- Pop Oldest Hidden Window                       
+                , ("M-.",                warpToWindow (1%10) (1%10))                                                                                                             -- Move Pointer To Focused Window
+                , ("M-h",                withFocused hideWindow)                                                                                                                 -- Hide Focused Window
+                , ("M-S-h",              popOldestHiddenWindow)                                                                                                                  -- Pop Oldest Hidden Window
 
-                -- LAYOUT WINDOW FOCUS                                                     
+                -- LAYOUT WINDOW FOCUS
 
                 , ("M-<Left>",           windows W.focusUp)                                                                                                                      -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
                 , ("M-<Right>",          windows W.focusDown)                                                                                                                    -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
@@ -230,14 +230,14 @@ myKeys =
                 , ("M-S-<Right>",        windows W.swapDown)                                                                                                                     -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
                 , ("M-m",                dwmpromote)                                                                                                                             -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
 
-                -- MOVE WINDOWS                                                     
+                -- MOVE WINDOWS
 
                 , ("M-M1-<Up>",          sendMessage (MoveUp        10))                                                                                                         -- Arrow Key <M+ALT+Up>    To Move The Focused Window Position By 10 At The "Up"    Side
                 , ("M-M1-<Down>",        sendMessage (MoveDown      10))                                                                                                         -- Arrow Key <M+ALT+Down>  To Move The Focused Window Position By 10 At The "Down"  Side
                 , ("M-M1-<Left>",        sendMessage (MoveLeft      10))                                                                                                         -- Arrow Key <M+ALT+Left>  To Move The Focused Window Position By 10 At The "Left"  Side
                 , ("M-M1-<Right>",       sendMessage (MoveRight     10))                                                                                                         -- Arrow Key <M+ALT+Right> To Move The Focused Window Position By 10 At The "Right" Side
 
-                -- RESIZE WINDOWS   
+                -- RESIZE WINDOWS
 
                 , ("M-C-<Up>",           sendMessage (IncreaseUp    10))                                                                                                         -- Arrow Key <M+C+Up>      To Increase The Focused Window Size By 10 At The "Up"    Side
                 , ("M-C-<Down>",         sendMessage (IncreaseDown  10))                                                                                                         -- Arrow Key <M+C+Down>    To Increase The Focused Window Size By 10 At The "Down"  Side
@@ -257,7 +257,7 @@ myKeys =
                 , ("M-M1-<KP_Add>",      incScreenSpacing 10)                                                                                                                    -- Decrease Screen Spacing
                 , ("M-M1-<KP_Subtract>", decScreenSpacing 10)                                                                                                                    -- Increase Screen Spacing
 
-                -- SCRATCHPADS                                                  
+                -- SCRATCHPADS
 
                 , ("M-s M-<Return>",     namedScratchpadAction myScratchPads "terminal")                                                                                         -- Spawn A Terminal           As A ScratchPad (Alacritty)
                 , ("M-s s",              namedScratchpadAction myScratchPads "spotify-tui")                                                                                      -- Spawn A TUI Spotify Client As A ScratchPad (SPT)
@@ -265,24 +265,25 @@ myKeys =
                 , ("M-s z",              namedScratchpadAction myScratchPads "fileManager")                                                                                      -- Spawn A TUI FileManager    As A ScratchPad (Ranger)
                 , ("M-s x",              namedScratchpadAction myScratchPads "musicPlayer")                                                                                      -- Spawn A TUI MusicPlayer    As A ScratchPad (NCMPCPP And MPD)
 
-                -- FUNCTION KEYS                                                     
+                -- FUNCTION KEYS
 
                 , ("<XF86AudioPrev>",    spawn "playerctl previous")                                                                                                             -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
                 , ("<XF86AudioPlay>",    spawn "playerctl play-pause")                                                                                                           -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
                 , ("<XF86AudioNext>",    spawn "playerctl next")                                                                                                                 -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
 
-                -- ROFI                                                     
+                -- ROFI
 
                 , ("M-d",                spawn "rofi -show drun -theme /home/arbab/.config/rofi/launcher/drun/launcher.rasi")                                                    -- Launcher -Drun
                 , ("M-S-d",              spawn "rofi -show run -theme /home/arbab/.config/rofi/launcher/run/launcher.rasi")                                                      -- Launcher -Run
                 , ("M-g",                spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh")                                                                              -- Screenshot Menu Using Rofi
                 , ("M-S-g",              spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh --stop")                                                                       -- Stop Recording On The Screenshot Menu Using Rofi
                 , ("M-S-q",              spawn "/home/arbab/.config/rofi/powermenu/powermenu.sh")                                                                                -- Powermenu Using Rofi
+                , ("M-b",                spawn "/home/arbab/.config/rofi/bookmarks/bookmarks.sh")                                                                                    -- Browser Menu Using Rofi
 
-                -- APPLICATIONS                                                     
+                -- APPLICATIONS
 
                 , ("M-<Return>",         spawn myTerminal)                                                                                                                       -- Spawn Terminal           (Alacritty)
-                , ("M-b",                spawn myBrowser)                                                                                                                        -- Spawn Browser            (Firefox)
+                , ("M-S-b",              spawn myBrowser)                                                                                                                        -- Spawn Browser            (Firefox)
                 , ("M-z",                spawn myGUIFileExplorer)                                                                                                                -- Spawn FileManager        (Nautilus)
                 , ("M-S-z",              spawn "thunar")                                                                                                                         -- Spawn Backup FileManager (Thunar)
                 , ("M-r p",              spawn "polybar-msg cmd restart")                                                                                                        -- Restart Polybar
@@ -399,9 +400,9 @@ myManageHook =
      , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> doCenterFloat
      , XMonad.ManageHook.title      =? "Unlock Login Keyring"                --> doCenterFloat
      , XMonad.ManageHook.title      =? "File Operation Progress"             --> doCenterFloat
-     , isFullscreen                                                          --> doFullFloat   
+     , isFullscreen                                                          --> doFullFloat
      , (className                   =? "firefox" <&&> resource =? "Dialog")  --> doFloat
-     , (className                   =? "code" <&&> resource =? "Dialog")     --> doFloat       
+     , (className                   =? "code" <&&> resource =? "Dialog")     --> doFloat
 
 
      -- BORDERS
@@ -414,8 +415,8 @@ myManageHook =
      , className                    =? "Qalculate-gtk"                       --> hasBorder False
      , className                    =? "scrcpy"                              --> hasBorder False
      , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> hasBorder False
-     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> hasBorder False 
-     , (className                   =? "code" <&&> resource =? "Dialog")     --> hasBorder False 
+     , (className                   =? "firefox" <&&> resource =? "Dialog")  --> hasBorder False
+     , (className                   =? "code" <&&> resource =? "Dialog")     --> hasBorder False
 
      -- ASSIGN WORKSPACES
 
@@ -456,7 +457,7 @@ myLogHook dbus =
   filterOutWsPP [scratchpadWorkspaceTag]
   $ def
 
-    -- Polybar Formatting 
+    -- Polybar Formatting
     -- Check https://hackage.haskell.org/package/xmonad-contrib-0.17.0/docs/XMonad-Hooks-DynamicLog.html#t:PP
 
     {
