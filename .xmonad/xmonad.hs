@@ -278,7 +278,9 @@ myKeys =
                 , ("M-g",                spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh")                                                                              -- Screenshot Menu Using Rofi
                 , ("M-S-g",              spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh --stop")                                                                       -- Stop Recording On The Screenshot Menu Using Rofi
                 , ("M-S-q",              spawn "/home/arbab/.config/rofi/powermenu/powermenu.sh")                                                                                -- Powermenu Using Rofi
-                , ("M-b",                spawn "/home/arbab/.config/rofi/bookmarks/bookmarks.sh")                                                                                    -- Browser Menu Using Rofi
+                , ("M-b",                spawn "/home/arbab/.config/rofi/bookmarks/bookmarks.sh")                                                                                -- Browser Menu Using Rofi
+                , ("M-S-x",              spawn "/home/arbab/.config/rofi/mpd/mpd.sh")                                                                                            -- MPD Menu Using Rofi
+                , ("M-S-s",              spawn "/home/arbab/.config/rofi/spotify/spotify.sh")                                                                                    -- Spotify Menu Using Rofi
 
                 -- APPLICATIONS
 
