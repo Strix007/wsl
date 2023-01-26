@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DIR="$HOME/.config/rofi/bookmarks/"
+DIR="$HOME/.config/rofi/bookmarks"
 THEME="bookmarks"
-BOOKMARKS_FILE="$HOME/.config/rofi/bookmarks/.bookmarks"
+BOOKMARKS_FILE="$DIR/.bookmarks"
 
 # Check if there is a bookmarks file and if not, make one
 
