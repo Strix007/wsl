@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
+ #-}
 -- IMPORTS
 
 -- CORE
@@ -290,7 +290,7 @@ myKeys =
                 , ("M-r p",              spawn "polybar-msg cmd restart")                                                                                                        -- Restart Polybar
 
                 -- EMACS
-
+                
                 , ("M-e e",              spawn "emacs")                                                                                                                          -- Launch Emacs
 
                 ]
@@ -508,8 +508,7 @@ myStartupHook =
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
-    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                              -- Set Background Multi-Screen
-    spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon    
+    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                                       -- Set Background Multi-Screen
     setWMName "LG3D"
 
 myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH
