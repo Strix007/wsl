@@ -4,14 +4,11 @@
 ;; Move customization variables to a separate file and load it
 (setq custom-file (concat user-emacs-directory "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
-
-;; Create backup files in a seperate directory
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-
-;; auto-save-mode doesn't create the path automatically!
-(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
-(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+;; Change the location of the native compilation cache
+(when (fboundp 'startup-redirect-eln-cache)
+  (startup-redirect-eln-cache
+   (convert-standard-filename
+	  (expand-file-name  "var/eln-cache/" user-emacs-directory))))
 
 ;; Initialize package sources
 (require 'package)
@@ -31,6 +28,10 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+(use-package no-littering)
+;; Move files that are saved when the edit in a buffer is saved to a direcotry under ~/.emacs.d
+(setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;; Install nord theme
 (use-package nord-theme
@@ -124,7 +125,7 @@
     (setq dashboard-set-heading-icons t)
     ;; (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
     (setq dashboard-banner-logo-title "Welcome, Arbab")
-    (setq dashboard-startup-banner "/home/arbab/.emacs.d/ProfilePic.jpg")
+    (setq dashboard-startup-banner "/home/arbab/.emacs.d/banner.jpg")
     (setq dashboard-items '(
                              (recents  . 5)
                              (bookmarks . 5)
