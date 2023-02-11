@@ -13,6 +13,29 @@
 (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
       auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
 
+;; Initialize package sources
+(require 'package)
+(setq package-archives '(
+			             ("melpa" . "https://melpa.org/packages/")
+                         ("org"   . "https://orgmode.org/elpa/")
+                         ("elpa"  . "https://elpa.gnu.org/packages/")
+			 ))
+
+(package-initialize)
+(unless package-archive-contents
+ (package-refresh-contents))
+
+;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+   (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; Install nord theme
+(use-package nord-theme
+    :ensure t)
+
 ;; Load nord theme
 (defun load-nord-theme (frame)
   (select-frame frame)
@@ -69,53 +92,51 @@
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (setq doom-modeline-icon t)
-                (setq dashboard-set-heading-icons t)
-                (setq dashboard-set-file-icons t)
                 (with-selected-frame frame
                   (efs/set-font-faces))))
     (efs/set-font-faces))
-
-;; Initialize package sources
-(require 'package)
-(setq package-archives '(
-			                   ("melpa" . "https://melpa.org/packages/")
-                         ("org"   . "https://orgmode.org/elpa/")
-                         ("elpa"  . "https://elpa.gnu.org/packages/")
-			 ))
-
-(package-initialize)
-(unless package-archive-contents
- (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-   (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
 
 ;; Evil
 (use-package evil
   :config (evil-mode 1))
 
+;; All-the-icons
+(use-package all-the-icons
+    :ensure t)
+
+;; Projectile
+(use-package projectile
+    :config (projectile-mode +1)
+    :bind 
+    ("C-c p" . projectile-command-map)
+    )
+
 ;; Dashboard
 (use-package dashboard
   :ensure t
-  :init 
+  :init
+    (setq dashboard-center-content t)
     (setq dashboard-set-footer nil)
     (setq dashboard-set-navigator t)
-    (setq dashboard-center-content t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-set-init-info nil)
+    (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-heading-icons t)
-    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+    ;; (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
     (setq dashboard-banner-logo-title "Welcome, Arbab")
     (setq dashboard-startup-banner "/home/arbab/.emacs.d/ProfilePic.jpg")
-    (setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
-                        (projects . 5)
-                        (agenda . 5)
-                        (registers . 5)))
+    (setq dashboard-items '(
+                             (recents  . 5)
+                             (bookmarks . 5)
+                             (projects . 5)
+                            ;;  (agenda . 5)
+                            ;;  (registers . 5)
+                        ))
+    (setq dashboard-item-names '(
+                                ;;  ("Recent Files:" . " Recent Files:")
+                                ;;  ("Bookmarks:" . " Bookmarks:")
+                                ;;  ("Projects:" . " Projects:")
+                             ))
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")))
@@ -168,7 +189,7 @@
   )
 
 ;; Ivy
-(use-package ivy
+(use-package counsel
   :ensure t
   :init (ivy-mode)
   :diminish ivy
