@@ -291,7 +291,8 @@ myKeys =
 
                 -- EMACS
 
-                , ("M-e e",              spawn "emacs")                                                                                                                          -- Launch Emacs
+                , ("M-e e",              spawn "emacsclient -c -a 'emacs'")                                                                                                                          -- Launch Emacs
+                -- , ("M-e e",              spawn "emacs")                                                                                                                          -- Launch Emacs
 
                 ]
 
@@ -509,7 +510,7 @@ myStartupHook =
     spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
     spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                              -- Set Background Multi-Screen
-    spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon    
+    -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon    
     setWMName "LG3D"
 
 myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH

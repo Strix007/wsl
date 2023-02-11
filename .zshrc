@@ -21,9 +21,9 @@ export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 # Editor For SSH And Local Separately
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
+  export EDITOR='emacs'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 # KEYBINDING TYPE
 bindkey -v 

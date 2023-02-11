@@ -1,5 +1,5 @@
 ;; Enable server mode (daemon) for this Emacs session
-;; (server-start)
+(server-start)
 
 ;; Move customization variables to a separate file and load it
 (setq custom-file (concat user-emacs-directory "custom-set-variables.el"))
@@ -79,7 +79,8 @@
 		eshell-mode-hook
 		shell-mode-hook
 		term-mode-hook
-		neotree-mode-hook))
+		neotree-mode-hook
+		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Font
@@ -103,11 +104,30 @@
 
 ;; Evil
 (use-package evil
-  :config (evil-mode 1))
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-set-undo-system 'undo-redo)
+  )
+
+;; Evil-collection
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init)
+  )
+
+;; Evil-nerd-commenter
+(use-package evil-nerd-commenter
+  :init
+  (evilnc-default-hotkeys))
 
 ;; All-the-icons
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons)
 
 ;; Projectile
 (use-package projectile
@@ -118,7 +138,6 @@
 
 ;; Dashboard
 (use-package dashboard
-  :ensure t
   :init
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
@@ -127,7 +146,7 @@
   (setq dashboard-set-init-info nil)
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
-  ;; (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
   (setq dashboard-banner-logo-title "Welcome, Arbab")
   (setq dashboard-startup-banner "/home/arbab/.emacs.d/banner.jpg")
   (setq dashboard-items '(
@@ -165,17 +184,6 @@
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-smart-open t)
-  (add-hook 'neotree-mode-hook
-            (lambda ()
-              (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-              (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
-              (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-              (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
-              (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
-              (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
-              (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
-              (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
   :config 
   (add-to-list 'load-path "/some/path/neotree")
   :bind (
@@ -199,13 +207,13 @@
 ;; :config (powerline-center-evil-theme)
 ;; )
 (use-package doom-modeline
-  :ensure t
   :init  
   (setq doom-modeline-indent-info t) 
   (setq doom-modeline-minor-modes nil)
   (doom-modeline-mode 1)
   )
 
+;; Helpful
 (use-package helpful
   :custom
   (setq counsel-describe-function-function #'helpful-callable)
@@ -216,18 +224,19 @@
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key)
   )
+
 ;; Ivy
 (use-package counsel
-  :ensure t
   :init (ivy-mode)
   :diminish ivy
   :bind (
 	 ("C-s"     . swiper)
 	 ("C-c C-r" . ivy-resume)
+	 ("C-x r b" . counsel-bookmark)
 	 ("<f6>"    . ivy-resume)
 	 ("M-x"     . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
-	 ("C-x b"   . counsel-ibuffer)
+	 ("C-x b"   . counsel-switch-buffer)
 	 ("<f1> l"  . counsel-find-library)
 	 ("<f2> i"  . counsel-info-lookup-symbol)
 	 ("<f2> u"  . counsel-unicode-char)
@@ -235,8 +244,8 @@
 	 ("C-c j"   . counsel-git-grep)
 	 ("C-c k"   . counsel-ag)
 	 ("C-x l"   . counsel-locate)
-         )
-  )
+	 ("C-x w"   . counsel-wmctrl)
+         ))
 
 ;; Ivy-rich
 (use-package ivy-rich
@@ -246,7 +255,6 @@
 
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
-  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode)
   )
 
@@ -265,15 +273,30 @@
   :init
   (setq counsel-spotify-client-id "021a3ba7d3084e0fab36b2c7ea07d536")
   (setq counsel-spotify-client-secret "b0ff80fc4db14384acd46888485d6945")
-  :bind (
-	 ("C-c s s" . counsel-spotify-toggle-play-pause) 
-	 ("C-c s a" . counsel-spotify-search-album) 
-	 ("C-c s d" . counsel-spotify-search-artist) 
-	 ("C-c s t" . counsel-spotify-search-track) 
-	 ("C-c s v" . counsel-spotify-search-playlist) 
-	 )
   )
 
-(use-package emmet-mode
-  :init (emmet-mode)
+;; Company
+(use-package company
+  :hook
+  (emacs-lisp-mode . company-mode)
+  ;; (after-init-hook . global-company-mode)
   )
+
+;; General
+(use-package general
+  :init
+  (general-auto-unbind-keys)
+  :config
+  (general-create-definer arbab/leader-keys
+			  :keymaps '(normal insert visual emacs)
+			  :prefix "SPC"
+			  :global-prefix "C-SPC")
+  (arbab/leader-keys
+   ;; Spotify keybinds using counsel-spotify
+   "s"  '(:ignore t :which-key "Spotify")
+   "ss" '(counsel-spotify-toggle-play-pause :which-key "Play-Pause")
+   "sa" '(counsel-spotify-search-artist     :which-key "Search Artist")
+   "sd" '(counsel-spotify-search-album      :which-key "Search Album")
+   "sv" '(counsel-spotify-search-playlist   :which-key "Search Playlist")
+   "st" '(counsel-spotify-search-track      :which-key "Search Track")
+   ))
