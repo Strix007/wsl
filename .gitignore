@@ -15,8 +15,10 @@
 .config/mpv/watch_later
 .config/rofi/.history
 .config/rofi/bookmarks/.bookmarks
+.emacs.d/.cache
 .emacs.d/elpa
 .emacs.d/etc
+.emacs.d/transient
 .emacs.d/var
 .emacs.d/custom-set-variables.el
 xmenu/Makefile
