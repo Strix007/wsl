@@ -80,6 +80,8 @@
 		shell-mode-hook
 		term-mode-hook
 		neotree-mode-hook
+		which-key-mode
+		helpful-mode
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -116,7 +118,8 @@
 
 ;; Evil-collection
 (use-package evil-collection
-  :after evil
+  :after
+  evil
   :config
   (evil-collection-init)
   )
@@ -131,10 +134,19 @@
 
 ;; Projectile
 (use-package projectile
-  :config (projectile-mode +1)
+  :diminish projectile-mode
+  :custom (
+	   (projectile-completion-system 'ivy)
+	   )
+  :config
+  (projectile-mode +1)
   :bind 
   ("C-c p" . projectile-command-map)
   )
+
+;; Counsel-projectile
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
 
 ;; Dashboard
 (use-package dashboard
@@ -279,7 +291,6 @@
 (use-package company
   :hook
   (emacs-lisp-mode . company-mode)
-  ;; (after-init-hook . global-company-mode)
   )
 
 ;; General
@@ -288,15 +299,27 @@
   (general-auto-unbind-keys)
   :config
   (general-create-definer arbab/leader-keys
-			  :keymaps '(normal insert visual emacs)
-			  :prefix "SPC"
-			  :global-prefix "C-SPC")
-  (arbab/leader-keys
-   ;; Spotify keybinds using counsel-spotify
-   "s"  '(:ignore t :which-key "Spotify")
-   "ss" '(counsel-spotify-toggle-play-pause :which-key "Play-Pause")
-   "sa" '(counsel-spotify-search-artist     :which-key "Search Artist")
-   "sd" '(counsel-spotify-search-album      :which-key "Search Album")
-   "sv" '(counsel-spotify-search-playlist   :which-key "Search Playlist")
-   "st" '(counsel-spotify-search-track      :which-key "Search Track")
-   ))
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  )
+(arbab/leader-keys
+  ;; Spotify keybinds using counsel-spotify
+  "s"  '(:ignore t :which-key "Spotify")
+  "ss" '(counsel-spotify-toggle-play-pause :which-key "Play-Pause")
+  "sa" '(counsel-spotify-search-artist     :which-key "Search Artist")
+  "sd" '(counsel-spotify-search-album      :which-key "Search Album")
+  "sv" '(counsel-spotify-search-playlist   :which-key "Search Playlist")
+  "st" '(counsel-spotify-search-track      :which-key "Search Track")
+  ;; Increase or decrease text scale using hydra
+  "t" '(:ignore t :which-key "Text")
+  "ts" '(hydra-text-scale/body :which-key "Scale")
+  )
+
+;; Hydra
+(defhydra hydra-text-scale (:color t)
+  "scale text"
+  ("+" text-scale-increase "in")
+  ("-" text-scale-decrease "out")
+  ("ESC" nil "finished" :exit t)
+  )
