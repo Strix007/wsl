@@ -21,6 +21,7 @@
 .emacs.d/transient
 .emacs.d/var
 .emacs.d/custom-set-variables.el
+.emacs.d/OrgFiles
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu

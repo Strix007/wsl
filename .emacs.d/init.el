@@ -54,7 +54,7 @@
 ;; Disable startup message
 (setq inhibit-startup-message t)
 
-;; Disable not needed UI elements
+;; Modify UI elements
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)   ; Disable the toolbar
 (tooltip-mode -1)    ; Disable tooltips
@@ -63,8 +63,6 @@
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-M-h") 'package-install)
-(global-set-key (kbd "M-RET") 'shell)
 
 
 ;; Revert buffers when the underlying file has changed
@@ -75,34 +73,35 @@
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
+		org-agenda-mode-hook
+		dashboard-mode-hook
+		vterm-mode-hook
+		compilation-mode-hook
+		backtrace-mode-hook
 		term-mode-hook
 		eshell-mode-hook
 		shell-mode-hook
 		term-mode-hook
 		neotree-mode-hook
 		which-key-mode
-		helpful-mode
+		helpful-mode-hook
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Font
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 125)
-(defun efs/set-font-faces ()
-  (message "Setting faces!")
-  (set-face-attribute 'default nil :font "JetBrains Mono" :height 125)
-
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 125)
-
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "JetBrains Mono" :height 125 :weight 'regular))
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (setq doom-modeline-icon t)
-                (with-selected-frame frame
-                  (efs/set-font-faces))))
-  (efs/set-font-faces))
+(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 125)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 125)
+;; Org-mode fonts
+;; Ensure that anything that should be fixed-pltch in Org files appears that way
+;; (set-face-attribute 'org-block           nil :foreground nil :inherit 'fixed-pitch)
+;; (set-face-attribute 'org-code            nil :inherit '(shadow fixed-pitch))
+;; (set-face-attribute 'org-table           nil :inherit '(shadow fixed-pitch))
+;; (set-face-attribute 'org-indent          nil :inherit '(org-hide fixed-pitch))
+;; (set-face-attribute 'org-verbatim        nil :inherit '(shadow fixed-pitch))
+;; (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+;; (set-face-attribute 'org-meta-line       nil :inherit '(font-lock-comment-face fixed-pitch))
+;; (set-face-attribute 'org-checkbox        nil :inherit 'fixed-pitch)
 
 ;; Evil
 (use-package evil
@@ -158,15 +157,14 @@
   (setq dashboard-set-init-info nil)
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
   (setq dashboard-banner-logo-title "Welcome, Arbab")
   (setq dashboard-startup-banner "/home/arbab/.emacs.d/banner.jpg")
   (setq dashboard-items '(
                           (recents  . 5)
                           (bookmarks . 5)
                           (projects . 5)
-                          ;;  (agenda . 5)
-                          ;;  (registers . 5)
+                          (agenda . 5)
+                          ;; (registers . 5)
                           ))
   (setq dashboard-item-names '(
                                ;;  ("Recent Files:" . " Recent Files:")
@@ -186,11 +184,6 @@
   (ace-popup-menu-mode 1)
   )
 
-;; Sublimity
-(use-package sublimity
-  :config (sublimity-mode 1)
-  )
-
 ;; Neotree
 (use-package neotree
   :init
@@ -198,9 +191,8 @@
   (setq neo-smart-open t)
   :config 
   (add-to-list 'load-path "/some/path/neotree")
-  :bind (
-	 ("<f8>" . neotree-toggle)
-	 )
+  :bind 
+  ("<f8>" . neotree-toggle)
   )
 
 ;; Emojify
@@ -231,7 +223,7 @@
   (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable)
   :bind
-  ("C-h f" . helpful-function )
+  ("C-h f" . helpful-function)
   ("C-h c" . helpful-command)
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key)
@@ -241,23 +233,23 @@
 (use-package counsel
   :init (ivy-mode)
   :diminish ivy
-  :bind (
-	 ("C-s"     . swiper)
-	 ("C-c C-r" . ivy-resume)
-	 ("C-x r b" . counsel-bookmark)
-	 ("<f6>"    . ivy-resume)
-	 ("M-x"     . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-x b"   . counsel-switch-buffer)
-	 ("<f1> l"  . counsel-find-library)
-	 ("<f2> i"  . counsel-info-lookup-symbol)
-	 ("<f2> u"  . counsel-unicode-char)
-	 ("C-c g"   . counsel-git)
-	 ("C-c j"   . counsel-git-grep)
-	 ("C-c k"   . counsel-ag)
-	 ("C-x l"   . counsel-locate)
-	 ("C-x w"   . counsel-wmctrl)
-         ))
+  :bind 
+  ("C-s"     . swiper)
+  ("C-c C-r" . ivy-resume)
+  ("C-x r b" . counsel-bookmark)
+  ("<f6>"    . ivy-resume)
+  ("M-x"     . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("C-x b"   . counsel-switch-buffer)
+  ("<f1> l"  . counsel-find-library)
+  ("<f2> i"  . counsel-info-lookup-symbol)
+  ("<f2> u"  . counsel-unicode-char)
+  ("C-c g"   . counsel-git)
+  ("C-c j"   . counsel-git-grep)
+  ("C-c k"   . counsel-ag)
+  ("C-x l"   . counsel-locate)
+  ("C-x w"   . counsel-wmctrl)
+  )
 
 ;; Ivy-rich
 (use-package ivy-rich
@@ -322,7 +314,7 @@
   "scale text"
   ("=" text-scale-increase "Zoom In")
   ("-" text-scale-decrease "Zoom Out")
-  ("ESC" nil "finished" :exit t)
+  ("ESC" nil "Finished" :exit t)
   )
 
 ;; Magit
@@ -333,6 +325,59 @@
 ;; Forge
 (use-package forge)
 
-;; Org-mode
+(defun arbab/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1)
+  )
 
-(use-package org)
+;; Org-mode
+(use-package org
+  :hook
+  (org-mode . arbab/org-mode-setup)
+  :config
+  (setq org-ellipsis "▾")
+  (setq org-agenda-files '("~/.emacs.d/OrgFiles/Tasks.org"))
+  )
+
+;; Org-bullets
+(use-package org-bullets
+  :after
+  org
+  :hook
+  (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+  )
+
+;; (dolist (face '((org-level-1 . 1.2)
+;; 		(org-level-2 . 1.1)
+;; 		(org-level-3 . 1.05)
+;; 		(org-level-4 . 1.0)
+;; 		(org-level-5 . 1.1)
+;; 		(org-level-6 . 1.1)
+;; 		(org-level-7 . 1.1)
+;; 		(org-level-8 . 1.1)
+;; 		))
+;;   (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+;; Visual-fill-column
+(use-package visual-fill-column
+  :hook (org-mode . arbab/org-mode-visual-fill))
+(defun arbab/org-mode-visual-fill ()
+  (setq visual-fill-column-width 50)
+  (setq visual-fill-column-center-text t)
+  (setq visual-fill-column-mode 1)
+  )
+
+;; Haskell-mode
+(use-package haskell-mode)
+
+;; Lua-mode
+(use-package lua-mode)
+
+;; Vterm
+(use-package vterm
+  :bind
+  ("M-RET" . vterm)
+  )
