@@ -317,9 +317,22 @@
   )
 
 ;; Hydra
+(use-package hydra)
 (defhydra hydra-text-scale (:color t)
   "scale text"
-  ("+" text-scale-increase "in")
-  ("-" text-scale-decrease "out")
+  ("=" text-scale-increase "Zoom In")
+  ("-" text-scale-decrease "Zoom Out")
   ("ESC" nil "finished" :exit t)
   )
+
+;; Magit
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+;; Forge
+(use-package forge)
+
+;; Org-mode
+
+(use-package org)
