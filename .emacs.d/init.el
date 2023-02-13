@@ -72,7 +72,11 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
+(dolist (mode '(
+		completion-list-mode-hook 
+		org-mode-hook
+		Info-mode-hook
+		calendar-mode-hook
 		org-agenda-mode-hook
 		dashboard-mode-hook
 		vterm-mode-hook
@@ -90,8 +94,8 @@
 
 ;; Font
 (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125)
-(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 125)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 125)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 250)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 250)
 
 ;; Evil
 (use-package evil
@@ -157,9 +161,13 @@
                           ;; (registers . 5)
                           ))
   (setq dashboard-item-names '(
-                               ;;  ("Recent Files:" . " Recent Files:")
-                               ;;  ("Bookmarks:" . " Bookmarks:")
-                               ;;  ("Projects:" . " Projects:")
+                               ;; ("Recent Files:" . " Recent Files:")
+                               ;; ("Bookmarks:" . " Bookmarks:")
+                               ;; ("Projects:" . " Projects:")
+                               ("Recent Files:" . "Recent Files▾")
+                               ("Bookmarks:" . "Bookmarks▾")
+                               ("Projects:" . "Projects▾")
+			       ("Agenda for the coming week:" . "Agenda▾")
                                ))
   :config
   (dashboard-setup-startup-hook)
@@ -351,7 +359,13 @@
   (org-mode . arbab/org-mode-setup)
   :config
   (setq org-ellipsis "▾")
+  (setq org-log-done 'note)
+  ;; Org-agenda files
   (setq org-agenda-files '("~/.emacs.d/OrgFiles/Tasks.org"))
+  (setq org-agenda-files '("~/.emacs.d/OrgFiles/Family.org"))
+  (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
   )
 
 ;; Org-bullets
@@ -366,13 +380,12 @@
 
 
 ;; Visual-fill-column
+(defun arbab/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 (use-package visual-fill-column
   :hook (org-mode . arbab/org-mode-visual-fill))
-(defun arbab/org-mode-visual-fill ()
-  (setq visual-fill-column-width 50)
-  (setq visual-fill-column-center-text t)
-  (setq visual-fill-column-mode 1)
-  )
 
 ;; Haskell-mode
 (use-package haskell-mode)
