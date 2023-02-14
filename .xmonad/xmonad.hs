@@ -345,13 +345,13 @@ mySpacing n = spacingRaw False (Border n n n n) True (Border n n n n) True -- Wi
 -- BUNDLED LAYOUTS
 
 spirals        = renamed [Replace "Spiral"]
-                  $ hiddenWindows
                   $ mySpacing 3
+                  $ hiddenWindows
                   $ spiral (6/7)
 
 masterAndStack = renamed [Replace "MasterAndStack"]
-                  $ hiddenWindows
                   $ mySpacing 3
+                  $ hiddenWindows
                     tiled
 
                       where
@@ -374,12 +374,12 @@ masterAndStack = renamed [Replace "MasterAndStack"]
 
 
 myLayout =   avoidStruts
-           $ mouseResize
-           $ windowArrange
-           $ lessBorders Screen
-           $ mkToggle (FULL ?? EOT)
-           $ spirals
-         ||| masterAndStack
+             $ mouseResize
+             $ windowArrange
+             $ lessBorders Screen
+             $ mkToggle (FULL ?? EOT)
+             $ spirals
+           ||| masterAndStack
 
 -- WINDOW RULES
 

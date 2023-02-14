@@ -238,7 +238,7 @@
   ("<f6>"    . ivy-resume)
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-x b"   . counsel-switch-buffer)
+  ("C-x b"   . counsel-ibuffer)
   ("<f1> l"  . counsel-find-library)
   ("<f2> i"  . counsel-info-lookup-symbol)
   ("<f2> u"  . counsel-unicode-char)
@@ -280,7 +280,7 @@
 ;; Company
 (use-package company
   :hook
-  (emacs-lisp-mode . company-mode)
+  (prog-mode . company-mode)
   )
 
 ;; General
@@ -398,3 +398,17 @@
   :bind
   ("M-RET" . vterm)
   )
+
+;; Markdown-preview-eww
+(use-package markdown-preview-eww)
+
+;; LSP
+;; "Run `lsp-deferred' if it's a supported mode."
+(defun arbab/lsp-deferred-if-supported ()
+  (unless (derived-mode-p 'emacs-lisp-mode)
+    (lsp-deferred)))
+(use-package lsp-haskell)
+(use-package lsp-mode
+  :hook
+  (prog-mode . arbab/lsp-deferred-if-supported))
+(use-package lsp-pyright)
