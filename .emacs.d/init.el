@@ -13,7 +13,7 @@
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(
-			 ("melpa" . "https://melpa.org/packages/")
+			                   ("melpa" . "https://melpa.org/packages/")
                          ("org"   . "https://orgmode.org/elpa/")
                          ("elpa"  . "https://elpa.gnu.org/packages/")
 			 ))
@@ -60,6 +60,11 @@
 (tooltip-mode -1)    ; Disable tooltips
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1)   ; Disable the menu bar
+
+;; Indentation
+(setq-default tab-width 2)
+(setq-default evil-shift-width tab-width)
+(setq-default indent-tabs-mode nil)
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -332,7 +337,7 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   ;; Set faces for heading levels
   (dolist (face '(
-		  (org-level-1 . 1.2)
+		              (org-level-1 . 1.2)
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)
                   (org-level-4 . 1.0)
@@ -403,7 +408,7 @@
 (use-package markdown-preview-eww)
 
 ;; LSP
-;; "Run `lsp-deferred' if it's a supported mode."
+;; Run "lsp-deferred" if it's a supported mode.
 (defun arbab/lsp-deferred-if-supported ()
   (unless (derived-mode-p 'emacs-lisp-mode)
     (lsp-deferred)))
