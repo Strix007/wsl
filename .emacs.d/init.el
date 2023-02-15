@@ -97,10 +97,10 @@
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Font
+;; Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125)
-(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 250)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 250)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150)
 
 ;; Evil
 (use-package evil
@@ -172,7 +172,7 @@
                                ("Recent Files:" . "Recent Files▾")
                                ("Bookmarks:" . "Bookmarks▾")
                                ("Projects:" . "Projects▾")
-			       ("Agenda for the coming week:" . "Agenda▾")
+			                         ("Agenda for the coming week:" . "Agenda▾")
                                ))
   :config
   (dashboard-setup-startup-hook)
@@ -363,14 +363,79 @@
   :hook
   (org-mode . arbab/org-mode-setup)
   :config
+  (setq org-confirm-babel-evaluate nil) 
   (setq org-ellipsis "▾")
   (setq org-log-done 'note)
   ;; Org-agenda files
-  (setq org-agenda-files '("~/.emacs.d/OrgFiles/Tasks.org"))
-  (setq org-agenda-files '("~/.emacs.d/OrgFiles/Family.org"))
+  (setq org-agenda-files
+        '("~/.emacs.d/OrgFiles/Tasks.org"
+          "~/.emacs.d/OrgFiles/Family.org")
+        )
   (setq org-todo-keywords
     '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
       (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+  (setq org-refile-targets
+    '(("Archive.org" :maxlevel . 1)
+      ("Tasks.org" :maxlevel . 1)))
+
+  ;; Save Org buffers after refiling
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("agenda" . ?a)
+       ("planning" . ?p)
+       ("publish" . ?P)
+       ("batch" . ?b)
+       ("note" . ?n)
+       ("idea" . ?i)
+       ("goal" . ?g)
+       ))
+
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+   '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+    ("w" "Workflow Status"
+     ((todo "WAIT"
+            ((org-agenda-overriding-header "Waiting on External")
+             (org-agenda-files org-agenda-files)))
+      (todo "REVIEW"
+            ((org-agenda-overriding-header "In Review")
+             (org-agenda-files org-agenda-files)))
+      (todo "PLAN"
+            ((org-agenda-overriding-header "In Planning")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "BACKLOG"
+            ((org-agenda-overriding-header "Project Backlog")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "READY"
+            ((org-agenda-overriding-header "Ready for Work")
+             (org-agenda-files org-agenda-files)))
+      (todo "ACTIVE"
+            ((org-agenda-overriding-header "Active Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "COMPLETED"
+            ((org-agenda-overriding-header "Completed Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "CANC"
+            ((org-agenda-overriding-header "Cancelled Projects")
+             (org-agenda-files org-agenda-files)))))))
   )
 
 ;; Org-bullets
@@ -383,10 +448,16 @@
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
   )
 
+;; Org-babel-templates
+(require 'org-tempo)
+(add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
+(add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py"  . "src python"))
+(add-to-list 'org-structure-template-alist '("lua" . "lua"))
 
 ;; Visual-fill-column
 (defun arbab/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
+  (setq visual-fill-column-width 150
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 (use-package visual-fill-column
