@@ -36,10 +36,12 @@
 
 ;; Install doom-nord theme
 (use-package doom-themes
-  :init
-  (setq doom-themes-enable-bold t)
-  (setq doom-themes-enable-italic t)
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t) 
   (setq doom-themes-padded-modeline nil)
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
   (doom-themes-neotree-config) 
   (doom-themes-org-config)
   (load-theme 'doom-nord t)
@@ -94,6 +96,7 @@
 		neotree-mode-hook
 		which-key-mode
 		helpful-mode-hook
+    treemacs-mode-hook
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -198,6 +201,17 @@
   ("<f8>" . neotree-toggle)
   )
 
+;; Treemacs
+(use-package treemacs
+  :bind
+  ("<f9>" . treemacs))
+;; Treemacs-evil
+(use-package treemacs-evil
+  :after treemacs)
+;; Treemacs-projectile
+(use-package treemacs-projectile
+  :after treemacs)
+
 ;; Emojify
 (use-package emojify
   :hook (after-init . global-emojify-mode)
@@ -286,7 +300,14 @@
 (use-package company
   :hook
   (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
   )
+
+;; Company-box
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 ;; General
 (use-package general
@@ -469,6 +490,13 @@
 ;; Lua-mode
 (use-package lua-mode)
 
+;; Typescript-mode
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :config
+  (setq typescript-indent-level 2)
+  )
+
 ;; Vterm
 (use-package vterm
   :bind
@@ -480,11 +508,37 @@
 
 ;; LSP
 ;; Run "lsp-deferred" if it's a supported mode.
-(defun arbab/lsp-deferred-if-supported ()
+(defun arbab/lsp-mode-setup ()
   (unless (derived-mode-p 'emacs-lisp-mode)
-    (lsp-deferred)))
+    (lsp-deferred)
+    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+    (lsp-headerline-breadcrumb-mode))
+  )
+
+;; Make sure to install the language servers on your local machine
+;; LSP-Haskell
 (use-package lsp-haskell)
-(use-package lsp-mode
-  :hook
-  (prog-mode . arbab/lsp-deferred-if-supported))
+
+;; LSP-pyright
 (use-package lsp-pyright)
+
+;; LSP-treemacs
+(use-package lsp-treemacs)
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook
+  (prog-mode . arbab/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t)
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  )
+
+;; LSP-UI
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui)
+  :custom
+  (lsp-ui-doc-position 'bottom)
+  )
