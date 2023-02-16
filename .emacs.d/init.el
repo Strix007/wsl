@@ -34,6 +34,17 @@
 ;; Move files that are saved when the edit in a buffer is saved to a direcotry under ~/.emacs.d
 (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
+;; Auto-package-update
+(use-package auto-package-update
+  :custom
+  (auto-package-update-interval 7)
+  (auto-package-update-prompt-before-update t)
+  (auto-package-update-hide-results t)
+  :config
+  (auto-package-update-maybe)
+  (auto-package-update-at-time "20:00")
+  )
+
 ;; Install doom-nord theme
 (use-package doom-themes
   :config
@@ -55,6 +66,8 @@
 (setq use-dialog-box nil)
 ;; Disable startup message
 (setq inhibit-startup-message t)
+;; Restore the last location of the cursor in a file
+(save-place-mode 1)
 
 ;; Modify UI elements
 (scroll-bar-mode -1) ; Disable visible scrollbar
@@ -70,7 +83,12 @@
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; Move point from window to window using Shift and the arrow keys
+(windmove-default-keybindings)
 
+;; Auto close brackets and quotes
+(electric-pair-mode)
+(electric-quote-mode)
 
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
@@ -82,6 +100,7 @@
 (dolist (mode '(
 		completion-list-mode-hook 
 		org-mode-hook
+    dired-mode-hook
 		Info-mode-hook
 		calendar-mode-hook
 		org-agenda-mode-hook
@@ -205,9 +224,11 @@
 (use-package treemacs
   :bind
   ("<f9>" . treemacs))
+
 ;; Treemacs-evil
 (use-package treemacs-evil
   :after treemacs)
+
 ;; Treemacs-projectile
 (use-package treemacs-projectile
   :after treemacs)
@@ -219,14 +240,33 @@
 
 ;; Dirvish
 (use-package dirvish
-  :init (
-	 dirvish-override-dired-mode
-	 ))
+  :init
+	(dirvish-override-dired-mode)
+  (setq dired-mouse-drag-files t)                   
+  (setq mouse-drag-and-drop-region-cross-program t) 
+  (setq delete-by-moving-to-trash t)
+  :bind
+   ("C-x C-g" . dired-jump)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-single-up-directory)
+	)
+
+;; All-the-icons-dired
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+;; Dired-hide-dotfiles
+(use-package dired-hide-dotfiles
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
 
 ;; Powerline
 ;; (use-package powerline
-;; :config (powerline-center-evil-theme)
-;; )
+;; :config (powerline-center-evil-theme))
+
+;; Doom-modeline
 (use-package doom-modeline
   :init  
   (setq doom-modeline-indent-info t) 
@@ -257,7 +297,7 @@
   ("<f6>"    . ivy-resume)
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-x b"   . counsel-ibuffer)
+  ("C-x b"   . counsel-switch-buffer)
   ("<f1> l"  . counsel-find-library)
   ("<f2> i"  . counsel-info-lookup-symbol)
   ("<f2> u"  . counsel-unicode-char)
@@ -330,6 +370,13 @@
   ;; Increase or decrease text scale using hydra
   "t" '(:ignore t :which-key "Text")
   "ts" '(hydra-text-scale/body :which-key "Scale")
+  ;; Navigate tabs using centaur-tabs
+  "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
+  "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
+  "S-<right>" '(centaur-tabs-forward-group              :which-key "Move To Right Tab Group")
+  "<up>"      '(centaur-tabs--create-new-tab            :which-key "Create New Tab")
+  "w"         '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Tab")
+  ;; "<down>"  '(centaur-tabs-forward  :which-key "Move To Right Tab")
   )
 
 ;; Hydra
@@ -501,6 +548,8 @@
 (use-package vterm
   :bind
   ("M-RET" . vterm)
+  :config
+  (setq vterm-max-scrollback 10000)
   )
 
 ;; Markdown-preview-eww
@@ -541,4 +590,39 @@
   :hook (lsp-mode . lsp-ui)
   :custom
   (lsp-ui-doc-position 'bottom)
+  )
+
+;; Ws-butler
+(use-package ws-butler
+  :hook
+  (prog-mode . ws-butler-mode))
+
+;; Multiple-cursors
+(use-package multiple-cursors
+  :bind
+  ("C-M-/" . mc/edit-lines)
+  ("C-M-<" . mc/mark-previous-like-this)
+  ("C-M->" . mc/mark-next-like-this)
+  )
+
+;; Centaur-tabs
+(use-package centaur-tabs
+  :init
+  (setq centaur-tabs-set-bar 'left)
+  (setq centaur-tabs-style "zigzag")
+  (setq centaur-tabs-cycle-scope 'default)
+  :hook
+  (dired-mode . centaur-tabs-local-mode)
+  (dashboard-mode . centaur-tabs-local-mode)
+  (vterm-mode . centaur-tabs-local-mode)
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-height 40)
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-close-button "")
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-modified-marker "")
+  (setq centaur-tabs-show-new-tab-button t)
+  ;; (setq centaur-tabs-new-tab-text "")
+  (centaur-tabs-change-fonts "Jetbrains Mono" 125)
   )
