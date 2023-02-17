@@ -372,7 +372,7 @@
   "ts" '(hydra-text-scale/body :which-key "Scale")
   ;; Navigate tabs using centaur-tabs
   "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
-  "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
+  "<right>"   '(centaur-tabs-forward-tab                :which-key "Move To Right Tab")
   "S-<right>" '(centaur-tabs-forward-group              :which-key "Move To Right Tab Group")
   "<up>"      '(centaur-tabs--create-new-tab            :which-key "Create New Tab")
   "w"         '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Tab")
@@ -558,10 +558,11 @@
 ;; LSP
 ;; Run "lsp-deferred" if it's a supported mode.
 (defun arbab/lsp-mode-setup ()
-  (unless (derived-mode-p 'emacs-lisp-mode)
+  (unless (derived-mode-p 'emacs-lisp-mode 'yuck-mode)
     (lsp-deferred)
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode))
+    (lsp-headerline-breadcrumb-mode)
+    )
   )
 
 ;; Make sure to install the language servers on your local machine
@@ -625,4 +626,13 @@
   (setq centaur-tabs-show-new-tab-button t)
   ;; (setq centaur-tabs-new-tab-text "")
   (centaur-tabs-change-fonts "Jetbrains Mono" 125)
+  )
+
+;; Yuck-mode
+(use-package yuck-mode)
+
+;; Parinfer-rust-mode
+(use-package parinfer-rust-mode
+  :init
+  (setq parinfer-rust-auto-download t)
   )
