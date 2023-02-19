@@ -155,6 +155,8 @@
 ;; Projectile
 (use-package projectile
   :diminish projectile-mode
+  :init
+  (setq projectile-project-search-path '("~/projects/"))
   :custom (
 	   (projectile-completion-system 'ivy)
 	   )
