@@ -1,7 +1,3 @@
-(deflisten spotify-format
-  :interval "1s"
-  `playerctl --follow metadata --format {{title}}`
-  )
 (defpoll time
   :interval "1s"
   `date +'%H:%M:%S'`
@@ -17,8 +13,28 @@
   :stacking "fg"
   :windowtype "desktop"
   :wm-ignore false
-  (time))
-
+  (time)
+  )
+(defwindow spotify
+  :monitor 0
+  :geometry (geometry
+             :x "-6px"
+             :width "20%"
+             :height "20%"
+             :anchor "top center"
+             )
+  :stacking "fg"
+  :windowtype "desktop"
+  :wm-ignore false
+  (spotify)
+  )
+(defwidget spotify []
+  (box
+   :orientation "vertical"
+   :class "art"
+   "Hello"
+   )
+  )
 (defwidget time []
   (box
    :orientation "vertical"
