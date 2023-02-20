@@ -638,3 +638,8 @@
   :init
   (setq parinfer-rust-auto-download t)
   )
+
+;; Emmet
+(use-package emmet-mode
+  :hook
+  (html-mode . emmet-mode))
