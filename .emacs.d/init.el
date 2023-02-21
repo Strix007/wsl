@@ -316,6 +316,13 @@
   (ivy-rich-mode 1)
   )
 
+;; Ivy-posframe
+(use-package ivy-posframe
+  :init
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+  (ivy-posframe-mode 1)
+  )
+
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode)
@@ -349,7 +356,10 @@
 
 ;; Company-box
 (use-package company-box
-  :hook (company-mode . company-box-mode))
+  :hook (company-mode . company-box-mode)
+  :bind
+   ("M-<tab>" . company-complete)
+  )
 
 ;; General
 (use-package general
@@ -376,9 +386,9 @@
   "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
   "<right>"   '(centaur-tabs-forward-tab                :which-key "Move To Right Tab")
   "S-<right>" '(centaur-tabs-forward-group              :which-key "Move To Right Tab Group")
+  "S-<left>"  '(centaur-tabs-backward-group             :which-key "Move To Left Tab Group")
   "<up>"      '(centaur-tabs--create-new-tab            :which-key "Create New Tab")
   "w"         '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Tab")
-  ;; "<down>"  '(centaur-tabs-forward  :which-key "Move To Right Tab")
   )
 
 ;; Hydra
@@ -523,7 +533,7 @@
 (add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
 (add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("py"  . "src python"))
-(add-to-list 'org-structure-template-alist '("lua" . "lua"))
+(add-to-list 'org-structure-template-alist '("lua" . "src lua"))
 
 ;; Visual-fill-column
 (defun arbab/org-mode-visual-fill ()
@@ -558,8 +568,8 @@
 (use-package markdown-preview-eww)
 
 ;; LSP
-;; Run "lsp-deferred" if it's a supported mode.
 (defun arbab/lsp-mode-setup ()
+  ;; Run "lsp-deferred" if it's a supported mode
   (unless (derived-mode-p 'emacs-lisp-mode 'yuck-mode)
     (lsp-deferred)
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -577,6 +587,7 @@
 ;; LSP-treemacs
 (use-package lsp-treemacs)
 
+;; LSP-mode
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook
