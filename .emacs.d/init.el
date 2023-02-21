@@ -180,6 +180,7 @@
   (setq dashboard-set-init-info nil)
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
+  (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   (setq dashboard-banner-logo-title "Welcome, Arbab")
   (setq dashboard-startup-banner "/home/arbab/.emacs.d/banner.jpg")
   (setq dashboard-items '(
@@ -448,9 +449,9 @@
   (setq org-log-done 'note)
   ;; Org-agenda files
   (setq org-agenda-files
-        '("~/.emacs.d/OrgFiles/Tasks.org"
-          "~/.emacs.d/OrgFiles/Family.org")
-        )
+        '(
+          "~/.emacs.d/OrgFiles/Tasks.org"
+        ))
   (setq org-todo-keywords
     '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
       (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))

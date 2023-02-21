@@ -19,6 +19,7 @@ export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
+export BROWSER="firefox"
 # Editor For SSH And Local Separately
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='emacs'
@@ -57,5 +58,4 @@ alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
 
-# Created by `pipx` on 2023-01-06 15:14:07
 export PATH="$PATH:/home/arbab/.local/bin"
