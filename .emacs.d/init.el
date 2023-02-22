@@ -116,6 +116,7 @@
 		which-key-mode
 		helpful-mode-hook
     treemacs-mode-hook
+    undo-tree-mode-hook
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -133,7 +134,7 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-set-undo-system 'undo-redo)
+  (evil-set-undo-system 'undo-tree)
   )
 
 ;; Evil-collection
@@ -655,3 +656,11 @@
 (use-package emmet-mode
   :hook
   (html-mode . emmet-mode))
+
+;; Undo-tree
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode)
+  :custom
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/var/undo")))
+  )
