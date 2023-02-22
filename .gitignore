@@ -22,6 +22,7 @@
 .emacs.d/var
 .emacs.d/custom-set-variables.el
 .emacs.d/OrgFiles
+.emacs.d/init.el~
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
