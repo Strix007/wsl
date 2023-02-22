@@ -1,5 +1,8 @@
 ;; Enable server mode (daemon) for this Emacs session
-(server-start)
+(if (daemonp false)
+    (server-start)
+  (message "Server Already Started")
+    )
 
 ;; Move customization variables to a separate file and load it
 (setq custom-file (concat user-emacs-directory "custom-set-variables.el"))
@@ -188,7 +191,7 @@
                           (recents  . 5)
                           (bookmarks . 5)
                           (projects . 5)
-                          ;; (agenda . 5)
+                          (agenda . 5)
                           ;; (registers . 5)
                           ))
   (setq dashboard-item-names '(
