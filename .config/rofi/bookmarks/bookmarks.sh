@@ -27,5 +27,5 @@ elif [[ $INPUT == *"."* ]]; then
 elif [[ -z $INPUT  ]]; then
     exit 0
 else
-    $BROWSER --search $INPUT
+    $BROWSER -new-tab "https://www.google.com/search?q=$INPUT"
 fi

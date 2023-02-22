@@ -1,5 +1,5 @@
 ;; Enable server mode (daemon) for this Emacs session
-(if 'daemonp
+(if (not daemonp)
     (server-start)
   )
 

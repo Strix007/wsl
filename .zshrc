@@ -19,13 +19,12 @@ export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
-export BROWSER="firefox"
-# Editor For SSH And Local Separately
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='emacs'
-else
   export EDITOR='vim'
+else
+  export EDITOR='emacs'
 fi
+export BROWSER="firefox"
 # KEYBINDING TYPE
 bindkey -v 
 # ALIASES
