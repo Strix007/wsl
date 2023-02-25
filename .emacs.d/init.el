@@ -356,13 +356,13 @@
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
+  :bind
+  ("M-<tab>" . company-complete)
   )
 
 ;; Company-box
 (use-package company-box
   :hook (company-mode . company-box-mode)
-  :bind
-   ("M-<tab>" . company-complete)
   )
 
 ;; General
@@ -665,4 +665,13 @@
   (global-undo-tree-mode)
   :custom
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/var/undo")))
+  )
+
+;; Try
+(use-package try)
+
+;; Sudo-edit
+(use-package sudo-edit
+  :bind
+  ("C-c C-w" . sudo-edit)
   )
