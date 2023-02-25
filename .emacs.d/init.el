@@ -675,3 +675,11 @@
   :bind
   ("C-c C-w" . sudo-edit)
   )
+
+;; Beacon
+(use-package beacon
+  :init
+  (beacon-mode 1)
+  :custom
+  (beacon-color "#5e81ac")
+  )
