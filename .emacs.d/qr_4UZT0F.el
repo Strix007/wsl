@@ -119,7 +119,7 @@
 		helpful-mode-hook
     treemacs-mode-hook
     undo-tree-visualizer-mode-hook
-    quickrun--mode-hook
+    quickrun--mode
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -329,19 +329,9 @@
   (ivy-posframe-mode 1)
   )
 
-;; All-the-icons-ivy
-(use-package all-the-icons-ivy
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
-
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode)
-  )
-
-;; Rainbow-mode
-(use-package rainbow-mode
-  :hook
-  (prog-mode . rainbow-mode)
   )
 
 ;; Which-key
@@ -696,10 +686,12 @@
   (beacon-color "#5e81ac")
   )
 
+;; All-the-icons-ivy
+(use-package all-the-icons-ivy
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
 ;; Quickrun
 (use-package quickrun
   :bind
   ("C-c r r" . quickrun)
-  ("C-c r w" . quickrun-region)
-  ("C-c r e" . quickrun-replace-region)
   )
