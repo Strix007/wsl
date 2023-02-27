@@ -77,6 +77,7 @@
 (tooltip-mode -1)    ; Disable tooltips
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1)   ; Disable the menu bar
+(fset 'yes-or-no-p 'y-or-n-p) ; Change yes/no to y/n
 
 ;; Indentation
 (setq-default tab-width 2)
@@ -120,6 +121,7 @@
     treemacs-mode-hook
     undo-tree-visualizer-mode-hook
     quickrun--mode-hook
+    nov-mode-hook
 		))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -553,11 +555,13 @@
 
 ;; Visual-fill-column
 (defun arbab/org-mode-visual-fill ()
-  (setq visual-fill-column-width 150
-        visual-fill-column-center-text t)
+  (setq visual-fill-column-width 150)
   (visual-fill-column-mode 1))
 (use-package visual-fill-column
-  :hook (org-mode . arbab/org-mode-visual-fill))
+  :init
+  (setq-default visual-fill-column-center-text t)
+  :hook (org-mode . arbab/org-mode-visual-fill)
+  )
 
 ;; Haskell-mode
 (use-package haskell-mode)
@@ -702,4 +706,34 @@
   ("C-c r r" . quickrun)
   ("C-c r w" . quickrun-region)
   ("C-c r e" . quickrun-replace-region)
+  )
+
+;; Corral
+(use-package corral
+  :init
+  (setq corral-preserve-point t)
+  :bind
+  ("M-9" . corral-parentheses-backward)
+  ("M-0" . corral-parentheses-forward)
+  ("M-[" . corral-brackets-backward)
+  ("M-]" . corral-brackets-forward)
+  ("M-{" . corral-braces-backward)
+  ("M-}" . corral-braces-forward)
+  ("M-/" . corral-double-quotes-forward)
+  )
+
+;; Setup for nov
+(defun arbab/nov-setup ()
+  (face-remap-add-relative 'variable-pitch :family "Cantarell" :height 1.0)
+  (visual-fill-column-mode)
+  (visual-line-mode)
+  )
+;; Nov
+(use-package nov
+  :init
+  (setq nov-variable-pitch nil)
+  :mode
+  ("\\.epub\\'" . nov-mode)
+  :hook
+  (nov-mode-hook . arbab/nov-setup)
   )
