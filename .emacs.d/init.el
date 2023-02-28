@@ -3,6 +3,9 @@
     (server-start)
   )
 
+;; Avoid errors on windows about the encoding system
+(set-default-coding-systems 'utf-8)
+
 ;; Move customization variables to a separate file and load it
 (setq custom-file (concat user-emacs-directory "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
@@ -70,6 +73,8 @@
 (setq inhibit-startup-message t)
 ;; Restore the last location of the cursor in a file
 (save-place-mode 1)
+;; Don’t warn for large files
+(setq large-file-warning-threshold nil)
 
 ;; Modify UI elements
 (scroll-bar-mode -1) ; Disable visible scrollbar
@@ -95,6 +100,7 @@
 
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
 
 ;; Line numbers
 (column-number-mode)
@@ -154,6 +160,13 @@
 (use-package evil-nerd-commenter
   :init
   (evilnc-default-hotkeys))
+
+;; Evil-goggles
+(use-package evil-goggles
+  :config
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces)
+  )
 
 ;; All-the-icons
 (use-package all-the-icons)
@@ -298,16 +311,18 @@
 
 ;; Ivy
 (use-package counsel
-  :init (ivy-mode)
+  :init
+  (setq ivy-initial-inputs-alist nil)
+  (ivy-mode)
   :diminish ivy
   :bind 
   ("C-s"     . swiper)
-  ("C-c C-r" . ivy-resume)
+  ("C-c C-r" . counsel-recentf)
   ("C-x r b" . counsel-bookmark)
   ("<f6>"    . ivy-resume)
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-x b"   . counsel-switch-buffer)
+  ("C-x b"   . persp-counsel-switch-buffer)
   ("<f1> l"  . counsel-find-library)
   ("<f2> i"  . counsel-info-lookup-symbol)
   ("<f2> u"  . counsel-unicode-char)
@@ -629,7 +644,10 @@
 ;; Ws-butler
 (use-package ws-butler
   :hook
-  (prog-mode . ws-butler-mode))
+  (prog-mode . ws-butler-mode)
+  (text-mode . ws-butler-mode)
+
+  )
 
 ;; Multiple-cursors
 (use-package multiple-cursors
@@ -736,4 +754,15 @@
   ("\\.epub\\'" . nov-mode)
   :hook
   (nov-mode-hook . arbab/nov-setup)
+  )
+
+;; Perseptive
+(use-package perspective
+  :init
+  (setq persp-init-frame-name "Main")
+  (persp-mode)
+  :bind
+  ("C-x k" . persp-kill-buffer*)
+  :custom
+  (persp-mode-prefix-key (kbd "C-c b"))
   )
