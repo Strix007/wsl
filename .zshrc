@@ -57,4 +57,4 @@ alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
 
-export PATH="$PATH:/home/arbab/.local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/doom-emacs/bin"
