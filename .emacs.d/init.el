@@ -126,6 +126,7 @@
 		helpful-mode-hook
     treemacs-mode-hook
     undo-tree-visualizer-mode-hook
+    tetris-mode-hook
     quickrun--mode-hook
     nov-mode-hook
 		))
@@ -664,9 +665,10 @@
   (setq centaur-tabs-style "zigzag")
   (setq centaur-tabs-cycle-scope 'default)
   :hook
-  (dired-mode . centaur-tabs-local-mode)
-  (dashboard-mode . centaur-tabs-local-mode)
-  (vterm-mode . centaur-tabs-local-mode)
+  (dired-mode           . centaur-tabs-local-mode)
+  (dashboard-mode       . centaur-tabs-local-mode)
+  (vterm-mode           . centaur-tabs-local-mode)
+  (tetris-mode          . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-height 40)
@@ -765,4 +767,17 @@
   ("C-x k" . persp-kill-buffer*)
   :custom
   (persp-mode-prefix-key (kbd "C-c b"))
+  )
+
+;; Vimish-fold
+(use-package vimish-fold)
+
+;; Evil-vimish-fold
+(use-package evil-vimish-fold
+  :after vimish-fold
+  :init
+  (setq evil-vimish-fold-mode-lighter "")
+  (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
+  :config
+  (global-evil-vimish-fold-mode)
   )
