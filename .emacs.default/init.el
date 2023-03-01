@@ -651,12 +651,14 @@
 
   )
 
-;; Multiple-cursors
-(use-package multiple-cursors
+;; Evil-mc
+(use-package evil-mc
+  :init
+  (global-evil-mc-mode 1)
   :bind
-  ("C-M-/" . mc/edit-lines)
-  ("C-M-<" . mc/mark-previous-like-this)
-  ("C-M->" . mc/mark-next-like-this)
+  ("C-M->" . evil-mc-make-cursor-in-visual-selection-end)
+  ("C-M-<" . evil-mc-make-cursor-in-visual-selection-beg)
+  ("C-M-/" . evil-mc-undo-all-cursors)
   )
 
 ;; Centaur-tabs
