@@ -203,7 +203,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   (setq dashboard-banner-logo-title "Welcome, Arbab")
-  (setq dashboard-startup-banner "/home/arbab/.emacs.d/banner.jpg")
+  (setq dashboard-startup-banner "/home/arbab/.emacs.default/banner.jpg")
   (setq dashboard-items '(
                           (recents  . 5)
                           (bookmarks . 5)
@@ -292,8 +292,9 @@
 
 ;; Doom-modeline
 (use-package doom-modeline
-  :init  
-  (setq doom-modeline-indent-info t) 
+  :init
+  (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-indent-info nil)
   (setq doom-modeline-minor-modes nil)
   (doom-modeline-mode 1)
   )
@@ -761,7 +762,6 @@
 ;; Perseptive
 (use-package perspective
   :init
-  (setq persp-init-frame-name "Main")
   (persp-mode)
   :bind
   ("C-x k" . persp-kill-buffer*)
