@@ -382,6 +382,8 @@
 
 ;; Company
 (use-package company
+  :init
+  (setq company-format-margin-function    #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
   :custom
@@ -389,11 +391,6 @@
   (company-idle-delay 0.0)
   :bind
   ("M-<tab>" . company-complete)
-  )
-
-;; Company-box
-(use-package company-box
-  :hook (company-mode . company-box-mode)
   )
 
 ;; General
