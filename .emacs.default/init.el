@@ -196,8 +196,14 @@
   ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
+  ;; (setq dashboard-footer-messages '("Hello There!"))
+  ;; (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
+  ;;                                                    :height 1.1
+  ;;                                                    :v-adjust -0.05
+  ;;                                                    :face 'font-lock-keyword-face))
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info nil)
+  ;; (setq dashboard-init-info "Hello There!")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
@@ -217,7 +223,8 @@
                                ("Recent Files:" . "Recent Files▾")
                                ("Bookmarks:" . "Bookmarks▾")
                                ("Projects:" . "Projects▾")
-			                   ("Agenda for the coming week:" . "Agenda▾")
+			                         ("Agenda for the coming week:" . "Agenda▾")
+			                         ("Registers:" . "Registers▾")
                                ))
   (setq dashboard-set-navigator t)
   (setq dashboard-navigator-buttons
