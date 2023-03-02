@@ -264,9 +264,14 @@ myKeys =
 
                 -- FUNCTION KEYS
 
+                , ("<XF86Explorer>",     spawn "thunar")               -- Use "Fn+F1" To Open File Explorer
+                , ("<XF86Search>",       spawn "rofi -show run")       -- Use "Fn+F2" To Launch Rofi
+                , ("<XF86Calculator>",   spawn "qalculate-gtk")        -- Use "Fn+F3" To Launch Calculator
+                , ("<XF86Tools>",        spawn "spotify")              -- Use "Fn+F4" To Launch Spotify
                 , ("<XF86AudioPrev>",    spawn "playerctl previous")   -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
                 , ("<XF86AudioPlay>",    spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
                 , ("<XF86AudioNext>",    spawn "playerctl next")       -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
+                , ("<XF86AudioStop>",    spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Active Media On The Last Active Player
 
                 -- ROFI
 
