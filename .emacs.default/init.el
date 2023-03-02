@@ -54,18 +54,18 @@
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t) 
+        doom-themes-enable-italic t)
   (setq doom-themes-padded-modeline nil)
   (setq doom-themes-treemacs-theme "doom-colors")
   (doom-themes-treemacs-config)
-  (doom-themes-neotree-config) 
+  (doom-themes-neotree-config)
   (doom-themes-org-config)
   (load-theme 'doom-nord t)
   )
 
 ;; Solaire
 (use-package solaire-mode
-  :init (solaire-global-mode +1)) 
+  :init (solaire-global-mode +1))
 
 ;; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)
@@ -107,7 +107,7 @@
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
 (dolist (mode '(
-		completion-list-mode-hook 
+		completion-list-mode-hook
 		org-mode-hook
     dired-mode-hook
 		Info-mode-hook
@@ -182,7 +182,7 @@
 	   )
   :config
   (projectile-mode +1)
-  :bind 
+  :bind
   ("C-c p" . projectile-command-map)
   )
 
@@ -196,7 +196,6 @@
   ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
-  (setq dashboard-set-navigator t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info nil)
   (setq dashboard-show-shortcuts nil)
@@ -218,8 +217,38 @@
                                ("Recent Files:" . "Recent Files▾")
                                ("Bookmarks:" . "Bookmarks▾")
                                ("Projects:" . "Projects▾")
-			                         ("Agenda for the coming week:" . "Agenda▾")
+			                   ("Agenda for the coming week:" . "Agenda▾")
                                ))
+  (setq dashboard-set-navigator t)
+  (setq dashboard-navigator-buttons
+        `(
+          (
+           (
+            ,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+            "Homepage"
+            "Browse My Github Profile"
+            (lambda (&rest _) (browse-url "https://github.com/Strix007"))
+            )
+           (" "
+            "Configuration"
+            "Open Configuration"
+            (lambda (&rest _) (find-file ".emacs.default/init.el")) warning)
+           (
+            ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
+            "Restore"
+            "Restore Your Last Session"
+            (lambda (&rest _) (wg-open-workgroup)) error)
+           )
+          (
+           (
+            ,(all-the-icons-material "settings" :height 1.0 :v-adjust 0.0)
+            "dotfiles"
+            "View System Dotfiles"
+            (lambda (&rest _) (browse-url "https://github.com/Strix007/dotfiles"))
+            )
+           )
+          )
+        )
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")))
@@ -227,9 +256,9 @@
 
 ;; Ace-pop-up menu
 (use-package ace-popup-menu
-  :init 
+  :init
   (setq ace-popup-menu-show-pane-header t)
-  :config 
+  :config
   (ace-popup-menu-mode 1)
   )
 
@@ -238,9 +267,9 @@
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-smart-open t)
-  :config 
+  :config
   (add-to-list 'load-path "/some/path/neotree")
-  :bind 
+  :bind
   ("<f8>" . neotree-toggle)
   )
 
@@ -266,8 +295,8 @@
 (use-package dirvish
   :init
 	(dirvish-override-dired-mode)
-  (setq dired-mouse-drag-files t)                   
-  (setq mouse-drag-and-drop-region-cross-program t) 
+  (setq dired-mouse-drag-files t)
+  (setq mouse-drag-and-drop-region-cross-program t)
   (setq delete-by-moving-to-trash t)
   :bind
    ("C-x C-g" . dired-jump)
@@ -317,7 +346,7 @@
   (setq ivy-initial-inputs-alist nil)
   (ivy-mode)
   :diminish ivy
-  :bind 
+  :bind
   ("C-s"     . swiper)
   ("C-c C-r" . counsel-recentf)
   ("C-x r b" . counsel-bookmark)
@@ -475,7 +504,7 @@
   :hook
   (org-mode . arbab/org-mode-setup)
   :config
-  (setq org-confirm-babel-evaluate nil) 
+  (setq org-confirm-babel-evaluate nil)
   (setq org-ellipsis "▾")
   (setq org-log-done 'note)
   ;; Org-agenda files
@@ -665,10 +694,10 @@
   (setq centaur-tabs-style "zigzag")
   (setq centaur-tabs-cycle-scope 'default)
   :hook
-  (dired-mode           . centaur-tabs-local-mode)
-  (dashboard-mode       . centaur-tabs-local-mode)
-  (vterm-mode           . centaur-tabs-local-mode)
-  (tetris-mode          . centaur-tabs-local-mode)
+  (dired-mode     . centaur-tabs-local-mode)
+  (dashboard-mode . centaur-tabs-local-mode)
+  (vterm-mode     . centaur-tabs-local-mode)
+  (tetris-mode    . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-height 40)
@@ -677,7 +706,7 @@
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-modified-marker "")
   (setq centaur-tabs-show-new-tab-button t)
-  ;; (setq centaur-tabs-new-tab-text "")
+  (setq centaur-tabs-new-tab-text "  ")
   (centaur-tabs-change-fonts "Jetbrains Mono" 125)
   )
 
@@ -779,4 +808,12 @@
   (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
   :config
   (global-evil-vimish-fold-mode)
+  )
+
+;; Save-visited-files
+(use-package workgroups2
+  :init
+  (setq wg-prefix-key "C-c z")
+  (setq wg-session-file "~/.emacs.default/.workgroups")
+  (workgroups-mode 1)
   )

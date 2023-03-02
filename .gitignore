@@ -23,6 +23,7 @@
 .emacs.default/custom-set-variables.el
 .emacs.default/OrgFiles
 .emacs.default/init.el~
+.emacs.default/.workgroups
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
