@@ -18,10 +18,10 @@
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(
-			                   ("melpa" . "https://melpa.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
                          ("org"   . "https://orgmode.org/elpa/")
                          ("elpa"  . "https://elpa.gnu.org/packages/")
-			                   ))
+                         ))
 
 (package-initialize)
 (unless package-archive-contents
@@ -107,30 +107,30 @@
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
 (dolist (mode '(
-		            completion-list-mode-hook
-	              org-mode-hook
+                completion-list-mode-hook
+                org-mode-hook
                 dired-mode-hook
-		            Info-mode-hook
-		            calendar-mode-hook
-		            org-agenda-mode-hook
-		            dashboard-mode-hook
-		            vterm-mode-hook
-		            compilation-mode-hook
-		            backtrace-mode-hook
-		            term-mode-hook
-		            eshell-mode-hook
-		            shell-mode-hook
-		            term-mode-hook
-		            neotree-mode-hook
-		            which-key-mode
-		            helpful-mode-hook
+                Info-mode-hook
+                calendar-mode-hook
+                org-agenda-mode-hook
+                dashboard-mode-hook
+                vterm-mode-hook
+                compilation-mode-hook
+                backtrace-mode-hook
+                term-mode-hook
+                eshell-mode-hook
+                shell-mode-hook
+                term-mode-hook
+                neotree-mode-hook
+                which-key-mode
+                helpful-mode-hook
                 treemacs-mode-hook
                 woman-mode-hook
                 undo-tree-visualizer-mode-hook
                 tetris-mode-hook
                 quickrun--mode-hook
                 nov-mode-hook
-		            ))
+                ))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts
@@ -179,8 +179,8 @@
   :init
   (setq projectile-project-search-path '("~/projects/"))
   :custom (
-	         (projectile-completion-system 'ivy)
-	         )
+           (projectile-completion-system 'ivy)
+           )
   :config
   (projectile-mode +1)
   :bind
@@ -224,8 +224,8 @@
                                ("Recent Files:" . "Recent Files▾")
                                ("Bookmarks:" . "Bookmarks▾")
                                ("Projects:" . "Projects▾")
-			                         ("Agenda for the coming week:" . "Agenda▾")
-			                         ("Registers:" . "Registers▾")
+                               ("Agenda for the coming week:" . "Agenda▾")
+                               ("Registers:" . "Registers▾")
                                ))
   (setq dashboard-set-navigator t)
   (setq dashboard-navigator-buttons
@@ -302,7 +302,7 @@
 ;; Dirvish
 (use-package dirvish
   :init
-	(dirvish-override-dired-mode)
+  (dirvish-override-dired-mode)
   (setq dired-mouse-drag-files t)
   (setq mouse-drag-and-drop-region-cross-program t)
   (setq delete-by-moving-to-trash t)
@@ -311,7 +311,7 @@
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory)
-	)
+  )
 
 ;; All-the-icons-dired
 (use-package all-the-icons-dired
@@ -491,7 +491,7 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   ;; Set faces for heading levels
   (dolist (face '(
-		              (org-level-1 . 1.2)
+                  (org-level-1 . 1.2)
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)
                   (org-level-4 . 1.0)
@@ -499,7 +499,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)
-		              ))
+                  ))
     (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
