@@ -21,7 +21,7 @@
 			                   ("melpa" . "https://melpa.org/packages/")
                          ("org"   . "https://orgmode.org/elpa/")
                          ("elpa"  . "https://elpa.gnu.org/packages/")
-			 ))
+			                   ))
 
 (package-initialize)
 (unless package-archive-contents
@@ -107,29 +107,30 @@
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
 (dolist (mode '(
-		completion-list-mode-hook
-		org-mode-hook
-    dired-mode-hook
-		Info-mode-hook
-		calendar-mode-hook
-		org-agenda-mode-hook
-		dashboard-mode-hook
-		vterm-mode-hook
-		compilation-mode-hook
-		backtrace-mode-hook
-		term-mode-hook
-		eshell-mode-hook
-		shell-mode-hook
-		term-mode-hook
-		neotree-mode-hook
-		which-key-mode
-		helpful-mode-hook
-    treemacs-mode-hook
-    undo-tree-visualizer-mode-hook
-    tetris-mode-hook
-    quickrun--mode-hook
-    nov-mode-hook
-		))
+		            completion-list-mode-hook
+	              org-mode-hook
+                dired-mode-hook
+		            Info-mode-hook
+		            calendar-mode-hook
+		            org-agenda-mode-hook
+		            dashboard-mode-hook
+		            vterm-mode-hook
+		            compilation-mode-hook
+		            backtrace-mode-hook
+		            term-mode-hook
+		            eshell-mode-hook
+		            shell-mode-hook
+		            term-mode-hook
+		            neotree-mode-hook
+		            which-key-mode
+		            helpful-mode-hook
+                treemacs-mode-hook
+                woman-mode-hook
+                undo-tree-visualizer-mode-hook
+                tetris-mode-hook
+                quickrun--mode-hook
+                nov-mode-hook
+		            ))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts
@@ -178,8 +179,8 @@
   :init
   (setq projectile-project-search-path '("~/projects/"))
   :custom (
-	   (projectile-completion-system 'ivy)
-	   )
+	         (projectile-completion-system 'ivy)
+	         )
   :config
   (projectile-mode +1)
   :bind
@@ -306,7 +307,7 @@
   (setq mouse-drag-and-drop-region-cross-program t)
   (setq delete-by-moving-to-trash t)
   :bind
-   ("C-x C-g" . dired-jump)
+  ("C-x C-g" . dired-jump)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory)
@@ -320,7 +321,8 @@
 (use-package dired-hide-dotfiles
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
+    "H" 'dired-hide-dotfiles-mode)
+  )
 
 ;; Powerline
 ;; (use-package powerline
@@ -387,6 +389,9 @@
 ;; All-the-icons-ivy
 (use-package all-the-icons-ivy
   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
+;; Smex
+(use-package smex)
 
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
@@ -471,7 +476,8 @@
 ;; Magit
 (use-package magit
   :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  )
 
 ;; Forge
 (use-package forge)
@@ -493,7 +499,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)
-		  ))
+		              ))
     (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
@@ -518,72 +524,72 @@
   (setq org-agenda-files
         '(
           "~/.emacs.d/OrgFiles/Tasks.org"
-        ))
+          ))
   (setq org-todo-keywords
-    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
   (setq org-refile-targets
-    '(("Archive.org" :maxlevel . 1)
-      ("Tasks.org" :maxlevel . 1)))
+        '(("Archive.org" :maxlevel . 1)
+          ("Tasks.org" :maxlevel . 1)))
 
   ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
   (setq org-tag-alist
-    '((:startgroup)
-       ; Put mutually exclusive tags here
-       (:endgroup)
-       ("@errand" . ?E)
-       ("@home" . ?H)
-       ("agenda" . ?a)
-       ("planning" . ?p)
-       ("publish" . ?P)
-       ("batch" . ?b)
-       ("note" . ?n)
-       ("idea" . ?i)
-       ("goal" . ?g)
-       ))
+        '((:startgroup)
+                                        ; Put mutually exclusive tags here
+          (:endgroup)
+          ("@errand" . ?E)
+          ("@home" . ?H)
+          ("agenda" . ?a)
+          ("planning" . ?p)
+          ("publish" . ?P)
+          ("batch" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i)
+          ("goal" . ?g)
+          ))
 
   ;; Configure custom agenda views
   (setq org-agenda-custom-commands
-   '(("d" "Dashboard"
-     ((agenda "" ((org-deadline-warning-days 7)))
-      (todo "NEXT"
-        ((org-agenda-overriding-header "Next Tasks")))
-      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))
+            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
-    ("n" "Next Tasks"
-     ((todo "NEXT"
-        ((org-agenda-overriding-header "Next Tasks")))))
+          ("n" "Next Tasks"
+           ((todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))
 
-    ("w" "Workflow Status"
-     ((todo "WAIT"
-            ((org-agenda-overriding-header "Waiting on External")
-             (org-agenda-files org-agenda-files)))
-      (todo "REVIEW"
-            ((org-agenda-overriding-header "In Review")
-             (org-agenda-files org-agenda-files)))
-      (todo "PLAN"
-            ((org-agenda-overriding-header "In Planning")
-             (org-agenda-todo-list-sublevels nil)
-             (org-agenda-files org-agenda-files)))
-      (todo "BACKLOG"
-            ((org-agenda-overriding-header "Project Backlog")
-             (org-agenda-todo-list-sublevels nil)
-             (org-agenda-files org-agenda-files)))
-      (todo "READY"
-            ((org-agenda-overriding-header "Ready for Work")
-             (org-agenda-files org-agenda-files)))
-      (todo "ACTIVE"
-            ((org-agenda-overriding-header "Active Projects")
-             (org-agenda-files org-agenda-files)))
-      (todo "COMPLETED"
-            ((org-agenda-overriding-header "Completed Projects")
-             (org-agenda-files org-agenda-files)))
-      (todo "CANC"
-            ((org-agenda-overriding-header "Cancelled Projects")
-             (org-agenda-files org-agenda-files)))))))
+          ("w" "Workflow Status"
+           ((todo "WAIT"
+                  ((org-agenda-overriding-header "Waiting on External")
+                   (org-agenda-files org-agenda-files)))
+            (todo "REVIEW"
+                  ((org-agenda-overriding-header "In Review")
+                   (org-agenda-files org-agenda-files)))
+            (todo "PLAN"
+                  ((org-agenda-overriding-header "In Planning")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "BACKLOG"
+                  ((org-agenda-overriding-header "Project Backlog")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "READY"
+                  ((org-agenda-overriding-header "Ready for Work")
+                   (org-agenda-files org-agenda-files)))
+            (todo "ACTIVE"
+                  ((org-agenda-overriding-header "Active Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "COMPLETED"
+                  ((org-agenda-overriding-header "Completed Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "CANC"
+                  ((org-agenda-overriding-header "Cancelled Projects")
+                   (org-agenda-files org-agenda-files)))))))
   )
 
 ;; Org-bullets
@@ -681,7 +687,6 @@
   :hook
   (prog-mode . ws-butler-mode)
   (text-mode . ws-butler-mode)
-
   )
 
 ;; Evil-mc
@@ -729,7 +734,8 @@
 ;; Emmet
 (use-package emmet-mode
   :hook
-  (html-mode . emmet-mode))
+  (html-mode . emmet-mode)
+  )
 
 ;; Undo-tree
 (use-package undo-tree
@@ -823,4 +829,13 @@
   (setq wg-prefix-key "C-c z")
   (setq wg-session-file "~/.emacs.default/.workgroups")
   (workgroups-mode 1)
+  )
+
+;; Highlight-indentation
+(use-package highlight-indent-guides
+  :hook
+  (prog-mode . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-responsive 'top)
   )
