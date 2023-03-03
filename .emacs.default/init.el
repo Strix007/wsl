@@ -240,12 +240,15 @@
            (" "
             "Configuration"
             "Open Configuration"
-            (lambda (&rest _) (find-file ".emacs.default/init.el")) warning)
+            (lambda (&rest _) (find-file ".emacs.default/init.el")) warning
+            )
            (
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
             "Restore"
             "Restore Your Last Session"
-            (lambda (&rest _) (wg-open-workgroup)) error)
+            (lambda (&rest _) (wg-open-workgroup))
+            error
+            )
            )
           (
            (
@@ -253,6 +256,7 @@
             "dotfiles"
             "View System Dotfiles"
             (lambda (&rest _) (browse-url "https://github.com/Strix007/dotfiles"))
+            font-lock-function-name-face
             )
            )
           )
@@ -838,4 +842,12 @@
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-responsive 'top)
+  )
+
+;; Sxhkd-mode
+(use-package sxhkdrc-mode
+  :init
+  (setq sxhkd-mode-reload-config t)
+  :mode
+  ("sxhkdrc" . sxhkdrc-mode)
   )

@@ -64,12 +64,14 @@ import Text.XHtml (title)
 
 -- User Set Variables
 
-myGUIFileExplorer, myBrowser, myTerminal, myMPDClient :: String
+myGUIFileExplorer, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator :: String
+myTerminal        = "alacritty"     -- Global Terminal Variable
+myBrowser         = "firefox"       -- Global Browser Variable
+myGUIFileExplorer = "thunar"        -- Global GUI FileExplorer Variable
+myMPDClient       = "ncmpcpp"       -- Global MPD Client Variable
+myGUIMusicApp     = "spotify"       -- Global GUI Music App Variable
+myCalculator      = "qalculate-gtk" -- Global Calculator Variable
 
-myTerminal        = "alacritty" -- Global Terminal         Variable
-myBrowser         = "firefox"   -- Global Browser          Variable
-myGUIFileExplorer = "thunar"  -- Global GUI FileExplorer Variable
-myMPDClient       = "ncmpcpp"   -- Global MPD Client       Variable
 
 -- Change Focus To The Window Where The Mouse Is
 
@@ -95,11 +97,11 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
--- myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}\61884%{A}  "]
+-- myWorkspaces = ["  %{A1:$HOME/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 17:}\61884%{A}  "]
 -- myWorkspaces = ["\61506", "\61728", "\61564", "\61729", "\61598", "\61723", "\62060", "\61643", "\61884"]
 -- myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 -- myWorkspaces = ["  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
-myWorkspaces = ["  %{A1:/home/arbab/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:/home/arbab/.xmonad/xmonadctl 17:}9%{A}  "]
+myWorkspaces = ["  %{A1:$HOME/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 17:}9%{A}  "]
 
 -- SCRATCHPADS
 
@@ -130,7 +132,7 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
-    -- The Flags Are To Be Changed Depending On The Terminal
+
 
     spawnSpt  = myTerminal ++ " " ++ "-t" ++ " " ++ "SpotifyTUI" ++ " " ++ "--class" ++ " " ++ "spt,SPT" ++ " " ++ "-e" ++ " " ++ "spt"
     findSpt   = XMonad.ManageHook.title =? "SpotifyTUI"
@@ -143,7 +145,7 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
-    spawnCalculator  = "qalculate-gtk"
+    spawnCalculator  = myCalculator
     findCalculator   = XMonad.ManageHook.title =? "Qalculate!"
     manageCalculator = customFloating $ W.RationalRect l t w h
 
@@ -192,7 +194,7 @@ myKeys =
 
                  -- Actions
 
-                , ("C-S-<Escape>",       spawn "/home/arbab/i3lock/lock.sh") -- Custom Lockscript Using i3lock
+                , ("C-S-<Escape>",       spawn "$HOME/i3lock/lock.sh") -- Custom Lockscript Using i3lock
 
                  -- KILL
 
@@ -264,10 +266,10 @@ myKeys =
 
                 -- FUNCTION KEYS
 
-                , ("<XF86Explorer>",     spawn "thunar")               -- Use "Fn+F1" To Open File Explorer
-                , ("<XF86Search>",       spawn "rofi -show run")       -- Use "Fn+F2" To Launch Rofi
-                , ("<XF86Calculator>",   spawn "qalculate-gtk")        -- Use "Fn+F3" To Launch Calculator
-                , ("<XF86Tools>",        spawn "spotify")              -- Use "Fn+F4" To Launch Spotify
+                , ("<XF86Explorer>",     spawn myGUIFileExplorer)               -- Use "Fn+F1" To Open File Explorer
+                , ("<XF86Search>",       spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Use "Fn+F2" To Launch Rofi
+                , ("<XF86Calculator>",   spawn myCalculator)        -- Use "Fn+F3" To Launch Calculator
+                , ("<XF86Tools>",        spawn myGUIMusicApp)          -- Use "Fn+F4" To Launch Spotify
                 , ("<XF86AudioPrev>",    spawn "playerctl previous")   -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
                 , ("<XF86AudioPlay>",    spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
                 , ("<XF86AudioNext>",    spawn "playerctl next")       -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
@@ -275,21 +277,21 @@ myKeys =
 
                 -- ROFI
 
-                , ("M-d",                spawn "rofi -show drun -theme /home/arbab/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
-                , ("M-S-d",              spawn "rofi -show run -theme /home/arbab/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
-                , ("M-g",                spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh")                           -- Screenshot Menu Using Rofi
-                , ("M-S-g",              spawn "/home/arbab/.config/rofi/screenshot/screenshot.sh --stop")                    -- Stop Recording On The Screenshot Menu Using Rofi
-                , ("M-S-q",              spawn "/home/arbab/.config/rofi/powermenu/powermenu.sh")                             -- Powermenu Using Rofi
-                , ("M-b",                spawn "/home/arbab/.config/rofi/bookmarks/bookmarks.sh")                             -- Browser Menu Using Rofi
-                , ("M-S-x",              spawn "/home/arbab/.config/rofi/mpd/mpd.sh")                                         -- MPD Menu Using Rofi
-                , ("M-S-s",              spawn "/home/arbab/.config/rofi/spotify/spotify.sh")                                 -- Spotify Menu Using Rofi
+                , ("M-d",                spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
+                , ("M-S-d",              spawn "rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
+                , ("M-g",                spawn "$HOME/.config/rofi/screenshot/screenshot.sh")                           -- Screenshot Menu Using Rofi
+                , ("M-S-g",              spawn "$HOME/.config/rofi/screenshot/screenshot.sh --stop")                    -- Stop Recording On The Screenshot Menu Using Rofi
+                , ("M-S-q",              spawn "$HOME/.config/rofi/powermenu/powermenu.sh")                             -- Powermenu Using Rofi
+                , ("M-b",                spawn "$HOME/.config/rofi/bookmarks/bookmarks.sh")                             -- Browser Menu Using Rofi
+                , ("M-S-x",              spawn "$HOME/.config/rofi/mpd/mpd.sh")                                         -- MPD Menu Using Rofi
+                , ("M-S-s",              spawn "$HOME/.config/rofi/spotify/spotify.sh")                                 -- Spotify Menu Using Rofi
 
                 -- APPLICATIONS
 
                 , ("M-<Return>",         spawn myTerminal)                -- Spawn Terminal           (Alacritty)
                 , ("M-S-b",              spawn myBrowser)                 -- Spawn Browser            (Firefox)
                 , ("M-z",                spawn myGUIFileExplorer)         -- Spawn FileManager        (Nautilus)
-                , ("M-S-z",              spawn "thunar")                  -- Spawn Backup FileManager (Thunar)
+                , ("M-S-z",              spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
                 , ("M-r p",              spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
@@ -325,7 +327,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
       -- Mod-Button2, Raise The Window To The Top Of The Stack
 
-      , ((modm, button3), \w -> spawn "/home/arbab/xmenu/xmenu.sh")
+      , ((modm, button3), \w -> spawn "$HOME/xmenu/xmenu.sh")
 
       -- Mod-Button3, Set The Window To Floating Mode And Resize By Dragging
 
@@ -475,7 +477,7 @@ myLogHook dbus =
       , ppCurrent = wrap "%{u#5e81ac F#f3f4f5}%{+u}" "%{-u F-}"
       , ppUrgent  = wrap "%{F#db104e}" "%{F-}"
       , ppHidden  = wrap "%{F#abb2bf}" "%{F-}"
-      , ppOrder   = \(ws:l:t:_) -> [ws,"  ","%{A1:/home/arbab/.xmonad/xmonadctl 25:}" ++ l ++ "%{A}","  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
+      , ppOrder   = \(ws:l:t:_) -> [ws,"  ","%{A1:$HOME/.xmonad/xmonadctl 25:}" ++ l ++ "%{A}","  "]                           -- Xmonad-Log Output With Workspaces And Current Layout
       , ppSep     = ""
 
     }
@@ -500,6 +502,8 @@ myStartupHook =
 
   do
 
+    -- spawnOnce "sxhkd &" -- SXHKD
+
     spawnOnce "xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI3 --off --output VIRTUAL1 --off" -- Multi-Screen Xrandr
     spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
@@ -507,12 +511,12 @@ myStartupHook =
     spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
     spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
     spawnOnce "kdeconnect-indicator"                                                                                                                                                                                                  -- SysTray KDE-Indicator
-    spawnOnce "/home/arbab/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
+    spawnOnce "$HOME/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
-    spawnOnce "/home/arbab/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
+    spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
-    spawnOnce "feh --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill /home/arbab/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                              -- Set Background Multi-Screen
+    spawnOnce "feh --bg-fill $HOME/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill $HOME/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                              -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
     setWMName "LG3D"
 

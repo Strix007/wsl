@@ -1,0 +1,35 @@
+#Function Keys
+XF86Explorer
+    thunar
+XF86Search
+    rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi
+XF86Calculator
+    qalculate-gtk
+XF86Tools
+    spotify
+XF86Audio{Prev,Play,Next,Stop}
+    playerctl {previous,play-pause,next,stop}
+
+#Rofi
+super + d
+    rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi
+super + shift + d
+    rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi
+super + g
+    $HOME/.config/rofi/screenshot/screenshot.sh
+super + shift + g
+    $HOME/.config/rofi/screenshot/screenshot.sh --stop
+super + shift + q
+    $HOME/.config/rofi/powermenu/powermenu.sh
+super + b
+    $HOME/.config/rofi/bookmarks/bookmarks.sh
+super + shift + x
+    $HOME/.config/rofi/mpd/mpd.sh
+
+#Applications
+super + shift + b
+    firefox
+super + z
+    thunar
+super + shift + z
+    pcmanfm
