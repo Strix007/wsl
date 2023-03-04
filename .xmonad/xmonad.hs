@@ -517,7 +517,7 @@ myStartupHook =
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
-    spawnOnce "feh --bg-fill $HOME/Documents/Wallpapers/Nordic/ign_desert.png  --bg-fill $HOME/Documents/Wallpapers/Nordic/ign_mountain.png"                                                                              -- Set Background Multi-Screen
+    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/wallpapers/ign_mountain.png"                                                                              -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
     setWMName "LG3D"
 
