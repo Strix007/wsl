@@ -1,5 +1,5 @@
-;; Enable server mode (daemon) for this Emacs session
-(if 'daemonp
+;; Enable server mode (daemon) for this Emacs session if there are no emacs server already started
+(unless 'daemonp
     (server-start)
   )
 
@@ -142,8 +142,8 @@
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
-  :config
   (evil-mode 1)
+  :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -161,7 +161,8 @@
 ;; Evil-nerd-commenter
 (use-package evil-nerd-commenter
   :init
-  (evilnc-default-hotkeys))
+  (evilnc-default-hotkeys)
+  )
 
 ;; Evil-goggles
 (use-package evil-goggles
@@ -171,6 +172,7 @@
   )
 
 ;; All-the-icons
+;; Make sure to do a manual ’M-x all-the-icons-install-fonts RET'
 (use-package all-the-icons)
 
 ;; Projectile
@@ -196,12 +198,12 @@
   :init
   ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-center-content t)
-  (setq dashboard-set-footer nil)
-  ;; (setq dashboard-footer-messages '("Hello There!"))
-  ;; (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
-  ;;                                                    :height 1.1
-  ;;                                                    :v-adjust -0.05
-  ;;                                                    :face 'font-lock-keyword-face))
+  (setq dashboard-set-footer t)
+  (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
+  (setq dashboard-footer-icon (all-the-icons-material "person"
+                                                     :height 1.0
+                                                     :v-adjust 0.0
+                                                     :face 'font-lock-keyword-face))
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info nil)
   ;; (setq dashboard-init-info "Hello There!")
@@ -335,10 +337,13 @@
 ;; Doom-modeline
 (use-package doom-modeline
   :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 30)
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-indent-info nil)
   (setq doom-modeline-minor-modes nil)
-  (doom-modeline-mode 1)
+  (setq doom-modeline-buffer-file-name-style 'relative-to-project)
   )
 
 ;; Helpful
@@ -432,6 +437,7 @@
   :hook
   (prog-mode . company-mode)
   :custom
+  (company-tooltip-limit 20)
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
   :bind
@@ -535,7 +541,7 @@
 
   (setq org-refile-targets
         '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
+          ("Tasks.org"   :maxlevel . 1)))
 
   ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -628,6 +634,9 @@
 
 ;; Lua-mode
 (use-package lua-mode)
+
+;; Rust-mode
+(use-package rust-mode)
 
 ;; Typescript-mode
 (use-package typescript-mode
@@ -849,5 +858,100 @@
   :init
   (setq sxhkd-mode-reload-config t)
   :mode
-  ("sxhkdrc" . sxhkdrc-mode)
+  ("\\sxhkdrc\\’" . sxhkdrc-mode)
+  )
+
+;; Minimap
+(use-package minimap
+  :config
+  (setq minimap-window-location 'right)
+  (setq minimap-minimum-width 10)
+  (setq minimap-dedicated-window t)
+  (setq minimap-hide-cursor t)
+  (setq minimap-hide-scroll-bar nil)
+  (setq minimap-hide-fringes t)
+  )
+
+;; Hl-mode
+(use-package hl-mode
+  :ensure nil
+  :hook
+  (prog-mode . hl-line-mode)
+  (text-mode . hl-line-mode)
+  )
+
+;; So-long
+(use-package so-long
+  :ensure nil
+  :init
+  (global-so-long-mode)
+  )
+
+;; Smartparens
+(use-package smartparens
+  :hook
+  (prog-mode . smartparens-mode)
+  )
+
+;; Prescient
+(use-package prescient)
+
+;; Ivy-prescient
+(use-package ivy-prescient
+  :after prescient
+  :init
+  (ivy-prescient-mode 1)
+  )
+
+;; Company-prescient
+(use-package company-prescient
+  :after prescient
+  :init
+  (company-prescient-mode 1)
+  )
+
+;; Tree-sitter
+(use-package tree-sitter)
+
+;; Tree-sitter-langs
+(use-package tree-sitter-langs
+  :after tree-sitter
+  )
+
+;; Flyspell
+(use-package flyspell
+  :ensure nil
+  :hook
+  (prog-mode . flyspell-prog-mode)
+  (text-mode . turn-on-flyspell)
+  )
+
+;; Lipsy
+(use-package lispy
+  :hook
+  (emacs-lisp-mode . lispy-mode)
+  (lisp-mode       . lispy-mode)
+  (scheme-mode     . lispy-mode)
+  )
+
+;; Lipsyville
+(use-package lispyville
+  :hook
+  (lispy-mode . lispyville-mode)
+  )
+
+;; Git-modes
+(use-package git-modes
+  :mode
+  ("\\.gitattributes\\'" . gitattributes-mode)
+  ("\\.gitconfig\\'"     . gitconfig-mode)
+  ("\\.gitignore\\'"     . gitignore-mode)
+  )
+
+;; Vimrc-mode
+(use-package vimrc-mode)
+
+;; Nix-mode
+(use-package nix-mode
+  :mode "\\.nix\\'"
   )
