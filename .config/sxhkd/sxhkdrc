@@ -1,4 +1,4 @@
-#Function Keys
+# Function Keys
 XF86Explorer
     thunar
 XF86Search
@@ -10,11 +10,13 @@ XF86Tools
 XF86Audio{Prev,Play,Next,Stop}
     playerctl {previous,play-pause,next,stop}
 
-#Rofi
+# Rofi
 super + d
     rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi
 super + shift + d
     rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi
+super + shift + q
+    $HOME/.config/rofi/powermenu/powermenu.sh
 super + g
     $HOME/.config/rofi/screenshot/screenshot.sh
 super + shift + g
@@ -26,10 +28,16 @@ super + b
 super + shift + x
     $HOME/.config/rofi/mpd/mpd.sh
 
-#Applications
+# Applications
 super + shift + b
     firefox
 super + z
     thunar
 super + shift + z
     pcmanfm
+super + p; r
+    polybar-msg cmd restart
+
+# Emacs
+super + e; e
+    emacsclient -c -a 'emacs'
