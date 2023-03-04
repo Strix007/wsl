@@ -88,8 +88,10 @@ These programs are required to get you started with this config so make sure to 
 
 ### Optionally
 - [i3](https://i3wm.org/downloads/)
+
 **Note:** I used to use i3 before xmonad so that’s why I have a config for i3 in this repo but I don’t use it anymore so it’s not configured to use all my new scripts and stuff but it works well enough for a fallback wm so you can install it if you desire to do so.
 - [sxhkd](https://github.com/baskerville/sxhkd)
+
 **Note:** I have it here because I wanted to switch to it for all my non-xmonad related bindings such as alacritty etc but I found it to be buggy and decided not to do so, tough it is still configured for all my non wm related bindings so you can install it but I wouldn’t recommend to do so.
 
 <a id="notes"></a>
