@@ -1,5 +1,5 @@
 ![showcase](dotfiles-assets/images/home.png)
-# <h1 style="text-align: center;">Personal Configuration Of Arbab Khan</h1>
+<h1 align="center">Personal Configuration Of Arbab Khan</h1>
 ## This is my personal configuration. This is not meant as a plug and play configuration. 
 
 ## Table Of Contents
@@ -67,7 +67,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `Super + b`           | Open browser menu                 |
 | `Super + shift + b`   | Open browser (firefox)            |
 
-**Note:** Make sure to go through .xmonad/xmonad.hs for additional keybindings
+**Note:** Make sure to go through .xmonad/xmonad.hs for additional keybindings.
 
 <a id="installs"></a>
 ## What To Install
@@ -83,40 +83,42 @@ These programs are required to get you started with this config so make sure to 
 - [Mpd](https://mpd.readthedocs.io/en/stable/user.html)
 - [Mpv](https://mpv.io/installation/)
 - [Picom](https://github.com/ibhagwan/picom-ibhagwan-git) **Note:** Make sure to install the given fork instead of other forks
-- [Rofi]()https://github.com/davatorium/rofi#installation
+- [Rofi](https://github.com/davatorium/rofi#installation)
 - [Zathura](https://github.com/pwmt/zathura)
 
 ### Optionally
-- [i3](https://i3wm.org/downloads/) **Note:** I used to use i3 before xmonad so that’s why I have a config for i3 in this repo but I don’t use it anymore so it’s not configured to use all my new scripts and stuff but it works well enough for a fallback wm so you can install it if you desire to do so.
-- [sxhkd](https://github.com/baskerville/sxhkd) **Note:** I have it here because I wanted to switch to it for all my non-xmonad related bindings such as alacritty etc but I found it to be buggy and decided not to do so, tough it is still configured for all my non wm related bindings so you can install it but I wouldn’t recommend so.
+- [i3](https://i3wm.org/downloads/)
+**Note:** I used to use i3 before xmonad so that’s why I have a config for i3 in this repo but I don’t use it anymore so it’s not configured to use all my new scripts and stuff but it works well enough for a fallback wm so you can install it if you desire to do so.
+- [sxhkd](https://github.com/baskerville/sxhkd)
+**Note:** I have it here because I wanted to switch to it for all my non-xmonad related bindings such as alacritty etc but I found it to be buggy and decided not to do so, tough it is still configured for all my non wm related bindings so you can install it but I wouldn’t recommend to do so.
 
 <a id="notes"></a>
 ## Additional Notes
 
-These are additional notes and instruction you have to follow to get this config up and running
+These are additional notes and instruction you have to follow to get this config up and running.
 
 ### Xmonad
 #### Xmonad with Polybar
-Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in ‘.config/polybar/scripts‘ so no worries there but you do need to install ‘haskell-dbus’ and ‘haskell-dbus-logger’ manually through your package manager on your system’s package manager.
+Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in ‘.config/polybar/scripts‘ so no worries there but you do need to install `haskell-dbus` and `haskell-dbus-logger` manually through your package manager on your system’s package manager.
 
 #### Xmonad startup
-Xmonad starts up a lot of things configured for my system, such as ‘rclone’ etc. Make sure to disable the ones you don’t need.
+Xmonad starts up a lot of things configured for my system, such as `rclone` etc. Make sure to disable the ones you don’t need.
 
 #### Xmonad-ctl
-Xmonad-ctl is required for clickable icons with polybar and exit to login manager with rofi-powermenu. Make sure to use ‘-dynamic’ flag when compiling ‘.xmonad/xmonadctl.hs‘
+Xmonad-ctl is required for clickable icons with polybar and exit to login manager with rofi-powermenu. Make sure to use `-dynamic` flag when compiling `.xmonad/xmonadctl.hs`
 
 ### Emacs
 
 #### Chemacs2
-Emacs is setup with [chemacs2](https://github.com/plexus/chemacs2) to load multiple configs together without much hassle. If you don’t want this behavior, rename the ‘.emacs.default’ to ‘.emacs.d’ and delete ‘.emacs-profiles.el’. If you do want this behavior, just clone [chemacs2](https://github.com/plexus/chemacs2) as ‘.emacs.d’ and add any extra configurations to ‘.emacs-profiles.el’.
+Emacs is setup with [chemacs2](https://github.com/plexus/chemacs2) to load multiple configs together without much hassle. If you don’t want this behavior, rename the `.emacs.default` to `.emacs.d` and delete `.emacs-profiles.el`. If you do want this behavior, just clone [chemacs2](https://github.com/plexus/chemacs2) as `.emacs.d` and add any extra configurations to `.emacs-profiles.el`.
 
-**Note:** ‘.emacs-profiles.el’ already has a few more configs setup, all you need to do is install their respective files to their expected directories.
+**Note:** `.emacs-profiles.el` already has a few more configs setup, all you need to do is install their respective files to their expected directories.
 
 #### All-the-icons
-After first booting into emacs, make sure to do a ‘M-x all-the-icons-install-fonts RET’.
+After first booting into emacs, make sure to do a `M-x all-the-icons-install-fonts RET`.
 
 #### LSP
-Make sure to install the language-servers in ‘.emacs.d/init.el’ on your system.
+Make sure to install the language-servers in `.emacs.d/init.el` on your system.
 
 <a id="contributing"></a>
 ## Contributing
