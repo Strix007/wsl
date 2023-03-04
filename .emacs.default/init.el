@@ -3,6 +3,18 @@
     (server-start)
   )
 
+;;Startup Performance
+(setq gc-cons-threshold (* 50 1000 1000))
+
+(defun arbab/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                     (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'arbab/display-startup-time)
+
 ;; Avoid errors on windows about the encoding system
 (set-default-coding-systems 'utf-8)
 
@@ -755,7 +767,7 @@
   :init
   (global-undo-tree-mode)
   :custom
-  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/var/undo")))
+  (setq undo-tree-auto-save-history t)
   )
 
 ;; Try
