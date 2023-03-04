@@ -89,10 +89,10 @@ These programs are required to get you started with this config so make sure to 
 ### Optionally
 - [i3](https://i3wm.org/downloads/)
 
-**Note:** I used to use i3 before xmonad so that’s why I have a config for i3 in this repo but I don’t use it anymore so it’s not configured to use all my new scripts and stuff but it works well enough for a fallback wm so you can install it if you desire to do so.
+**Note:** Used to use i3 before xmonad, that’s why it’s here. Most things work with i3 but I mainly use it as a fallback wm.
 - [sxhkd](https://github.com/baskerville/sxhkd)
 
-**Note:** I have it here because I wanted to switch to it for all my non-xmonad related bindings such as alacritty etc but I found it to be buggy and decided not to do so, tough it is still configured for all my non wm related bindings so you can install it but I wouldn’t recommend to do so.
+**Note:** Thought of moving all my non-wm related keybindings to sxhkd but found it to be buggy and decided not to do so. You can still use it if you wish as all my bindings are configured.
 
 <a id="notes"></a>
 ## Additional Notes
@@ -101,7 +101,7 @@ These are additional notes and instruction you have to follow to get this config
 
 ### Xmonad
 #### Xmonad with Polybar
-Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in ‘.config/polybar/scripts‘ so no worries there but you do need to install `haskell-dbus` and `haskell-dbus-logger` manually through your package manager on your system’s package manager.
+Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in `.config/polybar/scripts` so no worries there but you do need to install `haskell-dbus` and `haskell-dbus-logger` manually through your system’s package manager.
 
 #### Xmonad startup
 Xmonad starts up a lot of things configured for my system, such as `rclone` etc. Make sure to disable the ones you don’t need.
