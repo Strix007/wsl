@@ -1,4 +1,4 @@
-![showcase](images/home.png)
+![showcase](dotfiles-assets/images/home.png)
 # <h1 style="text-align: center;">Personal Configuration Of Arbab Khan</h1>
 ## This is my personal configuration. This is not meant as a plug and play configuration. 
 
