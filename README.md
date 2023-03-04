@@ -120,9 +120,10 @@ After first booting into emacs, make sure to do a `M-x all-the-icons-install-fon
 #### LSP
 Make sure to install the language-servers in `.emacs.d/init.el` on your system.
 
+### Xmodmap
+I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pink. If you don’t want this behavior, delete `.Xmodmap`.
+
 <a id="contributing"></a>
 ## Contributing
 If you see me doing anything inefficiently in this config or you think something would be useful to me or you want to correct some error on my part, feel free to open a pull request.
 
-### Xmodmap
-I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pink. If you don’t want this behavior, delete `.Xmodmap`.
