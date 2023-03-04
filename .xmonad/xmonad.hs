@@ -432,6 +432,7 @@ myManageHook =
      -- ASSIGN WORKSPACES
 
      , className                    =? "firefox"             --> doShift ( myWorkspaces !! 0 )
+     , className                    =? "Google-chrome"       --> doShift ( myWorkspaces !! 8 )
      , className                    =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
      , className                    =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
      , className                    =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
