@@ -31,32 +31,32 @@ elif [[ $STATUSTHREE == "Paused" ]]; then
 
 xmenu <<EOF | sh &
 Applications
-	IMG:/home/arbab/xmenu/icons/web.png		Web Browser	firefox
-	IMG:/home/arbab/xmenu/icons/gimp.png	Image editor	gimp
+	IMG:$HOME/xmenu/icons/web.png		Web Browser	firefox
+	IMG:$HOME/xmenu/icons/gimp.png	Image editor	gimp
 
 Terminal	alacritty
 
 Powermenu
-	IMG:/home/arbab/xmenu/icons/Shutdown.png	Shutdown	systemctl poweroff
-	IMG:/home/arbab/xmenu/icons/Reboot.png		Reboot		systemctl reboot
-	IMG:/home/arbab/xmenu/icons/Lock.png		Lock		/home/arbab/i3lock/lock.sh
-	IMG:/home/arbab/xmenu/icons/Sleep.png		Sleep 		systemctl suspend
-	IMG:/home/arbab/xmenu/icons/Exit.png		Exit	    if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then openbox --exit; elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then bspc quit; elif [[ "$DESKTOP_SESSION" == "i3" ]]; then i3-msg exit; elif [[ "$DESKTOP_SESSION" == "xmonad" ]]; then /home/arbab.xmonad/xmonadctl 39;	fi
+	IMG:$HOME/xmenu/icons/Shutdown.png	Shutdown	systemctl poweroff
+	IMG:$HOME/xmenu/icons/Reboot.png		Reboot		systemctl reboot
+	IMG:$HOME/xmenu/icons/Lock.png		Lock		$HOME/i3lock/lock.sh
+	IMG:$HOME/xmenu/icons/Sleep.png		Sleep 		systemctl suspend
+	IMG:$HOME/xmenu/icons/Exit.png		Exit	    if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then openbox --exit; elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then bspc quit; elif [[ "$DESKTOP_SESSION" == "i3" ]]; then i3-msg exit; elif [[ "$DESKTOP_SESSION" == "xmonad" ]]; then $HOME.xmonad/xmonadctl 39;	fi
 
 Players ($PLAYERCOUNT) 
 	$PLAYERONE	
 		$FORMATONE
-			IMG:/home/arbab/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYERONE" previous
-			IMG:/home/arbab/xmenu/icons/$CHANGESTATEONE.png		$CHANGESTATEONE		playerctl --player "$PLAYERONE" play-pause
-			IMG:/home/arbab/xmenu/icons/Next.png				Next				playerctl --player "$PLAYERONE" next
+			IMG:$HOME/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYERONE" previous
+			IMG:$HOME/xmenu/icons/$CHANGESTATEONE.png		$CHANGESTATEONE		playerctl --player "$PLAYERONE" play-pause
+			IMG:$HOME/xmenu/icons/Next.png				Next				playerctl --player "$PLAYERONE" next
 	$PLAYERTWO		
 		$FORMATTWO	
-			IMG:/home/arbab/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYETWO" previous
-			IMG:/home/arbab/xmenu/icons/$CHANGESTATETWO.png		$CHANGESTATETWO		playerctl --player "$PLAYETWO" play-pause
-			IMG:/home/arbab/xmenu/icons/Next.png				Next				playerctl --player "$PLAYETWO" next
+			IMG:$HOME/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYETWO" previous
+			IMG:$HOME/xmenu/icons/$CHANGESTATETWO.png		$CHANGESTATETWO		playerctl --player "$PLAYETWO" play-pause
+			IMG:$HOME/xmenu/icons/Next.png				Next				playerctl --player "$PLAYETWO" next
 	$PLAYERTHREE		
 		$FORMATTHREE	
-			IMG:/home/arbab/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYERTHREE" previous
-			IMG:/home/arbab/xmenu/icons/$CHANGESTATETHREE.png	$CHANGESTATETHREE	playerctl --player "$PLAYERTHREE" play-pause
-			IMG:/home/arbab/xmenu/icons/Next.png				Next				playerctl --player "$PLAYERTHREE" next
+			IMG:$HOME/xmenu/icons/Previous.png			Previous			playerctl --player "$PLAYERTHREE" previous
+			IMG:$HOME/xmenu/icons/$CHANGESTATETHREE.png	$CHANGESTATETHREE	playerctl --player "$PLAYERTHREE" play-pause
+			IMG:$HOME/xmenu/icons/Next.png				Next				playerctl --player "$PLAYERTHREE" next
 EOF

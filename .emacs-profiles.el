@@ -4,4 +4,5 @@
  ("doom"      . ((user-emacs-directory . "~/doom-emacs")))
  ("spacemacs" . ((user-emacs-directory . "~/spacemacs")))
  ("yay-evil"  . ((user-emacs-directory . "~/yay-evil-emacs")))
+ ("prelude"   . ((user-emacs-directory . "~/prelude-emacs")))
   )

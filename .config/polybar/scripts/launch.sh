@@ -7,10 +7,10 @@ FALLBACKWM="xmonad" # Set fallback window manager
 
 if [ -z "$DESKTOP_SESSION" ] # Check for some reason if $DESKTOP_SESSION is empty and if so, launch polybar with a fallback window manager
 then
-    polybar mainbar-$(echo $FALLBACKWM) --config=/home/arbab/.config/polybar/config.ini &
+    polybar mainbar-$(echo $FALLBACKWM) --config=$HOME/.config/polybar/config.ini &
     echo "Polybar For $(echo $FALLBACKWM) Has Been Launched"
 else
-    polybar mainbar-$(echo $DESKTOP_SESSION) --config=/home/arbab/.config/polybar/config.ini &
+    polybar mainbar-$(echo $DESKTOP_SESSION) --config=$HOME/.config/polybar/config.ini &
     echo "Polybar For $(echo $DESKTOP_SESSION) Has Been Launched"
 fi
 

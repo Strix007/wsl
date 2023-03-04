@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/home/arbab/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 # ZSH Prompt Theme
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="false"      # Autocorrection

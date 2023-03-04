@@ -70,21 +70,21 @@ format = "Discord\n%s\n%b"
 	background  = "#2E3440"
 	foreground  = "#ECEFF4"
 	timeout     = 2
-	icon        = "/home/arbab/.config/dunst/icons/low.png" 
+	icon        = "$HOME/.config/dunst/icons/low.png" 
 
 [urgency_normal]
 
 	background  = "#2E3440"
 	foreground  = "#ECEFF4"
 	timeout 	= 2
-	icon        = "/home/arbab/.config/dunst/icons/normal.png" 
+	icon        = "$HOME/.config/dunst/icons/normal.png" 
 
 [urgency_critical]
 
 	background  = "#2E3440"
 	foreground  = "#ECEFF4"
 	timeout 	= 2
-	icon        = "/home/arbab/.config/dunst/icons/critical.png" 
+	icon        = "$HOME/.config/dunst/icons/critical.png" 
 
 
 [Youtube Music]
@@ -98,4 +98,4 @@ format = "Discord\n%s\n%b"
 
 #[play_sound]
 #    summary = "*"
-#    script  = /home/arbab/.config/dunst/scripts/alert.sh
+#    script  = $HOME/.config/dunst/scripts/alert.sh

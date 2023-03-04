@@ -1,4 +1,4 @@
-@import                          "/home/arbab/.config/rofi/shared/colors.rasi"
+@import                          "$HOME/.config/rofi/shared/colors.rasi"
 
 * {
     border-colour:               var(selected);

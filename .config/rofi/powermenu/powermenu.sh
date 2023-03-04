@@ -88,7 +88,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		/home/arbab/i3lock/lock.sh
+		$HOME/i3lock/lock.sh
         ;;
     $suspend)
 		run_cmd --suspend

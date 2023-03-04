@@ -223,7 +223,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   (setq dashboard-banner-logo-title "Welcome, Arbab")
-  (setq dashboard-startup-banner "/home/arbab/.emacs.default/banner.jpg")
+  (setq dashboard-startup-banner "~/.emacs.default/banner.jpg")
   (setq dashboard-items '(
                           (recents  . 5)
                           (bookmarks . 5)
@@ -246,7 +246,7 @@
         `(
           (
            (
-            ,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+            ,(all-the-icons-octicon "mark-github" :height 1.0 :v-adjust 0.0)
             "Homepage"
             "Browse My Github Profile"
             (lambda (&rest _) (browse-url "https://github.com/Strix007"))

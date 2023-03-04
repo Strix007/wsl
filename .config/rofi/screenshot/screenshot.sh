@@ -37,7 +37,7 @@ ffmpeg() {
 
 # Set the default command for rofi.
 rofi() {
-  command rofi -theme /home/arbab/.config/rofi/screenshot/screenshot.rasi "$@" || kill -USR1 "$_process_id"
+  command rofi -theme $HOME/.config/rofi/screenshot/screenshot.rasi "$@" || kill -USR1 "$_process_id"
   # command rofi -theme themes/fds-center-menu "$@" || kill -USR1 "$_process_id"
 }
 
@@ -278,7 +278,7 @@ main() {
   done
 
   # Get choice from Rofi.
-  choice=$( (get_options) | rofi -dmenu -i -fuzzy -p "" -theme /home/arbab/.config/rofi/screenshot/screenshot.rasi "Screenshot" )
+  choice=$( (get_options) | rofi -dmenu -i -fuzzy -p "" -theme $HOME/.config/rofi/screenshot/screenshot.rasi "Screenshot" )
 
   # If user has not picked anything, exit.
   if [[ -z "${choice// }" ]]; then

@@ -27,7 +27,7 @@ bindsym XF86AudioNext exec playerctl next
 
 # Use $mod+Shift+x to Lock Desktop Using A Custom i3lock Script
 
-bindsym $mod+Shift+x exec /home/arbab/.config/i3lock/lock.sh
+bindsym $mod+Shift+x exec $HOME/.config/i3lock/lock.sh
 
 # Start A Terminal (Current: Alacritty)
 
@@ -39,22 +39,22 @@ bindsym $mod+q kill
 
 # Start A Program Launcher (Currently Rofi)
 
-bindsym $mod+d exec rofi -show drun -theme /home/arbab/.config/rofi/launcher/launcher.rasi
-bindsym $mod+Shift+d exec rofi -show run -theme /home/arbab/.config/rofi/launcher/launcher.rasi
+bindsym $mod+d exec rofi -show drun -theme $HOME/.config/rofi/launcher/launcher.rasi
+bindsym $mod+Shift+d exec rofi -show run -theme $HOME/.config/rofi/launcher/launcher.rasi
 
 # Using A Script Using Rofi To Take Screenshots
 
 # Execute The Script
 
-bindsym $mod+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh
+bindsym $mod+g exec $HOME/.config/rofi/screenshot/screenshot.sh
 
 # Stop The Recording 
 
-bindsym $mod+Shift+g exec /home/arbab/.config/rofi/screenshot/screenshot.sh --stop
+bindsym $mod+Shift+g exec $HOME/.config/rofi/screenshot/screenshot.sh --stop
 
 # Powermenu Script Using Rofi
 
-bindsym $mod+Shift+q exec /home/arbab/.config/rofi/powermenu/powermenu.sh
+bindsym $mod+Shift+q exec $HOME/.config/rofi/powermenu/powermenu.sh
 
 # Change Focus
 
@@ -119,14 +119,14 @@ set $ws9  "9: Spotify"
 # Switch To Workspace
 
 bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2; exec /home/arbab/.config/i3/scripts/bindings/alacritty.sh
+bindsym $mod+2 workspace $ws2; exec $HOME/.config/i3/scripts/bindings/alacritty.sh
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9; exec /home/arbab/.config/i3/scripts/bindings/spotify.sh
+bindsym $mod+9 workspace $ws9; exec $HOME/.config/i3/scripts/bindings/spotify.sh
 
 # Mmove Focused Container To Workspace
 
@@ -156,7 +156,7 @@ for_window [class="Spotify"]   move to workspace $ws9
 
 bindsym $mod+Shift+r restart
 
-# Reload /home/arbab/.config/i3/config File
+# Reload $HOME/.config/i3/config File
 
 bindsym $mod+Shift+c reload
 
@@ -244,8 +244,8 @@ bindsym $mod+Shift+Tab workspace prev
 
 # Startup Once
 
-exec --no-startup-id /home/arbab/.config/i3/scripts/startup.sh
+exec --no-startup-id $HOME/.config/i3/scripts/startup.sh
 
 # Startup Always
 
-exec_always --no-startup-id /home/arbab/.config/i3/scripts/exec_always.sh
+exec_always --no-startup-id $HOME/.config/i3/scripts/exec_always.sh

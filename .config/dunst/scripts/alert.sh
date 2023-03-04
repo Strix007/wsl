@@ -1,2 +1,2 @@
 #!/bin/sh
-paplay /home/arbab/.config/dunst/sounds/alert.ogg
+paplay $HOME/.config/dunst/sounds/alert.ogg
