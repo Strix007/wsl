@@ -1,6 +1,6 @@
 ![showcase](dotfiles-assets/images/home.png)
 <h1 align="center">Personal Configuration Of Arbab Khan</h1>
-## This is my personal configuration. This is not meant as a plug and play configuration. 
+This is my personal configuration. This is not meant as a plug and play configuration.
 
 ## Table Of Contents
 
@@ -13,7 +13,7 @@
 - [Contributing](#contributing)
 
 ## Caution
-This repo is tailored towards a 1920x1080 system to things may not look correct on other resolutions. This is something yourself to get working on your system. I might make things a bit more friendly on other resolutions in the future.
+This repo is tailored towards a 1920x1080 system so things may not look correct on other resolutions. This is something yourself to get working on your system. I might make things a bit more friendly on other resolutions in the future.
 
 You need to be a little familiar with the following to get the most out of this repo
 
@@ -34,6 +34,8 @@ As I said above, this is meant to be my personal configuration that I can clone 
 ## Showcase
 ![showcase](dotfiles-assets/images/home.png)
 ![showcase](dotfiles-assets/images/emacs.png)
+![showcase](dotfiles-assets/images/code.png)
+![showcase](dotfiles-assets/images/code2.png)
 ![showcase](dotfiles-assets/images/terminal.png)
 ![showcase](dotfiles-assets/images/rofi.png)
 ![showcase](dotfiles-assets/images/browser.png)
@@ -50,7 +52,6 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `Super + q `          | Close window                      |
 | `Super + shift + q`   | Open rofi powermenu               |
 | `Super + shift + c`   | Recompile xmonad                  |
-| `Super + Space`       | Cycle through layouts             |
 | `Super + t`           | Make a floating window tiled      |
 | `Super + Space`       | Cycle through layouts             |
 | `Super + tab`         | Cycle through workspace forwards  |
@@ -67,7 +68,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `Super + b`           | Open browser menu                 |
 | `Super + shift + b`   | Open browser (firefox)            |
 
-**Note:** Make sure to go through .xmonad/xmonad.hs for additional keybindings.
+**Note:** Make sure to go through `.xmonad/xmonad.hs` for additional keybindings.
 
 <a id="installs"></a>
 ## What To Install
@@ -123,7 +124,7 @@ After first booting into emacs, make sure to do a `M-x all-the-icons-install-fon
 Make sure to install the language-servers in `.emacs.d/init.el` on your system.
 
 ### Xmodmap
-I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pink. If you don’t want this behavior, delete `.Xmodmap`.
+I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pinky. If you don’t want this behavior, delete `.Xmodmap`.
 
 <a id="contributing"></a>
 ## Contributing
