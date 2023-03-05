@@ -86,6 +86,12 @@ These programs are required to get you started with this config so make sure to 
 - [Picom](https://github.com/ibhagwan/picom-ibhagwan-git) **Note:** Make sure to install the given fork instead of other forks
 - [Rofi](https://github.com/davatorium/rofi#installation)
 - [Zathura](https://github.com/pwmt/zathura)
+- [Playerctl](https://github.com/altdesktop/playerctl)
+- [Playerctld](https://github.com/altdesktop/playerctl)
+- [wmctrl](https://github.com/dancor/wmctrl)
+- [slop](https://github.com/naelstrof/slop)
+- [scrot](https://github.com/resurrecting-open-source-projects/scrot)
+- [Zscroll](https://github.com/noctuid/zscroll)
 
 ### Optionally
 - [i3](https://i3wm.org/downloads/)
