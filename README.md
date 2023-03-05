@@ -47,26 +47,42 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 
 <a id="keybindings"></a>
 ## Keybindings
-| Keybind               | Function                          |
-|-----------------------|-----------------------------------|
-| `Super + q `          | Close window                      |
-| `Super + shift + q`   | Open rofi powermenu               |
-| `Super + shift + c`   | Recompile xmonad                  |
-| `Super + t`           | Make a floating window tiled      |
-| `Super + Space`       | Cycle through layouts             |
-| `Super + tab`         | Cycle through workspace forwards  |
-| `Super + shift + tab` | Cycle through workspace backwards |
-| `Alt   + F4`          | Exit xmonad                       |
-| `Super + e e`         | Open emacs                        |
-| `Super + enter`       | Launch terminal (alacritty)       |
-| `Super + z`           | Open thunar                       |
-| `Super + shift + z`   | Open pcmanfm                      |
-| `Super + d`           | Open rofi menu                    |
-| `Super + d`           | Open rofi drun                    |
-| `Super + g`           | Open screenshot menu              |
-| `Super + x`           | Open rofi-mpd                     |
-| `Super + b`           | Open browser menu                 |
-| `Super + shift + b`   | Open browser (firefox)            |
+| Keybind                   | Function                                  |
+|---------------------------|-------------------------------------------|
+| `Super + q `              | Close window                              |
+| `Super + shift + q`       | Open rofi powermenu                       |
+| `alt   + F4`              | Exit xmonad                               |
+| `Super + n`               | Refresh layouts                           |
+| `Super + ctrl  + tab`     | Move to next display                      |
+| `alt   + ctrl  + tab`     | Shift to next display                     |
+| `Super + shift + c`       | Recompile xmonad                          |
+| `Super + t`               | Snap floating window to tiling            |
+| `Super + Space`           | Cycle through layouts                     |
+| `Super + tab`             | Cycle through workspace forwards          |
+| `Super + shift + tab`     | Cycle through workspace backwards         |
+| `Super + e e`             | Open emacs                                |
+| `Super + enter`           | Launch terminal (alacritty)               |
+| `Super + z`               | Open thunar                               |
+| `Super + shift + z`       | Open pcmanfm                              |
+| `Super + d`               | Open rofi menu                            |
+| `Super + shift + d`       | Open rofi drun                            |
+| `Super + g`               | Open screenshot menu                      |
+| `Super + shift + x`       | Open rofi-mpd                             |
+| `Super + b`               | Open browser menu                         |
+| `alt   + shift + tab`     | Swap windows between two displays         |
+| `super + shift + f`       | Toggle bar (polybar)                      |
+| `super + ctrl  + f`       | Toggle tile                               |
+| `super + .`               | Warp cursor to focused window             |
+| `super + shift + h`       | Hide focused window                       |
+| `super + ctrl  + h`       | Show latest hiddent window                |
+| `super + f`               | Fullscreen focused window                 |
+| `super + left/k`          | Move focus to upper window                |
+| `super + right/j`         | Move focus to down window                 |
+| `super + shift + left/k`  | Swap to upper window                      |
+| `super + shift + right/j` | Swap to down window                       |
+| `super + up`              | Increase number of windows in master pane |
+| `super + down`            | Decrease number of windows in master pane |
+| `Super + shift + b`       | Open browser (firefox)                    |
 
 **Note:** Make sure to go through `.xmonad/xmonad.hs` for additional keybindings.
 
