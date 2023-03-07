@@ -1,5 +1,9 @@
 @import                          "~/.config/rofi/shared/colors.rasi"
 
+configuration {
+    font: "JetBrains Mono 12";  
+}
+
 * {
     border-colour:               var(selected);
     handle-colour:               var(foreground);

@@ -9,6 +9,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
+    font: "JetBrains Mono 12";
     show-icons:                 false;
 }
 
