@@ -930,14 +930,6 @@
   :after tree-sitter
   )
 
-;; Flyspell
-(use-package flyspell
-  :ensure nil
-  :hook
-  (prog-mode . flyspell-prog-mode)
-  (text-mode . turn-on-flyspell)
-  )
-
 ;; Lipsy
 (use-package lispy
   :hook
