@@ -57,6 +57,8 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + shift + q` | Open rofi powermenu |
 | `alt   + F4`        | Exit xmonad         |
 #### Layout
+| Keybind             | Function                                  |
+|---------------------|-------------------------------------------|
 | `super + n`         | Refresh layouts                           |
 | `super + Space`     | Cycle through layouts                     |
 | `super + t`         | Snap floating window to tiling            |
@@ -66,6 +68,8 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + shift + f` | Toggle bar (polybar)                      |
 | `super + f`         | Fullscreen focused window                 |
 #### Move
+| Keybind               | Function                          |
+|-----------------------|-----------------------------------|
 | `super + ctrl + tab`  | Move focus to next display        |
 | `super + left/k`      | Move focus to upper window        |
 | `super + right/j`     | Move focus to down window         |
@@ -80,11 +84,15 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + alt + left`  | Move window left by 10 pixels     |
 | `super + alt + right` | Move window right by 10 pixels    |
 #### Shift
+| Keybind                   | Function                           |
+|---------------------------|------------------------------------|
 | `alt   + ctrl + tab`      | Shift to next display              |
 | `super + shift + left/k`  | Shift to upper window              |
 | `super + shift + right/j` | Shift to down window               |
 | `alt   + shift + tab`     | Shift windows between two displays |
 #### Resize
+| Keybind                      | Function                             |
+|------------------------------|--------------------------------------|
 | `super + kp_add`             | Increase window size by 10 pixels    |
 | `super + kp_subtract`        | Decrease window size by 10 pixels    |
 | `super + ctrl + kp_add`      | Increase window spacing by 10 pixels |
@@ -92,6 +100,8 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + alt + kp_add`       | Increase screen spacing by 10 pixels |
 | `super + alt + kp_subtract`  | Decrease screen spacing by 10 pixels |
 ### Rofi
+| Keybind             | Function                           |
+|---------------------|------------------------------------|
 | `super + d`         | Open rofi drun                     |
 | `super + shift + d` | Open rofi run                      |
 | `super + g`         | Open screenshot menu               |
@@ -99,6 +109,8 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + shift + x` | Open mpd widget (rofi)             |
 | `super + b`         | Open browser menu(rofi)            |
 ### Applications
+| Keybind             | Function                    |
+|---------------------|-----------------------------|
 | `super + enter`     | Launch terminal (alacritty) |
 | `super + e e`       | Open emacs                  |
 | `super + z`         | Open thunar                 |
@@ -106,10 +118,14 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + shift + b` | Open browser (firefox)      |
 | `super + p r`       | Restart bar (polybar)       |
 ### Scratchpads
+| Keybind                   | Function                               |
+|---------------------------|----------------------------------------|
 | `super + s super + enter` | Launch terminal scratchpad (alacritty) |
 | `super + s x`             | Launch MPD plyaer (ncmpcpp)            |
 | `super + s z`             | Launch filemanager (ranger)            |
 ### Function Keys
+| Keybind    | Function                      |
+|------------|-------------------------------|
 | `Fn + F1`  | Launch filemanager (thunar)   |
 | `Fn + F2`  | Launch rofi drun              |
 | `Fn + F3`  | Launch calculator (qalculate) |
