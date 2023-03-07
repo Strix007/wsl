@@ -48,44 +48,80 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 
 <a id="keybindings"></a>
 ## Keybindings
-| Keybind                   | Function                                  |
-|---------------------------|-------------------------------------------|
-| `Super + q `              | Close window                              |
-| `Super + shift + q`       | Open rofi powermenu                       |
-| `alt   + F4`              | Exit xmonad                               |
-| `Super + n`               | Refresh layouts                           |
-| `Super + ctrl  + tab`     | Move to next display                      |
-| `alt   + ctrl  + tab`     | Shift to next display                     |
-| `Super + shift + c`       | Recompile xmonad                          |
-| `Super + t`               | Snap floating window to tiling            |
-| `Super + Space`           | Cycle through layouts                     |
-| `Super + tab`             | Cycle through workspace forwards          |
-| `Super + shift + tab`     | Cycle through workspace backwards         |
-| `Super + e e`             | Open emacs                                |
-| `Super + enter`           | Launch terminal (alacritty)               |
-| `Super + z`               | Open thunar                               |
-| `Super + shift + z`       | Open pcmanfm                              |
-| `Super + d`               | Open rofi menu                            |
-| `Super + shift + d`       | Open rofi drun                            |
-| `Super + g`               | Open screenshot menu                      |
-| `Super + shift + x`       | Open rofi-mpd                             |
-| `Super + b`               | Open browser menu                         |
-| `alt   + shift + tab`     | Swap windows between two displays         |
-| `super + shift + f`       | Toggle bar (polybar)                      |
-| `super + ctrl  + f`       | Toggle tile                               |
-| `super + .`               | Warp cursor to focused window             |
-| `super + shift + h`       | Hide focused window                       |
-| `super + ctrl  + h`       | Show latest hiddent window                |
-| `super + f`               | Fullscreen focused window                 |
-| `super + left/k`          | Move focus to upper window                |
-| `super + right/j`         | Move focus to down window                 |
-| `super + shift + left/k`  | Swap to upper window                      |
-| `super + shift + right/j` | Swap to down window                       |
-| `super + up`              | Increase number of windows in master pane |
-| `super + down`            | Decrease number of windows in master pane |
-| `Super + shift + b`       | Open browser (firefox)                    |
-
-**Note:** Make sure to go through `.xmonad/xmonad.hs` for additional keybindings.
+### Xmonad
+#### Exit
+| Keybind             | Function            |
+|---------------------|---------------------|
+| `super + shift + c` | Recompile xmonad    |
+| `super + q `        | Close window        |
+| `super + shift + q` | Open rofi powermenu |
+| `alt   + F4`        | Exit xmonad         |
+#### Layout
+| `super + n`         | Refresh layouts                           |
+| `super + Space`     | Cycle through layouts                     |
+| `super + t`         | Snap floating window to tiling            |
+| `super + up`        | Increase number of windows in master pane |
+| `super + down`      | Decrease number of windows in master pane |
+| `super + ctrl + f`  | Toggle tile                               |
+| `super + shift + f` | Toggle bar (polybar)                      |
+| `super + f`         | Fullscreen focused window                 |
+#### Move
+| `super + ctrl + tab`  | Move focus to next display        |
+| `super + left/k`      | Move focus to upper window        |
+| `super + right/j`     | Move focus to down window         |
+| `super + .`           | Warp cursor to focused window     |
+| `super + shift + h`   | Hide focused window               |
+| `super + ctrl  + h`   | Show last hiddent window          |
+| `super + tab`         | Cycle through workspace forwards  |
+| `super + shift + tab` | Cycle through workspace backwards |
+| `super + m`           | Swap focused windowwith master    |
+| `super + alt + up`    | Move window up by 10 pixels       |
+| `super + alt + down`  | Move window down by 10 pixels     |
+| `super + alt + left`  | Move window left by 10 pixels     |
+| `super + alt + right` | Move window right by 10 pixels    |
+#### Shift
+| `alt   + ctrl + tab`      | Shift to next display              |
+| `super + shift + left/k`  | Shift to upper window              |
+| `super + shift + right/j` | Shift to down window               |
+| `alt   + shift + tab`     | Shift windows between two displays |
+#### Resize
+| `super + kp_add`             | Increase window size by 10 pixels    |
+| `super + kp_subtract`        | Decrease window size by 10 pixels    |
+| `super + ctrl + kp_add`      | Increase window spacing by 10 pixels |
+| `super + ctrl + kp_subtract` | Decrease window spacing by 10 pixels |
+| `super + alt + kp_add`       | Increase screen spacing by 10 pixels |
+| `super + alt + kp_subtract`  | Decrease screen spacing by 10 pixels |
+### Rofi
+| `super + d`         | Open rofi drun                     |
+| `super + shift + d` | Open rofi run                      |
+| `super + g`         | Open screenshot menu               |
+| `super + shift + g` | Stop recording(in screenshot menu) |
+| `super + shift + x` | Open mpd widget (rofi)             |
+| `super + b`         | Open browser menu(rofi)            |
+### Applications
+| `super + enter`     | Launch terminal (alacritty) |
+| `super + e e`       | Open emacs                  |
+| `super + z`         | Open thunar                 |
+| `super + shift + z` | Open pcmanfm                |
+| `super + shift + b` | Open browser (firefox)      |
+| `super + p r`       | Restart bar (polybar)       |
+### Scratchpads
+| `super + s super + enter` | Launch terminal scratchpad (alacritty) |
+| `super + s x`             | Launch MPD plyaer (ncmpcpp)            |
+| `super + s z`             | Launch filemanager (ranger)            |
+### Function Keys
+| `Fn + F1`  | Launch filemanager (thunar)   |
+| `Fn + F2`  | Launch rofi drun              |
+| `Fn + F3`  | Launch calculator (qalculate) |
+| `Fn + F4`  | Launch spotify                |
+| `Fn + F5`  | Next media (playerctl)        |
+| `Fn + F6`  | Previous media (playerctl)    |
+| `Fn + F7`  | Toggle media (playerctl)      |
+| `Fn + F8`  | Stop media (playerctl)        |
+| `Fn + F9`  | Volume mute (volumeicon)      |
+| `Fn + F9`  | Volume mute (volumeicon)      |
+| `Fn + F10` | Volume increase (volumeicon)  |
+| `Fn + F11` | Volume decrease (volumeicon)  |
 
 <a id="installs"></a>
 ## What To Install
@@ -108,6 +144,8 @@ These programs are required to get you started with this config so make sure to 
 ### MPD
 - [Mpd](https://mpd.readthedocs.io/en/stable/user.html)
 - [mpc](https://github.com/MusicPlayerDaemon/mpc)
+### Emacs
+- [pandoc](https://github.com/jgm/pandoc/blob/main/INSTALL.md)
 ### Others
 - [Emacs](https://www.gnu.org/software/emacs/download.html)
 - [i3lock](https://github.com/Raymo111/i3lock-color)
@@ -119,7 +157,6 @@ These programs are required to get you started with this config so make sure to 
 - [Picom](https://github.com/ibhagwan/picom-ibhagwan-git) **Note:** Make sure to install the given fork instead of other forks
 - [Zathura](https://github.com/pwmt/zathura)
 - [ncmpcpp](https://rybczak.net/ncmpcpp/installation)
-
 ### Optionally
 - [i3](https://i3wm.org/downloads/)
 
@@ -146,7 +183,7 @@ These are additional notes and instruction you have to follow to get this config
 
 ### Xmonad
 #### Xmonad with Polybar
-Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in `.config/polybar/scripts` so no worries there but you do need to install `haskell-dbus` and `haskell-dbus-logger` manually through your system’s package manager.
+Xmonad with polybar was a bit tricky to get running, I had to use [xmonad-log](https://github.com/xintron/xmonad-log) to get things working. I have already put a compiled binary of xmonad-log in `.config/polybar/scripts` so no worries there but you do need to install `haskell-dbus` manually through your system’s package manager.
 
 #### Xmonad startup
 Xmonad starts up a lot of things configured for my system, such as `rclone` etc. Make sure to disable the ones you don’t need.
