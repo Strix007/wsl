@@ -9,6 +9,7 @@ This is my personal configuration. This is not meant as a plug and play configur
 - [Workflow ](#workflow)
 - [Important Keybindings](#keybindings)
 - [What To Install](#installs)
+- [Fonts](#fonts)
 - [Addition Notes](#notes)
 - [Contributing](#contributing)
 
@@ -108,6 +109,18 @@ These programs are required to get you started with this config so make sure to 
 - [slop](https://github.com/naelstrof/slop)
 - [scrot](https://github.com/resurrecting-open-source-projects/scrot)
 - [Zscroll](https://github.com/noctuid/zscroll)
+- [mpc](https://github.com/MusicPlayerDaemon/mpc)
+- [ncmpcpp](https://rybczak.net/ncmpcpp/installation)
+
+<a id="fonts"></a>
+## Fonts
+There are the fonts that are used in my configuratuin for text and icons. Make sure to install them
+- [FiraCode](https://github.com/tonsky/FiraCode)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+- [Font Awesome](https://fontawesome.com/v6/download)
+- [Material Design Icons](https://github.com/google/material-design-icons)
+- [Grape Nuts](https://fonts.google.com/specimen/Grape+Nuts)
+- [Feather](https://github.com/oblador/react-native-vector-icons/raw/master/Fonts/Feather.ttf)
 
 ### Optionally
 - [i3](https://i3wm.org/downloads/)
