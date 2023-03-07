@@ -97,11 +97,7 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
--- myWorkspaces = ["  %{A1:$HOME/.xmonad/xmonadctl 1:}\62057%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 3:}\61728%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 5:}\61564%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 7:}\61729%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 9:}\61598%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 11:}\61723%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 13:}\62060%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 15:}\61643%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 17:}\61884%{A}  "]
--- myWorkspaces = ["\61506", "\61728", "\61564", "\61729", "\61598", "\61723", "\62060", "\61643", "\61884"]
--- myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
--- myWorkspaces = ["  1  " , "  2  " , "  3  " , "  4  " , "  5  " , "  6  " , "  7  " , "  8  " , "  9  " ]
-myWorkspaces = ["  %{A1:$HOME/.xmonad/xmonadctl 1:}1%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 3:}2%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 5:}3%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 7:}4%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 9:}5%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 11:}6%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 13:}7%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 15:}8%{A}  ", "  %{A1:$HOME/.xmonad/xmonadctl 17:}9%{A}  "]
+myWorkspaces = ["  %{A1:wmctrl -s 0:}1%{A}  ", "  %{A1:wmctrl -s 1:}2%{A}  ", "  %{A1:wmctrl -s 2:}3%{A}  ", "  %{A1:wmctrl -s 3:}4%{A}  ", "  %{A1:wmctrl -s 4:}5%{A}  ", "  %{A1:wmctrl -s 5:}6%{A}  ", "  %{A1:wmctrl -s 6:}7%{A}  ", "  %{A1:wmctrl -s 7:}8%{A}  ", "  %{A1:wmctrl -s 8:}9%{A}  "]
 
 -- SCRATCHPADS
 
@@ -110,8 +106,6 @@ myScratchPads =
   [
 
       NS "terminal"    spawnTerminal    findTerminal    manageTerminal    -- Alacritty
-    , NS "spotify-tui" spawnSpt         findSpt         manageSpt         -- Spotify-TUI
-    , NS "calculator"  spawnCalculator  findCalculator  manageCalculator  -- Qalculate
     , NS "fileManager" spawnFileManager findFileManager manageFileManager -- Ranger
     , NS "musicPlayer" spawnMusicPlayer findMusicPlayer manageMusicPlayer -- NCMPCPP And MPD
 
@@ -131,30 +125,6 @@ myScratchPads =
         w = 0.9
         t = 0.95 -h
         l = 0.95 -w
-
-
-
-    spawnSpt  = myTerminal ++ " " ++ "-t" ++ " " ++ "SpotifyTUI" ++ " " ++ "--class" ++ " " ++ "spt,SPT" ++ " " ++ "-e" ++ " " ++ "spt"
-    findSpt   = XMonad.ManageHook.title =? "SpotifyTUI"
-    manageSpt = customFloating $ W.RationalRect l t w h
-
-     where
-
-        h = 0.9
-        w = 0.9
-        t = 0.95 -h
-        l = 0.95 -w
-
-    spawnCalculator  = myCalculator
-    findCalculator   = XMonad.ManageHook.title =? "Qalculate!"
-    manageCalculator = customFloating $ W.RationalRect l t w h
-
-     where
-
-        h = 0.5
-        w = 0.4
-        t = 0.75 -h
-        l = 0.70 -w
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
@@ -189,65 +159,62 @@ myKeys =
                 [
                   -- CORE
 
-                  ("M-S-c",              restart "xmonad" True) -- Recompile Xmonad
-                , ("M1-<F4>",            io exitSuccess)        -- Exit Xmonad
+                  ("M-S-c",   restart "xmonad" True) -- Recompile Xmonad
+                , ("M1-<F4>", io exitSuccess)        -- Exit Xmonad
 
                  -- Actions
 
-                , ("C-S-<Escape>",       spawn "$HOME/i3lock/lock.sh") -- Custom Lockscript Using i3lock
+                , ("C-S-<Escape>", spawn "$HOME/i3lock/lock.sh") -- Custom Lockscript Using i3lock
 
                  -- KILL
 
-                , ("M-q",                kill)    -- Kill Focused Window
-                , ("M-C-q",              killAll) -- Kill All Windows On Workspace
+                , ("M-q",   kill)    -- Kill Focused Window
+                , ("M-C-q", killAll) -- Kill All Windows On Workspace
 
                 -- LAYOUTS
-                , ("M-<Space>",          sendMessage NextLayout)     -- Change Xmonad Layout
-                , ("M-n",                refresh)                    -- Restore Default Layouts
-                , ("M-<Tab>",            moveTo Next NonEmptyWS)     -- Cycle Through The Next Non-Empty Workspace
-                , ("M-S-<Tab>",          moveTo Prev NonEmptyWS)     -- Cycle Through The Previours Non-Empty Workspace
-                , ("M-C-<Tab>",          nextScreen)                 -- Cycle To The Next Screen
-                , ("M1-C-<Tab>",         shiftNextScreen)            -- Move  To The Next Screen
-                , ("M1-S-<Tab>",         swapNextScreen)             -- Move  To The Next Screen
-                , ("M-S-f",              sendMessage ToggleStruts)   -- Toggle FULLSCREEN Layout Without Avoiding Struts
-                , ("M-C-f",              withFocused toggleFloat)    -- Toggle Float On Focused Window
-                , ("M-.",                warpToWindow (1%10) (1%10)) -- Move Pointer To Focused Window
-                , ("M-h",                withFocused hideWindow)     -- Hide Focused Window
-                , ("M-S-h",              popOldestHiddenWindow)      -- Pop Oldest Hidden Window
-                , ("M-f",                sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts) -- Toggle FULLSCREEN Layout And Avoid Struts
+
+                , ("M-<Space>",  sendMessage NextLayout)     -- Change Xmonad Layout
+                , ("M-n",        refresh)                    -- Restore Default Layouts
+                , ("M-<Tab>",    moveTo Next NonEmptyWS)     -- Cycle Through The Next Non-Empty Workspace
+                , ("M-S-<Tab>",  moveTo Prev NonEmptyWS)     -- Cycle Through The Previours Non-Empty Workspace
+                , ("M-C-<Tab>",  nextScreen)                 -- Cycle To The Next Screen
+                , ("M1-C-<Tab>", shiftNextScreen)            -- Move  To The Next Screen
+                , ("M1-S-<Tab>", swapNextScreen)             -- Swap the windows present on the two screen
+                , ("M-C-f",      withFocused toggleFloat)    -- Toggle Float On Focused Window
+                , ("M-.",        warpToWindow (1%10) (1%10)) -- Move Pointer To Focused Window
+                , ("M-S-h",      withFocused hideWindow)     -- Hide Focused Window
+                , ("M-C-h",      popOldestHiddenWindow)      -- Pop Oldest Hidden Window
+                , ("M-S-f",      spawn ("polybar-msg cmd toggle")) -- Toggle FULLSCREEN Layout Without Avoiding Struts
+                , ("M-f",        sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts) -- Toggle FULLSCREEN Layout And Avoid Struts
 
                 -- LAYOUT WINDOW FOCUS
 
-                , ("M-<Left>",           windows W.focusUp)   -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
-                , ("M-<Right>",          windows W.focusDown) -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
+                , ("M-k",       windows W.focusUp)   -- k To Change Focus To The "Upper" Window
+                , ("M-j",       windows W.focusDown) -- j To Change Focus To The "Down"  Window
+                , ("M-<Left>",  windows W.focusUp)   -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
+                , ("M-<Right>", windows W.focusDown) -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
 
                 -- LAYOUT WINDOW SWAPS
 
-                , ("M-<Up>",             sendMessage (IncMasterN    1))  -- Arrow Key <M+Up>      To Increase Windows In Master Pane
-                , ("M-<Down>",           sendMessage (IncMasterN  (-1))) -- Arrow Key <M+Down>    To Decrease Windows In Master Pane
-                , ("M-S-<Left>",         windows W.swapUp)               -- Arrow Key <M-S-Left>  To Swap To The "Upper" Window
-                , ("M-S-<Right>",        windows W.swapDown)             -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
-                , ("M-m",                dwmpromote)                     -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
+                , ("M-<Up>",      sendMessage (IncMasterN    1))  -- Arrow Key <M+Up>   To Increase Windows In Master Pane
+                , ("M-<Down>",    sendMessage (IncMasterN  (-1))) -- Arrow Key <M+Down> To Decrease Windows In Master Pane
+                , ("M-S-<Left>",  windows W.swapUp)   -- Arrow Key <u-S-Left>  To Swap To The "Upper" Window
+                , ("M-S-k",       windows W.swapUp)   -- Shift + k To Swap To The "Upper" Window
+                , ("M-S-<Right>", windows W.swapDown) -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
+                , ("M-S-j",       windows W.swapDown) -- Shift + j To Swap To The "Down"  Window
+                , ("M-m",         dwmpromote)         -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
 
                 -- MOVE WINDOWS
 
-                , ("M-M1-<Up>",          sendMessage (MoveUp        10)) -- Arrow Key <M+ALT+Up>    To Move The Focused Window Position By 10 At The "Up"    Side
-                , ("M-M1-<Down>",        sendMessage (MoveDown      10)) -- Arrow Key <M+ALT+Down>  To Move The Focused Window Position By 10 At The "Down"  Side
-                , ("M-M1-<Left>",        sendMessage (MoveLeft      10)) -- Arrow Key <M+ALT+Left>  To Move The Focused Window Position By 10 At The "Left"  Side
-                , ("M-M1-<Right>",       sendMessage (MoveRight     10)) -- Arrow Key <M+ALT+Right> To Move The Focused Window Position By 10 At The "Right" Side
+                , ("M-M1-<Up>",          sendMessage (MoveUp    10)) -- Arrow Key <M+ALT+Up>    To Move The Focused Window Position By 10 At The "Up"    Side
+                , ("M-M1-<Down>",        sendMessage (MoveDown  10)) -- Arrow Key <M+ALT+Down>  To Move The Focused Window Position By 10 At The "Down"  Side
+                , ("M-M1-<Left>",        sendMessage (MoveLeft  10)) -- Arrow Key <M+ALT+Left>  To Move The Focused Window Position By 10 At The "Left"  Side
+                , ("M-M1-<Right>",       sendMessage (MoveRight 10)) -- Arrow Key <M+ALT+Right> To Move The Focused Window Position By 10 At The "Right" Side
 
                 -- RESIZE WINDOWS
 
-                , ("M-C-<Up>",           sendMessage (IncreaseUp    10)) -- Arrow Key <M+C+Up>      To Increase The Focused Window Size By 10 At The "Up"    Side
-                , ("M-C-<Down>",         sendMessage (IncreaseDown  10)) -- Arrow Key <M+C+Down>    To Increase The Focused Window Size By 10 At The "Down"  Side
-                , ("M-C-<Left>",         sendMessage (IncreaseLeft  10)) -- Arrow Key <M+C+Left>    To Increase The Focused Window Size By 10 At The "Left"  Side
-                , ("M-C-<Right>",        sendMessage (IncreaseRight 10)) -- Arrow Key <M+C+Right>   To Increase The Focused Window Size By 10 At The "Right" Side
-                , ("M-S-C-<Up>",         sendMessage (DecreaseUp    10)) -- Arrow Key <M+S+C+Up>    To Decrease The Focused Window Size By 10 At The "Up"    Side
-                , ("M-S-C-<Down>",       sendMessage (DecreaseDown  10)) -- Arrow Key <M+S+C+Down>  To Decrease The Focused Window Size By 10 At The "Down"  Side
-                , ("M-S-C-<Left>",       sendMessage (DecreaseLeft  10)) -- Arrow Key <M+S+C+Left>  To Decrease The Focused Window Size By 10 At The "Left"  Side
-                , ("M-S-C-<Right>",      sendMessage (DecreaseRight 10)) -- Arrow Key <M+S+C+Right> To Decrease The Focused Window Size By 10 At The "Right" Side
-                , ("M-<KP_Subtract>",    sendMessage (DecreaseUp    10) >> sendMessage (DecreaseDown  10) >> sendMessage (DecreaseLeft  10) >> sendMessage (DecreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Decrease THe Focused Window Size By 10 At      All    Sides
-                , ("M-<KP_Add>",         sendMessage (IncreaseUp    10) >> sendMessage (IncreaseDown  10) >> sendMessage (IncreaseLeft  10) >> sendMessage (IncreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Increase THe Focused Window Size By 10 At      All    Sides
+                , ("M-<KP_Subtract>",    sendMessage (DecreaseUp 10) >> sendMessage (DecreaseDown  10) >> sendMessage (DecreaseLeft  10) >> sendMessage (DecreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Decrease THe Focused Window Size By 10 At      All    Sides
+                , ("M-<KP_Add>",         sendMessage (IncreaseUp 10) >> sendMessage (IncreaseDown  10) >> sendMessage (IncreaseLeft  10) >> sendMessage (IncreaseRight  10) ) -- Arrow Key <M+C+NumPad+> To Increase THe Focused Window Size By 10 At      All    Sides
 
                 -- RESIZE GAPS
 
@@ -258,46 +225,43 @@ myKeys =
 
                 -- SCRATCHPADS
 
-                , ("M-s M-<Return>",     namedScratchpadAction myScratchPads "terminal")    -- Spawn A Terminal           As A ScratchPad (Alacritty)
-                , ("M-s s",              namedScratchpadAction myScratchPads "spotify-tui") -- Spawn A TUI Spotify Client As A ScratchPad (SPT)
-                , ("M-s c",              namedScratchpadAction myScratchPads "calculator")  -- Spawn A Calculator         As A ScratchPad (Qalculate)
-                , ("M-s z",              namedScratchpadAction myScratchPads "fileManager") -- Spawn A TUI FileManager    As A ScratchPad (Ranger)
-                , ("M-s x",              namedScratchpadAction myScratchPads "musicPlayer") -- Spawn A TUI MusicPlayer    As A ScratchPad (NCMPCPP And MPD)
+                , ("M-s M-<Return>", namedScratchpadAction myScratchPads "terminal")    -- Spawn A Terminal As A ScratchPad (Alacritty)
+                , ("M-s z",          namedScratchpadAction myScratchPads "fileManager") -- Spawn A TUI FileManager As A ScratchPad (Ranger)
+                , ("M-s x",          namedScratchpadAction myScratchPads "musicPlayer") -- Spawn A TUI MusicPlayer As A ScratchPad (NCMPCPP And MPD)
 
                 -- FUNCTION KEYS
 
-                , ("<XF86Explorer>",     spawn myGUIFileExplorer)               -- Use "Fn+F1" To Open File Explorer
-                , ("<XF86Search>",       spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Use "Fn+F2" To Launch Rofi
-                , ("<XF86Calculator>",   spawn myCalculator)        -- Use "Fn+F3" To Launch Calculator
-                , ("<XF86Tools>",        spawn myGUIMusicApp)          -- Use "Fn+F4" To Launch Spotify
-                , ("<XF86AudioPrev>",    spawn "playerctl previous")   -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
-                , ("<XF86AudioPlay>",    spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
-                , ("<XF86AudioNext>",    spawn "playerctl next")       -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
-                , ("<XF86AudioStop>",    spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Active Media On The Last Active Player
+                , ("<XF86Explorer>",   spawn myGUIFileExplorer)               -- Use "Fn+F1" To Open File Explorer
+                , ("<XF86Search>",     spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Use "Fn+F2" To Launch Rofi
+                , ("<XF86Calculator>", spawn myCalculator)           -- Use "Fn+F3" To Launch Calculator
+                , ("<XF86Tools>",      spawn myGUIMusicApp)          -- Use "Fn+F4" To Launch Spotify
+                , ("<XF86AudioPrev>",  spawn "playerctl previous")   -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
+                , ("<XF86AudioPlay>",  spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
+                , ("<XF86AudioNext>",  spawn "playerctl next")       -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
+                , ("<XF86AudioStop>",  spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Active Media On The Last Active Player
 
                 -- ROFI
 
-                , ("M-d",                spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
-                , ("M-S-d",              spawn "rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
-                , ("M-g",                spawn "$HOME/.config/rofi/screenshot/screenshot.sh")                           -- Screenshot Menu Using Rofi
-                , ("M-S-g",              spawn "$HOME/.config/rofi/screenshot/screenshot.sh --stop")                    -- Stop Recording On The Screenshot Menu Using Rofi
-                , ("M-S-q",              spawn "$HOME/.config/rofi/powermenu/powermenu.sh")                             -- Powermenu Using Rofi
-                , ("M-b",                spawn "$HOME/.config/rofi/bookmarks/bookmarks.sh")                             -- Browser Menu Using Rofi
-                , ("M-S-x",              spawn "$HOME/.config/rofi/mpd/mpd.sh")                                         -- MPD Menu Using Rofi
-                , ("M-S-s",              spawn "$HOME/.config/rofi/spotify/spotify.sh")                                 -- Spotify Menu Using Rofi
+                , ("M-d",   spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
+                , ("M-S-d", spawn "rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
+                , ("M-g",   spawn "$HOME/.config/rofi/screenshot/screenshot.sh")        -- Screenshot Menu Using Rofi
+                , ("M-S-g", spawn "$HOME/.config/rofi/screenshot/screenshot.sh --stop") -- Stop Recording On The Screenshot Menu Using Rofi
+                , ("M-S-q", spawn "$HOME/.config/rofi/powermenu/powermenu.sh")          -- Powermenu Using Rofi
+                , ("M-b",   spawn "$HOME/.config/rofi/bookmarks/bookmarks.sh")          -- Browser Menu Using Rofi
+                , ("M-S-x", spawn "$HOME/.config/rofi/mpd/mpd.sh")                      -- MPD Menu Using Rofi
+                , ("M-S-s", spawn "$HOME/.config/rofi/spotify/spotify.sh")              -- Spotify Menu Using Rofi
 
                 -- APPLICATIONS
 
-                , ("M-<Return>",         spawn myTerminal)                -- Spawn Terminal           (Alacritty)
-                , ("M-S-b",              spawn myBrowser)                 -- Spawn Browser            (Firefox)
-                , ("M-z",                spawn myGUIFileExplorer)         -- Spawn FileManager        (Nautilus)
-                , ("M-S-z",              spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
-                , ("M-r p",              spawn "polybar-msg cmd restart") -- Restart Polybar
+                , ("M-<Return>", spawn myTerminal)                -- Spawn Terminal (Alacritty)
+                , ("M-S-b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
+                , ("M-z",        spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
+                , ("M-S-z",      spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
+                , ("M-p r",      spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
 
-                , ("M-e e",              spawn "emacsclient -c -a 'emacs'") -- Launch Emacsclient And If No Server Is Running, Launch Emacs
-                -- , ("M-e e",              spawn "emacs")                     -- Launch Emacs
+                , ("M-e e", spawn "emacsclient -c -a 'emacs'") -- Launch Emacsclient And If No Server Is Running, Launch Emacs
 
                 ]
 
@@ -507,16 +471,16 @@ myStartupHook =
 
     spawnOnce "xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI3 --off --output VIRTUAL1 --off" -- Multi-Screen Xrandr
     spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
+    spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
     spawnOnce "xfce4-power-manager"                                                                                                                                                                                                   -- Xfce Power Manager
     spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
-    spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
     spawnOnce "kdeconnect-indicator"                                                                                                                                                                                                  -- SysTray KDE-Indicator
     spawnOnce "$HOME/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
-    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
+    -- spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
     spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/wallpapers/ign_mountain.png"                                                                              -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
     setWMName "LG3D"
