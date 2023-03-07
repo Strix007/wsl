@@ -89,28 +89,44 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 
 <a id="installs"></a>
 ## What To Install
-These programs are required to get you started with this config so make sure to install them.
+These programs are required to get you started with this config so make sure to install them. Only build them from source if you have checked your distribution’s package manager and cannot find them. If you’re on arch linux, make sure to also check the [AUR](https://aur.archlinux.org).
+### Xmonad
 - [Xmonad](https://xmonad.org/download.html)
+- [Xmonad-contrib](https://github.com/xmonad/xmonad-contrib)
+#### Xmonad-log
+- [haskell-dbus](https://hackage.haskell.org/package/dbus)
+### Polybar
 - [Polybar](https://github.com/polybar/polybar#installation)
+- [wmctrl](https://github.com/dancor/wmctrl)
+- [Playerctl](https://github.com/altdesktop/playerctl)
+- [Zscroll](https://github.com/noctuid/zscroll)
+### Rofi
+- [Rofi](https://github.com/davatorium/rofi#installation)
+- [ffcast](https://github.com/ropery/FFcast)
+- [slop](https://github.com/naelstrof/slop)
+- [scrot](https://github.com/resurrecting-open-source-projects/scrot)
+### MPD
+- [Mpd](https://mpd.readthedocs.io/en/stable/user.html)
+- [mpc](https://github.com/MusicPlayerDaemon/mpc)
+### Others
 - [Emacs](https://www.gnu.org/software/emacs/download.html)
 - [i3lock](https://github.com/Raymo111/i3lock-color)
 - [Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
 - [Oh-my-zsh](https://ohmyz.sh/#install)
 - [Alacritty](https://github.com/alacritty/alacritty/blob/master/INSTALL.md)
 - [Dunst](https://github.com/dunst-project/dunst/wiki/Installation)
-- [Mpd](https://mpd.readthedocs.io/en/stable/user.html)
 - [Mpv](https://mpv.io/installation/)
 - [Picom](https://github.com/ibhagwan/picom-ibhagwan-git) **Note:** Make sure to install the given fork instead of other forks
-- [Rofi](https://github.com/davatorium/rofi#installation)
 - [Zathura](https://github.com/pwmt/zathura)
-- [Playerctl](https://github.com/altdesktop/playerctl)
-- [Playerctld](https://github.com/altdesktop/playerctl)
-- [wmctrl](https://github.com/dancor/wmctrl)
-- [slop](https://github.com/naelstrof/slop)
-- [scrot](https://github.com/resurrecting-open-source-projects/scrot)
-- [Zscroll](https://github.com/noctuid/zscroll)
-- [mpc](https://github.com/MusicPlayerDaemon/mpc)
 - [ncmpcpp](https://rybczak.net/ncmpcpp/installation)
+
+### Optionally
+- [i3](https://i3wm.org/downloads/)
+
+**Note:** Used to use i3 before xmonad, that’s why it’s here. Most things work with i3 but I mainly use it as a fallback wm.
+- [sxhkd](https://github.com/baskerville/sxhkd)
+
+**Note:** Thought of moving all my non-wm related keybindings to sxhkd but found it to be buggy and decided not to do so. You can still use it if you wish as all my bindings are configured.
 
 <a id="fonts"></a>
 ## Fonts
@@ -121,14 +137,7 @@ There are the fonts that are used in my configuratuin for text and icons. Make s
 - [Material Design Icons](https://github.com/google/material-design-icons)
 - [Grape Nuts](https://fonts.google.com/specimen/Grape+Nuts)
 - [Feather](https://github.com/oblador/react-native-vector-icons/raw/master/Fonts/Feather.ttf)
-
-### Optionally
-- [i3](https://i3wm.org/downloads/)
-
-**Note:** Used to use i3 before xmonad, that’s why it’s here. Most things work with i3 but I mainly use it as a fallback wm.
-- [sxhkd](https://github.com/baskerville/sxhkd)
-
-**Note:** Thought of moving all my non-wm related keybindings to sxhkd but found it to be buggy and decided not to do so. You can still use it if you wish as all my bindings are configured.
+- [Noto Sans](https://notofonts.github.io)
 
 <a id="notes"></a>
 ## Additional Notes
