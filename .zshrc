@@ -45,3 +45,4 @@ alias cp='cp -vr'
 alias rm='rm -vr'
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/doom-emacs/bin"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
