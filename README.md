@@ -159,6 +159,7 @@ These programs are required to get you started with this config so make sure to 
 ### MPD
 - [Mpd](https://mpd.readthedocs.io/en/stable/user.html)
 - [mpc](https://github.com/MusicPlayerDaemon/mpc)
+- [Mpris-mpd](https://github.com/natsukagami/mpd-mpris)
 ### Emacs
 - [pandoc](https://github.com/jgm/pandoc/blob/main/INSTALL.md)
 ### Others

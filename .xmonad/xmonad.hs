@@ -472,21 +472,20 @@ myStartupHook =
 
     -- spawnOnce "sxhkd &" -- SXHKD
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
-
-    spawnOnce "volctl"                                                                                                                                                                                                            -- Pipewire Volume Manager In SysTray
-
+    spawnOnce "volctl"                                                                                                                                                                                                                -- Pipewire Volume Manager In SysTray
+    spawnOnce "mpd-mpris"                                                                                                                                                                                                             -- Mpris Support For MPD
     spawnOnce "xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI3 --off --output VIRTUAL1 --off" -- Multi-Screen Xrandr
     spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
     spawnOnce "xfce4-power-manager"                                                                                                                                                                                                   -- Xfce Power Manager
     spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
     spawnOnce "kdeconnect-indicator"                                                                                                                                                                                                  -- SysTray KDE-Indicator
-    spawnOnce "$HOME/.config/dunst/scripts/load.sh"                                                                                                                                                                             -- Dunst Startup Script
+    spawnOnce "$HOME/.config/dunst/scripts/load.sh"                                                                                                                                                                                   -- Dunst Startup Script
     spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
-    spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
-    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/wallpapers/ign_mountain.png"                                                                              -- Set Background Multi-Screen
-    -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
+    spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                               -- Dock
+    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/wallpapers/ign_mountain.png"                                                                                                                    -- Set Background Multi-Screen
+    -- spawnOnce "emacs --daemon"                                                                                                                                                                                                     -- Start Emacs Daemon
     setWMName "LG3D"
 
 myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH

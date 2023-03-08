@@ -28,29 +28,16 @@ export BROWSER="firefox"
 # KEYBINDING TYPE
 bindkey -v 
 # ALIASES
-# ZSH
-alias zshconfig="nvim ~/.zshrc"
-alias zshreload="source $HOME/.zshrc"
 # Exa
 alias l="exa -la"
 alias ls="exa -a"
 # Vim 
 alias vim="nvim"
-alias svim="sudo -e nvim"
 # Git
 alias g="git"
-alias ga="git add ."
-alias gpb="git push origin"
-alias gm="ga && git commit -m"
-alias gp="git push -u origin main"
 alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # Misc
 alias c="clear"
-alias vs="code"
-alias pac="paru"
-alias fetch="neofetch"
-alias train="sl | lolcat"
-alias speed="speedtest-cli"
 alias xclass="xprop | grep WM_CLASS"
 # Verbose 
 alias mv='mv -v'
