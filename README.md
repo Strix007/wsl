@@ -121,7 +121,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | Keybind                   | Function                               |
 |---------------------------|----------------------------------------|
 | `super + s super + enter` | Launch terminal scratchpad (alacritty) |
-| `super + s x`             | Launch MPD plyaer (ncmpcpp)            |
+| `super + s x`             | Launch MPD player (ncmpcpp)            |
 | `super + s z`             | Launch filemanager (ranger)            |
 ### Function Keys
 | Keybind    | Function                      |
@@ -134,10 +134,9 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `Fn + F6`  | Previous media (playerctl)    |
 | `Fn + F7`  | Toggle media (playerctl)      |
 | `Fn + F8`  | Stop media (playerctl)        |
-| `Fn + F9`  | Volume mute (volumeicon)      |
-| `Fn + F9`  | Volume mute (volumeicon)      |
-| `Fn + F10` | Volume increase (volumeicon)  |
-| `Fn + F11` | Volume decrease (volumeicon)  |
+| `Fn + F9`  | Volume mute (pactl)           |
+| `Fn + F10` | Volume increase (pactl)       |
+| `Fn + F11` | Volume decrease (pactl)       |
 
 <a id="installs"></a>
 ## What To Install

@@ -236,9 +236,12 @@ myKeys =
                 , ("<XF86Calculator>", spawn myCalculator)           -- Use "Fn+F3" To Launch Calculator
                 , ("<XF86Tools>",      spawn myGUIMusicApp)          -- Use "Fn+F4" To Launch Spotify
                 , ("<XF86AudioPrev>",  spawn "playerctl previous")   -- Use "Fn+F5" With PlayerctlD To Play The Previous Media On The Last Active Player
-                , ("<XF86AudioPlay>",  spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Pause/Play Media On The Last Active Player
-                , ("<XF86AudioNext>",  spawn "playerctl next")       -- Use "Fn+F7" With PlayerctlD To Play The Next Media On The Last Active Player
-                , ("<XF86AudioStop>",  spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Active Media On The Last Active Player
+                , ("<XF86AudioPlay>",  spawn "playerctl play-pause") -- Use "Fn+F6" With PlayerctlD To Play The Next Media On The Last Active Player
+                , ("<XF86AudioNext>",  spawn "playerctl next")       -- Use "Fn+F7" With With PlayerctlD To Pause/Play Media On The Last Active Player
+                , ("<XF86AudioStop>",  spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Last Active Media On The Last Active Player
+                , ("<XF86AudioMute>",  spawn "pactl set-sink-mute 0 toggle") -- Use "Fn+F9" With pactl To Mute Volume
+                , ("<XF86AudioLowerVolume>",  spawn "pactl set-sink-volume 0 -5%") -- Use "Fn+F9" With pactl To Raise Volume By 5%
+                , ("<XF86AudioRaiseVolume>",  spawn "pactl set-sink-volume 0 +5%") -- Use "Fn+F9" With pactl To Lower Volume by 5%
 
                 -- ROFI
 
@@ -468,10 +471,12 @@ myStartupHook =
   do
 
     -- spawnOnce "sxhkd &" -- SXHKD
+    spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
+
+    spawnOnce "volctl"                                                                                                                                                                                                            -- Pipewire Volume Manager In SysTray
 
     spawnOnce "xrandr --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI3 --off --output VIRTUAL1 --off" -- Multi-Screen Xrandr
     spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
-    spawnOnce "volumeicon"                                                                                                                                                                                                            -- Pulseaudio Volume Manager In SysTray
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
     spawnOnce "xfce4-power-manager"                                                                                                                                                                                                   -- Xfce Power Manager
     spawnOnce "nm-applet"                                                                                                                                                                                                             -- NetworkManager Systray Utility
@@ -480,7 +485,6 @@ myStartupHook =
     spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                         -- Dock
-    -- spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
     spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/wallpapers/ign_mountain.png"                                                                              -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
     setWMName "LG3D"
