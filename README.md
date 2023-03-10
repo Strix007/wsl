@@ -70,6 +70,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 #### Move
 | Keybind               | Function                          |
 |-----------------------|-----------------------------------|
+| `super + 1...9`       | Move from workspaces 1 to 9       |
 | `super + ctrl + tab`  | Move focus to next display        |
 | `super + left/k`      | Move focus to upper window        |
 | `super + right/j`     | Move focus to down window         |
@@ -86,6 +87,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 #### Shift
 | Keybind                   | Function                           |
 |---------------------------|------------------------------------|
+| `super + shift + 1...9`   | Shift from workspaces 1 to 9       |
 | `alt   + ctrl + tab`      | Shift to next display              |
 | `super + shift + left/k`  | Shift to upper window              |
 | `super + shift + right/j` | Shift to down window               |
@@ -151,6 +153,7 @@ These programs are required to get you started with this config so make sure to 
 - [wmctrl](https://github.com/dancor/wmctrl)
 - [Playerctl](https://github.com/altdesktop/playerctl)
 - [Zscroll](https://github.com/noctuid/zscroll)
+- [jq](https://stedolan.github.io/jq)
 ### Rofi
 - [Rofi](https://github.com/davatorium/rofi#installation)
 - [ffcast](https://github.com/ropery/FFcast)
@@ -222,6 +225,10 @@ Make sure to install the language-servers in `.emacs.d/init.el` on your system.
 
 ### Xmodmap
 I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pinky. If you don’t want this behavior, delete `.Xmodmap`.
+
+### Polybar
+#### Weather Module
+You need to make a `.env` in your home directory with an [OpenWeather](https://openweathermap.org/) API key and the code of the city you want to get the weather of. For more details on how to do this, check out my repo [here](https://githun.com/strix007/polybar-getweather).
 
 <a id="contributing"></a>
 ## Contributing
