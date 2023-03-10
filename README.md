@@ -228,7 +228,7 @@ I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pink
 
 ### Polybar
 #### Weather Module
-You need to make a `.env` in your home directory with an [OpenWeather](https://openweathermap.org/) API key and the code of the city you want to get the weather of. For more details on how to do this, check out my repo [here](https://githun.com/strix007/polybar-getweather).
+You need to make a `.env` in your home directory with an [OpenWeather](https://openweathermap.org/) API key and the code of the city you want to get the weather of. For more details on how to do this, check out my repo [here](https://github.com/strix007/polybar-getweather).
 
 <a id="contributing"></a>
 ## Contributing
