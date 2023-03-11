@@ -87,7 +87,7 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 #### Shift
 | Keybind                   | Function                           |
 |---------------------------|------------------------------------|
-| `super + shift + 1...9`   | Shift from workspaces 1 to 9       |
+| `super + shift + 1...9`   | Shift to workspaces 1 to 9         |
 | `alt   + ctrl + tab`      | Shift to next display              |
 | `super + shift + left/k`  | Shift to upper window              |
 | `super + shift + right/j` | Shift to down window               |
@@ -164,9 +164,9 @@ These programs are required to get you started with this config so make sure to 
 - [mpc](https://github.com/MusicPlayerDaemon/mpc)
 - [mpris-mpd](https://github.com/natsukagami/mpd-mpris)
 ### Emacs
+- [Emacs](https://www.gnu.org/software/emacs/download.html)
 - [pandoc](https://github.com/jgm/pandoc/blob/main/INSTALL.md)
 ### Others
-- [Emacs](https://www.gnu.org/software/emacs/download.html)
 - [i3lock](https://github.com/Raymo111/i3lock-color)
 - [Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH)
 - [Oh-my-zsh](https://ohmyz.sh/#install)
