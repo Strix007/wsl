@@ -129,5 +129,5 @@ else
     echo "Unexpected value, check variable for correct value. Possible values are metric,imperial or kelvin."
 fi
 
-FORMAT="%{F$ICON_HEX}| $ICON  $CONDITION $DAYTIME $RESULTS_PARSED $UNIT %{F-}"
+FORMAT="%{F$ICON_HEX}| $ICON $CONDITION $DAYTIME $RESULTS_PARSED $UNIT %{F-}"
 echo $FORMAT
