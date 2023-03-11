@@ -11,7 +11,8 @@
            (format "%.2f seconds"
                    (float-time
                      (time-subtract after-init-time before-init-time)))
-           gcs-done))
+           gcs-done)
+  )
 
 (add-hook 'emacs-startup-hook #'arbab/display-startup-time)
 
@@ -807,6 +808,7 @@
   ("M-{" . corral-braces-backward)
   ("M-}" . corral-braces-forward)
   ("M-/" . corral-double-quotes-forward)
+  ("M-~" . corral-backquote-forward)
   )
 
 ;; Setup for nov
@@ -928,20 +930,6 @@
 ;; Tree-sitter-langs
 (use-package tree-sitter-langs
   :after tree-sitter
-  )
-
-;; Lipsy
-(use-package lispy
-  :hook
-  (emacs-lisp-mode . lispy-mode)
-  (lisp-mode       . lispy-mode)
-  (scheme-mode     . lispy-mode)
-  )
-
-;; Lipsyville
-(use-package lispyville
-  :hook
-  (lispy-mode . lispyville-mode)
   )
 
 ;; Git-modes
