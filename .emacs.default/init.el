@@ -378,7 +378,7 @@
   :diminish ivy
   :bind
   ("C-s"     . swiper)
-  ("C-c C-r" . counsel-recentf)
+  ("C-x C-r" . counsel-recentf)
   ("C-x r b" . counsel-bookmark)
   ("<f6>"    . ivy-resume)
   ("M-x"     . counsel-M-x)
