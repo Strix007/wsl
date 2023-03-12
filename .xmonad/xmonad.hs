@@ -484,7 +484,7 @@ myStartupHook =
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "mpd-mpris"                                                                                                                                                                                                             -- Mpris Support For MPD
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                               -- Dock
-    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/ign_desert.png  --bg-fill $HOME/.xmonad/wallpapers/ign_mountain.png"                                                                                                            -- Set Background Multi-Screen
+    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/wallpaper1.jpg  --bg-fill $HOME/.xmonad/wallpapers/wallpaper2.png"                                                                                                            -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                     -- Start Emacs Daemon
     setWMName "LG3D"
 
