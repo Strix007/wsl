@@ -27,7 +27,7 @@ elif [ "$ICON_CODE" == "02d"  ]; then
     DAYTIME="Day"
 elif [ "$ICON_CODE" == "02n"  ]; then
     ICON=""
-    ICON_HEX="#414559"
+    ICON_HEX="#708089"
     CONDITION="Cloudy"
     DAYTIME="Night"
 elif [ "$ICON_CODE" == "03d"  ]; then
@@ -37,7 +37,7 @@ elif [ "$ICON_CODE" == "03d"  ]; then
     DAYTIME="Day"
 elif [ "$ICON_CODE" == "03n"  ]; then
     ICON=""
-    ICON_HEX="#414559"
+    ICON_HEX="#708089"
     CONDITION="Cloudier"
     DAYTIME="Night"
 elif [ "$ICON_CODE" == "04d"  ]; then
@@ -129,5 +129,5 @@ else
     echo "Unexpected value, check variable for correct value. Possible values are metric,imperial or kelvin."
 fi
 
-FORMAT="%{F$ICON_HEX} | $ICON $CONDITION $DAYTIME $RESULTS_PARSED $UNIT %{F-}"
+FORMAT="%{F$ICON_HEX}| $ICON $CONDITION $DAYTIME $RESULTS_PARSED $UNIT %{F-}"
 echo $FORMAT
