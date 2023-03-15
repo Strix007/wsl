@@ -106,6 +106,13 @@
 (setq-default evil-shift-width tab-width)
 (setq-default indent-tabs-mode nil)
 
+;; Save minibuffer history
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+;; Save desktop
+(setq desktop-save-mode t)
+
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; Move point from window to window using Shift and the arrow keys
@@ -208,7 +215,9 @@
 
 ;; Counsel-projectile
 (use-package counsel-projectile
-  :config (counsel-projectile-mode))
+  :config
+  (counsel-projectile-mode)
+  )
 
 ;; Dashboard
 (use-package dashboard
@@ -338,7 +347,8 @@
 
 ;; All-the-icons-dired
 (use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
+  :hook (dired-mode . all-the-icons-dired-mode)
+  )
 
 ;; Dired-hide-dotfiles
 (use-package dired-hide-dotfiles
@@ -375,6 +385,13 @@
   ("C-h k" . helpful-key)
   )
 
+;; Smex
+(use-package smex
+  :config
+  (setq smex-save-file "~/.emacs.d/var/smex-items")
+  (setq smex-history-length 1000)
+  )
+
 ;; Ivy
 (use-package counsel
   :init
@@ -383,20 +400,13 @@
   :diminish ivy
   :bind
   ("C-s"     . swiper)
-  ("C-x C-r" . counsel-recentf)
-  ("C-x r b" . counsel-bookmark)
-  ("<f6>"    . ivy-resume)
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
   ("C-x b"   . persp-counsel-switch-buffer)
   ("<f1> l"  . counsel-find-library)
   ("<f2> i"  . counsel-info-lookup-symbol)
   ("<f2> u"  . counsel-unicode-char)
-  ("C-c g"   . counsel-git)
-  ("C-c j"   . counsel-git-grep)
   ("C-c k"   . counsel-ag)
-  ("C-x l"   . counsel-locate)
-  ("C-x w"   . counsel-wmctrl)
   )
 
 ;; Ivy-rich
@@ -415,9 +425,6 @@
 ;; All-the-icons-ivy
 (use-package all-the-icons-ivy
   :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
-
-;; Smex
-(use-package smex)
 
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
@@ -491,6 +498,16 @@
   "S-<left>"  '(centaur-tabs-backward-group             :which-key "Move To Left Tab Group")
   "<up>"      '(centaur-tabs--create-new-tab            :which-key "Create New Tab")
   "w"         '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Tab")
+  ;; Counsel
+  ;; Files
+  "f"  '(:ignore t         :which-key "Files")
+  "fr" '(counsel-recentf   :which-key "Recent Files")
+  "ff" '(counsel-find-file :which-key "Find File")
+  "ft" '(ivy-resume        :which-key "Resume Ivy")
+  ;; Bookmarks
+  "b"  '(:ignore t        :which-key "Bookmark")
+  "bb" '(counsel-bookmark :which-key "List Bookmarks")
+  "bm" '(bookmark-set     :which-key "Add Bookmark")
   )
 
 ;; Hydra
@@ -678,7 +695,10 @@
 ;; LSP
 (defun arbab/lsp-mode-setup ()
   ;; Run "lsp-deferred" if it's a supported mode
-  (unless (derived-mode-p 'emacs-lisp-mode 'yuck-mode)
+  (unless (derived-mode-p
+           'emacs-lisp-mode
+           'yuck-mode
+           )
     (lsp-deferred)
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
     (lsp-headerline-breadcrumb-mode)
@@ -814,7 +834,7 @@
   ("M-{" . corral-braces-backward)
   ("M-}" . corral-braces-forward)
   ("M-/" . corral-double-quotes-forward)
-  ("M-~" . corral-backquote-forward)
+  ("M-1" . corral-backquote-forward)
   )
 
 ;; Setup for nov
@@ -931,7 +951,18 @@
   )
 
 ;; Tree-sitter
-(use-package tree-sitter)
+(defun arbab/tree-sitter-mode-setup ()
+  (unless (derived-mode-p
+           'emacs-lisp-mode
+           'yuck-mode
+           )
+    (tree-sitter-hl-mode)
+    )
+  )
+(use-package tree-sitter
+  :hook
+  (prog-mode . arbab/tree-sitter-mode-setup)
+  )
 
 ;; Tree-sitter-langs
 (use-package tree-sitter-langs
