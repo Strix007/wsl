@@ -97,7 +97,17 @@ myModMask = mod4Mask -- mod1Mask Is "Alt" And mod4Mask Is "Super"
 
 -- WORKSPACES
 
-myWorkspaces = ["  %{A1:wmctrl -s 0:}1%{A}  ", "  %{A1:wmctrl -s 1:}2%{A}  ", "  %{A1:wmctrl -s 2:}3%{A}  ", "  %{A1:wmctrl -s 3:}4%{A}  ", "  %{A1:wmctrl -s 4:}5%{A}  ", "  %{A1:wmctrl -s 5:}6%{A}  ", "  %{A1:wmctrl -s 6:}7%{A}  ", "  %{A1:wmctrl -s 7:}8%{A}  ", "  %{A1:wmctrl -s 8:}9%{A}  "]
+myWorkspaces = [
+    "%{A1:wmctrl -s 0:}  1  %{A}"
+  , "%{A1:wmctrl -s 1:}  2  %{A}"
+  , "%{A1:wmctrl -s 2:}  3  %{A}"
+  , "%{A1:wmctrl -s 3:}  4  %{A}"
+  , "%{A1:wmctrl -s 4:}  5  %{A}"
+  , "%{A1:wmctrl -s 5:}  6  %{A}"
+  , "%{A1:wmctrl -s 6:}  7  %{A}"
+  , "%{A1:wmctrl -s 7:}  8  %{A}"
+  , "%{A1:wmctrl -s 8:}  9  %{A}"
+  ]
 
 -- SCRATCHPADS
 
