@@ -28,6 +28,10 @@
    (convert-standard-filename
     (expand-file-name  "var/eln-cache/" user-emacs-directory))))
 
+;; Load sensitive variables from file
+(setq env (concat user-emacs-directory "env.el"))
+(load env)
+
 ;; Initialize package sources
 (require 'package)
 (setq package-archives '(
@@ -439,14 +443,14 @@
 ;; Counsel-spotify
 (use-package counsel-spotify
   :init
-  (setq counsel-spotify-client-id "021a3ba7d3084e0fab36b2c7ea07d536")
-  (setq counsel-spotify-client-secret "b0ff80fc4db14384acd46888485d6945")
+  (setq counsel-spotify-client-id spotify_class_id)
+  (setq counsel-spotify-client-secret spotify_class_secret)
   )
 
 ;; Company
 (use-package company
   :init
-  (setq company-format-margin-function    #'company-vscode-dark-icons-margin)
+  (setq company-format-margin-function #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
   :custom
@@ -478,6 +482,8 @@
   ;; Increase or decrease text scale using hydra
   "t" '(:ignore t :which-key "Text")
   "ts" '(hydra-text-scale/body :which-key "Scale")
+  ;; Change theme
+  "tt" '(load-theme :which-key "Load Theme")
   ;; Navigate tabs using centaur-tabs
   "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
   "<right>"   '(centaur-tabs-forward-tab                :which-key "Move To Right Tab")
@@ -703,7 +709,7 @@
 
 ;; LSP-UI
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui)
+  :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-position 'bottom)
   )

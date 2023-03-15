@@ -1,0 +1,19 @@
+Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+## India
+Server = https://mirror.vishmak.in/archlinux/$repo/os/$arch
+## India
+Server = https://in-mirror.garudalinux.org/archlinux/$repo/os/$arch
+## India
+Server = https://mirrors.abhy.me/archlinux/$repo/os/$arch
+## India
+Server = https://mirror.sahil.world/archlinux/$repo/os/$arch
+## India
+Server = https://mirrors.nxtgen.com/archlinux-mirror/$repo/os/$arch
+## India
+Server = https://mirror.albony.xyz/archlinux/$repo/os/$arch
+## India
+Server = http://mirror.sahil.world/archlinux/$repo/os/$arch
+## India
+Server = http://in-mirror.garudalinux.org/archlinux/$repo/os/$arch
+## India
+Server = http://mirrors.nxtgen.com/archlinux-mirror/$repo/os/$arch

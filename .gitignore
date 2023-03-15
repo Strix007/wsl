@@ -24,6 +24,7 @@
 .emacs.default/OrgFiles
 .emacs.default/init.el~
 .emacs.default/.workgroups
+.emacs.default/env.el
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
