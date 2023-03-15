@@ -25,6 +25,7 @@
 .emacs.default/init.el~
 .emacs.default/.workgroups
 .emacs.default/env.el
+.emacs.default/%backup%~
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
