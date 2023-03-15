@@ -34,10 +34,11 @@ As I said above, this is meant to be my personal configuration that I can clone 
 <a id="showcase"></a> 
 ## Showcase
 ![showcase](dotfiles-assets/images/home.png)
+![showcase](dotfiles-assets/images/terminal.png)
+![showcase](dotfiles-assets/images/terminal2.png)
 ![showcase](dotfiles-assets/images/emacs.png)
 ![showcase](dotfiles-assets/images/code.png)
 ![showcase](dotfiles-assets/images/code2.png)
-![showcase](dotfiles-assets/images/terminal.png)
 ![showcase](dotfiles-assets/images/rofi.png)
 ![showcase](dotfiles-assets/images/browser.png)
 ![showcase](dotfiles-assets/images/rofi-mpd.png)
