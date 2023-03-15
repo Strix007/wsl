@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Source some envs
+source $HOME/.env
 # ZSH Prompt Theme
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="false"      # Autocorrection
