@@ -127,19 +127,19 @@ This is meant to be a keyboard centric tiling workflow with vim style bindings a
 | `super + s x`             | Launch MPD player (ncmpcpp)            |
 | `super + s z`             | Launch filemanager (ranger)            |
 ### Function Keys
-| Keybind    | Function                      |
-|------------|-------------------------------|
-| `Fn + F1`  | Launch filemanager (thunar)   |
-| `Fn + F2`  | Launch rofi drun              |
-| `Fn + F3`  | Launch calculator (qalculate) |
-| `Fn + F4`  | Launch spotify                |
-| `Fn + F5`  | Next media (playerctl)        |
-| `Fn + F6`  | Previous media (playerctl)    |
-| `Fn + F7`  | Toggle media (playerctl)      |
-| `Fn + F8`  | Stop media (playerctl)        |
-| `Fn + F9`  | Volume mute (pactl)           |
-| `Fn + F10` | Volume increase (pactl)       |
-| `Fn + F11` | Volume decrease (pactl)       |
+| Keybind                | Function                      |
+|------------------------|-------------------------------|
+| `XF86Explorer`         | Launch filemanager (thunar)   |
+| `XF86Search`           | Launch rofi drun              |
+| `XF86Calculator`       | Launch calculator (qalculate) |
+| `XF86Tools`            | Launch spotify                |
+| `XF86AudioNext`        | Next media (playerctl)        |
+| `XF86AudioPrev`        | Previous media (playerctl)    |
+| `XF86AudioPlay`        | Toggle media (playerctl)      |
+| `XF86AudioStop`        | Stop media (playerctl)        |
+| `XF86AudioMute`        | Volume mute (pactl)           |
+| `XF86AudioRaiseVolume` | Volume increase (pactl)       |
+| `XF86AudioLowerVolume` | Volume decrease (pactl)       |
 
 <a id="installs"></a>
 ## What To Install
@@ -222,7 +222,15 @@ Emacs is setup with [chemacs2](https://github.com/plexus/chemacs2) to load multi
 After first booting into emacs, make sure to do a `M-x all-the-icons-install-fonts RET`.
 
 #### LSP
-Make sure to install the language-servers in `.emacs.d/init.el` on your system.
+Make sure to install the language-servers in `.emacs.default/init.el` on your system.
+
+#### Counsel-spotify
+Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in `.emacs.default/env.el`
+```
+(defconst spotify_class_id "yourclassidhere")
+(defconst spotify_class_secret "yourclasssecrethere")
+```
+If you don’t know how to get your spotify client id and secret, refer to [this article.](https://cran.r-project.org/web/packages/spotidy/vignettes/Connecting-with-the-Spotify-API.html)
 
 ### Xmodmap
 I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pinky. If you don’t want this behavior, delete `.Xmodmap`.
