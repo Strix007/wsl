@@ -9,6 +9,9 @@
 ;; Set the right directory to store the native comp cache
 (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
 
+;; Kill emacs with processes running without asking
+(setq confirm-kill-processes nil)
+
 ;;Startup Performance
 (setq gc-cons-threshold (* 50 1000 1000))
 
@@ -385,6 +388,7 @@
   :init
   (doom-modeline-mode 1)
   :config
+  (setq doom-modeline-support-imenu t)
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-github t)
   (setq doom-modeline-mu4e t)
@@ -552,6 +556,7 @@
 ;; Forge
 (use-package forge)
 
+;; Org-mode
 (defun arbab/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -607,60 +612,23 @@
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
   (setq org-tag-alist
-        '((:startgroup)
-                                        ; Put mutually exclusive tags here
+        '(
+          (:startgroup)
+
+          ;; Put mutually exclusive tags here
+
           (:endgroup)
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("agenda" . ?a)
+          ("@errand"  . ?E)
+          ("@home"    . ?H)
+          ("agenda"   . ?a)
           ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)
-          ("goal" . ?g)
-          ))
-
-  ;; Configure custom agenda views
-  (setq org-agenda-custom-commands
-        '(("d" "Dashboard"
-           ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))
-            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-
-          ("n" "Next Tasks"
-           ((todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))))
-
-          ("w" "Workflow Status"
-           ((todo "WAIT"
-                  ((org-agenda-overriding-header "Waiting on External")
-                   (org-agenda-files org-agenda-files)))
-            (todo "REVIEW"
-                  ((org-agenda-overriding-header "In Review")
-                   (org-agenda-files org-agenda-files)))
-            (todo "PLAN"
-                  ((org-agenda-overriding-header "In Planning")
-                   (org-agenda-todo-list-sublevels nil)
-                   (org-agenda-files org-agenda-files)))
-            (todo "BACKLOG"
-                  ((org-agenda-overriding-header "Project Backlog")
-                   (org-agenda-todo-list-sublevels nil)
-                   (org-agenda-files org-agenda-files)))
-            (todo "READY"
-                  ((org-agenda-overriding-header "Ready for Work")
-                   (org-agenda-files org-agenda-files)))
-            (todo "ACTIVE"
-                  ((org-agenda-overriding-header "Active Projects")
-                   (org-agenda-files org-agenda-files)))
-            (todo "COMPLETED"
-                  ((org-agenda-overriding-header "Completed Projects")
-                   (org-agenda-files org-agenda-files)))
-            (todo "CANC"
-                  ((org-agenda-overriding-header "Cancelled Projects")
-                   (org-agenda-files org-agenda-files)))))))
-  )
+          ("publish"  . ?P)
+          ("batch"    . ?b)
+          ("note"     . ?n)
+          ("idea"     . ?i)
+          ("goal"     . ?g)
+          )
+        )
 
 ;; Org-bullets
 (use-package org-bullets
