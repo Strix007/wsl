@@ -614,7 +614,6 @@
   (setq org-tag-alist
         '(
           (:startgroup)
-
           ;; Put mutually exclusive tags here
 
           (:endgroup)
@@ -629,6 +628,7 @@
           ("goal"     . ?g)
           )
         )
+  )
 
 ;; Org-bullets
 (use-package org-bullets
