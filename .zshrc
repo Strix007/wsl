@@ -45,6 +45,8 @@ alias xclass="xprop | grep WM_CLASS"
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
+alias dirs='dirs -v'
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/doom-emacs/bin"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+

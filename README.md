@@ -163,9 +163,8 @@ These programs are required to get you started with this config so make sure to 
 ### MPD
 - [mpd](https://mpd.readthedocs.io/en/stable/user.html)
 - [mpc](https://github.com/MusicPlayerDaemon/mpc)
-- [mpris-mpd](https://github.com/natsukagami/mpd-mpris)
 ### Emacs
-- [Emacs](https://www.gnu.org/software/emacs/download.html)
+- [emacs-nativecomp](https://www.gnu.org/software/emacs/download.html)
 - [pandoc](https://github.com/jgm/pandoc/blob/main/INSTALL.md)
 ### Others
 - [i3lock](https://github.com/Raymo111/i3lock-color)
@@ -236,6 +235,8 @@ If you don’t know how to get your spotify client id and secret, refer to [this
 I have changed my caps key to ctrl and my right ctrl to caps to avoid emacs pinky. If you don’t want this behavior, delete `.Xmodmap`.
 
 ### Polybar
+#### Monitor
+You need to set the MONITOR env to your output in .zshrc for polybar to display on the correct output.
 #### Weather Module
 You need to make a `.env` in your home directory with an [OpenWeather](https://openweathermap.org/) API key and the code of the city you want to get the weather of. For more details on how to do this, check out my repo [here](https://github.com/strix007/polybar-getweather).
 
