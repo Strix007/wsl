@@ -1,7 +1,5 @@
 ;; Enable server mode (daemon) for this Emacs session if there are no emacs server already started
-(unless 'daemonp
-    (server-start)
-    )
+(server-start)
 
 ;; Native-comp
 ;; Silence compiler warnings
@@ -656,69 +654,67 @@
   )
 
 ;; Org-super-agenda
+(setq org-super-agenda-groups
+      '(
+        (
+         :name "Today"
+               :time-grid t
+               :todo "TODAY"
+               :order 0
+               )
+        (
+         :name "Important"
+               :todo "URGENT"
+               :priority "A"
+               :order 1
+               )
+        (
+         :name "Active"
+               :time-grid t
+               :todo "ACTIVE"
+               :order 2
+               )
+        (
+         :name "Next Items"
+               :todo "NEXT"
+               :tag ("NEXT")
+               :order 3
+               )
+        (
+         :name "Errands"
+               :tag ("errand")
+               :order 4
+               )
+        (
+         :name "Plans"
+               :tag ("planning")
+               :order 5
+               )
+        (
+         :name "Ideas and Goals"
+               :tag ("idea" "goal")
+               :order 6
+               )
+        (
+         :name "Notes"
+               :tag ("note")
+               :order 7
+               )
+        (
+         :name "Quick Picks"
+               :effort< "0:30"
+               :order 1
+               )
+        (
+         :priority<= "B"
+                     :scheduled future
+                     :order 1
+                     )
+        )
+      )
 (use-package org-super-agenda
   :hook
   (org-agenda-mode . org-super-agenda-mode)
-  :custom
-  (setq org-super-agenda-groups
-        '(
-          (
-           :name "Today"
-                 :time-grid t
-                 :todo "TODAY"
-                 :order 0
-                 )
-          (
-           :name "Important"
-                 :todo "URGENT"
-                 ;; :priority "A"
-                 :order 1
-           )
-          (
-           :name "Active"
-                 :time-grid t
-                 :todo "ACTIVE"
-                 :order 2
-           )
-          (
-           :name "Next Items"
-                 :todo "NEXT"
-                 ;; :tag ("NEXT")
-                 :order 3
-                 )
-          (
-           :name "Errands"
-                 :tag ("errand")
-                 :order 4
-                 )
-          (
-           :name "Plans"
-                 :tag ("planning")
-                 :order 5
-                 )
-          (
-           :name "Ideas and Goals"
-                 :tag ("idea" "goal")
-                 :order 6
-                 )
-          (
-           :name "Notes"
-                 :tag ("note")
-                 :order 7
-                 )
-          (
-           :name "Quick Picks"
-                 :effort< "0:30"
-                 :order 1
-                 )
-          (
-           :priority<= "B"
-                       :scheduled future
-                       :order 1
-                       )
-          )
-        (org-agenda nil "a")
-        )
   )
 
 ;; Org-bullets
