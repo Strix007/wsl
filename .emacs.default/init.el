@@ -1,7 +1,13 @@
 ;; Enable server mode (daemon) for this Emacs session if there are no emacs server already started
 (unless 'daemonp
     (server-start)
-  )
+    )
+
+;; Native-comp
+;; Silence compiler warnings
+(setq native-comp-async-report-warnings-errors nil)
+;; Set the right directory to store the native comp cache
+(add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
 
 ;;Startup Performance
 (setq gc-cons-threshold (* 50 1000 1000))
@@ -92,6 +98,8 @@
 (save-place-mode 1)
 ;; Don’t warn for large files
 (setq large-file-warning-threshold nil)
+;; Don’t warn for following symlinked files
+(setq vc-follow-symlinks t)
 
 ;; Modify UI elements
 (scroll-bar-mode -1) ; Disable visible scrollbar
@@ -100,6 +108,9 @@
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1)   ; Disable the menu bar
 (fset 'yes-or-no-p 'y-or-n-p) ; Change yes/no to y/n
+
+;; Set default connection mode to SSH
+(setq tramp-default-method "ssh")
 
 ;; Indentation
 (setq-default tab-width 2)
@@ -115,6 +126,7 @@
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "C-M-u") 'universal-argument)
 ;; Move point from window to window using Shift and the arrow keys
 (windmove-default-keybindings)
 
@@ -166,6 +178,8 @@
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-respect-visual-line-mode t)
   (evil-mode 1)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -361,16 +375,25 @@
 ;; (use-package powerline
 ;; :config (powerline-center-evil-theme))
 
+;; Minions
+(use-package minions
+  :hook
+  (doom-modeline-mode . minions-mode)
+  )
 ;; Doom-modeline
 (use-package doom-modeline
   :init
   (doom-modeline-mode 1)
   :config
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-github t)
+  (setq doom-modeline-mu4e t)
+  (setq doom-modeline-irc t)
   (setq doom-modeline-height 30)
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-indent-info nil)
-  (setq doom-modeline-minor-modes nil)
-  (setq doom-modeline-buffer-file-name-style 'relative-to-project)
+  (setq doom-modeline-minor-modes t)
+  (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
   )
 
 ;; Helpful
@@ -388,7 +411,7 @@
 ;; Smex
 (use-package smex
   :config
-  (setq smex-save-file "~/.emacs.d/var/smex-items")
+  (setq smex-save-file "~/.emacs.default/var/smex-items")
   (setq smex-history-length 1000)
   )
 
@@ -508,6 +531,7 @@
   "b"  '(:ignore t        :which-key "Bookmark")
   "bb" '(counsel-bookmark :which-key "List Bookmarks")
   "bm" '(bookmark-set     :which-key "Add Bookmark")
+  "br" '(bookmark-delete  :which-key "Remove Bookmark")
   )
 
 ;; Hydra
@@ -984,3 +1008,6 @@
 (use-package nix-mode
   :mode "\\.nix\\'"
   )
+
+;; Diminish
+(use-package diminish)
