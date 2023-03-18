@@ -214,7 +214,12 @@
 
 ;; All-the-icons
 ;; Make sure to do a manual ’M-x all-the-icons-install-fonts RET'
-(use-package all-the-icons)
+(use-package all-the-icons
+  :init
+  (when (and (not (member "all-the-icons" (font-family-list)))
+             (window-system))
+    (all-the-icons-install-fonts t))
+  )
 
 ;; Projectile
 (use-package projectile
@@ -390,7 +395,7 @@
   :config
   (setq doom-modeline-support-imenu t)
   (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-github t)
+  (setq doom-modeline-github nil)
   (setq doom-modeline-mu4e t)
   (setq doom-modeline-irc t)
   (setq doom-modeline-height 30)
@@ -592,17 +597,37 @@
   :hook
   (org-mode . arbab/org-mode-setup)
   :config
+  (setq org-agenda-span 10)
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-with-log-mode t)
   (setq org-confirm-babel-evaluate nil)
   (setq org-ellipsis "▾")
-  (setq org-log-done 'note)
+  (setq org-log-into-drawer t)
+  (setq org-log-done 'time)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
-          "~/.emacs.d/OrgFiles/Tasks.org"
+          "~/.emacs.default/OrgFiles/Tasks.org"
           ))
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+        '((sequence
+           "TODO(t)"
+           "NEXT(n)"
+           "|"
+           "DONE(d!)"
+           )
+          (sequence
+           "TODAY(r)"
+           "BACKLOG(b)"
+           "PLAN(p)"
+           "READY(r)"
+           "ACTIVE(a)"
+           "URGENT(u)"
+           "HOLD(h)"
+           "|"
+           "COMPLETED(c)"
+           "CANC(k@)"
+           )))
 
   (setq org-refile-targets
         '(("Archive.org" :maxlevel . 1)
@@ -627,6 +652,72 @@
           ("idea"     . ?i)
           ("goal"     . ?g)
           )
+        )
+  )
+
+;; Org-super-agenda
+(use-package org-super-agenda
+  :hook
+  (org-agenda-mode . org-super-agenda-mode)
+  :custom
+  (setq org-super-agenda-groups
+        '(
+          (
+           :name "Today"
+                 :time-grid t
+                 :todo "TODAY"
+                 :order 0
+                 )
+          (
+           :name "Important"
+                 :todo "URGENT"
+                 ;; :priority "A"
+                 :order 1
+           )
+          (
+           :name "Active"
+                 :time-grid t
+                 :todo "ACTIVE"
+                 :order 2
+           )
+          (
+           :name "Next Items"
+                 :todo "NEXT"
+                 ;; :tag ("NEXT")
+                 :order 3
+                 )
+          (
+           :name "Errands"
+                 :tag ("errand")
+                 :order 4
+                 )
+          (
+           :name "Plans"
+                 :tag ("planning")
+                 :order 5
+                 )
+          (
+           :name "Ideas and Goals"
+                 :tag ("idea" "goal")
+                 :order 6
+                 )
+          (
+           :name "Notes"
+                 :tag ("note")
+                 :order 7
+                 )
+          (
+           :name "Quick Picks"
+                 :effort< "0:30"
+                 :order 1
+                 )
+          (
+           :priority<= "B"
+                       :scheduled future
+                       :order 1
+                       )
+          )
+        (org-agenda nil "a")
         )
   )
 

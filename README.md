@@ -217,11 +217,8 @@ Emacs is setup with [chemacs2](https://github.com/plexus/chemacs2) to load multi
 
 **Note:** `.emacs-profiles.el` already has a few more configs setup, all you need to do is install their respective files to their expected directories.
 
-#### All-the-icons
-After first booting into emacs, make sure to do a `M-x all-the-icons-install-fonts RET`.
-
 #### LSP
-Make sure to install the language-servers in `.emacs.default/init.el` on your system.
+Make sure to install the language-servers in you need on your system.
 
 #### Counsel-spotify
 Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in `.emacs.default/env.el`
