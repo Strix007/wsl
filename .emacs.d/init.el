@@ -259,7 +259,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   (setq dashboard-banner-logo-title "Welcome, Arbab")
-  (setq dashboard-startup-banner "~/.emacs.default/banner.jpg")
+  (setq dashboard-startup-banner "~/.emacs.d/banner.jpg")
   (setq dashboard-items '(
                           (recents  . 5)
                           (bookmarks . 5)
@@ -290,7 +290,7 @@
            (" "
             "Configuration"
             "Open Configuration"
-            (lambda (&rest _) (find-file ".emacs.default/init.el")) warning
+            (lambda (&rest _) (find-file ".emacs.d/init.el")) warning
             )
            (
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
@@ -436,7 +436,7 @@
 ;; Smex
 (use-package smex
   :config
-  (setq smex-save-file "~/.emacs.default/var/smex-items")
+  (setq smex-save-file "~/.emacs.d/var/smex-items")
   (setq smex-history-length 1000)
   )
 
@@ -626,7 +626,7 @@
   ;; Org-agenda files
   (setq org-agenda-files
         '(
-          "~/.emacs.default/OrgFiles/Tasks.org"
+          "~/.emacs.d/OrgFiles/Tasks.org"
           ))
   (setq org-todo-keywords
         '((sequence
@@ -987,7 +987,7 @@
 (use-package workgroups2
   :init
   (setq wg-prefix-key "C-c z")
-  (setq wg-session-file "~/.emacs.default/.workgroups")
+  (setq wg-session-file "~/.emacs.d/.workgroups")
   (workgroups-mode 1)
   )
 
