@@ -215,7 +215,7 @@ Xmonad-ctl is required for clickable icons with polybar and exit to login manage
 Make sure to install the language-servers in you need on your system.
 
 #### Counsel-spotify
-Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in `.emacs.default/env.el`
+Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in `.emacs.d/env.el`
 ```
 (defconst spotify_class_id "yourclassidhere")
 (defconst spotify_class_secret "yourclasssecrethere")

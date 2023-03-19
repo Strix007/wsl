@@ -1051,6 +1051,7 @@
   :after prescient
   :init
   (ivy-prescient-mode 1)
+  (setq ivy-prescient-retain-classic-highlighting t)  
   )
 
 ;; Company-prescient
