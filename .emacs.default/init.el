@@ -1,4 +1,4 @@
-;; Enable server mode (daemon) for this Emacs session if there are no emacs server already started
+;; Enable server mode (daemon) for this Emacs session
 (server-start)
 
 ;; Native-comp
@@ -87,10 +87,6 @@
   (load-theme 'doom-nord t)
   )
 
-;; Solaire
-(use-package solaire-mode
-  :init (solaire-global-mode +1))
-
 ;; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)
 ;; Disable startup message
@@ -167,6 +163,7 @@
                 tetris-mode-hook
                 quickrun--mode-hook
                 nov-mode-hook
+                project-explorer-mode-hook
                 ))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -175,6 +172,11 @@
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150)
 (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150)
 
+;; Solaire
+(use-package solaire-mode
+  :init
+  (solaire-global-mode +1)
+ )
 ;; Evil
 (use-package evil
   :init
@@ -335,8 +337,12 @@
 
 ;; Treemacs
 (use-package treemacs
+  :custom
+  (treemacs-display-current-project-exclusively t)
+  (treemacs-follow-mode t)
   :bind
-  ("<f9>" . treemacs))
+  ("<f9>" . treemacs)
+  )
 
 ;; Treemacs-evil
 (use-package treemacs-evil
@@ -346,18 +352,30 @@
 (use-package treemacs-projectile
   :after treemacs)
 
+;; Treemacs-magit
+(use-package treemacs-magit
+  :after treemacs)
+
+;; Treemacs-perspective
+(use-package treemacs-perspective
+  :after treemacs-perspective)
+
 ;; Emojify
 (use-package emojify
-  :hook (after-init . global-emojify-mode)
+  :hook
+  (after-init . global-emojify-mode)
   )
 
 ;; Dirvish
 (use-package dirvish
   :init
-  (dirvish-override-dired-mode)
+  ;; Downloas "gls" and uncomment this line if you’re on OSX
+  ;; (setq insert-directory-program "gls")
+  (setq dirvish-reuse-session nil)
   (setq dired-mouse-drag-files t)
   (setq mouse-drag-and-drop-region-cross-program t)
   (setq delete-by-moving-to-trash t)
+  (dirvish-override-dired-mode)
   :bind
   ("C-x C-g" . dired-jump)
   :config
@@ -454,11 +472,14 @@
 
 ;; All-the-icons-ivy
 (use-package all-the-icons-ivy
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+  :init
+  (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+  )
 
 ;; Rainbow-delimiters
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode)
+  :hook
+  (prog-mode . rainbow-delimiters-mode)
   )
 
 ;; Rainbow-mode
@@ -654,65 +675,66 @@
   )
 
 ;; Org-super-agenda
-(setq org-super-agenda-groups
-      '(
-        (
-         :name "Today"
-               :time-grid t
-               :todo "TODAY"
-               :order 0
-               )
-        (
-         :name "Important"
-               :todo "URGENT"
-               :priority "A"
-               :order 1
-               )
-        (
-         :name "Active"
-               :time-grid t
-               :todo "ACTIVE"
-               :order 2
-               )
-        (
-         :name "Next Items"
-               :todo "NEXT"
-               :tag ("NEXT")
-               :order 3
-               )
-        (
-         :name "Errands"
-               :tag ("errand")
-               :order 4
-               )
-        (
-         :name "Plans"
-               :tag ("planning")
-               :order 5
-               )
-        (
-         :name "Ideas and Goals"
-               :tag ("idea" "goal")
-               :order 6
-               )
-        (
-         :name "Notes"
-               :tag ("note")
-               :order 7
-               )
-        (
-         :name "Quick Picks"
-               :effort< "0:30"
-               :order 1
-               )
-        (
-         :priority<= "B"
-                     :scheduled future
-                     :order 1
-                     )
-        )
-      )
 (use-package org-super-agenda
+  :init
+  (setq org-super-agenda-groups
+        '(
+          (
+           :name "Today"
+           :time-grid t
+           :todo "TODAY"
+           :order 0
+           )
+          (
+           :name "Important"
+           :todo "URGENT"
+           :priority "A"
+           :order 1
+           )
+          (
+           :name "Active"
+           :time-grid t
+           :todo "ACTIVE"
+           :order 2
+           )
+          (
+           :name "Next Items"
+           :todo "NEXT"
+           :tag ("NEXT")
+           :order 3
+           )
+          (
+           :name "Errands"
+           :tag ("errand")
+           :order 4
+           )
+          (
+           :name "Plans"
+                 :tag ("planning")
+           :order 5
+           )
+          (
+           :name "Ideas and Goals"
+           :tag ("idea" "goal")
+           :order 6
+           )
+          (
+           :name "Notes"
+           :tag ("note")
+           :order 7
+           )
+          (
+           :name "Quick Picks"
+           :effort< "0:30"
+           :order 1
+           )
+          (
+           :priority<= "B"
+           :scheduled future
+           :order 1
+           )
+          )
+        )
   :hook
   (org-agenda-mode . org-super-agenda-mode)
   )
@@ -737,11 +759,13 @@
 ;; Visual-fill-column
 (defun arbab/org-mode-visual-fill ()
   (setq visual-fill-column-width 150)
-  (visual-fill-column-mode 1))
+  (visual-fill-column-mode 1)
+  )
 (use-package visual-fill-column
   :init
   (setq-default visual-fill-column-center-text t)
-  :hook (org-mode . arbab/org-mode-visual-fill)
+  :hook
+  (org-mode . arbab/org-mode-visual-fill)
   )
 
 ;; Haskell-mode
@@ -808,7 +832,8 @@
 
 ;; LSP-UI
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
+  :hook
+  (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-position 'bottom)
   )
@@ -837,10 +862,13 @@
   (setq centaur-tabs-style "zigzag")
   (setq centaur-tabs-cycle-scope 'default)
   :hook
-  (dired-mode     . centaur-tabs-local-mode)
-  (dashboard-mode . centaur-tabs-local-mode)
-  (vterm-mode     . centaur-tabs-local-mode)
-  (tetris-mode    . centaur-tabs-local-mode)
+  (
+   (
+    dired-mode
+    dashboard-mode
+    vterm-mode
+    tetris-mode
+    ) . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-height 40)
@@ -995,8 +1023,11 @@
 (use-package hl-mode
   :ensure nil
   :hook
-  (prog-mode . hl-line-mode)
-  (text-mode . hl-line-mode)
+  (
+   (
+    prog-mode
+    text-mode
+    ) . hl-line-mode)
   )
 
 ;; So-long
@@ -1066,3 +1097,13 @@
 
 ;; Diminish
 (use-package diminish)
+
+;; Prettify-symbols-mode
+(use-package prettify-symbols-mode
+  :ensure nil
+  :hook
+  (prog-mode . prettify-symbols-mode)
+  )
+
+;; Multifiles
+(use-package multifiles)
