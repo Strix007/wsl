@@ -261,7 +261,7 @@
   (setq dashboard-banner-logo-title "Welcome, Arbab")
   (setq dashboard-startup-banner "~/.emacs.d/banner.jpg")
   (setq dashboard-items '(
-                          (recents  . 5)
+                          ;; (recents  . 5)
                           (bookmarks . 5)
                           (projects . 5)
                           ;; (agenda . 5)

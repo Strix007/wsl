@@ -16,7 +16,7 @@ plugins=(
 			)
 source $ZSH/oh-my-zsh.sh
 # Enviorment Variables
-export MONITOR="HDMI-2"
+export MONITOR="HDMI-1"
 export LANG=en_US.UTF-8 
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
