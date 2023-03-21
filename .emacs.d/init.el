@@ -436,7 +436,6 @@
 ;; Smex
 (use-package smex
   :config
-  (setq smex-save-file "~/.emacs.d/var/smex-items")
   (setq smex-history-length 1000)
   )
 
@@ -529,6 +528,7 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
   )
+;; Define Keybindings
 (arbab/leader-keys
   ;; Spotify keybinds using counsel-spotify
   "s"  '(:ignore t :which-key "Spotify")
@@ -538,19 +538,28 @@
   "sv" '(counsel-spotify-search-playlist   :which-key "Search Playlist")
   "st" '(counsel-spotify-search-track      :which-key "Search Track")
   ;; Increase or decrease text scale using hydra
-  "t" '(:ignore t :which-key "Text")
+  "t"  '(:ignore t :which-key "Text")
   "ts" '(hydra-text-scale/body :which-key "Scale")
+  ;; Window Management
+  ;; Manage Splits
+  "xw" '(hydra-splits/body  :which-key "Splits")
+  "xh" '(split-window-right :which-key "Split Horizontally")
+  "xv" '(split-window-below :which-key "Split Vertically")
+  "xq" '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Buffer")
+  "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
+  "xb" '(persp-counsel-switch-buffer :which-key "List Buffers")
+  "xc" '(delete-window      :which-key "Kill Split")
+  "xf" '(ffap-other-window  :which-key "Open File In New Split")
+  "xF" '(ffap-other-frame   :which-key "Open File In New Tab")
+  "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
   ;; Navigate tabs using centaur-tabs
-  "<left>"    '(centaur-tabs-backward-tab               :which-key "Move To Left Tab")
-  "<right>"   '(centaur-tabs-forward-tab                :which-key "Move To Right Tab")
-  "S-<right>" '(centaur-tabs-forward-group              :which-key "Move To Right Tab Group")
-  "S-<left>"  '(centaur-tabs-backward-group             :which-key "Move To Left Tab Group")
-  "<up>"      '(centaur-tabs--create-new-tab            :which-key "Create New Tab")
-  "w"         '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Tab")
-  ;; Counsel
-  ;; Files
+  "h" '(centaur-tabs-backward-tab   :which-key "Move To Left Tab")
+  "l" '(centaur-tabs-forward-tab    :which-key "Move To Right Tab")
+  "j" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
+  "k" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
+  ;; Counsel Files
   "f"  '(:ignore t         :which-key "Files")
   "fr" '(counsel-recentf   :which-key "Recent Files")
   "ff" '(counsel-find-file :which-key "Find File")
@@ -564,11 +573,20 @@
 
 ;; Hydra
 (use-package hydra)
+;; Define a hydra for text scale
 (defhydra hydra-text-scale (:color t)
-  "scale text"
+  "Scale Text"
   ("=" text-scale-increase "Zoom In")
   ("-" text-scale-decrease "Zoom Out")
   ("ESC" nil "Finished" :exit t)
+  )
+;; Define a hydra for splits
+(defhydra hydra-splits (:color t)
+  "Manage Splits"
+  ("[" shrink-window-horizontally  10 "Shrink Window Horizontally")
+  ("]" enlarge-window-horizontally 10 "Enlarge Window Horizontally")
+  ("-" shrink-window 10 "Shrink Window Vertically")
+  ("=" balance-windows "Balance Windows")
   )
 
 ;; Magit
@@ -613,6 +631,7 @@
 
 ;; Org-mode
 (use-package org
+  :ensure org-plus-contrib
   :hook
   (org-mode . arbab/org-mode-setup)
   :config
@@ -808,6 +827,17 @@
     )
   )
 
+;; Org-wild-notifier
+(use-package org-wild-notifier
+  :init
+  (org-wild-notifier-mode 1)
+  :custom
+  (org-wild-notifier-alert-time '(1 10 30 60))
+  (org-wild-notifier-notification-tile "Org Agenda")
+  (org-wild-notifier-notification-icon "")
+  (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
+  )
+
 ;; Make sure to install the language servers on your local machine
 ;; LSP-Haskell
 (use-package lsp-haskell)
@@ -868,6 +898,7 @@
     dashboard-mode
     vterm-mode
     tetris-mode
+    quickrun--mode
     ) . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
@@ -878,7 +909,7 @@
   (setq centaur-tabs-modified-marker "")
   (setq centaur-tabs-show-new-tab-button t)
   (setq centaur-tabs-new-tab-text "  ")
-  (centaur-tabs-change-fonts "Jetbrains Mono" 125)
+  (centaur-tabs-change-fonts "JetBrains Mono" 125)
   )
 
 ;; Yuck-mode
