@@ -115,8 +115,8 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Save minibuffer history
-(savehist-mode 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+(savehist-mode +1)
+;; (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;; Save desktop
 (setq desktop-save-mode t)
@@ -451,18 +451,13 @@
   ("C-h k" . helpful-key)
   )
 
-;; Smex
-(use-package smex
-  :config
-  (setq smex-history-length 1000)
-  )
-
 ;; Ivy
 (use-package counsel
   :init
-  (setq ivy-initial-inputs-alist nil)
   (ivy-mode)
   :diminish ivy
+  :config
+  (setq ivy-initial-inputs-alist nil)
   :bind (
          ("C-s"     . swiper)
          ("M-x"     . counsel-M-x)
@@ -474,6 +469,16 @@
          ("C-c k"   . counsel-ag)
          :map counsel-find-file-map
          ("<tab>" . ivy-alt-done)
+         ("M-j" . ivy-previous-line-or-history)
+         ("M-k" . ivy-next-line-or-history)
+         :map counsel-describe-map
+         ("<tab>" . ivy-alt-done)
+         ("M-j" . ivy-previous-line-or-history)
+         ("M-k" . ivy-next-line-or-history)
+         :map swiper-map
+         ("<tab>" . ivy-alt-done)
+         ("M-j" . ivy-previous-line-or-history)
+         ("M-k" . ivy-next-line-or-history)
          )
   )
 
@@ -613,6 +618,7 @@
   ("]" enlarge-window-horizontally 10 "Enlarge Window Horizontally")
   ("-" shrink-window 10 "Shrink Window Vertically")
   ("=" balance-windows "Balance Windows")
+  ("ESC" nil "Finished" :exit t)
   )
 
 ;; Magit
@@ -1083,22 +1089,29 @@
   )
 
 ;; Prescient
-(use-package prescient)
+(use-package prescient
+  :config
+  (setq prescient-persist-mode t)
+  (setq prescient-sort-length-enable nil)
+  )
 
 ;; Ivy-prescient
 (use-package ivy-prescient
-  :after prescient
+  :after counsel
   :init
+  (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode 1)
-  (setq ivy-prescient-retain-classic-highlighting t)  
   )
 
 ;; Company-prescient
 (use-package company-prescient
-  :after prescient
+  :after company
   :init
   (company-prescient-mode 1)
   )
+
+;; Smex
+(use-package smex)
 
 ;; Tree-sitter
 (defun arbab/tree-sitter-mode-setup ()
