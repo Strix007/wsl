@@ -19,6 +19,7 @@
 .emacs.d/elpa
 .emacs.d/etc
 .emacs.d/transient
+.emacs.d/.emacs.desktop
 .emacs.d/var
 .emacs.d/custom-set-variables.el
 .emacs.d/OrgFiles

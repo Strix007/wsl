@@ -106,6 +106,9 @@
 (menu-bar-mode -1)   ; Disable the menu bar
 (fset 'yes-or-no-p 'y-or-n-p) ; Change yes/no to y/n
 
+;; Disable scratch buffer message
+(setq initial-scratch-message nil)
+
 ;; Set default connection mode to SSH
 (setq tramp-default-method "ssh")
 
@@ -119,7 +122,7 @@
 ;; (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;; Save desktop
-(setq desktop-save-mode t)
+(desktop-save-mode 1)
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -260,7 +263,9 @@
 
 ;; Dashboard
 (use-package dashboard
-  :init
+  :config
+  (dashboard-setup-startup-hook)
+  (dashboard-modify-heading-icons '((recents . "file-text")))
   ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-center-content t)
   (setq dashboard-set-footer t)
@@ -313,7 +318,7 @@
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
             "Restore"
             "Restore Your Last Session"
-            (lambda (&rest _) (wg-open-workgroup))
+            (lambda (&rest _) (desktop-read))
             error
             )
            )
@@ -328,9 +333,6 @@
            )
           )
         )
-  :config
-  (dashboard-setup-startup-hook)
-  (dashboard-modify-heading-icons '((recents . "file-text")))
   )
 
 ;; Ace-pop-up menu
@@ -346,8 +348,6 @@
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-smart-open t)
-  :config
-  (add-to-list 'load-path "/some/path/neotree")
   :bind
   ("<f8>" . neotree-toggle)
   )
@@ -372,10 +372,6 @@
 ;; Treemacs-magit
 (use-package treemacs-magit
   :after treemacs)
-
-;; Treemacs-perspective
-(use-package treemacs-perspective
-  :after treemacs-perspective)
 
 ;; Emojify
 (use-package emojify
@@ -461,7 +457,7 @@
          ("C-s"     . swiper)
          ("M-x"     . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-x b"   . persp-counsel-switch-buffer)
+         ("C-x b"   . counsel-switch-buffer)
          ("<f1> l"  . counsel-find-library)
          ("<f2> i"  . counsel-info-lookup-symbol)
          ("<f2> u"  . counsel-unicode-char)
@@ -471,6 +467,10 @@
          ("M-k" . ivy-previous-line-or-history)
          ("M-j" . ivy-next-line-or-history)
          :map counsel-describe-map
+         ("<tab>" . ivy-alt-done)
+         ("M-k" . ivy-previous-line-or-history)
+         ("M-j" . ivy-next-line-or-history)
+         :map ivy-switch-buffer-map
          ("<tab>" . ivy-alt-done)
          ("M-k" . ivy-previous-line-or-history)
          ("M-j" . ivy-next-line-or-history)
@@ -577,7 +577,7 @@
   "xv" '(split-window-below :which-key "Split Vertically")
   "xq" '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Buffer")
   "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
-  "xb" '(persp-counsel-switch-buffer :which-key "List Buffers")
+  "xb" '(counsel-switch-buffer :which-key "List Buffers")
   "xc" '(delete-window      :which-key "Kill Split")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Tab")
@@ -1012,16 +1012,6 @@
   ("\\.epub\\'" . nov-mode)
   :hook
   (nov-mode-hook . arbab/nov-setup)
-  )
-
-;; Perseptive
-(use-package perspective
-  :init
-  (persp-mode)
-  :bind
-  ("C-x k" . persp-kill-buffer*)
-  :custom
-  (persp-mode-prefix-key (kbd "C-c b"))
   )
 
 ;; Vimish-fold
