@@ -135,6 +135,13 @@
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
 
+;; Toggle automated performance mitigations for files with long lines
+(global-so-long-mode +1)
+
+;; Show matching parentheses
+(show-paren-mode +1)
+(setq show-paren-delay 0)
+
 ;; Line numbers
 (column-number-mode)
 (global-display-line-numbers-mode t)
@@ -176,7 +183,8 @@
 (use-package solaire-mode
   :init
   (solaire-global-mode +1)
- )
+  )
+
 ;; Evil
 (use-package evil
   :init
@@ -210,6 +218,16 @@
   :config
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
+  )
+
+;; Evil-mc
+(use-package evil-mc
+  :init
+  (global-evil-mc-mode 1)
+  :bind
+  ("C-M->" . evil-mc-make-cursor-in-visual-selection-end)
+  ("C-M-<" . evil-mc-make-cursor-in-visual-selection-beg)
+  ("C-M-/" . evil-mc-undo-all-cursors)
   )
 
 ;; All-the-icons
@@ -445,19 +463,29 @@
   (setq ivy-initial-inputs-alist nil)
   (ivy-mode)
   :diminish ivy
-  :bind
-  ("C-s"     . swiper)
-  ("M-x"     . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
-  ("C-x b"   . persp-counsel-switch-buffer)
-  ("<f1> l"  . counsel-find-library)
-  ("<f2> i"  . counsel-info-lookup-symbol)
-  ("<f2> u"  . counsel-unicode-char)
-  ("C-c k"   . counsel-ag)
+  :bind (
+         ("C-s"     . swiper)
+         ("M-x"     . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-x b"   . persp-counsel-switch-buffer)
+         ("<f1> l"  . counsel-find-library)
+         ("<f2> i"  . counsel-info-lookup-symbol)
+         ("<f2> u"  . counsel-unicode-char)
+         ("C-c k"   . counsel-ag)
+         :map counsel-find-file-map
+         ("<tab>" . ivy-alt-done)
+         )
+  )
+
+;; All-the-icons-ivy-rich
+(use-package all-the-icons-ivy-rich
+  :init
+  (all-the-icons-ivy-rich-mode 1)
   )
 
 ;; Ivy-rich
 (use-package ivy-rich
+  :after all-the-icons-ivy-rich
   :init
   (ivy-rich-mode 1)
   )
@@ -467,12 +495,6 @@
   :init
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   (ivy-posframe-mode 1)
-  )
-
-;; All-the-icons-ivy
-(use-package all-the-icons-ivy
-  :init
-  (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
   )
 
 ;; Rainbow-delimiters
@@ -515,7 +537,11 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
   :bind
-  ("M-<tab>" . company-complete)
+  (
+   ("M-<tab>" . company-complete)
+   :map company-active-map
+   ("<tab>" . company-complete-selection)
+   )
   )
 
 ;; General
@@ -758,6 +784,17 @@
   (org-agenda-mode . org-super-agenda-mode)
   )
 
+;; Org-wild-notifier
+(use-package org-wild-notifier
+  :init
+  (org-wild-notifier-mode 1)
+  :custom
+  (org-wild-notifier-alert-time '(1 10 30 60))
+  (org-wild-notifier-notification-tile "Org Agenda")
+  (org-wild-notifier-notification-icon "")
+  (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
+  )
+
 ;; Org-bullets
 (use-package org-bullets
   :after
@@ -827,17 +864,6 @@
     )
   )
 
-;; Org-wild-notifier
-(use-package org-wild-notifier
-  :init
-  (org-wild-notifier-mode 1)
-  :custom
-  (org-wild-notifier-alert-time '(1 10 30 60))
-  (org-wild-notifier-notification-tile "Org Agenda")
-  (org-wild-notifier-notification-icon "")
-  (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
-  )
-
 ;; Make sure to install the language servers on your local machine
 ;; LSP-Haskell
 (use-package lsp-haskell)
@@ -872,17 +898,6 @@
 (use-package ws-butler
   :hook
   (prog-mode . ws-butler-mode)
-  (text-mode . ws-butler-mode)
-  )
-
-;; Evil-mc
-(use-package evil-mc
-  :init
-  (global-evil-mc-mode 1)
-  :bind
-  ("C-M->" . evil-mc-make-cursor-in-visual-selection-end)
-  ("C-M-<" . evil-mc-make-cursor-in-visual-selection-beg)
-  ("C-M-/" . evil-mc-undo-all-cursors)
   )
 
 ;; Centaur-tabs
@@ -1061,13 +1076,6 @@
     ) . hl-line-mode)
   )
 
-;; So-long
-(use-package so-long
-  :ensure nil
-  :init
-  (global-so-long-mode)
-  )
-
 ;; Smartparens
 (use-package smartparens
   :hook
@@ -1139,3 +1147,14 @@
 
 ;; Multifiles
 (use-package multifiles)
+
+(use-package highlight-numbers
+  :hook
+  (prog-mode . highlight-numbers-mode)
+  )
+
+;; Highlight-escape-sequences
+(use-package highlight-escape-sequences
+  :hook
+  (prog-mode . hes-mode)
+  )
