@@ -231,7 +231,6 @@
   )
 
 ;; All-the-icons
-;; Make sure to do a manual ’M-x all-the-icons-install-fonts RET'
 (use-package all-the-icons
   :init
   (when (and (not (member "all-the-icons" (font-family-list)))
@@ -469,16 +468,16 @@
          ("C-c k"   . counsel-ag)
          :map counsel-find-file-map
          ("<tab>" . ivy-alt-done)
-         ("M-j" . ivy-previous-line-or-history)
-         ("M-k" . ivy-next-line-or-history)
+         ("M-k" . ivy-previous-line-or-history)
+         ("M-j" . ivy-next-line-or-history)
          :map counsel-describe-map
          ("<tab>" . ivy-alt-done)
-         ("M-j" . ivy-previous-line-or-history)
-         ("M-k" . ivy-next-line-or-history)
+         ("M-k" . ivy-previous-line-or-history)
+         ("M-j" . ivy-next-line-or-history)
          :map swiper-map
          ("<tab>" . ivy-alt-done)
-         ("M-j" . ivy-previous-line-or-history)
-         ("M-k" . ivy-next-line-or-history)
+         ("M-k" . ivy-previous-line-or-history)
+         ("M-j" . ivy-next-line-or-history)
          )
   )
 
