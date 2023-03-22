@@ -585,8 +585,6 @@
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
   ;; Navigate tabs using centaur-tabs
-  "h" '(centaur-tabs-backward-tab   :which-key "Move To Left Tab")
-  "l" '(centaur-tabs-forward-tab    :which-key "Move To Right Tab")
   "j" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
   "k" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Counsel Files
@@ -930,6 +928,11 @@
   (setq centaur-tabs-show-new-tab-button t)
   (setq centaur-tabs-new-tab-text "  ")
   (centaur-tabs-change-fonts "JetBrains Mono" 125)
+  :bind (
+         :map evil-normal-state-map
+              ("g t" . centaur-tabs-forward)
+              ("g T" . centaur-tabs-backward)
+              )
   )
 
 ;; Yuck-mode
