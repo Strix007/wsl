@@ -122,7 +122,7 @@
 ;; (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;; Save desktop
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -181,6 +181,80 @@
 (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125)
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150)
 (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150)
+
+;; Dashboard
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (dashboard-modify-heading-icons '((recents . "file-text")))
+  ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq dashboard-center-content t)
+  (setq dashboard-set-footer t)
+  (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
+  (setq dashboard-footer-icon (all-the-icons-material "person"
+                                                     :height 1.0
+                                                     :v-adjust 0.0
+                                                     :face 'font-lock-keyword-face))
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-init-info t)
+  (setq dashboard-init-info "Welcome, Arbab")
+  (setq dashboard-show-shortcuts nil)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
+  (setq dashboard-banner-logo-title " ")
+  (setq dashboard-startup-banner (concat user-emacs-directory "banner.jpg"))
+  (setq dashboard-items '(
+                          ;; (recents  . 5)
+                          (bookmarks . 5)
+                          (projects . 5)
+                          ;; (agenda . 5)
+                          ;; (registers . 5)
+                          ))
+  (setq dashboard-item-names '(
+                               ;; ("Recent Files:" . " Recent Files:")
+                               ;; ("Bookmarks:" . " Bookmarks:")
+                               ;; ("Projects:" . " Projects:")
+                               ("Recent Files:" . "Recent Files▾")
+                               ("Bookmarks:" . "Bookmarks▾")
+                               ("Projects:" . "Projects▾")
+                               ("Agenda for the coming week:" . "Agenda▾")
+                               ("Registers:" . "Registers▾")
+                               ))
+  (setq dashboard-set-navigator t)
+  (setq dashboard-navigator-buttons
+        `(
+          (
+           (
+            ,(all-the-icons-octicon "mark-github" :height 1.0 :v-adjust 0.0)
+            "Homepage"
+            "Browse My Github Profile"
+            (lambda (&rest _) (browse-url "https://github.com/Strix007"))
+            )
+           (" "
+            "Configuration"
+            "Open Configuration"
+            (lambda (&rest _) (find-file ".emacs.d/init.el")) warning
+            )
+           (
+            ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
+            "Restore"
+            "Restore Your Last Session"
+            (lambda (&rest _) (desktop-read))
+            error
+            )
+           )
+          (
+           (
+            ,(all-the-icons-material "settings" :height 1.0 :v-adjust 0.0)
+            "dotfiles"
+            "View System Dotfiles"
+            (lambda (&rest _) (browse-url "https://github.com/Strix007/dotfiles"))
+            font-lock-function-name-face
+            )
+           )
+          )
+        )
+  )
 
 ;; Solaire
 (use-package solaire-mode
@@ -261,80 +335,6 @@
   (counsel-projectile-mode)
   )
 
-;; Dashboard
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook)
-  (dashboard-modify-heading-icons '((recents . "file-text")))
-  ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  (setq dashboard-center-content t)
-  (setq dashboard-set-footer t)
-  (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
-  (setq dashboard-footer-icon (all-the-icons-material "person"
-                                                     :height 1.0
-                                                     :v-adjust 0.0
-                                                     :face 'font-lock-keyword-face))
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-init-info nil)
-  ;; (setq dashboard-init-info "Hello There!")
-  (setq dashboard-show-shortcuts nil)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  (setq dashboard-banner-logo-title "Welcome, Arbab")
-  (setq dashboard-startup-banner "~/.emacs.d/banner.jpg")
-  (setq dashboard-items '(
-                          ;; (recents  . 5)
-                          (bookmarks . 5)
-                          (projects . 5)
-                          ;; (agenda . 5)
-                          ;; (registers . 5)
-                          ))
-  (setq dashboard-item-names '(
-                               ;; ("Recent Files:" . " Recent Files:")
-                               ;; ("Bookmarks:" . " Bookmarks:")
-                               ;; ("Projects:" . " Projects:")
-                               ("Recent Files:" . "Recent Files▾")
-                               ("Bookmarks:" . "Bookmarks▾")
-                               ("Projects:" . "Projects▾")
-                               ("Agenda for the coming week:" . "Agenda▾")
-                               ("Registers:" . "Registers▾")
-                               ))
-  (setq dashboard-set-navigator t)
-  (setq dashboard-navigator-buttons
-        `(
-          (
-           (
-            ,(all-the-icons-octicon "mark-github" :height 1.0 :v-adjust 0.0)
-            "Homepage"
-            "Browse My Github Profile"
-            (lambda (&rest _) (browse-url "https://github.com/Strix007"))
-            )
-           (" "
-            "Configuration"
-            "Open Configuration"
-            (lambda (&rest _) (find-file ".emacs.d/init.el")) warning
-            )
-           (
-            ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
-            "Restore"
-            "Restore Your Last Session"
-            (lambda (&rest _) (desktop-read))
-            error
-            )
-           )
-          (
-           (
-            ,(all-the-icons-material "settings" :height 1.0 :v-adjust 0.0)
-            "dotfiles"
-            "View System Dotfiles"
-            (lambda (&rest _) (browse-url "https://github.com/Strix007/dotfiles"))
-            font-lock-function-name-face
-            )
-           )
-          )
-        )
-  )
-
 ;; Ace-pop-up menu
 (use-package ace-popup-menu
   :init
@@ -407,10 +407,6 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode)
   )
-
-;; Powerline
-;; (use-package powerline
-;; :config (powerline-center-evil-theme))
 
 ;; Minions
 (use-package minions
@@ -1028,7 +1024,7 @@
 (use-package workgroups2
   :init
   (setq wg-prefix-key "C-c z")
-  (setq wg-session-file "~/.emacs.d/.workgroups")
+  (setq wg-session-file (concat user-emacs-directory ".workgroups"))
   (workgroups-mode 1)
   )
 
