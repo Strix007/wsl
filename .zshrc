@@ -16,7 +16,7 @@ plugins=(
 			)
 source $ZSH/oh-my-zsh.sh
 # Enviorment Variables
-export MONITOR="HDMI-1"
+export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8 
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
@@ -27,6 +27,33 @@ else
   export EDITOR='emacs'
 fi
 export BROWSER="firefox"
+
+# Function for extracting archives
+ex ()
+{
+  if [ -f "$1" ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
 # KEYBINDING TYPE
 bindkey -v 
 # ALIASES
@@ -47,6 +74,6 @@ alias cp='cp -vr'
 alias rm='rm -vr'
 alias dirs='dirs -v'
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/doom-emacs/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
