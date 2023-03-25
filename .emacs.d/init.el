@@ -1,6 +1,9 @@
 ;; Enable server mode (daemon) for this Emacs session
 (server-start)
 
+;; Set emacs window title
+(setq frame-title-format '(buffer-file-name "%f" "%b"))
+
 ;; Native-comp
 ;; Silence compiler warnings
 (setq native-comp-async-report-warnings-errors nil)
@@ -174,6 +177,7 @@
                 quickrun--mode-hook
                 nov-mode-hook
                 project-explorer-mode-hook
+                browse-kill-ring-mode
                 ))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -247,7 +251,7 @@
            (
             ,(all-the-icons-material "settings" :height 1.0 :v-adjust 0.0)
             "dotfiles"
-            "View System Dotfiles"
+            "View My Dotfiles"
             (lambda (&rest _) (browse-url "https://github.com/Strix007/dotfiles"))
             font-lock-function-name-face
             )
@@ -540,6 +544,7 @@
   (
    ("M-<tab>" . company-complete)
    :map company-active-map
+   ("M-<tab>" . company-complete-common)
    ("<tab>" . company-complete-selection)
    )
   )
@@ -915,6 +920,7 @@
     vterm-mode
     tetris-mode
     quickrun--mode
+    browse-kill-ring-mode
     ) . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
@@ -1143,9 +1149,6 @@
   (prog-mode . prettify-symbols-mode)
   )
 
-;; Multifiles
-(use-package multifiles)
-
 (use-package highlight-numbers
   :hook
   (prog-mode . highlight-numbers-mode)
@@ -1155,4 +1158,30 @@
 (use-package highlight-escape-sequences
   :hook
   (prog-mode . hes-mode)
+  )
+
+;; Popup-kill-ring
+(use-package popup-kill-ring
+  :bind
+  (
+   ("M-y" . popup-kill-ring)
+   :map popup-kill-ring-keymap
+   ("C-j" . popup-kill-ring-next)
+   ("C-k" . popup-kill-ring-next)
+   )
+  )
+
+;; Browse-kill-ring
+(use-package browse-kill-ring
+  :bind
+  ("M-p" . browse-kill-ring)
+  :custom
+  (browse-kill-ring-highlight-current-entry 'solid)
+  )
+
+;; Drag-sutff
+(use-package drag-stuff
+  :bind
+  ("C-j" . drag-stuff-down)
+  ("C-k" . drag-stuff-up)
   )

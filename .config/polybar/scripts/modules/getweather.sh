@@ -22,7 +22,7 @@ elif [ "$ICON_CODE" == "01n"  ]; then
     DAYTIME="Night"
 elif [ "$ICON_CODE" == "02d"  ]; then
     ICON="  "
-    ICON_HEX="#51576d"
+    ICON_HEX="#7c7f93"
     CONDITION="Cloudy"
     DAYTIME="Day"
 elif [ "$ICON_CODE" == "02n"  ]; then
