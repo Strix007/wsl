@@ -125,6 +125,10 @@
 
 ;; Save desktop
 ;; (desktop-save-mode 1)
+(defun desktop-save-main ()
+  (desktop-save "~/")
+  )
+(add-hook 'kill-emacs-hook 'desktop-save-main)
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -237,13 +241,14 @@
            (" "
             "Configuration"
             "Open Configuration"
-            (lambda (&rest _) (find-file ".emacs.d/init.el")) warning
+            (lambda (&rest _) (find-file ".emacs.d/init.el"))
+            warning
             )
            (
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
             "Restore"
             "Restore Your Last Session"
-            (lambda (&rest _) (desktop-read))
+            (lambda (&rest _)(desktop-read "~/"))
             error
             )
            )
