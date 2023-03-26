@@ -488,6 +488,14 @@
    ("<tab>" . ivy-alt-done)
    ("M-k" . ivy-previous-line-or-history)
    ("M-j" . ivy-next-line-or-history)
+   :map recentf-mode-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   :map helpful-mode-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
    )
   )
 
