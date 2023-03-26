@@ -1,4 +1,6 @@
 {-# OPTIONS_GHC -Wno-deprecations #-}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use head" #-}
 -- IMPORTS
 
 -- CORE
@@ -138,7 +140,7 @@ myScratchPads =
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
-    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "ranger,RANGER" ++ " " ++ "-e" ++ " " ++ "ranger"
+    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "lf,LF" ++ " " ++ "-e" ++ " " ++ "lf"
     findFileManager   = XMonad.ManageHook.title =? "FileManager"
     manageFileManager = customFloating $ W.RationalRect l t w h
 
@@ -398,7 +400,7 @@ myManageHook =
      , className                    =? "scratchpadterminal"                  --> hasBorder False
      , className                    =? "spt"                                 --> hasBorder False
      , className                    =? "qalculate-gtk"                       --> hasBorder False
-     , className                    =? "ranger"                              --> hasBorder False
+     , className                    =? "lf"                                  --> hasBorder False
      , className                    =? "mpd-client"                          --> hasBorder False
      , className                    =? "Qalculate-gtk"                       --> hasBorder False
      , className                    =? "scrcpy"                              --> hasBorder False
