@@ -122,7 +122,6 @@
 
 ;; Save minibuffer history
 (savehist-mode +1)
-;; (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;; Save desktop
 ;; (desktop-save-mode 1)
@@ -157,6 +156,7 @@
                 org-mode-hook
                 dired-mode-hook
                 Info-mode-hook
+                tldr-mode-hook
                 calendar-mode-hook
                 org-agenda-mode-hook
                 dashboard-mode-hook
@@ -342,9 +342,9 @@
 ;; Ace-pop-up menu
 (use-package ace-popup-menu
   :init
-  (setq ace-popup-menu-show-pane-header t)
-  :config
   (ace-popup-menu-mode 1)
+  :config
+  (setq ace-popup-menu-show-pane-header t)
   )
 
 ;; Neotree
@@ -548,6 +548,15 @@
    ("<tab>" . company-complete-selection)
    )
   )
+
+;; Company-quickhelp
+(use-package company-quickhelp
+  :hook
+  (company-mode . company-quickhelp-mode)
+  :custom
+  (company-quickhelp-delay 0.0)
+  )
+
 
 ;; General
 (use-package general
@@ -846,6 +855,9 @@
   (setq typescript-indent-level 2)
   )
 
+;; Tldr
+(use-package tldr)
+
 ;; Vterm
 (use-package vterm
   :bind
@@ -921,6 +933,7 @@
     tetris-mode
     quickrun--mode
     browse-kill-ring-mode
+    tldr-mode
     ) . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
@@ -932,6 +945,12 @@
   (setq centaur-tabs-show-new-tab-button t)
   (setq centaur-tabs-new-tab-text "  ")
   (centaur-tabs-change-fonts "JetBrains Mono" 125)
+  :bind
+  (
+   :map evil-normal-state-map
+        ("g t" . centaur-tabs-forward)
+        ("g T" . centaur-tabs-backward)
+        )
   )
 
 ;; Yuck-mode
@@ -954,7 +973,8 @@
   :init
   (global-undo-tree-mode)
   :custom
-  (setq undo-tree-auto-save-history t)
+  (undo-tree-auto-save-history t)
+  (undo-tree-visualizer-diff t)
   )
 
 ;; Try
@@ -973,6 +993,7 @@
   :custom
   (beacon-color "#5e81ac")
   )
+
 
 ;; Quickrun
 (use-package quickrun
@@ -1166,8 +1187,9 @@
   (
    ("M-y" . popup-kill-ring)
    :map popup-kill-ring-keymap
-   ("C-j" . popup-kill-ring-next)
-   ("C-k" . popup-kill-ring-next)
+   ("M-j" . popup-kill-ring-next)
+   ("M-k" . popup-kill-ring-next)
+   ("<escape>" . keyboard-quit)
    )
   )
 
@@ -1184,4 +1206,22 @@
   :bind
   ("C-j" . drag-stuff-down)
   ("C-k" . drag-stuff-up)
+  )
+
+;; Smart-hungry-delete
+(use-package smart-hungry-delete
+  :init
+  (smart-hungry-delete-add-default-hooks)
+  :bind
+  (
+   ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
+	 ([remap delete-backward-char] . smart-hungry-delete-backward-char)
+	 ([remap delete-char] . smart-hungry-delete-forward-char)
+   )
+  )
+
+;; Highlight-parentheses
+(use-package highlight-parentheses
+  :hook
+  (prog-mode . highlight-parentheses-mode)
   )
