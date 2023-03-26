@@ -128,7 +128,7 @@
 (defun desktop-save-main ()
   (desktop-save "~/")
   )
-(add-hook 'kill-emacs-hook 'desktop-save-main)
+;; (add-hook 'kill-emacs-hook 'desktop-save-main)
 
 ;; Keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -402,7 +402,9 @@
   ("C-x C-g" . dired-jump)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory)
+    "h" 'dired-up-directory
+    "l" 'dired-find-file
+    )
   )
 
 ;; All-the-icons-dired
@@ -457,33 +459,36 @@
   (ivy-mode)
   :diminish ivy
   :config
+  (setq ivy-height 15)
   (setq ivy-initial-inputs-alist nil)
-  :bind (
-         ("C-s"     . swiper)
-         ("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-x b"   . counsel-switch-buffer)
-         ("<f1> l"  . counsel-find-library)
-         ("<f2> i"  . counsel-info-lookup-symbol)
-         ("<f2> u"  . counsel-unicode-char)
-         ("C-c k"   . counsel-ag)
-         :map counsel-find-file-map
-         ("<tab>" . ivy-alt-done)
-         ("M-k" . ivy-previous-line-or-history)
-         ("M-j" . ivy-next-line-or-history)
-         :map counsel-describe-map
-         ("<tab>" . ivy-alt-done)
-         ("M-k" . ivy-previous-line-or-history)
-         ("M-j" . ivy-next-line-or-history)
-         :map ivy-switch-buffer-map
-         ("<tab>" . ivy-alt-done)
-         ("M-k" . ivy-previous-line-or-history)
-         ("M-j" . ivy-next-line-or-history)
-         :map swiper-map
-         ("<tab>" . ivy-alt-done)
-         ("M-k" . ivy-previous-line-or-history)
-         ("M-j" . ivy-next-line-or-history)
-         )
+  :bind
+  (
+   ("C-s"     . swiper)
+   ("M-x"     . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("C-x d"   . counsel-find-file)
+   ("C-x b"   . counsel-switch-buffer)
+   ("<f1> l"  . counsel-find-library)
+   ("<f2> i"  . counsel-info-lookup-symbol)
+   ("<f2> u"  . counsel-unicode-char)
+   ("C-c k"   . counsel-ag)
+   :map counsel-find-file-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   :map counsel-describe-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   :map ivy-switch-buffer-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   :map swiper-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   )
   )
 
 ;; All-the-icons-ivy-rich
@@ -887,6 +892,29 @@
     )
   )
 
+;; LSP-mode
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook
+  (prog-mode . arbab/lsp-mode-setup)
+  :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-enable-which-key-integration t)
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  (lsp-lens-enable nil)
+  )
+
+;; Lsp-ivy
+(use-package lsp-ivy)
+
+;; LSP-UI
+(use-package lsp-ui
+  :hook
+  (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom)
+  )
+
 ;; Make sure to install the language servers on your local machine
 ;; LSP-Haskell
 (use-package lsp-haskell)
@@ -896,26 +924,6 @@
 
 ;; LSP-treemacs
 (use-package lsp-treemacs)
-
-;; LSP-mode
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook
-  (prog-mode . arbab/lsp-mode-setup)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (lsp-enable-which-key-integration t)
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-  )
-
-;; LSP-UI
-(use-package lsp-ui
-  :hook
-  (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom)
-  )
 
 ;; Ws-butler
 (use-package ws-butler
