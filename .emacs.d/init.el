@@ -20,7 +20,7 @@
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
-                     (time-subtract after-init-time before-init-time)))
+                    (time-subtract after-init-time before-init-time)))
            gcs-done)
   )
 
@@ -207,9 +207,9 @@
   (setq dashboard-set-footer t)
   (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
   (setq dashboard-footer-icon (all-the-icons-material "person"
-                                                     :height 1.0
-                                                     :v-adjust 0.0
-                                                     :face 'font-lock-keyword-face))
+                                                      :height 1.0
+                                                      :v-adjust 0.0
+                                                      :face 'font-lock-keyword-face))
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
   (setq dashboard-init-info "Welcome, Arbab")
@@ -484,6 +484,10 @@
    ("C-c k"   . counsel-ag)
    ("C-x C-i" . counsel-imenu)
    :map counsel-find-file-map
+   ("<tab>" . ivy-alt-done)
+   ("M-k" . ivy-previous-line-or-history)
+   ("M-j" . ivy-next-line-or-history)
+   :map counsel-mode-map
    ("<tab>" . ivy-alt-done)
    ("M-k" . ivy-previous-line-or-history)
    ("M-j" . ivy-next-line-or-history)
@@ -801,7 +805,7 @@
            )
           (
            :name "Plans"
-                 :tag ("planning")
+           :tag ("planning")
            :order 5
            )
           (
@@ -983,9 +987,9 @@
   :bind
   (
    :map evil-normal-state-map
-        ("g t" . centaur-tabs-forward)
-        ("g T" . centaur-tabs-backward)
-        )
+   ("g t" . centaur-tabs-forward)
+   ("g T" . centaur-tabs-backward)
+   )
   )
 
 ;; Yuck-mode
@@ -1008,6 +1012,7 @@
   :init
   (global-undo-tree-mode)
   :custom
+  (undo-tree-visualizer-timestamps t)
   (undo-tree-auto-save-history t)
   (undo-tree-visualizer-diff t)
   )
