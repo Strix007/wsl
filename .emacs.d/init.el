@@ -173,7 +173,9 @@
                 term-mode-hook
                 neotree-mode-hook
                 which-key-mode
+                special-mode
                 helpful-mode-hook
+                help-mode-hook
                 treemacs-mode-hook
                 woman-mode-hook
                 undo-tree-visualizer-mode-hook
@@ -186,14 +188,19 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts
-(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125)
-(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150)
+(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'medium)
+;; Make comments italic
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+;; Make keywords italic
+(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
 ;; Dashboard
 (use-package dashboard
-  :config
+  :init
   (dashboard-setup-startup-hook)
+  :config
   (dashboard-modify-heading-icons '((recents . "file-text")))
   ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-center-content t)
@@ -237,6 +244,7 @@
             "Homepage"
             "Browse My Github Profile"
             (lambda (&rest _) (browse-url "https://github.com/Strix007"))
+            font-lock-reference-face
             )
            (" "
             "Configuration"
@@ -391,20 +399,22 @@
 ;; Dirvish
 (use-package dirvish
   :init
-  ;; Downloas "gls" and uncomment this line if you’re on OSX
-  ;; (setq insert-directory-program "gls")
-  (setq dirvish-reuse-session nil)
-  (setq dired-mouse-drag-files t)
-  (setq mouse-drag-and-drop-region-cross-program t)
-  (setq delete-by-moving-to-trash t)
   (dirvish-override-dired-mode)
   :bind
   ("C-x C-g" . dired-jump)
-  :config
+  :custom
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
     "l" 'dired-find-file
     )
+  (setq dirvish-reuse-session nil)
+  (setq dired-mouse-drag-files t)
+  (setq mouse-drag-and-drop-region-cross-program t)
+  (setq delete-by-moving-to-trash t
+        trash-directory "~/.local/share/Trash/files"
+        )
+  ;; Downloas "gls" and uncomment this line if you’re on OSX
+  ;; (setq insert-directory-program "gls")
   )
 
 ;; All-the-icons-dired
@@ -472,6 +482,7 @@
    ("<f2> i"  . counsel-info-lookup-symbol)
    ("<f2> u"  . counsel-unicode-char)
    ("C-c k"   . counsel-ag)
+   ("C-x C-i" . counsel-imenu)
    :map counsel-find-file-map
    ("<tab>" . ivy-alt-done)
    ("M-k" . ivy-previous-line-or-history)
@@ -492,12 +503,13 @@
    ("<tab>" . ivy-alt-done)
    ("M-k" . ivy-previous-line-or-history)
    ("M-j" . ivy-next-line-or-history)
-   :map helpful-mode-map
+   :map counsel-imenu-map
    ("<tab>" . ivy-alt-done)
    ("M-k" . ivy-previous-line-or-history)
    ("M-j" . ivy-next-line-or-history)
    )
   )
+
 
 ;; All-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
@@ -621,6 +633,7 @@
   "f"  '(:ignore t         :which-key "Files")
   "fr" '(counsel-recentf   :which-key "Recent Files")
   "ff" '(counsel-find-file :which-key "Find File")
+  "fd" '(dired-jump        :which-key "Open Dired")
   "ft" '(ivy-resume        :which-key "Resume Ivy")
   ;; Bookmarks
   "b"  '(:ignore t        :which-key "Bookmark")
@@ -954,6 +967,7 @@
     tetris-mode
     quickrun--mode
     browse-kill-ring-mode
+    special-mode
     tldr-mode
     ) . centaur-tabs-local-mode)
   :config
@@ -1209,7 +1223,7 @@
    ("M-y" . popup-kill-ring)
    :map popup-kill-ring-keymap
    ("M-j" . popup-kill-ring-next)
-   ("M-k" . popup-kill-ring-next)
+   ("M-k" . popup-kill-ring-previous)
    ("<escape>" . keyboard-quit)
    )
   )
