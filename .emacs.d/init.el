@@ -677,7 +677,7 @@
 ;; Org-mode
 (defun arbab/org-mode-setup ()
   (org-indent-mode)
-  (variable-pitch-mode 1)
+  ;; (variable-pitch-mode 1)
   (visual-line-mode 1)
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -872,6 +872,12 @@
    :map org-mode-map
    ("M-<tab>"    . completion-at-point)
    )
+  )
+
+;; Toc-org
+(use-package toc-org
+  :hook
+  (org-mode . toc-org-mode)
   )
 
 ;; Org-babel-templates

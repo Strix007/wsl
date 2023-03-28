@@ -1,9 +1,12 @@
+#+TITLE: Arbab Khan’s Dotfiles
+#+AUTHOR: Arbab Khan   
+#+EMAIL: arbabashruff@gmail.com
+#+DESCRIPTION: This is my personal configuration for arch linux, xmonad, emacs etc.
 
-#+CAPTION: Home
 #+ATTR_HTML: :align center :title Home :alt Home
 [[file:dotfiles-assets/images/home.png]]
-#+ATTR_HTML: :align center 
-                 Personal Configuration Of Arbab Khan
+
+* Personal Configuration Of Arbab Khan :noexport:
 This is my personal configuration. This is not meant as a plug and play configuration.
 
 * Table of Contents :toc:
