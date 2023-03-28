@@ -624,7 +624,7 @@
   "xb" '(counsel-switch-buffer :which-key "List Buffers")
   "xc" '(delete-window      :which-key "Kill Split")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
-  "xF" '(ffap-other-frame   :which-key "Open File In New Tab")
+  "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
   "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
@@ -718,6 +718,7 @@
   (setq org-ellipsis "▾")
   (setq org-log-into-drawer t)
   (setq org-log-done 'time)
+  (setq org-startup-with-inline-images t)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
@@ -853,6 +854,24 @@
   (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+  )
+
+;; Org-roam
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :config
+  (org-roam-setup)
+  :custom
+  (org-roam-directory "~/Notes")
+  :bind
+  (
+   ("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n i" . org-roam-node-insert)
+   :map org-mode-map
+   ("M-<tab>"    . completion-at-point)
+   )
   )
 
 ;; Org-babel-templates
