@@ -3,7 +3,8 @@
 #+ATTR_HTML: :align center :title Home :alt Home
 [[file:dotfiles-assets/images/home.png]]
 #+ATTR_HTML: :align center 
-* This is my personal configuration. This is not meant as a plug and play configuration. :noexport:
+                 Personal Configuration Of Arbab Khan
+This is my personal configuration. This is not meant as a plug and play configuration.
 
 * Table of Contents :toc:
 - [[#caution][Caution]]
@@ -229,7 +230,7 @@ Define variables for spotify-client-id and spotify-client-secret for counsel-spo
 (defconst spotify_class_secret "yourclasssecrethere")
 #+end_example
 
-If you don't know how to get your spotify client id and secret, refer to [[https://cran.r-project.org/web/packages/spotidy/vignettes/Connecting-with-the-Spotify-API.html][this article.]].
+If you don't know how to get your spotify client id and secret, refer to [[https://cran.r-project.org/web/packages/spotidy/vignettes/Connecting-with-the-Spotify-API.html][this article]].
 
 ** Xmodmap
 I have changed my caps key to ctrl and my right ctrl to caps key. If you don't want this behavior, delete =.Xmodmap=.
