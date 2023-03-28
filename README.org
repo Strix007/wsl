@@ -1,0 +1,244 @@
+
+#+CAPTION: Home
+#+ATTR_HTML: :align center :title Home :alt Home
+[[file:dotfiles-assets/images/home.png]]
+#+ATTR_HTML: :align center 
+* This is my personal configuration. This is not meant as a plug and play configuration. :noexport:
+
+* Table of Contents :toc:
+- [[#caution][Caution]]
+- [[#prerequisite-knowledge][Prerequisite Knowledge]]
+- [[#about][About]]
+- [[#showcase][Showcase]]
+- [[#keybindings][Keybindings]]
+  - [[#xmonad][Xmonad]]
+  - [[#rofi][Rofi]]
+  - [[#applications][Applications]]
+  - [[#scratchpads][Scratchpads]]
+  - [[#function-keys][Function Keys]]
+- [[#what-to-install][What To Install]]
+  - [[#xmonad-1][Xmonad]]
+  - [[#polybar][Polybar]]
+  - [[#rofi-1][Rofi]]
+  - [[#mpd][MPD]]
+  - [[#emacs][Emacs]]
+  - [[#others][Others]]
+  - [[#optionally][Optionally]]
+- [[#fonts][Fonts]]
+- [[#additional-notes][Additional Notes]]
+  - [[#xmonad-2][Xmonad]]
+  - [[#emacs-1][Emacs]]
+  - [[#xmodmap][Xmodmap]]
+  - [[#polybar-1][Polybar]]
+- [[#contributing][Contributing]]
+
+* Caution
+This repo is tailored towards a 1920x1080 system so things may not look correct on other resolutions. This is something yourself to get working on your system. I might make things a bit more friendly on other resolutions in the future.
+
+* Prerequisite Knowledge
+You need to be a little familiar with the following to get the most out of this repo.
+- [[https://www.youtube.com/watch?v=3noK4GTmyMw][Xmonad]]
+- [[https://www.youtube.com/watch?v=TutfIwxSE_s&t=792s][Rofi]]
+- [[https://www.youtube.com/watch?v=PPQ8m8xQAs8][Bash Scripting]]
+- [[https://www.youtube.com/watch?v=48JlgiBpw_I&t=1198s][Emacs]]
+
+I have also linked good beginner resources if you need help with any of these.
+
+This config also took a lot of inspiration from [[https://github.com/adi1090x/rofi][adi1090x]]'s rofi and [[https://github.com/Axarva/dotfiles-2.0][Axarva]]'s xmonad configs so check them out.
+
+* About
+As I said above, this is meant to be my personal configuration that I can clone on my system and get working instantly so many things are tailored to my personal liking. There may be some things you might want to change to get working to your liking.
+
+* Showcase
+[[file:dotfiles-assets/images/home.png]]
+[[file:dotfiles-assets/images/terminal.png]]
+[[file:dotfiles-assets/images/terminal2.png]]
+[[file:dotfiles-assets/images/emacs.png]]
+[[file:dotfiles-assets/images/code.png]]
+[[file:dotfiles-assets/images/code2.png]]
+[[file:dotfiles-assets/images/rofi.png]]
+[[file:dotfiles-assets/images/browser.png]]
+[[file:dotfiles-assets/images/rofi-mpd.png]]
+
+* Keybindings
+** Xmonad
+*** Exit
+| Keybind           | Function            |
+|-------------------+---------------------|
+| super + shift + c | Recompile xmonad    |
+| super + q         | Close window        |
+| super + shift + q | Open rofi powermenu |
+| alt   + F4        | Exit xmonad         |
+*** Layout
+| Keybind           | Function                                  |
+|-------------------+-------------------------------------------|
+| super + n         | Refresh layouts                           |
+| super + Space     | Cycle through layouts                     |
+| super + t         | Snap floating window to tiling            |
+| super + up        | Increase number of windows in master pane |
+| super + down      | Decrease number of windows in master pane |
+| super + ctrl + f  | Toggle tile                               |
+| super + shift + f | Toggle bar (polybar)                      |
+| super + f         | Fullscreen focused window                 |
+*** Motion
+| Keybind             | Function                          |
+|---------------------+-----------------------------------|
+| super + 1...9       | Move from workspaces 1 to 9       |
+| super + ctrl + tab  | Move focus to next display        |
+| super + left/k      | Move focus to upper window        |
+| super + right/j     | Move focus to down window         |
+| super + .           | Warp cursor to focused window     |
+| super + shift + h   | Hide focused window               |
+| super + ctrl  + h   | Show last hiddent window          |
+| super + tab         | Cycle through workspace forwards  |
+| super + shift + tab | Cycle through workspace backwards |
+| super + m           | Swap focused windowwith master    |
+| super + alt + up    | Move window up by 10 pixels       |
+| super + alt + down  | Move window down by 10 pixels     |
+| super + alt + left  | Move window left by 10 pixels     |
+| super + alt + right | Move window right by 10 pixels    |
+*** Shift
+| Keybind                 | Function                           |
+|-------------------------+------------------------------------|
+| super + shift + 1...9   | Shift to workspaces 1 to 9         |
+| alt   + ctrl + tab      | Shift to next display              |
+| super + shift + left/k  | Shift to upper window              |
+| super + shift + right/j | Shift to down window               |
+| alt   + shift + tab     | Shift windows between two displays |
+*** Resize
+| Keybind                    | Function                             |
+|----------------------------+--------------------------------------|
+| super + kp_add             | Increase window size by 10 pixels    |
+| super + kp_subtract        | Decrease window size by 10 pixels    |
+| super + ctrl + kp_add      | Increase window spacing by 10 pixels |
+| super + ctrl + kp_subtract | Decrease window spacing by 10 pixels |
+| super + alt + kp_add       | Increase screen spacing by 10 pixels |
+| super + alt + kp_subtract  | Decrease screen spacing by 10 pixels |
+** Rofi
+| Keybind           | Function                           |
+|-------------------+------------------------------------|
+| super + d         | Open rofi drun                     |
+| super + shift + d | Open rofi run                      |
+| super + g         | Open screenshot menu               |
+| super + shift + g | Stop recording(in screenshot menu) |
+| super + shift + x | Open mpd widget (rofi)             |
+| super + b         | Open browser menu(rofi)            |
+** Applications
+| Keybind           | Function                    |
+|-------------------+-----------------------------|
+| super + enter     | Launch terminal (alacritty) |
+| super + e e       | Open emacs                  |
+| super + z         | Open thunar                 |
+| super + shift + z | Open pcmanfm                |
+| super + shift + b | Open browser (firefox)      |
+| super + p r       | Restart bar (polybar)       |
+** Scratchpads 
+| Keybind                 | Function                               |
+|-------------------------+----------------------------------------|
+| super + s super + enter | Launch terminal scratchpad (alacritty) |
+| super + s x             | Launch MPD player (ncmpcpp)            |
+| super + s z             | Launch filemanager (ranger)            |
+** Function Keys
+| Keybind              | Function                      |
+|----------------------+-------------------------------|
+| XF86Explorer         | Launch filemanager (thunar)   |
+| XF86Search           | Launch rofi drun              |
+| XF86Calculator       | Launch calculator (qalculate) |
+| XF86Tools            | Launch spotify                |
+| XF86AudioNext        | Next media (playerctl)        |
+| XF86AudioPrev        | Previous media (playerctl)    |
+| XF86AudioPlay        | Toggle media (playerctl)      |
+| XF86AudioStop        | Stop media (playerctl)        |
+| XF86AudioMute        | Volume mute (pactl)           |
+| XF86AudioRaiseVolume | Volume increase (pactl)       |
+| XF86AudioLowerVolume | Volume decrease (pactl)       |
+
+* What To Install
+These programs are required to get you started with this config so make sure to install them. Only build them from source if you have checked your distribution’s package manager and cannot find them. If you’re on arch linux, make sure to also check the [[https://aur.archlinux.org][AUR]]. 
+** Xmonad
+- [[https://xmonad.org/download.html][Xmonad]] 
+- [[https://github.com/xmonad/xmonadcontrib][Xmonadcontrib]] 
+*** Xmonad-log
+- [[https://hackage.haskell.org/package/dbus][haskelldbus]]
+** Polybar
+- [[https://github.com/polybar/polybarinstallation][Polybar]] 
+- [[https://github.com/dancor/wmctrl][wmctrl]] 
+- [[https://github.com/altdesktop/playerctl][Playerctl]] 
+- [[https://github.com/noctuid/zscroll][Zscroll]] 
+- [[https://stedolan.github.io/jq][jq]]   
+** Rofi
+- [[https://github.com/davatorium/rofiinstallation][Rofi]] 
+- [[https://github.com/ropery/FFcast][ffcast]] 
+- [[https://github.com/naelstrof/slop][slop]] 
+- [[https://github.com/resurrectingopensourceprojects/scrot][scrot]]
+** MPD
+- [[https://mpd.readthedocs.io/en/stable/user.html][mpd]] 
+- [[https://github.com/MusicPlayerDaemon/mpc][mpc]]   
+** Emacs
+- [[https://www.gnu.org/software/emacs/download.html][emacsnativecomp]] 
+- [[https://github.com/jgm/pandoc/blob/main/INSTALL.md][pandoc]] 
+** Others
+- [[https://github.com/Raymo111/i3lockcolor][i3lock]] 
+- [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]] 
+- [[https://ohmyz.sh/install][Ohmyzsh]] 
+- [[https://github.com/alacritty/alacritty/blob/master/INSTALL.md][Alacritty]] 
+- [[https://github.com/dunstproject/dunst/wiki/Installation][Dunst]] 
+- [[https://mpv.io/installation/][Mpv]] 
+- [[https://github.com/ibhagwan/picomibhagwangit][Picom]] *Note:* Make sure to install the given fork instead of other forks
+- [[https://github.com/pwmt/zathura][Zathura]] 
+- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]   
+
+** Optionally
+- [[https://i3wm.org/downloads/][i3]]
+*Note:* Used to use i3 before xmonad, that’s why it’s here. Most things work with i3 but I mainly use it as a fallback wm.
+
+- [[https://github.com/baskerville/sxhkd][sxhkd]]
+*Note:* Thought of moving all my non-wm related keybindings to sxhkd but found it to be buggy and decided not to do so. You can still use it if you wish as all my bindings are configured.
+
+* Fonts
+There are the fonts that are used in my configuratuin for text and icons. Make sure to install them.
+- [[https://github.com/tonsky/FiraCode][FiraCode]]
+- [[https://github.com/ryanoasis/nerd-fonts][Nerd Fonts]]
+- [[https://fontawesome.com/v6/download][Font Awesome]]
+- [[https://github.com/google/material-design-icons][Material Design Icons]]
+- [[https://fonts.google.com/specimen/Grape+Nuts][Grape Nuts]]
+- [[https://github.com/oblador/react-native-vector-icons/raw/master/Fonts/Feather.ttf][Feather]]
+- [[https://notofonts.github.io][Noto Sans]]
+
+* Additional Notes
+These are additional notes and instruction you have to follow to get this config up and running.
+** Xmonad
+*** Xmonad With Polybar
+Xmonad with polybar was a bit tricky to get running, I had to use [[https://github.com/xintron/xmonad-log][xmonad-log]] to get things working. I have already put a compiled binary of xmonad-log in =.config/polybar/scripts= so no worries there but you do need to install =haskell-dbus= manually through your system's package manager.
+
+*** Xmonad Startup
+Xmonad starts up a lot of things configured for my system, such as =rclone= etc. Make sure to disable the ones you don't need.
+
+*** Xmonad-ctl
+Xmonad-ctl is required for exit to login manager with rofi-powermenu. Make sure to use =-dynamic= flag when compiling =.xmonad/xmonadctl.hs=
+
+** Emacs
+*** LSP
+Make sure to install the language-servers in you need on your system.
+
+*** Counsel-spotify
+Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in =.emacs.d/env.el=.
+
+#+begin_example
+(defconst spotify_class_id "yourclassidhere")
+(defconst spotify_class_secret "yourclasssecrethere")
+#+end_example
+
+If you don't know how to get your spotify client id and secret, refer to [[https://cran.r-project.org/web/packages/spotidy/vignettes/Connecting-with-the-Spotify-API.html][this article.]].
+
+** Xmodmap
+I have changed my caps key to ctrl and my right ctrl to caps key. If you don't want this behavior, delete =.Xmodmap=.
+
+** Polybar
+*** DIsplay
+You need to set the MONITOR env to your output in .zshrc for polybar to display on the correct output.
+*** Weather Module
+You need to make a =.env= in your home directory with an [[https://openweathermap.org/][OpenWeather]] API key and the code of the city you want to get the weather of. For more details on how to do this, check out my repo [[https://github.com/strix007/polybar-getweather][here]].
+
+* Contributing
+If you see me doing anything inefficiently in this config or you think something would be useful to me or you want to correct some error on my part, feel free to open a pull request.
