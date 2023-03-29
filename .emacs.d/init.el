@@ -190,7 +190,7 @@
 ;; Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'medium)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
 ;; Make comments italic
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 ;; Make keywords italic
@@ -469,6 +469,7 @@
   (ivy-mode)
   :diminish ivy
   :config
+  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   (setq ivy-height 15)
   (setq ivy-initial-inputs-alist nil)
   :bind
@@ -483,34 +484,11 @@
    ("<f2> u"  . counsel-unicode-char)
    ("C-c k"   . counsel-ag)
    ("C-x C-i" . counsel-imenu)
-   :map counsel-find-file-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map counsel-mode-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map counsel-describe-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map ivy-switch-buffer-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map swiper-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map recentf-mode-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
-   :map counsel-imenu-map
-   ("<tab>" . ivy-alt-done)
-   ("M-k" . ivy-previous-line-or-history)
-   ("M-j" . ivy-next-line-or-history)
+   :map ivy-minibuffer-map
+   ("<tab>" . ivy-done)
+   ("M-<tab>" . ivy-immediate-done)
+   ("M-k" . ivy-previous-line)
+   ("M-j" . ivy-next-line)
    )
   )
 
@@ -616,12 +594,14 @@
   "ts" '(hydra-text-scale/body :which-key "Scale")
   ;; Window Management
   ;; Manage Splits
+  "x"  '(:ignore t :which-key "Window Management")
   "xw" '(hydra-splits/body  :which-key "Splits")
   "xh" '(split-window-right :which-key "Split Horizontally")
   "xv" '(split-window-below :which-key "Split Vertically")
   "xq" '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Buffer")
   "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
   "xb" '(counsel-switch-buffer :which-key "List Buffers")
+  "xB" '(counsel-ibuffer :which-key "List All Buffers")
   "xc" '(delete-window      :which-key "Kill Split")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
@@ -677,7 +657,7 @@
 ;; Org-mode
 (defun arbab/org-mode-setup ()
   (org-indent-mode)
-  ;; (variable-pitch-mode 1)
+  (variable-pitch-mode 1)
   (visual-line-mode 1)
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -718,7 +698,7 @@
   (setq org-ellipsis "▾")
   (setq org-log-into-drawer t)
   (setq org-log-done 'time)
-  (setq org-startup-with-inline-images t)
+  (setq org-startup-with-inline-images nil)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
@@ -893,6 +873,7 @@
   (visual-fill-column-mode 1)
   )
 (use-package visual-fill-column
+  :disabled t
   :init
   (setq-default visual-fill-column-center-text t)
   :hook
@@ -1261,7 +1242,7 @@
 ;; Browse-kill-ring
 (use-package browse-kill-ring
   :bind
-  ("M-p" . browse-kill-ring)
+  ("M-Y" . browse-kill-ring)
   :custom
   (browse-kill-ring-highlight-current-entry 'solid)
   )
