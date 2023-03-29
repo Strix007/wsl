@@ -48,10 +48,10 @@ You need to be a little familiar with the following to get the most out of this 
 
 I have also linked good beginner resources if you need help with any of these.
 
-This config also took a lot of inspiration from [[https://github.com/adi1090x/rofi][adi1090x]]'s rofi and [[https://github.com/Axarva/dotfiles-2.0][Axarva]]'s xmonad configs so check them out.
-
 * About
 As I said above, this is meant to be my personal configuration that I can clone on my system and get working instantly so many things are tailored to my personal liking. There may be some things you might want to change to get working to your liking.
+
+This config also took a lot of inspiration from [[https://github.com/adi1090x/rofi][adi1090x]]'s rofi and [[https://github.com/Axarva/dotfiles-2.0][Axarva]]'s xmonad configs so check them out.
 
 * Showcase
 [[file:dotfiles-assets/images/home.png]]
@@ -77,7 +77,7 @@ As I said above, this is meant to be my personal configuration that I can clone 
 | Keybind           | Function                                  |
 |-------------------+-------------------------------------------|
 | super + n         | Refresh layouts                           |
-| super + Space     | Cycle through layouts                     |
+| super + space     | Cycle through layouts                     |
 | super + t         | Snap floating window to tiling            |
 | super + up        | Increase number of windows in master pane |
 | super + down      | Decrease number of windows in master pane |
@@ -161,9 +161,9 @@ As I said above, this is meant to be my personal configuration that I can clone 
 These programs are required to get you started with this config so make sure to install them. Only build them from source if you have checked your distribution’s package manager and cannot find them. If you’re on arch linux, make sure to also check the [[https://aur.archlinux.org][AUR]]. 
 ** Xmonad
 - [[https://xmonad.org/download.html][Xmonad]] 
-- [[https://github.com/xmonad/xmonadcontrib][Xmonadcontrib]] 
+- [[https://github.com/xmonad/xmonadcontrib][Xmonad-contrib]] 
 *** Xmonad-log
-- [[https://hackage.haskell.org/package/dbus][haskelldbus]]
+- [[https://hackage.haskell.org/package/dbus][haskell-dbus]]
 ** Polybar
 - [[https://github.com/polybar/polybarinstallation][Polybar]] 
 - [[https://github.com/dancor/wmctrl][wmctrl]] 
@@ -184,7 +184,7 @@ These programs are required to get you started with this config so make sure to 
 ** Others
 - [[https://github.com/Raymo111/i3lockcolor][i3lock]] 
 - [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]] 
-- [[https://ohmyz.sh/install][Ohmyzsh]] 
+- [[https://ohmyz.sh/install][Ohmyzsh]]
 - [[https://github.com/alacritty/alacritty/blob/master/INSTALL.md][Alacritty]] 
 - [[https://github.com/dunstproject/dunst/wiki/Installation][Dunst]] 
 - [[https://mpv.io/installation/][Mpv]] 
@@ -223,7 +223,7 @@ Xmonad-ctl is required for exit to login manager with rofi-powermenu. Make sure 
 
 ** Emacs
 *** LSP
-Make sure to install the language-servers in you need on your system.
+Make sure to install the language-servers you need on your system.
 
 *** Counsel-spotify
 Define variables for spotify-client-id and spotify-client-secret for counsel-spotify in =.emacs.d/env.el=.
