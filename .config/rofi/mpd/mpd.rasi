@@ -15,6 +15,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import                          "../shared/colors.rasi"
+@import                          "~/.config/rofi/shared/keys.rasi"
 
 /*
 USE_ICON=YES

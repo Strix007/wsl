@@ -1,4 +1,5 @@
 @import                          "~/.config/rofi/shared/colors.rasi"
+@import                          "~/.config/rofi/shared/keys.rasi"
 
 configuration {
     font: "JetBrains Mono 12";  

@@ -196,6 +196,9 @@
 ;; Make keywords italic
 (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
+;; Specific modes for specific file extensions
+(add-to-list 'auto-mode-alist '("\\.rasi$" . conf-unix-mode))
+
 ;; Dashboard
 (use-package dashboard
   :init
@@ -485,7 +488,7 @@
    ("C-c k"   . counsel-ag)
    ("C-x C-i" . counsel-imenu)
    :map ivy-minibuffer-map
-   ("<tab>" . ivy-done)
+   ("<tab>" . ivy-alt-done)
    ("M-<tab>" . ivy-immediate-done)
    ("M-k" . ivy-previous-line)
    ("M-j" . ivy-next-line)

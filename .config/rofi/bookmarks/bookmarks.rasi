@@ -15,6 +15,7 @@ configuration {
 }
 
 @import                          "~/.config/rofi/shared/colors.rasi"
+@import                          "~/.config/rofi/shared/keys.rasi"
 
 * {
     border-colour:               var(selected);
