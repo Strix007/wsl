@@ -1,24 +1,11 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
+@import "~/.config/rofi/shared/colors.rasi"
+@import "~/.config/rofi/shared/keys.rasi"
 
-/*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
 }
 
-/*****----- Global Properties -----*****/
-@import                          "~/.config/rofi/shared/colors.rasi"
-@import                          "~/.config/rofi/shared/keys.rasi"
-
-/*
 USE_BUTTONS=YES
-*/
 
 /*****----- Main Window -----*****/
 window {

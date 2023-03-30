@@ -1,21 +1,11 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-
-/*****----- Global Properties -----*****/
+@import "~/.config/rofi/shared/colors.rasi"
+@import "~/.config/rofi/shared/keys.rasi"
 
 configuration {
     font: "JetBrains Mono 12";  
-    icon-theme: 					"Papirus";
+    icon-theme: "Papirus";
 }
 
-@import                          "~/.config/rofi/shared/colors.rasi"
-@import                          "~/.config/rofi/shared/keys.rasi"
 
 * {
     border-colour:               var(selected);
