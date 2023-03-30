@@ -5,8 +5,6 @@ configuration {
     show-icons:                 false;
 }
 
-USE_BUTTONS=YES
-
 /*****----- Main Window -----*****/
 window {
     /* properties for window widget */

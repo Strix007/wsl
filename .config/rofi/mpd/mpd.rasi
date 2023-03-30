@@ -6,8 +6,6 @@ configuration {
     show-icons:                 false;
 }
 
-USE_ICON=YES
-
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
