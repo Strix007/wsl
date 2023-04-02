@@ -982,6 +982,7 @@
     browse-kill-ring-mode
     special-mode
     tldr-mode
+    compilation-mode
     ) . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
@@ -1046,6 +1047,8 @@
 
 ;; Quickrun
 (use-package quickrun
+  :custom
+  (quickrun-timeout-seconds nil)
   :bind
   ("C-c r r" . quickrun)
   ("C-c r w" . quickrun-region)

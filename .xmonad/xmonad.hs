@@ -495,7 +495,7 @@ myStartupHook =
     spawnOnce "picom --experimental-backends"                                                                                                                                                                                         -- Compositor
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                               -- Dock
-    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/wallpaper1.jpg  --bg-fill $HOME/.xmonad/wallpapers/wallpaper2.png"                                                                                                            -- Set Background Multi-Screen
+    spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/wallpaper2.png --bg-fill $HOME/.xmonad/wallpapers/wallpaper1.jpg"                                                                                                               -- Set Background Multi-Screen
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                     -- Start Emacs Daemon
     setWMName "LG3D"
 

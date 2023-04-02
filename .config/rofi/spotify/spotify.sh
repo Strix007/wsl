@@ -1,9 +1,15 @@
 #!/bin/bash
 
 USE_FORMAT_ALT=false
+DIR="$HOME/.config/rofi/spotify"
+
+# Function for easier player actions
+player_action (){
+    playerctl --player=spotify $1
+}
 
 # Get the status of the player
-STATUS=$(playerctl --player=spotify status)
+STATUS=$(player_action status)
 
 # Function for metadata
 getmeta (){
@@ -92,7 +98,7 @@ rofi_run_playing (){
                      -theme-str "listview {columns: $COLUMNS; lines: $LINES;}" \
                      -mesg "$TITLE :: $DURATION" \
 		                 ${active} ${urgent} \
-		                 -theme "$HOME/.config/rofi/spotify/$THEME.rasi"
+		                 -theme "$DIR/$THEME.rasi"
 }
 # Run function when spotify is paused
 rofi_run_paused (){
@@ -105,7 +111,7 @@ rofi_run_paused (){
                      -theme-str "listview {columns: $COLUMNS; lines: $LINES;}" \
                      -mesg "$TITLE :: $DURATION" \
 		                 ${active} ${urgent} \
-		                 -theme "$HOME/.config/rofi/spotify/$THEME.rasi"
+		                 -theme "$DIR/$THEME.rasi"
 }
 
 # Icons for when player is not started
@@ -119,12 +125,6 @@ confirm_cmd() {
 		                 -p 'Confirmation' \
 		                 -mesg 'Spotify Is Not Currently Active. Would You Like To Open Spotify?' \
 		                 -theme "$HOME/.config/rofi/spotify/confirm.rasi"
-}
-
-
-# Function for easier player actions
-player_action (){
-    playerctl --player=spotify $1
 }
 
 # Evaluate output
