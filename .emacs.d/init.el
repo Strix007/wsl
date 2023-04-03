@@ -56,7 +56,8 @@
 
 ;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  )
 
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -315,6 +316,12 @@
   :config
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
+  )
+
+;; Evil-snipe
+(use-package evil-snipe
+  :init
+  (evil-snipe-override-mode 1)
   )
 
 ;; Evil-mc
@@ -578,12 +585,28 @@
   :init
   (general-auto-unbind-keys)
   :config
+  ;; Define prefixes
   (general-create-definer arbab/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
-    :global-prefix "C-SPC")
+    :global-prefix "C-SPC"
+    )
+  (general-create-definer arbab/avy
+    :keymaps '(normal visual)
+    :prefix "g SPC"
+    )
   )
 ;; Define Keybindings
+;; Define avy keybinding
+(arbab/avy
+  "e" '(avy-goto-char   :which-key "avy goto char")
+  "E" '(avy-goto-char-2 :which-key "avy goto char-2")
+  "w" '(avy-goto-word-1 :which-key "avy jump to word")
+  "W" '(avy-goto-word-0 :which-key "avy word tree")
+  "f" '(avy-goto-line   :which-key "avy goto line")
+  "r" '(avy-resume      :which-key "avy resume")
+  )
+;; Define keys using space as leader
 (arbab/leader-keys
   ;; Spotify keybinds using counsel-spotify
   "s"  '(:ignore t :which-key "Spotify")
@@ -1276,4 +1299,10 @@
 (use-package highlight-parentheses
   :hook
   (prog-mode . highlight-parentheses-mode)
+  )
+
+;; Avy
+(use-package avy
+  :custom
+  (avy-all-windows t)
   )
