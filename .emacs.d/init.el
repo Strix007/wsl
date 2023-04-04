@@ -36,7 +36,10 @@
 (when (fboundp 'startup-redirect-eln-cache)
   (startup-redirect-eln-cache
    (convert-standard-filename
-    (expand-file-name  "var/eln-cache/" user-emacs-directory))))
+    (expand-file-name  "var/eln-cache/" user-emacs-directory)
+    )
+   )
+  )
 
 ;; Load sensitive variables from file
 (setq env (concat user-emacs-directory "env.el"))
@@ -54,7 +57,8 @@
 
 (package-initialize)
 (unless package-archive-contents
-  (package-refresh-contents))
+  (package-refresh-contents)
+  )
 
 ;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
@@ -188,7 +192,10 @@
                 project-explorer-mode-hook
                 browse-kill-ring-mode
                 ))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (add-hook mode (lambda () (display-line-numbers-mode 0)
+                   )
+            )
+  )
 
 ;; Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
@@ -341,7 +348,8 @@
   :init
   (when (and (not (member "all-the-icons" (font-family-list)))
              (window-system))
-    (all-the-icons-install-fonts t))
+    (all-the-icons-install-fonts t)
+    )
   )
 
 ;; Projectile
@@ -349,9 +357,10 @@
   :diminish projectile-mode
   :init
   (setq projectile-project-search-path '("~/projects/"))
-  :custom (
-           (projectile-completion-system 'ivy)
-           )
+  :custom
+  (
+   (projectile-completion-system 'ivy)
+   )
   :config
   (projectile-mode +1)
   :bind
@@ -466,8 +475,8 @@
 ;; Helpful
 (use-package helpful
   :custom
-  (setq counsel-describe-function-function #'helpful-callable)
-  (setq counsel-describe-variable-function #'helpful-variable)
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
   :bind
   ("C-h f" . helpful-function)
   ("C-h c" . helpful-command)
@@ -695,8 +704,14 @@
   (variable-pitch-mode 1)
   (visual-line-mode 1)
   (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+                          '(
+                            ("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")
+                                       )
+                                )
+                             )
+                            )
+                          )
   ;; Set faces for heading levels
   (dolist (face '(
                   (org-level-1 . 1.2)
@@ -707,8 +722,11 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)
-                  ))
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+                  )
+                )
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)
+                        )
+    )
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block           nil :foreground nil :inherit 'fixed-pitch)
@@ -722,7 +740,7 @@
 
 ;; Org-mode
 (use-package org
-  :ensure org-plus-contrib
+  :ensure org-contrib
   :hook
   (org-mode . arbab/org-mode-setup)
   :config
@@ -738,9 +756,11 @@
   (setq org-agenda-files
         '(
           "~/.emacs.d/OrgFiles/Tasks.org"
-          ))
+          )
+        )
   (setq org-todo-keywords
-        '((sequence
+        '(
+          (sequence
            "TODO(t)"
            "NEXT(n)"
            "|"
@@ -757,11 +777,16 @@
            "|"
            "COMPLETED(c)"
            "CANC(k@)"
-           )))
+           )
+          )
+        )
 
   (setq org-refile-targets
-        '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org"   :maxlevel . 1)))
+        '(
+          ("Archive.org" :maxlevel . 1)
+          ("Tasks.org"   :maxlevel . 1)
+          )
+        )
 
   ;; Save Org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
