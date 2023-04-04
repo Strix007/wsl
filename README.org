@@ -16,6 +16,7 @@ This is my personal configuration. This is not meant as a plug and play configur
 - [[#showcase][Showcase]]
 - [[#keybindings][Keybindings]]
   - [[#xmonad][Xmonad]]
+  - [[#emacs][Emacs]]
   - [[#rofi][Rofi]]
   - [[#applications][Applications]]
   - [[#scratchpads][Scratchpads]]
@@ -25,13 +26,13 @@ This is my personal configuration. This is not meant as a plug and play configur
   - [[#polybar][Polybar]]
   - [[#rofi-1][Rofi]]
   - [[#mpd][MPD]]
-  - [[#emacs][Emacs]]
+  - [[#emacs-1][Emacs]]
   - [[#others][Others]]
   - [[#optionally][Optionally]]
 - [[#fonts][Fonts]]
 - [[#additional-notes][Additional Notes]]
   - [[#xmonad-2][Xmonad]]
-  - [[#emacs-1][Emacs]]
+  - [[#emacs-2][Emacs]]
   - [[#xmodmap][Xmodmap]]
   - [[#polybar-1][Polybar]]
 - [[#contributing][Contributing]]
@@ -93,7 +94,7 @@ This config also took a lot of inspiration from [[https://github.com/adi1090x/ro
 | super + right/j     | Move focus to down window         |
 | super + .           | Warp cursor to focused window     |
 | super + shift + h   | Hide focused window               |
-| super + ctrl  + h   | Show last hidden window          |
+| super + ctrl  + h   | Show last hidden window           |
 | super + tab         | Cycle through workspace forwards  |
 | super + shift + tab | Cycle through workspace backwards |
 | super + m           | Swap focused windowwith master    |
@@ -118,24 +119,30 @@ This config also took a lot of inspiration from [[https://github.com/adi1090x/ro
 | super + ctrl + kp_subtract | Decrease window spacing by 10 pixels |
 | super + alt + kp_add       | Increase screen spacing by 10 pixels |
 | super + alt + kp_subtract  | Decrease screen spacing by 10 pixels |
+** Emacs
+| Keybind                 | Function   |
+|-------------------------+------------|
+| super + e e             | Open emacs |
+| super + e super + enter | Open vterm |
+| super + e z             | Open dired |
 ** Rofi
-| Keybind           | Function                           |
-|-------------------+------------------------------------|
-| super + d         | Open rofi drun                     |
-| super + shift + d | Open rofi run                      |
-| super + g         | Open screenshot menu               |
-| super + shift + g | Stop recording(in screenshot menu) |
-| super + shift + x | Open mpd widget (rofi)             |
-| super + b         | Open browser menu(rofi)            |
+| Keybind             | Function                           |
+|---------------------+------------------------------------|
+| super + d d         | Open rofi drun                     |
+| super + d shift + d | Open rofi run                      |
+| super + d g         | Open screenshot menu               |
+| super + d shift + g | Stop recording(in screenshot menu) |
+| super + d x         | Open mpd widget (rofi)             |
+| super + d s         | Open spotify widget (rofi)         |
+| super + d b         | Open browser menu(rofi)            |
 ** Applications
-| Keybind           | Function                    |
-|-------------------+-----------------------------|
-| super + enter     | Launch terminal (alacritty) |
-| super + e e       | Open emacs                  |
-| super + z         | Open thunar                 |
-| super + shift + z | Open pcmanfm                |
-| super + shift + b | Open browser (firefox)      |
-| super + p r       | Restart bar (polybar)       |
+| Keybind             | Function                    |
+|---------------------+-----------------------------|
+| super + enter       | Launch terminal (alacritty) |
+| super + a z         | Open thunar                 |
+| super + a shift + z | Open pcmanfm                |
+| super + a b         | Open browser (firefox)      |
+| super + p r         | Restart bar (polybar)       |
 ** Scratchpads 
 | Keybind                 | Function                               |
 |-------------------------+----------------------------------------|

@@ -66,13 +66,14 @@ import Text.XHtml (title)
 
 -- User Set Variables
 
-myGUIFileExplorer, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator :: String
+myEmacs, myGUIFileExplorer, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator :: String
 myTerminal        = "alacritty"     -- Global Terminal Variable
 myBrowser         = "firefox"       -- Global Browser Variable
 myGUIFileExplorer = "thunar"        -- Global GUI FileExplorer Variable
 myMPDClient       = "ncmpcpp"       -- Global MPD Client Variable
 myGUIMusicApp     = "spotify"       -- Global GUI Music App Variable
 myCalculator      = "qalculate-gtk" -- Global Calculator Variable
+myEmacs           = "emacsclient -c -a 'emacs'"
 
 
 -- Change Focus To The Window Where The Mouse Is
@@ -266,15 +267,15 @@ myKeys =
 
                 , ("M-<Return>", spawn myTerminal)                -- Spawn Terminal (Alacritty)
                 , ("M-a b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
-                , ("M-a x",      spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
-                , ("M-a z",      spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
+                , ("M-a z",      spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
+                , ("M-a S-z",    spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
                 , ("M-p r",      spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
 
-                , ("M-e e", spawn "emacsclient -c -a 'emacs'") -- Launch Emacsclient And If No Server Is Running, Launch Emacs
-                , ("M-e z", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'") -- Launch dired
-                , ("M-e M-<Return>", spawn "emacsclient -c -a 'emacs' --eval '(vterm)'") -- Launch vterm
+                , ("M-e e", spawn myEmacs) -- Launch Emacsclient And If No Server Is Running, Launch Emacs
+                , ("M-e z", spawn (myEmacs ++ " --eval '(dired-jump)'"))     -- Launch dired
+                , ("M-e M-<Return>", spawn (myEmacs ++ " --eval '(vterm)'")) -- Launch vterm
 
                 ]
 
