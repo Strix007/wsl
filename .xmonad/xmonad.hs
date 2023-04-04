@@ -118,7 +118,7 @@ myScratchPads =
   [
 
       NS "terminal"    spawnTerminal    findTerminal    manageTerminal    -- Alacritty
-    , NS "fileManager" spawnFileManager findFileManager manageFileManager -- Ranger
+    , NS "fileManager" spawnFileManager findFileManager manageFileManager -- ls
     , NS "musicPlayer" spawnMusicPlayer findMusicPlayer manageMusicPlayer -- NCMPCPP And MPD
 
   ]
@@ -203,16 +203,12 @@ myKeys =
 
                 , ("M-k",       windows W.focusUp)   -- k To Change Focus To The "Upper" Window
                 , ("M-j",       windows W.focusDown) -- j To Change Focus To The "Down"  Window
-                , ("M-<Left>",  windows W.focusUp)   -- Arrow Key <M-Left>  To Change Focus To The "Upper" Window
-                , ("M-<Right>", windows W.focusDown) -- Arrow Key <M-Right> To Change Focus To The "Down"  Window
 
                 -- LAYOUT WINDOW SWAPS
 
                 , ("M-<Up>",      sendMessage (IncMasterN    1))  -- Arrow Key <M+Up>   To Increase Windows In Master Pane
                 , ("M-<Down>",    sendMessage (IncMasterN  (-1))) -- Arrow Key <M+Down> To Decrease Windows In Master Pane
-                , ("M-S-<Left>",  windows W.swapUp)   -- Arrow Key <u-S-Left>  To Swap To The "Upper" Window
                 , ("M-S-k",       windows W.swapUp)   -- Shift + k To Swap To The "Upper" Window
-                , ("M-S-<Right>", windows W.swapDown) -- Arrow Key <M-S-Right> To Swap To The "Down"  Window
                 , ("M-S-j",       windows W.swapDown) -- Shift + j To Swap To The "Down"  Window
                 , ("M-m",         dwmpromote)         -- Swap Master Pane With Focused Window And If Focused Window Is Master, Swap With The Next Window In The Stack, Focus Stays On Master Pane
 
@@ -252,31 +248,33 @@ myKeys =
                 , ("<XF86AudioNext>",  spawn "playerctl next")       -- Use "Fn+F7" With With PlayerctlD To Pause/Play Media On The Last Active Player
                 , ("<XF86AudioStop>",  spawn "playerctl stop")       -- Use "Fn+F8" With PlayerctlD To Stop The Last Active Media On The Last Active Player
                 , ("<XF86AudioMute>",  spawn "pactl set-sink-mute 0 toggle") -- Use "Fn+F9" With pactl To Mute Volume
-                , ("<XF86AudioLowerVolume>",  spawn "pactl set-sink-volume 0 -5%") -- Use "Fn+F9" With pactl To Raise Volume By 5%
-                , ("<XF86AudioRaiseVolume>",  spawn "pactl set-sink-volume 0 +5%") -- Use "Fn+F9" With pactl To Lower Volume by 5%
+                , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%") -- Use "Fn+F9" With pactl To Raise Volume By 5%
+                , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%") -- Use "Fn+F9" With pactl To Lower Volume by 5%
 
                 -- ROFI
 
-                , ("M-d",   spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
-                , ("M-S-d", spawn "rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
-                , ("M-g",   spawn "$HOME/.config/rofi/screenshot/screenshot.sh")        -- Screenshot Menu Using Rofi
-                , ("M-S-g", spawn "$HOME/.config/rofi/screenshot/screenshot.sh --stop") -- Stop Recording On The Screenshot Menu Using Rofi
-                , ("M-S-q", spawn "$HOME/.config/rofi/powermenu/powermenu.sh")          -- Powermenu Using Rofi
-                , ("M-b",   spawn "$HOME/.config/rofi/bookmarks/bookmarks.sh")          -- Browser Menu Using Rofi
-                , ("M-S-x", spawn "$HOME/.config/rofi/mpd/mpd.sh")                      -- MPD Menu Using Rofi
-                , ("M-S-s", spawn "$HOME/.config/rofi/spotify/spotify.sh")              -- Spotify Menu Using Rofi
+                , ("M-d d",   spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Launcher -Drun
+                , ("M-d S-d", spawn "rofi -show run -theme $HOME/.config/rofi/launcher/run/launcher.rasi")   -- Launcher -Run
+                , ("M-d g",   spawn "$HOME/.config/rofi/screenshot/screenshot.sh")        -- Screenshot Menu Using Rofi
+                , ("M-d S-g", spawn "$HOME/.config/rofi/screenshot/screenshot.sh --stop") -- Stop Recording On The Screenshot Menu Using Rofi
+                , ("M-S-q",   spawn "$HOME/.config/rofi/powermenu/powermenu.sh")          -- Powermenu Using Rofi
+                , ("M-d b",   spawn "$HOME/.config/rofi/bookmarks/bookmarks.sh")          -- Browser Menu Using Rofi
+                , ("M-d x",   spawn "$HOME/.config/rofi/mpd/mpd.sh")                      -- MPD Menu Using Rofi
+                , ("M-d s",   spawn "$HOME/.config/rofi/spotify/spotify.sh")              -- Spotify Menu Using Rofi
 
                 -- APPLICATIONS
 
                 , ("M-<Return>", spawn myTerminal)                -- Spawn Terminal (Alacritty)
-                , ("M-S-b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
-                , ("M-z",        spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
-                , ("M-S-z",      spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
+                , ("M-a b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
+                , ("M-a x",      spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
+                , ("M-a z",      spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
                 , ("M-p r",      spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
 
                 , ("M-e e", spawn "emacsclient -c -a 'emacs'") -- Launch Emacsclient And If No Server Is Running, Launch Emacs
+                , ("M-e z", spawn "emacsclient -c -a 'emacs' --eval '(dired nil)'") -- Launch dired
+                , ("M-e M-<Return>", spawn "emacsclient -c -a 'emacs' --eval '(vterm)'") -- Launch vterm
 
                 ]
 
@@ -306,7 +304,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
       -- Mod-Button2, Raise The Window To The Top Of The Stack
 
-      , ((modm, button3), \w -> spawn "$HOME/xmenu/xmenu.sh")
+    , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
 
       -- Mod-Button3, Set The Window To Floating Mode And Resize By Dragging
 
