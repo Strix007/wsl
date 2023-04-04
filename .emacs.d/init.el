@@ -44,11 +44,13 @@
 
 ;; Initialize package sources
 (require 'package)
-(setq package-archives '(
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("org"   . "https://orgmode.org/elpa/")
-                         ("elpa"  . "https://elpa.gnu.org/packages/")
-                         ))
+(setq package-archives
+      '(
+        ("melpa" . "https://melpa.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+        ("elpa"  . "https://elpa.gnu.org/packages/")
+        )
+      )
 
 (package-initialize)
 (unless package-archive-contents
@@ -409,14 +411,14 @@
 ;; Dirvish
 (use-package dirvish
   :init
-  (dirvish-override-dired-mode)
-  :bind
-  ("C-x C-g" . dired-jump)
-  :custom
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
     "l" 'dired-find-file
     )
+  (dirvish-override-dired-mode)
+  :bind
+  ("C-x C-g" . dired-jump)
+  :custom
   (setq dirvish-reuse-session nil)
   (setq dired-mouse-drag-files t)
   (setq mouse-drag-and-drop-region-cross-program t)
@@ -558,6 +560,8 @@
   (setq company-format-margin-function #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
+  :config
+  (add-to-list 'company-backends '(company-shell company-shell-env))
   :custom
   (company-tooltip-limit 20)
   (company-minimum-prefix-length 1)
@@ -570,6 +574,9 @@
    ("<tab>" . company-complete-selection)
    )
   )
+
+;; Company-shell
+(use-package company-shell)
 
 ;; Company-quickhelp
 (use-package company-quickhelp
@@ -605,6 +612,8 @@
   "W" '(avy-goto-word-0 :which-key "avy word tree")
   "f" '(avy-goto-line   :which-key "avy goto line")
   "r" '(avy-resume      :which-key "avy resume")
+  "l" '(link-hint-copy-link :which-key "copy link")
+  "L" '(link-hint-open-link :which-key "open link")
   )
 ;; Define keys using space as leader
 (arbab/leader-keys
@@ -1020,8 +1029,8 @@
   :bind
   (
    :map evil-normal-state-map
-   ("g t" . centaur-tabs-forward)
-   ("g T" . centaur-tabs-backward)
+   ("gt" . centaur-tabs-forward)
+   ("gT" . centaur-tabs-backward)
    )
   )
 
@@ -1305,4 +1314,23 @@
 (use-package avy
   :custom
   (avy-all-windows t)
+  )
+
+;; Link-hint
+(use-package link-hint)
+
+;; Dumb-jump
+(use-package dumb-jump
+  :hook
+  (xref-backend-functions . dumb-jump-xref-activate)
+  )
+
+;; Smart-jump
+(use-package smart-jump
+  :bind
+  (
+   ("M-." . smart-jump-go)
+   ("M-," . smart-jump-back)
+   ("M-?" . smart-jump-references)
+   )
   )
