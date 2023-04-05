@@ -730,8 +730,7 @@
                   (org-level-8 . 1.1)
                   )
                 )
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)
-                        )
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))
     )
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
@@ -969,8 +968,8 @@
 (use-package vterm
   :bind
   ("M-RET" . vterm)
-  :config
-  (setq vterm-max-scrollback 10000)
+  :custom
+  (vterm-max-scrollback 10000)
   )
 
 ;; Markdown-preview-eww
@@ -1083,6 +1082,7 @@
 ;; Undo-tree
 (use-package undo-tree
   :init
+  (setq undo-limit 10000000)
   (global-undo-tree-mode)
   :custom
   (undo-tree-visualizer-timestamps t)
@@ -1365,4 +1365,3 @@
    ("M-?" . smart-jump-references)
    )
   )
-(put 'dired-find-alternate-file 'disabled nil)
