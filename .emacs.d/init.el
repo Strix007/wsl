@@ -191,7 +191,8 @@
                 nov-mode-hook
                 project-explorer-mode-hook
                 browse-kill-ring-mode
-                ))
+                )
+              )
   (add-hook mode (lambda () (display-line-numbers-mode 0)
                    )
             )
@@ -237,7 +238,8 @@
                           (projects . 5)
                           ;; (agenda . 5)
                           ;; (registers . 5)
-                          ))
+                          )
+        )
   (setq dashboard-item-names '(
                                ;; ("Recent Files:" . " Recent Files:")
                                ;; ("Bookmarks:" . " Bookmarks:")
@@ -247,7 +249,8 @@
                                ("Projects:" . "Projects▾")
                                ("Agenda for the coming week:" . "Agenda▾")
                                ("Registers:" . "Registers▾")
-                               ))
+                               )
+        )
   (setq dashboard-set-navigator t)
   (setq dashboard-navigator-buttons
         `(
@@ -421,26 +424,29 @@
 (use-package dirvish
   :init
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
+    "h" 'dired-single-up-directory
     "l" 'dired-find-file
     )
   (dirvish-override-dired-mode)
   :bind
-  ("C-x C-g" . dired-jump)
+  (
+   ("C-x C-g" . dired-jump)
+   :map dired-mode-map
+   ("<return>" . dired-find-alternate-file)
+   )
   :custom
-  (setq dirvish-reuse-session nil)
-  (setq dired-mouse-drag-files t)
-  (setq mouse-drag-and-drop-region-cross-program t)
-  (setq delete-by-moving-to-trash t
+  (dirvish-reuse-session nil)
+  (delete-by-moving-to-trash t
         trash-directory "~/.local/share/Trash/files"
         )
   ;; Downloas "gls" and uncomment this line if you’re on OSX
-  ;; (setq insert-directory-program "gls")
+  ;; (insert-directory-program "gls")
   )
 
 ;; All-the-icons-dired
 (use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode)
+  :hook
+  (dired-mode . all-the-icons-dired-mode)
   )
 
 ;; Dired-hide-dotfiles
@@ -1359,3 +1365,4 @@
    ("M-?" . smart-jump-references)
    )
   )
+(put 'dired-find-alternate-file 'disabled nil)
