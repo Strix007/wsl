@@ -1,0 +1,205 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Cartograph CF Mono;
+  /* font-weight: 600; */
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #2e3440;
+}
+
+tooltip {
+  background: #2e3440;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #5e91ac;
+}
+
+#workspaces button {
+  padding: 5px;
+  margin-right: 5px;
+  color: #abb2bf;
+}
+
+#workspaces button.active {
+    color: #88c0d0;
+    box-shadow: inset 0 -3px #5e81ac;
+}
+
+#workspaces button.urgent {
+  color: #db104e;
+  box-shadow: inset 0 -3px #db104e;
+}
+
+#workspaces button:hover {
+  /* background: #11111b; */
+  color: black;
+  border-radius: 10rem;
+}
+
+#window,
+#workspaces,
+#cpu,
+#memory,
+#tray {
+  font-weight: 600;
+}
+
+#tray {
+  border-radius: 10rem;
+  margin-right: 10px;
+}
+
+#workspaces {
+  font-weight: Bold;
+}
+
+#cpu {
+    margin: 0 0.5rem 0 0;
+    color: #61afef;
+}
+
+#memory {
+  color: #989cff;
+  margin: 0 0.5rem 0 0;
+}
+
+#window {
+  border-radius: 10px;
+  background: transparent;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+#clock {
+  color: #b48ead;
+  margin: 0 0.5rem 0 0;
+  font-weight: 600;
+}
+#clock.date {
+  margin: 0 0.5rem 0 0;
+  color: #88c0d0;
+  font-weight: 600;
+}
+
+#submap {
+    color: #ebcb8b;
+    font-weight: 600;
+}
+#custom-storage_root {
+    color: #d08770;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+}
+#custom-storage_media {
+    color: #d08770;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+}
+
+#custom-mpd {
+    color: #a3be8c;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+    margin-bottom: 0;
+}
+
+#custom-mpd_state_icon {
+    color: #a3be8c;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+    margin-bottom: 0.2rem;
+}
+
+#custom-mpd_icon_loop.loop-on {
+    color: #a3be8c;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+    margin-bottom: 0.2rem;
+}
+
+#custom-mpd_icon_loop.loop-off {
+    color: #4c566a;
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+    margin-bottom: 0.2rem;
+}
+
+#custom-mpd_icon_random.random-on {
+    color: #a3be8c;
+    font-weight: 600;
+    margin: 0 0.7rem 0 0;
+    margin-bottom: 0.2rem;
+}
+
+#custom-mpd_icon_random.random-off {
+    color: #4c566a;
+    font-weight: 600;
+    margin: 0 0.7rem 0 0;
+    margin-bottom: 0.2rem;
+}
+
+#custom-spotify {
+    color: #e66868;
+    font-weight: 600;
+    margin: 0 0.3rem 0 0;
+}
+
+#custom-weather {
+    font-weight: 600;
+    margin: 0 0.5rem 0 0;
+}
+
+#custom-weather_icon {
+    font-weight: 600;
+    margin: 0 0.2rem 0 0;
+}
+#custom-weather.sunny-day, #custom-weather_icon.sunny-day {
+    color: #e5c890;
+}
+#custom-weather.clear-night, #custom-weather_icon.clear-night {
+    color: #c6d0f5;
+}
+
+#custom-weather.cloudy-day, #custom-weather_icon.cloudy-day {
+    color: #7c7f93;
+}
+
+#custom-weather.cloudy-night, #custom-weather_icon.cloudy-night {
+    color: #708089;
+}
+
+#custom-weather.rainy, #custom-weather_icon.rainy {
+    color: #7dc4e4;
+}
+
+#custom-weather.rainier, #custom-weather_icon.rainier {
+    color: #f4b8e4;
+}
+
+#custom-weather.stormy, #custom-weather_icon.stormy {
+    color: #e78284;
+}
+
+#custom-weather.snowy, #custom-weather_icon.snowy {
+    color: #99d1db;
+}
+
+#custom-weather.misty, #custom-weather_icon.misty {
+    color: #81c8be;
+}
+#custom-weather.mistier, #custom-weather_icon.mistier {
+    color: #a7b8b2;
+}
+
+#custom-weather_icon.clear-night {
+    margin: 0 0.5rem 0 0;
+}
+
+#custom-dunst {
+    margin: 0 1rem 0 0;
+}

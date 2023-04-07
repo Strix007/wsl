@@ -1,0 +1,147 @@
+{
+    "margin": "10px 0 0 0",
+    "width": 1895,
+    "height": 35,
+    "layer": "top",
+	  "output": "HDMI-A-2",  
+	  "output": ["HDMI-A-2"],
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "modules-left": [
+        "wlr/workspaces",
+        "hyprland/submap",
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "custom/mpd_state_icon",
+        "custom/mpd",
+        "custom/mpd_icon_loop",
+        "custom/mpd_icon_random",
+        "custom/spotify",
+        "custom/weather_icon",
+        "custom/weather",
+        "custom/storage_root",
+        "custom/storage_media",
+        "cpu",
+        "memory",
+        "clock#date",
+        "clock",
+        "custom/dunst",
+        "tray"
+    ],
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+    "hyprland/submap": {
+        "format": "{}",
+        "max-length": 30,
+        "tooltip": false
+    },
+    "wlr/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "6": "",
+        "7": "",
+        "8": "",
+        "9": "",
+            "urgent": "",
+            // "active": ""
+        }
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "| 󰍛  {usage}%",
+    },
+    "memory": {
+        "interval": 1,
+        "format": "|   {used}GB",
+        "tooltip-format": "Available: {avail}GB",
+    },
+    "tray": {
+        "show-passive-items": true,
+        "icon-size": 20,
+        "tooltip": false,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "|   {:%H:%M} |",
+    },
+    "clock#date": {
+        "format": "|    {:%a, %b %d, %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/storage_root": {
+        "exec": "~/waybar/scripts/modules/getstorage_root.sh",
+        "restart-interval": 10,
+        "return-type": "json",
+        "format": "| 󱩶  {}",
+    },
+    "custom/storage_media": {
+        "exec": "~/waybar/scripts/modules/getstorage_media.sh",
+        "restart-interval": 10,
+        "return-type": "json",
+        "format": "  {}",
+    },
+    "custom/mpd": {
+        "exec": "~/waybar/scripts/modules/mpd.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+    },
+    "custom/mpd_state_icon": {
+        "exec": "~/waybar/scripts/modules/mpd_state_icon.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+    },
+    "custom/mpd_icon_loop": {
+        "exec": "~/waybar/scripts/modules/mpd_icon_loop.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+        "on-click": "~/waybar/scripts/modules/mpd_loop_toggle.sh",
+    },
+    "custom/mpd_icon_random": {
+        "exec": "~/waybar/scripts/modules/mpd_icon_random.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+        "on-click": "~/waybar/scripts/modules/mpd_random_toggle.sh",
+    },
+    "custom/spotify": {
+        "exec": "~/waybar/scripts/modules/spotify.sh",
+        "exec-if": "pgrep spotify",
+        "restart-interval": 1,
+        "return-type": "json",
+        "format": "|   {}",
+    },
+    "custom/weather": {
+        "exec": "~/waybar/scripts/modules/getweather.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+    },
+    "custom/weather_icon": {
+        "exec": "~/waybar/scripts/modules/getweather_icons.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+        "format": "| {}",
+    },
+    "custom/dunst": {
+        "exec": "~/waybar/scripts/modules/dunst.sh",
+        "restart-interval": 1,
+        "return-type": "json",
+        "format": "{}",
+        "on-click": "dunstctl set-paused toggle",
+    },
+}
