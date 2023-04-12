@@ -121,6 +121,7 @@ myScratchPads =
       NS "terminal"    spawnTerminal    findTerminal    manageTerminal    -- Alacritty
     , NS "fileManager" spawnFileManager findFileManager manageFileManager -- ls
     , NS "musicPlayer" spawnMusicPlayer findMusicPlayer manageMusicPlayer -- NCMPCPP And MPD
+    , NS "spotify"     spawnSpotify     findSpotify     manageSpotify     -- Spotify
 
   ]
 
@@ -165,6 +166,16 @@ myScratchPads =
         t = 0.95 -h
         l = 0.95 -w
 
+    spawnSpotify  = "spotify"
+    findSpotify   = className =? "Spotify"
+    manageSpotify = customFloating $ W.RationalRect l t w h
+
+     where
+
+        h = 0.9
+        w = 0.9
+        t = 0.95 -h
+        l = 0.95 -w
 -- KEYBINDINGS
 
 myKeys =
@@ -235,7 +246,8 @@ myKeys =
                 -- SCRATCHPADS
 
                 , ("M-s M-<Return>", namedScratchpadAction myScratchPads "terminal")    -- Spawn A Terminal As A ScratchPad (Alacritty)
-                , ("M-s z",          namedScratchpadAction myScratchPads "fileManager") -- Spawn A TUI FileManager As A ScratchPad (Ranger)
+                , ("M-s s",          namedScratchpadAction myScratchPads "spotify")     -- Spawn A Spotify As A ScratchPad (Spotify)
+                , ("M-s z",          namedScratchpadAction myScratchPads "fileManager") -- Spawn A TUI FileManager As A ScratchPad (ls)
                 , ("M-s x",          namedScratchpadAction myScratchPads "musicPlayer") -- Spawn A TUI MusicPlayer As A ScratchPad (NCMPCPP And MPD)
 
                 -- FUNCTION KEYS
@@ -355,8 +367,13 @@ masterAndStack = renamed [Replace "MasterAndStack"]
 
                         delta = 3 / 100
 
+-- No borders on all floating windows
+data AllFloats = AllFloats deriving (Read, Show)
+instance SetsAmbiguous AllFloats where
+    hiddens _ wset _ _ _ = M.keys $ W.floating wset
 
 myLayout =   avoidStruts
+             $ lessBorders AllFloats
              $ mouseResize
              $ windowArrange
              $ lessBorders Screen
@@ -403,6 +420,7 @@ myManageHook =
      , className                    =? "mpd-client"                          --> hasBorder False
      , className                    =? "Qalculate-gtk"                       --> hasBorder False
      , className                    =? "scrcpy"                              --> hasBorder False
+     , className                    =? "Spotify"                             --> hasBorder False
      , XMonad.ManageHook.title      =? "Bulk Rename - Rename Multiple Files" --> hasBorder False
      , (className                   =? "firefox" <&&> resource =? "Dialog")  --> hasBorder False
      , (className                   =? "code" <&&> resource =? "Dialog")     --> hasBorder False
@@ -410,16 +428,12 @@ myManageHook =
      -- ASSIGN WORKSPACES
 
      , className                    =? "firefox"             --> doShift ( myWorkspaces !! 0 )
-     , className                    =? "Google-chrome"       --> doShift ( myWorkspaces !! 8 )
      , className                    =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
      , className                    =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
-     , className                    =? "Org.gnome.Nautilus"  --> doShift ( myWorkspaces !! 2 )
      , className                    =? "Pcmanfm"             --> doShift ( myWorkspaces !! 2 )
      , className                    =? "Code"                --> doShift ( myWorkspaces !! 3 )
      , className                    =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
      , className                    =? "Steam"               --> doShift ( myWorkspaces !! 5 )
-     , className                    =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
-     , XMonad.ManageHook.title      =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
 
     ] <+> namedScratchpadManageHook myScratchPads
 
@@ -484,6 +498,7 @@ myStartupHook =
     -- spawnOnce "sxhkd &" -- SXHKD
     spawnOnce "rclone mount --daemon Drive_arbabashruff: $HOME/Mount/arbabashruff@gmail.com/"                                                                                                                                         -- Mount Drive Account On Local Machine
     spawnOnce "volctl"                                                                                                                                                                                                                -- Pipewire Volume Manager In SysTray
+    spawnOnce "lxsession"                                                                                                                                                                                                             -- Polkit
     spawnOnce "xrandr --output DP-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --rate 144.00 --pos 1920x0 --rotate normal --output HDMI-3 --off"                     -- Multi-Screen Xrandr
     spawnOnce "lxsession"                                                                                                                                                                                                             -- Session Utility
     spawnOnce "playerctld daemon"                                                                                                                                                                                                     -- Playerctl Daemon
@@ -495,6 +510,8 @@ myStartupHook =
     spawnOnce "mpd --kill;mpd"                                                                                                                                                                                                        -- MusicPlayerDaemon
     spawnOnce "$HOME/.config/polybar/scripts/launch.sh"                                                                                                                                                                               -- Dock
     spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/wallpaper2.png --bg-fill $HOME/.xmonad/wallpapers/wallpaper1.jpg"                                                                                                               -- Set Background Multi-Screen
+    spawnOnce "xsetroot -cursor_name  left_ptr"                                                                                                                                                                                       -- Set Cursor
+    spawnOnce "unclutter"                                                                                                                                                                                                             -- Unclutter-xfixes
     -- spawnOnce "emacs --daemon"                                                                                                                                                                                                     -- Start Emacs Daemon
     setWMName "LG3D"
 

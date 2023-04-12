@@ -207,7 +207,8 @@ These programs are required to get you started with this config so make sure to 
 - [[https://mpv.io/installation/][Mpv]] 
 - [[https://github.com/ibhagwan/picom-ibhagwan-git][Picom]] *Note:* Make sure to install the given fork instead of other forks
 - [[https://github.com/pwmt/zathura][Zathura]] 
-- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]   
+- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
+- [[https://github.com/Airblader/unclutter-xfixes][unclutter]]
 
 ** Optionally
 - [[https://i3wm.org/downloads/][i3]]
