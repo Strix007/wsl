@@ -1,6 +1,6 @@
 ;; Enable server mode (daemon) for this Emacs session
 (server-start)
-
+(put 'dired-find-alternate-file 'disabled nil)
 ;; Set emacs window title
 (setq frame-title-format '(buffer-file-name "%f" "%b"))
 
@@ -86,6 +86,7 @@
 
 ;; Install doom-nord theme
 (use-package doom-themes
+  ;; :disabled
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -96,6 +97,11 @@
   (doom-themes-org-config)
   (load-theme 'doom-nord t)
   )
+
+;; High contrast nord theme
+;; https://git.sr.ht/~ashton314/nordic-night
+;; (load-file "~/.emacs.d/nordic-night-theme.el")
+;; (load-theme 'nordic-night t)
 
 ;; Don't pop up UI dialogs when prompting
 (setq use-dialog-box nil)
@@ -575,8 +581,6 @@
   (setq company-format-margin-function #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
-  :config
-  (add-to-list 'company-backends '(company-shell company-shell-env))
   :custom
   (company-tooltip-limit 20)
   (company-minimum-prefix-length 1)
@@ -589,9 +593,6 @@
    ("<tab>" . company-complete-selection)
    )
   )
-
-;; Company-shell
-(use-package company-shell)
 
 ;; Company-quickhelp
 (use-package company-quickhelp
@@ -653,16 +654,14 @@
   "xb" '(counsel-switch-buffer :which-key "List Buffers")
   "xB" '(counsel-ibuffer :which-key "List All Buffers")
   "xc" '(delete-window      :which-key "Kill Split")
+  "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
-  "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
+  ;; Navigate tabs using centaur-tabs
+  "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
+  "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
-  ;; Navigate tabs using centaur-tabs
-  "h" '(centaur-tabs-backward-tab   :which-key "Move To Left Tab")
-  "l" '(centaur-tabs-forward-tab    :which-key "Move To Right Tab")
-  "j" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
-  "k" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Counsel Files
   "f"  '(:ignore t         :which-key "Files")
   "fr" '(counsel-recentf   :which-key "Recent Files")
@@ -933,12 +932,13 @@
 (add-to-list 'org-structure-template-alist '("lua" . "src lua"))
 
 ;; Visual-fill-column
-(defun arbab/org-mode-visual-fill ()
-  (setq visual-fill-column-width 150)
-  (visual-fill-column-mode 1)
-  )
 (use-package visual-fill-column
   :disabled t
+  :preface
+  (defun arbab/org-mode-visual-fill ()
+    (setq visual-fill-column-width 150)
+    (visual-fill-column-mode 1)
+    )
   :init
   (setq-default visual-fill-column-center-text t)
   :hook
@@ -976,20 +976,20 @@
 (use-package markdown-preview-eww)
 
 ;; LSP
-(defun arbab/lsp-mode-setup ()
-  ;; Run "lsp-deferred" if it's a supported mode
-  (unless (derived-mode-p
-           'emacs-lisp-mode
-           'yuck-mode
-           )
-    (lsp-deferred)
-    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (lsp-headerline-breadcrumb-mode)
-    )
-  )
-
 ;; LSP-mode
 (use-package lsp-mode
+  :preface
+  (defun arbab/lsp-mode-setup ()
+    ;; Run "lsp-deferred" if it's a supported mode
+    (unless (derived-mode-p
+             'emacs-lisp-mode
+             'yuck-mode
+             )
+      (lsp-deferred)
+      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+      (lsp-headerline-breadcrumb-mode)
+      )
+    )
   :commands (lsp lsp-deferred)
   :hook
   (prog-mode . arbab/lsp-mode-setup)
@@ -1133,15 +1133,15 @@
   ("M-1" . corral-backquote-forward)
   )
 
-;; Setup for nov
-(defun arbab/nov-setup ()
-  (face-remap-add-relative 'variable-pitch :family "Cantarell" :height 1.0)
-  (visual-fill-column-mode)
-  (visual-line-mode)
-  )
 ;; Nov
 (use-package nov
-  :init
+  :preface
+  (defun arbab/nov-setup ()
+    (face-remap-add-relative 'variable-pitch :family "Cantarell" :height 1.0)
+    (visual-fill-column-mode)
+    (visual-line-mode)
+    )
+  :config
   (setq nov-variable-pitch nil)
   :mode
   ("\\.epub\\'" . nov-mode)
@@ -1241,15 +1241,16 @@
 (use-package smex)
 
 ;; Tree-sitter
-(defun arbab/tree-sitter-mode-setup ()
-  (unless (derived-mode-p
-           'emacs-lisp-mode
-           'yuck-mode
-           )
-    (tree-sitter-hl-mode)
-    )
-  )
 (use-package tree-sitter
+  :preface
+  (defun arbab/tree-sitter-mode-setup ()
+    (unless (derived-mode-p
+             'emacs-lisp-mode
+             'yuck-mode
+             )
+      (tree-sitter-hl-mode)
+      )
+    )
   :hook
   (prog-mode . arbab/tree-sitter-mode-setup)
   )
