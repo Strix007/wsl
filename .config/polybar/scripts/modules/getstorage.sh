@@ -1,6 +1,6 @@
 #!/bin/bash
 getstorage() {
-    df -h $1 | awk '{print $3}' | tail -n 1 | sed 's/G//' | cut -f1 -d"."
+    df -H $1 | awk '{print $3}' | tail -n 1 | sed 's/G//' | cut -f1 -d"."
 }
 
 USED_ROOT=$(getstorage /)
