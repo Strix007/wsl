@@ -26,6 +26,7 @@ This is my personal configuration. This is not meant as a plug and play configur
 - [[#what-to-install][What To Install]]
   - [[#xmonad-1][Xmonad]]
   - [[#polybar][Polybar]]
+  - [[#zsh][Zsh]]
   - [[#rofi-1][Rofi]]
   - [[#mpd][MPD]]
   - [[#emacs-1][Emacs]]
@@ -186,7 +187,15 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/dancor/wmctrl][wmctrl]] 
 - [[https://github.com/altdesktop/playerctl][Playerctl]] 
 - [[https://github.com/noctuid/zscroll][Zscroll]] 
-- [[https://stedolan.github.io/jq][jq]]   
+- [[https://stedolan.github.io/jq][jq]]
+** Zsh
+- [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]] 
+- [[https://ohmyz.sh/install][Ohmyzsh]]
+- [[https://github.com/zdharma-continuum/fast-syntax-highlighting#Installation][fast-syntax-highlighting]]
+- [[https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md][zsh-autosuggestions]]
+- [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]] 
+- [[https://github.com/MichaelAquilina/zsh-auto-notify#installation][zsh-auto-notify]]
+- [[https://github.com/zsh-users/zsh-history-substring-search#Install][zsh-history-substring-search]]
 ** Rofi
 - [[https://github.com/davatorium/rofiinstallation][Rofi]] 
 - [[https://github.com/ropery/FFcast][ffcast]] 
@@ -195,19 +204,17 @@ These programs are required to get you started with this config so make sure to 
 ** MPD
 - [[https://mpd.readthedocs.io/en/stable/user.html][mpd]] 
 - [[https://github.com/MusicPlayerDaemon/mpc][mpc]]   
+- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
 ** Emacs
 - [[https://www.gnu.org/software/emacs/download.html][emacs-nativecomp]] 
 - [[https://github.com/jgm/pandoc/blob/main/INSTALL.md][pandoc]] 
 ** Others
 - [[https://github.com/Raymo111/i3lockcolor][i3lock]] 
-- [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]] 
-- [[https://ohmyz.sh/install][Ohmyzsh]]
 - [[https://github.com/alacritty/alacritty/blob/master/INSTALL.md][Alacritty]] 
 - [[https://github.com/dunstproject/dunst/wiki/Installation][Dunst]] 
 - [[https://mpv.io/installation/][Mpv]] 
 - [[https://github.com/ibhagwan/picom-ibhagwan-git][Picom]] *Note:* Make sure to install the given fork instead of other forks
 - [[https://github.com/pwmt/zathura][Zathura]] 
-- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
 - [[https://github.com/Airblader/unclutter-xfixes][unclutter]]
 
 ** Optionally

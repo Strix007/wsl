@@ -5,16 +5,39 @@ source $HOME/.env
 # ZSH Prompt Theme
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="false"      # Autocorrection
-CASE_SENSITIVE="true"          # Case Sensitive Autocomple
-HYPHEN_INSENSITIVE="true"      # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
+CASE_SENSITIVE="true"          # Case Sensitive Autocomplete
+HYPHEN_INSENSITIVE="fakse"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
 DISABLE_UPDATE_PROMPT="true"   # Enable Or Disable Update Prompt
 COMPLETION_WAITING_DOTS="true" # Dot Buffer
 # Plugins
 plugins=(
-	zsh-syntax-highlighting
-	zsh-autosuggestions	
-			)
+    copypath
+    copyfile
+    copybuffer
+    dirhistory
+    fast-syntax-highlighting
+    zsh-autosuggestions
+    you-should-use
+    auto-notify
+    zsh-history-substring-search
+)
 source $ZSH/oh-my-zsh.sh
+# Plugins Configuration
+# Auto-notify
+export AUTO_NOTIFY_THRESHOLD=15
+export AUTO_NOTIFY_EXPIRE_TIME=20000
+AUTO_NOTIFY_IGNORE+=("docker" "emacs" "eww" "firefox" "mpv")
+# Zsh-history-substring-search
+bindkey '^[[1;5A' history-substring-search-up
+bindkey '^[[1;5B' history-substring-search-down
+
+# Emacs Mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+# Vi Mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
 # Enviorment Variables
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8 
@@ -22,36 +45,36 @@ export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='emacs'
+    export EDITOR='emacs'
 fi
 export BROWSER="firefox"
 
 # Function for extracting archives
 ex ()
 {
-  if [ -f "$1" ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   unzstd $1    ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+    if [ -f "$1" ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1   ;;
+            *.tar.gz)    tar xzf $1   ;;
+            *.bz2)       bunzip2 $1   ;;
+            *.rar)       unrar x $1   ;;
+            *.gz)        gunzip $1    ;;
+            *.tar)       tar xf $1    ;;
+            *.tbz2)      tar xjf $1   ;;
+            *.tgz)       tar xzf $1   ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1      ;;
+            *.deb)       ar x $1      ;;
+            *.tar.xz)    tar xf $1    ;;
+            *.tar.zst)   unzstd $1    ;;
+            *)           echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 # KEYBINDING TYPE
