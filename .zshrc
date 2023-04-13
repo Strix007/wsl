@@ -6,7 +6,7 @@ source $HOME/.env
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="false"      # Autocorrection
 CASE_SENSITIVE="true"          # Case Sensitive Autocomplete
-HYPHEN_INSENSITIVE="fakse"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
+HYPHEN_INSENSITIVE="false"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
 DISABLE_UPDATE_PROMPT="true"   # Enable Or Disable Update Prompt
 COMPLETION_WAITING_DOTS="true" # Dot Buffer
 # Plugins
