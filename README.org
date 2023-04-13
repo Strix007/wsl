@@ -59,10 +59,12 @@ This config also took a lot of inspiration from [[https://github.com/adi1090x/ro
 
 ** Wayland
   I needed to use some android apps on my system and couldn’t get anbox working so decided this would be a perfect time to configure a wayland wm for waydroid. I chose hyprland and waybar for this. It’s a bit rough around the edges and needs some more time but most things work. To get the wayland system up and running you need the following. Most but not all xmonad bindings work for hyprland.
+*** Caution
+The wayland setup has only been tested on arch linux. I don’t know if it will run just as smoothly on other distros. If you run into any issues, feel free to open an issue.
 *** What To Install (Wayland)
-**** [[https://wiki.hyprland.org/Getting-Started/Installation/][hyprland]] 
-**** [[https://github.com/Alexays/Waybar][waybar]]
-**** [[https://sw.kovidgoyal.net/kitty/][kitty]]
+-  [[https://wiki.hyprland.org/Getting-Started/Installation/][hyprland-git]] 
+-  [[https://github.com/Alexays/Waybar][waybar-hyprland-git]]
+-  [[https://sw.kovidgoyal.net/kitty/][kitty]]
 * Showcase
 [[file:dotfiles-assets/images/home.png]]
 [[file:dotfiles-assets/images/terminal.png]]
