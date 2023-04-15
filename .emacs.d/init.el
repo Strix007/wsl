@@ -649,7 +649,7 @@
   "xw" '(hydra-splits/body  :which-key "Splits")
   "xh" '(split-window-right :which-key "Split Horizontally")
   "xv" '(split-window-below :which-key "Split Vertically")
-  "xq" '(centaur-tabs--kill-this-buffer-dont-ask :which-key "Kill Buffer")
+  "xq" '(kill-this-buffer   :which-key "Kill Buffer")
   "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
   "xb" '(counsel-switch-buffer :which-key "List Buffers")
   "xB" '(counsel-ibuffer :which-key "List All Buffers")
@@ -1029,6 +1029,7 @@
 
 ;; Centaur-tabs
 (use-package centaur-tabs
+  :disabled t
   :init
   (setq centaur-tabs-set-bar 'left)
   (setq centaur-tabs-style "zigzag")
