@@ -1,0 +1,3 @@
+plugins = [
+    { git = "https://github.com/Duckonaut/split-monitor-workspaces", branch = "main", name = "split-monitor-workspaces" },
+]

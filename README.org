@@ -62,8 +62,11 @@ This config also took a lot of inspiration from [[https://github.com/adi1090x/ro
 *** Caution
 The wayland setup has only been tested on arch linux. I don’t know if it will run just as smoothly on other distros. If you run into any issues, feel free to open an issue.
 *** What To Install (Wayland)
+**** Hyprland
+-  [[https://github.com/Duckonaut/hyprload][hyprload]]
 -  [[https://wiki.hyprland.org/Getting-Started/Installation/][hyprland-git]] 
 -  [[https://github.com/Alexays/Waybar][waybar-hyprland-git]]
+*** Others
 -  [[https://sw.kovidgoyal.net/kitty/][kitty]]
 * Showcase
 [[file:dotfiles-assets/images/home.png]]
