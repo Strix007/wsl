@@ -91,41 +91,43 @@ The wayland setup has only been tested on arch linux. I don’t know if it will 
 | super + shift + q | Open rofi powermenu |
 | alt   + F4        | Exit xmonad         |
 *** Layout
-| Keybind           | Function                                  |
-|-------------------+-------------------------------------------|
-| super + n         | Refresh layouts                           |
-| super + space     | Cycle through layouts                     |
-| super + t         | Snap floating window to tiling            |
-| super + up        | Increase number of windows in master pane |
-| super + down      | Decrease number of windows in master pane |
-| super + ctrl + f  | Toggle tile                               |
-| super + shift + f | Toggle bar (polybar)                      |
-| super + f         | Fullscreen focused window                 |
+| Keybind             | Function                                  |
+|---------------------+-------------------------------------------|
+| super + n           | Refresh layouts                           |
+| super + space       | Cycle through layouts                     |
+| super + t           | Snap floating window to tiling            |
+| super + up          | Increase number of windows in master pane |
+| super + down        | Decrease number of windows in master pane |
+| super + f ctrl + f  | Toggle tile                               |
+| super + f shift + f | Toggle bar (polybar)                      |
+| super + f f         | Fullscreen focused window                 |
 *** Motion
-| Keybind             | Function                          |
-|---------------------+-----------------------------------|
-| super + 1...9       | Move from workspaces 1 to 9       |
-| super + ctrl + tab  | Move focus to next display        |
-| super + left/k      | Move focus to upper window        |
-| super + right/j     | Move focus to down window         |
-| super + .           | Warp cursor to focused window     |
-| super + shift + h   | Hide focused window               |
-| super + ctrl  + h   | Show last hidden window           |
-| super + tab         | Cycle through workspace forwards  |
-| super + shift + tab | Cycle through workspace backwards |
-| super + m           | Swap focused windowwith master    |
-| super + alt + up    | Move window up by 10 pixels       |
-| super + alt + down  | Move window down by 10 pixels     |
-| super + alt + left  | Move window left by 10 pixels     |
-| super + alt + right | Move window right by 10 pixels    |
+| Keybind                         | Function                        |
+|---------------------------------+---------------------------------|
+| super + 1...9                   | Move from workspaces 1 to 9     |
+| super + ctrl + tab              | Move focus to next display      |
+| super + left/k                  | Move focus to upper window      |
+| super + right/j                 | Move focus to down window       |
+| super + .                       | Warp cursor to focused window   |
+| super + shift + h               | Hide focused window             |
+| super + h h                     | Show last hidden window         |
+| super + tab tab                 | Move focus to next display      |
+| super + tab shift + tab         | Move focus to previous display  |
+| alt   + shift + tab tab         | Swap with next display          |
+| alt   + shift + tab shift + tab | Swap with previous display      |
+| super + m                       | Swap focused window with master |
+| super + alt + up                | Move window up by 10 pixels     |
+| super + alt + down              | Move window down by 10 pixels   |
+| super + alt + left              | Move window left by 10 pixels   |
+| super + alt + right             | Move window right by 10 pixels  |
 *** Shift
-| Keybind                 | Function                           |
-|-------------------------+------------------------------------|
-| super + shift + 1...9   | Shift to workspaces 1 to 9         |
-| alt   + ctrl + tab      | Shift to next display              |
-| super + shift + left/k  | Shift to upper window              |
-| super + shift + right/j | Shift to down window               |
-| alt   + shift + tab     | Shift windows between two displays |
+| Keybind                        | Function                   |
+|--------------------------------+----------------------------|
+| super + shift + 1...9          | Shift to workspaces 1 to 9 |
+| super + shift + tab tab        | Shift to next display      |
+| super + shift + tab shift +tab | Shift to previous display  |
+| super + shift + left/k         | Shift to upper window      |
+| super + shift + right/j        | Shift to down window       |
 *** Resize
 | Keybind                    | Function                             |
 |----------------------------+--------------------------------------|

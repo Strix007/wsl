@@ -188,17 +188,18 @@ myKeys =
 
                 , ("M-<Space>",  sendMessage NextLayout)     -- Change Xmonad Layout
                 , ("M-n",        refresh)                    -- Restore Default Layouts
-                , ("M-<Tab>",    moveTo Next NonEmptyWS)     -- Cycle Through The Next Non-Empty Workspace
-                , ("M-S-<Tab>",  moveTo Prev NonEmptyWS)     -- Cycle Through The Previours Non-Empty Workspace
-                , ("M-C-<Tab>",  nextScreen)                 -- Cycle To The Next Screen
-                , ("M1-C-<Tab>", shiftNextScreen)            -- Move  To The Next Screen
-                , ("M1-S-<Tab>", swapNextScreen)             -- Swap the windows present on the two screen
-                , ("M-C-f",      withFocused toggleFloat)    -- Toggle Float On Focused Window
-                , ("M-.",        warpToWindow (1%10) (1%10)) -- Move Pointer To Focused Window
-                , ("M-S-h",      withFocused hideWindow)     -- Hide Focused Window
-                , ("M-C-h",      popOldestHiddenWindow)      -- Pop Oldest Hidden Window
-                , ("M-S-f",      spawn ("polybar-msg cmd toggle")) -- Toggle FULLSCREEN Layout Without Avoiding Struts
-                , ("M-f",        sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts) -- Toggle FULLSCREEN Layout And Avoid Struts
+                , ("M-<Tab> <Tab>",       nextScreen)          -- Cycle To The Next Screen
+                , ("M-<Tab> S-<Tab>",     prevScreen)          -- Cycle To The Next Screen
+                , ("M-S-<Tab> <Tab>",     shiftNextScreen)     -- Move  To The Next Screen
+                , ("M-S-<Tab> S-<Tab>",   shiftPrevScreen)     -- Move  To The Next Screen
+                , ("M1-S-<Tab> <Tab>",    swapNextScreen)      -- Swap the windows present on the two screen
+                , ("M1-S-<Tab> S-<Tab>",  swapPrevScreen)      -- Swap the windows present on the two screen
+                , ("M-f C-f",      withFocused toggleFloat)    -- Toggle Float On Focused Window
+                , ("M-.",          warpToWindow (1%10) (1%10)) -- Move Pointer To Focused Window
+                , ("M-h S-h",      withFocused hideWindow)     -- Hide Focused Window
+                , ("M-h h",        popOldestHiddenWindow)      -- Pop Oldest Hidden Window
+                , ("M-f S-f",      spawn ("polybar-msg cmd toggle")) -- Toggle FULLSCREEN Layout Without Avoiding Struts
+                , ("M-f f",        sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts) -- Toggle FULLSCREEN Layout And Avoid Struts
 
                 -- LAYOUT WINDOW FOCUS
 
