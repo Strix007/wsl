@@ -121,7 +121,6 @@ myScratchPads =
       NS "terminal"    spawnTerminal    findTerminal    manageTerminal    -- Alacritty
     , NS "fileManager" spawnFileManager findFileManager manageFileManager -- ls
     , NS "musicPlayer" spawnMusicPlayer findMusicPlayer manageMusicPlayer -- NCMPCPP And MPD
-    , NS "spotify"     spawnSpotify     findSpotify     manageSpotify     -- Spotify
 
   ]
 
@@ -158,17 +157,6 @@ myScratchPads =
     spawnMusicPlayer  = myTerminal ++ " " ++ "-t" ++ " " ++ "MusicPlayer"  ++ " " ++ "--class" ++ " " ++ "mpd-client,MPD-CLIENT" ++ " " ++ "-e" ++ " " ++ myMPDClient
     findMusicPlayer   = XMonad.ManageHook.title =? "MusicPlayer"
     manageMusicPlayer = customFloating $ W.RationalRect l t w h
-
-     where
-
-        h = 0.9
-        w = 0.9
-        t = 0.95 -h
-        l = 0.95 -w
-
-    spawnSpotify  = "spotify"
-    findSpotify   = className =? "Spotify"
-    manageSpotify = customFloating $ W.RationalRect l t w h
 
      where
 
@@ -247,7 +235,6 @@ myKeys =
                 -- SCRATCHPADS
 
                 , ("M-s M-<Return>", namedScratchpadAction myScratchPads "terminal")    -- Spawn A Terminal As A ScratchPad (Alacritty)
-                , ("M-s s",          namedScratchpadAction myScratchPads "spotify")     -- Spawn A Spotify As A ScratchPad (Spotify)
                 , ("M-s z",          namedScratchpadAction myScratchPads "fileManager") -- Spawn A TUI FileManager As A ScratchPad (ls)
                 , ("M-s x",          namedScratchpadAction myScratchPads "musicPlayer") -- Spawn A TUI MusicPlayer As A ScratchPad (NCMPCPP And MPD)
 
@@ -435,6 +422,7 @@ myManageHook =
      , className                    =? "Code"                --> doShift ( myWorkspaces !! 3 )
      , className                    =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
      , className                    =? "Steam"               --> doShift ( myWorkspaces !! 5 )
+     , className                    =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
 
     ] <+> namedScratchpadManageHook myScratchPads
 
