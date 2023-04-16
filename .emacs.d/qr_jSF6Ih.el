@@ -196,7 +196,6 @@
                 quickrun--mode-hook
                 nov-mode-hook
                 project-explorer-mode-hook
-                nov-mode-hook
                 browse-kill-ring-mode
                 )
               )
@@ -595,16 +594,6 @@
    )
   )
 
-;; Company-jedi
-(use-package company-jedi
-  :preface
-  (defun arbab/python-company-setup ()
-    (add-to-list 'company-backends 'company-jedi)
-    )
-  :hook
-  (python-mode . arbab/python-company-setup)
-  )
-
 ;; Company-quickhelp
 (use-package company-quickhelp
   :hook
@@ -612,6 +601,7 @@
   :custom
   (company-quickhelp-delay 0.0)
   )
+
 
 ;; General
 (use-package general
@@ -766,7 +756,6 @@
   (setq org-log-into-drawer t)
   (setq org-log-done 'time)
   (setq org-startup-with-inline-images nil)
-  (setq org-image-actual-width 600)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
@@ -944,6 +933,7 @@
 
 ;; Visual-fill-column
 (use-package visual-fill-column
+  :disabled t
   :preface
   (defun arbab/org-mode-visual-fill ()
     (setq visual-fill-column-width 150)
@@ -951,8 +941,8 @@
     )
   :init
   (setq-default visual-fill-column-center-text t)
-  ;; :hook
-  ;; (org-mode . arbab/org-mode-visual-fill)
+  :hook
+  (org-mode . arbab/org-mode-visual-fill)
   )
 
 ;; Haskell-mode
@@ -963,11 +953,6 @@
 
 ;; Rust-mode
 (use-package rust-mode)
-
-;; Json-mode
-(use-package json-mode
-  :mode "\\.json\\’"
-  )
 
 ;; Typescript-mode
 (use-package typescript-mode
@@ -1152,17 +1137,17 @@
 ;; Nov
 (use-package nov
   :preface
-  (defun arbab/nov-mode-setup ()
+  (defun arbab/nov-setup ()
     (face-remap-add-relative 'variable-pitch :family "Cantarell" :height 1.0)
     (visual-fill-column-mode)
     (visual-line-mode)
     )
   :config
-  (setq nov-variable-pitch t)
+  (setq nov-variable-pitch nil)
   :mode
   ("\\.epub\\'" . nov-mode)
   :hook
-  (nov-mode . arbab/nov-mode-setup)
+  (nov-mode-hook . arbab/nov-setup)
   )
 
 ;; Vimish-fold
@@ -1171,10 +1156,10 @@
 ;; Evil-vimish-fold
 (use-package evil-vimish-fold
   :after vimish-fold
-  :config
+  :init
   (setq evil-vimish-fold-mode-lighter "")
   (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
-  :init
+  :config
   (global-evil-vimish-fold-mode)
   )
 
@@ -1382,7 +1367,7 @@
    ("M-?" . smart-jump-references)
    )
   )
-
+(message "Hello")
 ;; Hide-mode-line
 (use-package hide-mode-line
   :hook
@@ -1397,7 +1382,6 @@
     special-mode
     tldr-mode
     compilation-mode
-    diff-mode
     ) . hide-mode-line-mode
    )
   )
