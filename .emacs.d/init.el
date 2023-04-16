@@ -198,6 +198,7 @@
                 project-explorer-mode-hook
                 nov-mode-hook
                 browse-kill-ring-mode
+                lsp-ui-doc-frame-mode
                 )
               )
   (add-hook mode (lambda () (display-line-numbers-mode 0)
@@ -628,6 +629,12 @@
     :keymaps '(normal visual)
     :prefix "g SPC"
     )
+  ;; Comment out when using centaur-tabs
+  (general-define-key
+   :states 'normal
+   "gt" 'next-buffer
+   "gT" 'previous-buffer
+   )
   )
 ;; Define Keybindings
 ;; Define avy keybinding
@@ -895,7 +902,7 @@
   :init
   (org-wild-notifier-mode 1)
   :custom
-  (org-wild-notifier-alert-time '(1 10 30 60))
+  (org-wild-notifier-alert-time '(1 15 30 60))
   (org-wild-notifier-notification-tile "Org Agenda")
   (org-wild-notifier-notification-icon "")
   (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
@@ -1015,6 +1022,7 @@
   (lsp-lens-enable nil)
   )
 
+;; Make sure to install the language servers on your local machine
 ;; Lsp-ivy
 (use-package lsp-ivy)
 
@@ -1023,10 +1031,16 @@
   :hook
   (lsp-mode . lsp-ui-mode)
   :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-header nil)
   (lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-delay 0.0)
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-doc-show-with-mouse nil)
+  (lsp-ui-doc-enhanced-markdown t)
+  (lsp-ui-doc-use-childframe t)
   )
 
-;; Make sure to install the language servers on your local machine
 ;; LSP-Haskell
 (use-package lsp-haskell)
 
