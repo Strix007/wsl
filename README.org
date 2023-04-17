@@ -106,8 +106,8 @@ The wayland setup has only been tested on arch linux. I don’t know if it will 
 |---------------------------------+---------------------------------|
 | super + 1...9                   | Move from workspaces 1 to 9     |
 | super + ctrl + tab              | Move focus to next display      |
-| super + left/k                  | Move focus to upper window      |
-| super + right/j                 | Move focus to down window       |
+| super + k                       | Move focus to upper window      |
+| super + j                       | Move focus to down window       |
 | super + .                       | Warp cursor to focused window   |
 | super + shift + h               | Hide focused window             |
 | super + h h                     | Show last hidden window         |
@@ -126,8 +126,8 @@ The wayland setup has only been tested on arch linux. I don’t know if it will 
 | super + shift + 1...9          | Shift to workspaces 1 to 9 |
 | super + shift + tab tab        | Shift to next display      |
 | super + shift + tab shift +tab | Shift to previous display  |
-| super + shift + left/k         | Shift to upper window      |
-| super + shift + right/j        | Shift to down window       |
+| super + shift + k              | Shift to upper window      |
+| super + shift + j              | Shift to down window       |
 *** Resize
 | Keybind                    | Function                             |
 |----------------------------+--------------------------------------|
@@ -201,8 +201,6 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/zdharma-continuum/fast-syntax-highlighting#Installation][fast-syntax-highlighting]]
 - [[https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md][zsh-autosuggestions]]
 - [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]] 
-- [[https://github.com/MichaelAquilina/zsh-auto-notify#installation][zsh-auto-notify]]
-- [[https://github.com/zsh-users/zsh-history-substring-search#Install][zsh-history-substring-search]]
 ** Rofi
 - [[https://github.com/davatorium/rofiinstallation][Rofi]] 
 - [[https://github.com/ropery/FFcast][ffcast]] 

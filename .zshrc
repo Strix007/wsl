@@ -18,25 +18,23 @@ plugins=(
     fast-syntax-highlighting
     zsh-autosuggestions
     you-should-use
-    auto-notify
-    zsh-history-substring-search
 )
 source $ZSH/oh-my-zsh.sh
 # Plugins Configuration
 # Auto-notify
-export AUTO_NOTIFY_THRESHOLD=15
-export AUTO_NOTIFY_EXPIRE_TIME=20000
-AUTO_NOTIFY_IGNORE+=("docker" "emacs" "eww" "firefox" "mpv")
+# export AUTO_NOTIFY_THRESHOLD=15
+# export AUTO_NOTIFY_EXPIRE_TIME=20000
+# AUTO_NOTIFY_IGNORE+=("docker" "emacs" "eww" "firefox" "mpv")
 # Zsh-history-substring-search
-bindkey '^[[1;5A' history-substring-search-up
-bindkey '^[[1;5B' history-substring-search-down
+# bindkey '^[[1;5A' history-substring-search-up
+# bindkey '^[[1;5B' history-substring-search-down
 
 # Emacs Mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
+# bindkey -M emacs '^P' history-substring-search-up
+# bindkey -M emacs '^N' history-substring-search-down
 # Vi Mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
 
 # Enviorment Variables
 export MONITOR="HDMI-2"
