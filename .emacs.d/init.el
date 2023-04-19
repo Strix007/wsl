@@ -1403,6 +1403,7 @@
   (
    (
     dired-mode
+    fundamental-mode
     dashboard-mode
     vterm-mode
     tetris-mode
@@ -1411,7 +1412,18 @@
     special-mode
     tldr-mode
     compilation-mode
+    messages-buffer-mode
     diff-mode
     ) . hide-mode-line-mode
+   )
+  )
+
+;; Jinx
+(use-package jinx
+  :hook
+  (text-mode . jinx-mode)
+  :bind
+  (
+   ([remap ispell-word] . jinx-correct)
    )
   )
