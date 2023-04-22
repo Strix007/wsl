@@ -31,6 +31,8 @@
 .emacs.d/%backup%~
 .emacs.d/project-explorer-cache
 .emacs.d/nordic-night-theme.el
+.emacs.d/*~
+.emacs.d/qr*
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
