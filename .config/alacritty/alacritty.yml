@@ -1,5 +1,10 @@
 # Colors (Nord)
 colors:
+
+  # Curor
+  cursor:
+    cursor: '#81a1c1'
+
   # Default colors
   primary:
     background: '#2E3440'
@@ -33,3 +38,9 @@ font:
   normal:
     family: JetBrains Mono
 theme: Nord
+cursor:
+  style:
+    shape: Beam
+    blinking: On
+  vi_mode_style:
+    shape: Block
