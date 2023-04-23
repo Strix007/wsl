@@ -18,7 +18,7 @@
 (setq confirm-kill-processes nil)
 
 (defun arbab/display-startup-time ()
-  (message "Emacs loaded in %s with %d garbage collections."
+  (message " Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
                     (time-subtract after-init-time before-init-time)))
@@ -141,7 +141,7 @@
                 nov-mode-hook
                 project-explorer-mode-hook
                 nov-mode-hook
-                browse-kill-ring-mode
+                browse-kill-ring-mode-hook
                 lsp-ui-doc-frame-mode
                 )
               )

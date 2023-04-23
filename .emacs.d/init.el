@@ -29,6 +29,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(setq use-package-verbose nil)
 
 ;; No-littering
 (use-package no-littering)
@@ -48,7 +49,6 @@
 
 ;; Install doom-nord theme
 (use-package doom-themes
-  ;; :disabled
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -115,7 +115,7 @@
             "Homepage"
             "Browse My Github Profile"
             (lambda (&rest _) (browse-url "https://github.com/Strix007"))
-            font-lock-reference-face
+            font-lock-constant-face
             )
            (" "
             "Configuration"
@@ -146,7 +146,7 @@
 
 ;; Solaire
 (use-package solaire-mode
-  :init
+  :config
   (solaire-global-mode +1)
   )
 
@@ -174,12 +174,16 @@
 
 ;; Evil-nerd-commenter
 (use-package evil-nerd-commenter
-  :init
+  :after
+  evil
+  :config
   (evilnc-default-hotkeys)
   )
 
 ;; Evil-goggles
 (use-package evil-goggles
+  :after
+  evil
   :config
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
@@ -187,13 +191,17 @@
 
 ;; Evil-snipe
 (use-package evil-snipe
-  :init
+  :after
+  evil
+  :config
   (evil-snipe-override-mode 1)
   )
 
 ;; Evil-mc
 (use-package evil-mc
-  :init
+  :after
+  evil
+  :config
   (global-evil-mc-mode 1)
   :bind
   ("C-M->" . evil-mc-make-cursor-in-visual-selection-end)
@@ -203,7 +211,7 @@
 
 ;; All-the-icons
 (use-package all-the-icons
-  :init
+  :config
   (when (and (not (member "all-the-icons" (font-family-list)))
              (window-system))
     (all-the-icons-install-fonts t)
@@ -213,13 +221,12 @@
 ;; Projectile
 (use-package projectile
   :diminish projectile-mode
-  :init
-  (setq projectile-project-search-path '("~/projects/"))
   :custom
   (
    (projectile-completion-system 'ivy)
    )
   :config
+  (setq projectile-project-search-path '("~/projects/"))
   (projectile-mode +1)
   :bind-keymap
   ("C-c p" . projectile-command-map)
@@ -227,13 +234,16 @@
 
 ;; Counsel-projectile
 (use-package counsel-projectile
+  :after
+  ivy
+  projectile
   :config
   (counsel-projectile-mode)
   )
 
 ;; Ace-pop-up menu
 (use-package ace-popup-menu
-  :init
+  :config
   (ace-popup-menu-mode 1)
   :config
   (setq ace-popup-menu-show-pane-header t)
@@ -259,15 +269,21 @@
 
 ;; Treemacs-evil
 (use-package treemacs-evil
-  :after treemacs)
+  :after
+  treemacs
+  )
 
 ;; Treemacs-projectile
 (use-package treemacs-projectile
-  :after treemacs)
+  :after
+  treemacs
+  )
 
 ;; Treemacs-magit
 (use-package treemacs-magit
-  :after treemacs)
+  :after
+  treemacs
+  )
 
 ;; Emojify
 (use-package emojify
@@ -306,6 +322,8 @@
 
 ;; Dired-hide-dotfiles
 (use-package dired-hide-dotfiles
+  :after
+  dirvish
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode)
@@ -318,9 +336,8 @@
   )
 ;; Doom-modeline
 (use-package doom-modeline
-  :init
-  (doom-modeline-mode 1)
   :config
+  (doom-modeline-mode 1)
   (setq doom-modeline-support-imenu t)
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-github nil)
@@ -347,10 +364,9 @@
 
 ;; Ivy
 (use-package counsel
-  :init
-  (ivy-mode)
   :diminish ivy
   :config
+  (ivy-mode)
   (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
   (setq ivy-height 15)
   (setq ivy-initial-inputs-alist nil)
@@ -376,20 +392,24 @@
 
 ;; All-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
-  :init
+  :after
+  ivy
+  :config
   (all-the-icons-ivy-rich-mode 1)
   )
 
 ;; Ivy-rich
 (use-package ivy-rich
-  :after all-the-icons-ivy-rich
+  :after
+  ivy
+  all-the-icons-ivy-rich
   :init
   (ivy-rich-mode 1)
   )
 
 ;; Ivy-posframe
 (use-package ivy-posframe
-  :init
+  :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   (ivy-posframe-mode 1)
   )
@@ -408,12 +428,12 @@
 
 ;; Which-key
 (use-package which-key
+  :defer t
   :diminish which-key-mode
-  :init
+  :config
   (setq which-key-idle-delay 5)
   (which-key-mode)
   (which-key-setup-side-window-right)
-  :config
   (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
   (setq which-key-show-remaining-keys t)
   (setq which-key-allow-evil-operators t)
@@ -422,14 +442,15 @@
 
 ;; Counsel-spotify
 (use-package counsel-spotify
-  :init
+  :defer t
+  :config
   (setq counsel-spotify-client-id spotify_class_id)
   (setq counsel-spotify-client-secret spotify_class_secret)
   )
 
 ;; Company
 (use-package company
-  :init
+  :config
   (setq company-format-margin-function #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
@@ -466,9 +487,8 @@
 
 ;; General
 (use-package general
-  :init
-  (general-auto-unbind-keys)
   :config
+  (general-auto-unbind-keys)
   ;; Define prefixes
   (general-create-definer arbab/leader-keys
     :keymaps '(normal insert visual emacs)
@@ -543,7 +563,9 @@
   )
 
 ;; Hydra
-(use-package hydra)
+(use-package hydra
+  :defer t
+  )
 ;; Define a hydra for text scale
 (defhydra hydra-text-scale (:color t)
   "Scale Text"
@@ -563,54 +585,60 @@
 
 ;; Magit
 (use-package magit
+  :commands
+  (magit-status)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   )
 
 ;; Forge
-(use-package forge)
-
-;; Org-mode
-(defun arbab/org-mode-setup ()
-  (org-indent-mode)
-  (variable-pitch-mode 1)
-  (visual-line-mode 1)
-  (font-lock-add-keywords 'org-mode
-                          '(
-                            ("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")
-                                       )
-                                )
-                             )
-                            )
-                          )
-  ;; Set faces for heading levels
-  (dolist (face '(
-                  (org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)
-                  )
-                )
-    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))
-    )
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block           nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code            nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table           nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim        nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line       nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox        nil :inherit 'fixed-pitch)
+(use-package forge
+  :after
+  magit
   )
 
 ;; Org-mode
 (use-package org
+  :commands
+  (org-capture org-agenda)
+  :preface
+  (defun arbab/org-mode-setup ()
+    (org-indent-mode)
+    ;; (variable-pitch-mode 1)
+    (visual-line-mode 1)
+    (font-lock-add-keywords 'org-mode
+                            '(
+                              ("^ *\\([-]\\) "
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")
+                                         )
+                                  )
+                               )
+                              )
+                            )
+    ;; Set faces for heading levels
+    (dolist (face '(
+                    (org-level-1 . 1.2)
+                    (org-level-2 . 1.1)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)
+                    )
+                  )
+      (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))
+      )
+
+    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block           nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code            nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table           nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim        nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line       nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox        nil :inherit 'fixed-pitch)
+    )
   :ensure org-contrib
   :hook
   (org-mode . arbab/org-mode-setup)
@@ -624,6 +652,10 @@
   (setq org-log-done 'time)
   (setq org-startup-with-inline-images nil)
   (setq org-image-actual-width 600)
+  (setq org-hide-emphasis-markers t)
+  (setq org-link-descriptive t)
+  (setq org-pretty-entities nil)
+  (setq org-hidden-keywords nil)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
@@ -684,7 +716,9 @@
 
 ;; Org-super-agenda
 (use-package org-super-agenda
-  :init
+  :after
+  org
+  :config
   (setq org-super-agenda-groups
         '(
           (
@@ -749,7 +783,9 @@
 
 ;; Org-wild-notifier
 (use-package org-wild-notifier
-  :init
+  :after
+  org
+  :config
   (org-wild-notifier-mode 1)
   :custom
   (org-wild-notifier-alert-time '(1 15 30 60))
@@ -758,21 +794,52 @@
   (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
   )
 
-;; Org-bullets
-(use-package org-bullets
+;; Org-modern
+(use-package org-modern
   :after
   org
   :hook
-  (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+  (org-mode . org-modern-mode)
+  :config
+  (setq
+   org-modern-star '("◉" "○" "●" "○" "●" "○" "●")
+   org-modern-list '((42 . "") (43 . "") (45 . ""))
+   org-modern-checkbox nil
+   org-modern-hide-stars nil
+   org-modern-tag t
+   org-modern-priority t
+   org-modern-todo t
+   org-modern-table nil
+   org-modern-priority t
+   org-modern-block-name t
+   org-modern-block-fringe 0
+   org-modern-keyword t
+   org-modern-statistics t
+   org-modern-progress '("○" "◔" "◐" "◕" "●")
+   )
+  )
+
+;; Org-appear
+(use-package org-appear
+  :after
+  org
+  :hook
+  (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t)
+  (setq org-appear-autolinks t)
+  (setq org-appear-autosubmarkers nil)
+  (setq org-appear-autoentities t)
+  (setq org-appear-autokeywords nil)
+  (setq org-appear-delay 0)
   )
 
 ;; Org-roam
 (use-package org-roam
-  :init
-  (setq org-roam-v2-ack t)
+  :after
+  org
   :config
+  (setq org-roam-v2-ack t)
   (org-roam-setup)
   :custom
   (org-roam-directory "~/Notes")
@@ -788,6 +855,8 @@
 
 ;; Toc-org
 (use-package toc-org
+  :after
+  org
   :hook
   (org-mode . toc-org-mode)
   )
@@ -801,25 +870,33 @@
 
 ;; Visual-fill-column
 (use-package visual-fill-column
+  :commands
+  (visual-fill-column-mode global-visual-fill-column-mode)
   :preface
   (defun arbab/org-mode-visual-fill ()
     (setq visual-fill-column-width 150)
     (visual-fill-column-mode 1)
     )
-  :init
+  :config
   (setq-default visual-fill-column-center-text t)
   ;; :hook
   ;; (org-mode . arbab/org-mode-visual-fill)
   )
 
 ;; Haskell-mode
-(use-package haskell-mode)
+(use-package haskell-mode
+  :mode "\\.hs\\’"
+  )
 
 ;; Lua-mode
-(use-package lua-mode)
+(use-package lua-mode
+  :mode "\\.lua\\’"
+  )
 
 ;; Rust-mode
-(use-package rust-mode)
+(use-package rust-mode
+  :mode "\\.rs\\’"
+  )
 
 ;; Json-mode
 (use-package json-mode
@@ -834,7 +911,9 @@
   )
 
 ;; Tldr
-(use-package tldr)
+(use-package tldr
+  :defer t
+  )
 
 ;; Vterm
 (use-package vterm
@@ -874,7 +953,10 @@
   )
 
 ;; Lsp-ivy
-(use-package lsp-ivy)
+(use-package lsp-ivy
+  :after
+  lsp-mode
+  )
 
 ;; LSP-UI
 (use-package lsp-ui
@@ -892,13 +974,22 @@
   )
 
 ;; LSP-Haskell
-(use-package lsp-haskell)
+(use-package lsp-haskell
+  :after
+  lsp-mode
+  )
 
 ;; LSP-pyright
-(use-package lsp-pyright)
+(use-package lsp-pyright
+  :after
+  lsp-mode
+  )
 
 ;; LSP-treemacs
-(use-package lsp-treemacs)
+(use-package lsp-treemacs
+  :after
+  lsp-mode
+  )
 
 ;; Ws-butler
 (use-package ws-butler
@@ -945,11 +1036,14 @@
   )
 
 ;; Yuck-mode
-(use-package yuck-mode)
+(use-package yuck-mode
+  :mode "\\.yuck\\'"
+  )
 
 ;; Parinfer-rust-mode
 (use-package parinfer-rust-mode
-  :init
+  :defer t
+  :config
   (setq parinfer-rust-auto-download t)
   )
 
@@ -968,10 +1062,14 @@
   (undo-tree-visualizer-timestamps t)
   (undo-tree-auto-save-history t)
   (undo-tree-visualizer-diff t)
+  (undo-tree-history-directory-alist ("." . "~/.emacs.d/var/undo-tree-hist"))
   )
 
 ;; Try
-(use-package try)
+(use-package try
+  :commands
+  (try)
+  )
 
 ;; Sudo-edit
 (use-package sudo-edit
@@ -1000,7 +1098,7 @@
 
 ;; Corral
 (use-package corral
-  :init
+  :config
   (setq corral-preserve-point t)
   :bind
   ("M-9" . corral-parentheses-backward)
@@ -1030,21 +1128,26 @@
   )
 
 ;; Vimish-fold
-(use-package vimish-fold)
+(use-package vimish-fold
+  :after
+  evil
+  )
 
 ;; Evil-vimish-fold
 (use-package evil-vimish-fold
-  :after vimish-fold
+  :after
+  vimish-fold
+  :init
+  (global-evil-vimish-fold-mode)
   :config
   (setq evil-vimish-fold-mode-lighter "")
   (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
-  :init
-  (global-evil-vimish-fold-mode)
   )
 
 ;; Save-visited-files
 (use-package workgroups2
-  :init
+  :defer t
+  :config
   (setq wg-prefix-key "C-c z")
   (setq wg-session-file (concat user-emacs-directory ".workgroups"))
   (workgroups-mode 1)
@@ -1061,7 +1164,7 @@
 
 ;; Sxhkd-mode
 (use-package sxhkdrc-mode
-  :init
+  :config
   (setq sxhkd-mode-reload-config t)
   :mode
   ("\\sxhkdrc\\’" . sxhkdrc-mode)
@@ -1069,6 +1172,8 @@
 
 ;; Minimap
 (use-package minimap
+  :commands
+  (minimap-mode)
   :config
   (setq minimap-window-location 'right)
   (setq minimap-minimum-width 10)
@@ -1104,15 +1209,18 @@
 
 ;; Ivy-prescient
 (use-package ivy-prescient
-  :after counsel
+  :after
+  counsel
   :init
-  (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode 1)
+  :config
+  (setq ivy-prescient-retain-classic-highlighting t)
   )
 
 ;; Company-prescient
 (use-package company-prescient
-  :after company
+  :after
+  company
   :init
   (company-prescient-mode 1)
   )
@@ -1137,7 +1245,8 @@
 
 ;; Tree-sitter-langs
 (use-package tree-sitter-langs
-  :after tree-sitter
+  :after
+  tree-sitter
   )
 
 ;; Git-modes
@@ -1149,7 +1258,9 @@
   )
 
 ;; Vimrc-mode
-(use-package vimrc-mode)
+(use-package vimrc-mode
+  :mode "\\.vim\\'"
+  )
 
 ;; Nix-mode
 (use-package nix-mode
@@ -1209,8 +1320,8 @@
   :init
   (smart-hungry-delete-add-default-hooks)
   :bind
-  (
    ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
+  (
 	 ([remap delete-backward-char] . smart-hungry-delete-backward-char)
 	 ([remap delete-char] . smart-hungry-delete-forward-char)
    )
@@ -1224,6 +1335,7 @@
 
 ;; Avy
 (use-package avy
+  :defer t
   :custom
   (avy-all-windows t)
   )
@@ -1270,6 +1382,7 @@
 
 ;; Jinx
 (use-package jinx
+  :disabled t
   :hook
   (text-mode . jinx-mode)
   :bind
@@ -1294,4 +1407,10 @@
   (
    ("C-h ," . define-word-at-point)
    )
+  )
+
+;; Centered-cursor-mode
+(use-package centered-cursor-mode
+  :config
+  (global-centered-cursor-mode)
   )
