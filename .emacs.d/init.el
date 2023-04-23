@@ -3,9 +3,9 @@
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
 (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
 ;; Make comments italic
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
 ;; Make keywords italic
-(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
+(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)))
 
 ;; Initialize package sources
 (require 'package)
