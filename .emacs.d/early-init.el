@@ -142,7 +142,6 @@
                 project-explorer-mode-hook
                 nov-mode-hook
                 browse-kill-ring-mode-hook
-                lsp-ui-doc-frame-mode
                 )
               )
   (add-hook mode (lambda () (display-line-numbers-mode 0)

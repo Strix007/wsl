@@ -29,7 +29,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-(setq use-package-verbose t)
+(setq use-package-verbose nil)
 
 ;; No-littering
 (use-package no-littering)
@@ -237,7 +237,7 @@
 ;; Counsel-projectile
 (use-package counsel-projectile
   :after
-  (:all counsel projectile)
+  (:any counsel projectile)
   :config
   (counsel-projectile-mode)
   )
@@ -439,8 +439,9 @@
 (use-package which-key
   :defer t
   :diminish which-key-mode
-  :config
+  :init
   (which-key-mode)
+  :config
   (which-key-setup-side-window-right)
   :custom
   (which-key-idle-delay 5)
@@ -975,14 +976,20 @@
   :hook
   (lsp-mode . lsp-ui-mode)
   :custom
+  ;; Ui-doc
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header nil)
-  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-position 'top-right-corner)
   (lsp-ui-doc-delay 0.0)
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-show-with-mouse nil)
   (lsp-ui-doc-enhanced-markdown t)
   (lsp-ui-doc-use-childframe t)
+  ;; Sideline
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-delay 0.0)
   )
 
 ;; LSP-Haskell
@@ -1073,7 +1080,6 @@
   (undo-tree-visualizer-timestamps t)
   (undo-tree-auto-save-history t)
   (undo-tree-visualizer-diff t)
-  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/var/undo-tree-hist")))
   )
 
 ;; Try
