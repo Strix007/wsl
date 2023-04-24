@@ -29,7 +29,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-(setq use-package-verbose nil)
+(setq use-package-verbose t)
 
 ;; No-littering
 (use-package no-littering)
@@ -49,6 +49,8 @@
 
 ;; Install doom-nord theme
 (use-package doom-themes
+  :init
+  (load-theme 'doom-nord t)
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -57,7 +59,6 @@
   (doom-themes-treemacs-config)
   (doom-themes-neotree-config)
   (doom-themes-org-config)
-  (load-theme 'doom-nord t)
   )
 
 ;; High contrast nord theme
@@ -226,8 +227,9 @@
    (projectile-completion-system 'ivy)
    )
   :config
-  (setq projectile-project-search-path '("~/projects/"))
   (projectile-mode +1)
+  :custom
+  (projectile-project-search-path '("~/projects/"))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   )
@@ -245,8 +247,8 @@
 (use-package ace-popup-menu
   :config
   (ace-popup-menu-mode 1)
-  :config
-  (setq ace-popup-menu-show-pane-header t)
+  :custom
+  (ace-popup-menu-show-pane-header t)
   )
 
 ;; Neotree
@@ -322,6 +324,8 @@
 
 ;; Dired-hide-dotfiles
 (use-package dired-hide-dotfiles
+  :hook
+  (dired-mode . dired-hide-dotfiles-mode)
   :after
   dirvish
   :config
@@ -338,16 +342,17 @@
 (use-package doom-modeline
   :config
   (doom-modeline-mode 1)
-  (setq doom-modeline-support-imenu t)
-  (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-github nil)
-  (setq doom-modeline-mu4e t)
-  (setq doom-modeline-irc t)
-  (setq doom-modeline-height 30)
-  (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-indent-info nil)
-  (setq doom-modeline-minor-modes t)
-  (setq doom-modeline-buffer-file-name-style 'truncate-except-project)
+  :custom
+  (doom-modeline-support-imenu t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-github nil)
+  (doom-modeline-mu4e t)
+  (doom-modeline-irc t)
+  (doom-modeline-height 30)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-minor-modes t)
+  (doom-modeline-buffer-file-name-style 'truncate-except-project)
   )
 
 ;; Helpful
@@ -356,20 +361,25 @@
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ("C-h f" . helpful-function)
-  ("C-h c" . helpful-command)
-  ("C-h v" . helpful-variable)
+  ("C-h f" . counsel-describe-function)
+  ("C-h c" . counsel-describe-symbol)
+  ("C-h v" . counsel-describe-variable)
   ("C-h k" . helpful-key)
   )
 
 ;; Ivy
 (use-package counsel
-  :diminish ivy
+  :diminish
+  ivy
   :config
   (ivy-mode)
-  (setq ivy-ignore-buffers '("\\` " "\\`\\*"))
-  (setq ivy-height 15)
-  (setq ivy-initial-inputs-alist nil)
+  :custom
+  (ivy-extra-directories nil)
+  (ivy-use-virtual-buffers nil)
+  (enable-recursive-minibuffers t)
+  (ivy-ignore-buffers '("\\` " "\\`\\*"))
+  (ivy-height 15)
+  (ivy-initial-inputs-alist nil)
   :bind
   (
    ("C-s"     . swiper)
@@ -393,7 +403,7 @@
 ;; All-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
   :after
-  ivy
+  counsel
   :config
   (all-the-icons-ivy-rich-mode 1)
   )
@@ -401,17 +411,22 @@
 ;; Ivy-rich
 (use-package ivy-rich
   :after
-  ivy
+  counsel
   all-the-icons-ivy-rich
-  :init
+  :config
   (ivy-rich-mode 1)
+  :custom
+  (ivy-rich-path-style 'abbrev)
   )
 
 ;; Ivy-posframe
 (use-package ivy-posframe
+  :after
+  counsel
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   (ivy-posframe-mode 1)
+  :custom
+  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   )
 
 ;; Rainbow-delimiters
@@ -431,13 +446,14 @@
   :defer t
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 5)
   (which-key-mode)
   (which-key-setup-side-window-right)
-  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
-  (setq which-key-show-remaining-keys t)
-  (setq which-key-allow-evil-operators t)
-  (setq which-key-max-display-columns nil)
+  :custom
+  (which-key-idle-delay 5)
+  (which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
+  (which-key-show-remaining-keys t)
+  (which-key-allow-evil-operators t)
+  (which-key-max-display-columns nil)
   )
 
 ;; Counsel-spotify
@@ -450,11 +466,10 @@
 
 ;; Company
 (use-package company
-  :config
-  (setq company-format-margin-function #'company-vscode-dark-icons-margin)
   :hook
   (prog-mode . company-mode)
   :custom
+  (company-format-margin-function #'company-vscode-dark-icons-margin)
   (company-tooltip-limit 20)
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0)
@@ -642,20 +657,20 @@
   :ensure org-contrib
   :hook
   (org-mode . arbab/org-mode-setup)
-  :config
-  (setq org-agenda-span 10)
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-ellipsis "▾")
-  (setq org-log-into-drawer t)
-  (setq org-log-done 'time)
-  (setq org-startup-with-inline-images nil)
-  (setq org-image-actual-width 600)
-  (setq org-hide-emphasis-markers t)
-  (setq org-link-descriptive t)
-  (setq org-pretty-entities nil)
-  (setq org-hidden-keywords nil)
+  :custom
+  (org-agenda-span 10)
+  (org-agenda-start-on-weekday nil)
+  (org-agenda-start-with-log-mode t)
+  (org-confirm-babel-evaluate nil)
+  (org-ellipsis "▾")
+  (org-log-into-drawer t)
+  (org-log-done 'time)
+  (org-startup-with-inline-images nil)
+  (org-image-actual-width 600)
+  (org-hide-emphasis-markers t)
+  (org-link-descriptive t)
+  (org-pretty-entities nil)
+  (org-hidden-keywords nil)
   ;; Org-agenda files
   (setq org-agenda-files
         '(
@@ -825,13 +840,13 @@
   org
   :hook
   (org-mode . org-appear-mode)
-  :config
-  (setq org-appear-autoemphasis t)
-  (setq org-appear-autolinks t)
-  (setq org-appear-autosubmarkers nil)
-  (setq org-appear-autoentities t)
-  (setq org-appear-autokeywords nil)
-  (setq org-appear-delay 0)
+  :custom
+  (org-appear-autoemphasis t)
+  (org-appear-autolinks t)
+  (org-appear-autosubmarkers nil)
+  (org-appear-autoentities t)
+  (org-appear-autokeywords nil)
+  (org-appear-delay 0)
   )
 
 ;; Org-roam
@@ -839,9 +854,9 @@
   :after
   org
   :config
-  (setq org-roam-v2-ack t)
   (org-roam-setup)
   :custom
+  (org-roam-v2-ack t)
   (org-roam-directory "~/Notes")
   :bind
   (
@@ -906,8 +921,8 @@
 ;; Typescript-mode
 (use-package typescript-mode
   :mode "\\.ts\\'"
-  :config
-  (setq typescript-indent-level 2)
+  :custom
+  (typescript-indent-level 2)
   )
 
 ;; Tldr
@@ -1001,9 +1016,7 @@
 (use-package centaur-tabs
   :disabled t
   :init
-  (setq centaur-tabs-set-bar 'left)
-  (setq centaur-tabs-style "zigzag")
-  (setq centaur-tabs-cycle-scope 'default)
+  (centaur-tabs-mode t)
   :hook
   (
    (
@@ -1017,15 +1030,17 @@
     tldr-mode
     compilation-mode
     ) . centaur-tabs-local-mode)
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-height 40)
-  (setq centaur-tabs-set-icons t)
-  (setq centaur-tabs-close-button "")
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-modified-marker "")
-  (setq centaur-tabs-show-new-tab-button t)
-  (setq centaur-tabs-new-tab-text "  ")
+  :custom
+  (centaur-tabs-set-bar 'left)
+  (centaur-tabs-style "zigzag")
+  (centaur-tabs-cycle-scope 'default)
+  (centaur-tabs-height 40)
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-close-button "")
+  (centaur-tabs-set-modified-marker t)
+  (centaur-tabs-modified-marker "")
+  (centaur-tabs-show-new-tab-button t)
+  (centaur-tabs-new-tab-text "  ")
   (centaur-tabs-change-fonts "JetBrains Mono" 125)
   :bind
   (
@@ -1043,8 +1058,8 @@
 ;; Parinfer-rust-mode
 (use-package parinfer-rust-mode
   :defer t
-  :config
-  (setq parinfer-rust-auto-download t)
+  :custom
+  (parinfer-rust-auto-download t)
   )
 
 ;; Emmet
@@ -1056,13 +1071,12 @@
 ;; Undo-tree
 (use-package undo-tree
   :init
-  (setq undo-limit 10000000)
   (global-undo-tree-mode)
   :custom
   (undo-tree-visualizer-timestamps t)
   (undo-tree-auto-save-history t)
   (undo-tree-visualizer-diff t)
-  (undo-tree-history-directory-alist ("." . "~/.emacs.d/var/undo-tree-hist"))
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/var/undo-tree-hist")))
   )
 
 ;; Try
@@ -1098,8 +1112,8 @@
 
 ;; Corral
 (use-package corral
-  :config
-  (setq corral-preserve-point t)
+  :custom
+  (corral-preserve-point t)
   :bind
   ("M-9" . corral-parentheses-backward)
   ("M-0" . corral-parentheses-forward)
@@ -1119,8 +1133,8 @@
     (visual-fill-column-mode)
     (visual-line-mode)
     )
-  :config
-  (setq nov-variable-pitch t)
+  :custom
+  (nov-variable-pitch t)
   :mode
   ("\\.epub\\'" . nov-mode)
   :hook
@@ -1137,35 +1151,37 @@
 (use-package evil-vimish-fold
   :after
   vimish-fold
-  :init
-  (global-evil-vimish-fold-mode)
   :config
-  (setq evil-vimish-fold-mode-lighter "")
-  (setq evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
+  (global-evil-vimish-fold-mode)
+  :custom
+  (evil-vimish-fold-mode-lighter "")
+  (evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
   )
 
 ;; Save-visited-files
 (use-package workgroups2
+  :disabled t
   :defer t
   :config
+  (workgroups-mode 1)
+  :custom
   (setq wg-prefix-key "C-c z")
   (setq wg-session-file (concat user-emacs-directory ".workgroups"))
-  (workgroups-mode 1)
   )
 
 ;; Highlight-indentation
 (use-package highlight-indent-guides
   :hook
   (prog-mode . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-responsive 'top)
+  :custom
+  (highlight-indent-guides-method 'character)
+  (highlight-indent-guides-responsive 'top)
   )
 
 ;; Sxhkd-mode
 (use-package sxhkdrc-mode
-  :config
-  (setq sxhkd-mode-reload-config t)
+  :custom
+  (sxhkd-mode-reload-config t)
   :mode
   ("\\sxhkdrc\\’" . sxhkdrc-mode)
   )
@@ -1174,13 +1190,13 @@
 (use-package minimap
   :commands
   (minimap-mode)
-  :config
-  (setq minimap-window-location 'right)
-  (setq minimap-minimum-width 10)
-  (setq minimap-dedicated-window t)
-  (setq minimap-hide-cursor t)
-  (setq minimap-hide-scroll-bar nil)
-  (setq minimap-hide-fringes t)
+  :custom
+  (minimap-window-location 'right)
+  (minimap-minimum-width 10)
+  (minimap-dedicated-window t)
+  (minimap-hide-cursor t)
+  (minimap-hide-scroll-bar nil)
+  (minimap-hide-fringes t)
   )
 
 ;; Hl-mode
@@ -1202,31 +1218,34 @@
 
 ;; Prescient
 (use-package prescient
-  :config
-  (setq prescient-persist-mode t)
-  (setq prescient-sort-length-enable nil)
+  :custom
+  (prescient-persist-mode t)
+  (prescient-sort-length-enable nil)
   )
 
 ;; Ivy-prescient
 (use-package ivy-prescient
   :after
   counsel
-  :init
-  (ivy-prescient-mode 1)
   :config
-  (setq ivy-prescient-retain-classic-highlighting t)
+  (ivy-prescient-mode 1)
+  :custom
+  (ivy-prescient-retain-classic-highlighting nil)
   )
 
 ;; Company-prescient
 (use-package company-prescient
   :after
   company
-  :init
+  :config
   (company-prescient-mode 1)
   )
 
 ;; Smex
-(use-package smex)
+(use-package smex
+  :after
+  counsel
+  )
 
 ;; Tree-sitter
 (use-package tree-sitter
@@ -1317,7 +1336,7 @@
 
 ;; Smart-hungry-delete
 (use-package smart-hungry-delete
-  :init
+  :config
   (smart-hungry-delete-add-default-hooks)
   :bind
    ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
@@ -1341,7 +1360,9 @@
   )
 
 ;; Link-hint
-(use-package link-hint)
+(use-package link-hint
+  :defer t
+  )
 
 ;; Dumb-jump
 (use-package dumb-jump
@@ -1411,6 +1432,6 @@
 
 ;; Centered-cursor-mode
 (use-package centered-cursor-mode
-  :config
-  (global-centered-cursor-mode)
+  :commands
+  (centered-cursor-mode global-centered-cursor-mode)
   )
