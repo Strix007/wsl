@@ -168,7 +168,7 @@
 ;; Evil-collection
 (use-package evil-collection
   :after
-  evil
+  (evil)
   :config
   (evil-collection-init)
   )
@@ -176,7 +176,7 @@
 ;; Evil-nerd-commenter
 (use-package evil-nerd-commenter
   :after
-  evil
+  (evil)
   :config
   (evilnc-default-hotkeys)
   )
@@ -184,7 +184,7 @@
 ;; Evil-goggles
 (use-package evil-goggles
   :after
-  evil
+  (evil)
   :config
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
@@ -193,7 +193,7 @@
 ;; Evil-snipe
 (use-package evil-snipe
   :after
-  evil
+  (evil)
   :config
   (evil-snipe-override-mode 1)
   )
@@ -201,7 +201,7 @@
 ;; Evil-mc
 (use-package evil-mc
   :after
-  evil
+  (evil)
   :config
   (global-evil-mc-mode 1)
   :bind
@@ -237,8 +237,7 @@
 ;; Counsel-projectile
 (use-package counsel-projectile
   :after
-  ivy
-  projectile
+  (:all counsel projectile)
   :config
   (counsel-projectile-mode)
   )
@@ -272,19 +271,19 @@
 ;; Treemacs-evil
 (use-package treemacs-evil
   :after
-  treemacs
+  (treemacs)
   )
 
 ;; Treemacs-projectile
 (use-package treemacs-projectile
   :after
-  treemacs
+  (treemacs)
   )
 
 ;; Treemacs-magit
 (use-package treemacs-magit
   :after
-  treemacs
+  (treemacs)
   )
 
 ;; Emojify
@@ -327,7 +326,7 @@
   :hook
   (dired-mode . dired-hide-dotfiles-mode)
   :after
-  dirvish
+  (dirvish)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode)
@@ -369,9 +368,7 @@
 
 ;; Ivy
 (use-package counsel
-  :diminish
-  ivy
-  :config
+  :init
   (ivy-mode)
   :custom
   (ivy-extra-directories nil)
@@ -403,7 +400,7 @@
 ;; All-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
   :after
-  counsel
+  (counsel)
   :config
   (all-the-icons-ivy-rich-mode 1)
   )
@@ -411,8 +408,7 @@
 ;; Ivy-rich
 (use-package ivy-rich
   :after
-  counsel
-  all-the-icons-ivy-rich
+  (counsel all-the-icons-ivy-rich)
   :config
   (ivy-rich-mode 1)
   :custom
@@ -421,8 +417,6 @@
 
 ;; Ivy-posframe
 (use-package ivy-posframe
-  :after
-  counsel
   :config
   (ivy-posframe-mode 1)
   :custom
@@ -559,6 +553,7 @@
   "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
+  "xxf" '(counsel-switch-buffer-other-window :which-key "Open File In New Split")
   ;; Navigate tabs using centaur-tabs
   "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
   "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
@@ -609,7 +604,7 @@
 ;; Forge
 (use-package forge
   :after
-  magit
+  (magit)
   )
 
 ;; Org-mode
@@ -732,7 +727,7 @@
 ;; Org-super-agenda
 (use-package org-super-agenda
   :after
-  org
+  (org)
   :config
   (setq org-super-agenda-groups
         '(
@@ -799,7 +794,7 @@
 ;; Org-wild-notifier
 (use-package org-wild-notifier
   :after
-  org
+  (org)
   :config
   (org-wild-notifier-mode 1)
   :custom
@@ -812,7 +807,7 @@
 ;; Org-modern
 (use-package org-modern
   :after
-  org
+  (org)
   :hook
   (org-mode . org-modern-mode)
   :config
@@ -837,7 +832,7 @@
 ;; Org-appear
 (use-package org-appear
   :after
-  org
+  (org)
   :hook
   (org-mode . org-appear-mode)
   :custom
@@ -852,7 +847,7 @@
 ;; Org-roam
 (use-package org-roam
   :after
-  org
+  (org)
   :config
   (org-roam-setup)
   :custom
@@ -871,7 +866,7 @@
 ;; Toc-org
 (use-package toc-org
   :after
-  org
+  (org)
   :hook
   (org-mode . toc-org-mode)
   )
@@ -938,8 +933,10 @@
   (vterm-max-scrollback 10000)
   )
 
-;; Markdown-preview-eww
-(use-package markdown-preview-eww)
+;; Markdown-mode
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  )
 
 ;; Make sure to install the language servers on your local machine
 ;; LSP
@@ -970,7 +967,7 @@
 ;; Lsp-ivy
 (use-package lsp-ivy
   :after
-  lsp-mode
+  (lsp-mode)
   )
 
 ;; LSP-UI
@@ -991,19 +988,19 @@
 ;; LSP-Haskell
 (use-package lsp-haskell
   :after
-  lsp-mode
+  (lsp-mode)
   )
 
 ;; LSP-pyright
 (use-package lsp-pyright
   :after
-  lsp-mode
+  (lsp-mode)
   )
 
 ;; LSP-treemacs
 (use-package lsp-treemacs
   :after
-  lsp-mode
+  (lsp-mode)
   )
 
 ;; Ws-butler
@@ -1144,13 +1141,13 @@
 ;; Vimish-fold
 (use-package vimish-fold
   :after
-  evil
+  (evil)
   )
 
 ;; Evil-vimish-fold
 (use-package evil-vimish-fold
   :after
-  vimish-fold
+  (vimish-fold)
   :config
   (global-evil-vimish-fold-mode)
   :custom
@@ -1226,7 +1223,7 @@
 ;; Ivy-prescient
 (use-package ivy-prescient
   :after
-  counsel
+  (counsel)
   :config
   (ivy-prescient-mode 1)
   :custom
@@ -1236,7 +1233,7 @@
 ;; Company-prescient
 (use-package company-prescient
   :after
-  company
+  (company)
   :config
   (company-prescient-mode 1)
   )
@@ -1244,7 +1241,7 @@
 ;; Smex
 (use-package smex
   :after
-  counsel
+  (counsel)
   )
 
 ;; Tree-sitter
@@ -1265,7 +1262,7 @@
 ;; Tree-sitter-langs
 (use-package tree-sitter-langs
   :after
-  tree-sitter
+  (tree-sitter)
   )
 
 ;; Git-modes
