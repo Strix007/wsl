@@ -151,3 +151,4 @@
 
 ;; Specific modes for specific file extensions
 (add-to-list 'auto-mode-alist '("\\.rasi$" . conf-unix-mode))
+(add-to-list 'auto-mode-alist '("\\lfrc\\'" . sh-mode))

@@ -466,7 +466,7 @@
   :custom
   (company-format-margin-function #'company-vscode-dark-icons-margin)
   (company-tooltip-limit 20)
-  (company-minimum-prefix-length 1)
+  (company-minimum-prefix-length 2)
   (company-idle-delay 0.0)
   :bind
   (
@@ -896,27 +896,32 @@
 
 ;; Haskell-mode
 (use-package haskell-mode
-  :mode "\\.hs\\’"
+  :mode
+  ("\\.hs\\’")
   )
 
 ;; Lua-mode
 (use-package lua-mode
-  :mode "\\.lua\\’"
+  :mode
+  ("\\.lua\\’")
   )
 
 ;; Rust-mode
 (use-package rust-mode
-  :mode "\\.rs\\’"
+  :mode
+  ("\\.rs\\’")
   )
 
 ;; Json-mode
 (use-package json-mode
-  :mode "\\.json\\’"
+  :mode
+  ("\\.json\\’")
   )
 
 ;; Typescript-mode
 (use-package typescript-mode
-  :mode "\\.ts\\'"
+  :mode
+  ("\\.ts\\'")
   :custom
   (typescript-indent-level 2)
   )
@@ -936,7 +941,8 @@
 
 ;; Markdown-mode
 (use-package markdown-mode
-  :mode "\\.md\\'"
+  :mode
+  ("\\.md\\'")
   )
 
 ;; Make sure to install the language servers on your local machine
@@ -1056,7 +1062,8 @@
 
 ;; Yuck-mode
 (use-package yuck-mode
-  :mode "\\.yuck\\'"
+  :mode
+  ("\\.yuck\\'")
   )
 
 ;; Parinfer-rust-mode
@@ -1111,7 +1118,9 @@
   ("C-c r r" . quickrun)
   ("C-c r w" . quickrun-region)
   ("C-c r e" . quickrun-replace-region)
-  )
+  ("C-c r a" . quickrun-with-arg)
+  ("C-c r s" . quickrun-select)
+)
 
 ;; Corral
 (use-package corral
@@ -1281,12 +1290,14 @@
 
 ;; Vimrc-mode
 (use-package vimrc-mode
-  :mode "\\.vim\\'"
+  :mode
+  ("\\.vim\\'")
   )
 
 ;; Nix-mode
 (use-package nix-mode
-  :mode "\\.nix\\'"
+  :mode
+  ("\\.nix\\'")
   )
 
 ;; Diminish
