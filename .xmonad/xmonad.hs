@@ -141,7 +141,7 @@ myScratchPads =
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
-    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "lf,LF" ++ " " ++ "-e" ++ " " ++ "lf"
+    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "lf,LF" ++ " " ++ "-e" ++ " " ++ "$HOME/local/bin/lfub"
     findFileManager   = XMonad.ManageHook.title =? "FileManager"
     manageFileManager = customFloating $ W.RationalRect l t w h
 

@@ -202,9 +202,9 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/zdharma-continuum/fast-syntax-highlighting#Installation][fast-syntax-highlighting]]
 - [[https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md][zsh-autosuggestions]]
 - [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]]
-** lf
-[[https://github.com/gokcehan/lf][lf]]
-[[https://github.com/jstkdng/ueberzugpp][uberzug++]]
+** lf 
+- [[https://github.com/gokcehan/lf][lf]]  
+- [[https://github.com/jstkdng/ueberzugpp][uberzug++]]
 ** Rofi
 - [[https://github.com/davatorium/rofiinstallation][Rofi]] 
 - [[https://github.com/ropery/FFcast][ffcast]] 
