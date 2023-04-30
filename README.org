@@ -27,6 +27,7 @@ This is my personal configuration. This is not meant as a plug and play configur
   - [[#xmonad-1][Xmonad]]
   - [[#polybar][Polybar]]
   - [[#zsh][Zsh]]
+  - [[#lf][lf]]
   - [[#rofi-1][Rofi]]
   - [[#mpd][MPD]]
   - [[#emacs-1][Emacs]]
@@ -200,7 +201,10 @@ These programs are required to get you started with this config so make sure to 
 - [[https://ohmyz.sh/install][Ohmyzsh]]
 - [[https://github.com/zdharma-continuum/fast-syntax-highlighting#Installation][fast-syntax-highlighting]]
 - [[https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md][zsh-autosuggestions]]
-- [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]] 
+- [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]]
+** lf
+[[https://github.com/gokcehan/lf][lf]]
+[[https://github.com/jstkdng/ueberzugpp][uberzug++]]
 ** Rofi
 - [[https://github.com/davatorium/rofiinstallation][Rofi]] 
 - [[https://github.com/ropery/FFcast][ffcast]] 

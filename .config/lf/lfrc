@@ -1,0 +1,103 @@
+# Ueberzug
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/scope'
+
+# Zsh
+set shell zsh
+set shellopts '-euy'
+set ifs "\n"
+
+set drawbox
+set hidden
+set icons
+# show the result of execution of previous commands
+map ` !true
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# Map enter to j
+map <enter> open
+
+# Delete
+map D delete
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+
+# Create new directory
+map o push %mkdir<space>
+# Create new file
+map O push %lf-mkfile
+
+# Backup files when moving
+# cmd paste %{{
+#     set -- $(cat ~/.local/share/lf/files)
+#     mode="$1"
+#     shift
+#     case "$mode" in
+#         copy) cp -r --backup=numbered -- "$@" .;;
+#         move) mv --backup=numbered -- "$@" .;;
+#     esac
+#     rm ~/.local/share/lf/files
+#     lf -remote "send clear"
+# }}
+# Show progress when copying
+cmd paste &{{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    case "$mode" in
+        copy)
+            rsync -av --ignore-existing --progress -- "$@" . |
+            stdbuf -i0 -o0 -e0 tr '\r' '\n' |
+            while IFS= read -r line; do
+                lf -remote "send $id echo $line"
+            done
+            ;;
+        move) mv -n -- "$@" .;;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+
+# Tar
+cmd compress ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+cmd untar ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+map a untar
+map A compress
+
+# Wallpaper
+cmd wallpaper ${{
+    if [[ $fx =~ ( |\') ]]
+       then
+          wall1=$(echo $fx | awk '{print $1}')
+          wall2=$(echo $fx | awk '{print $2}')
+          feh --bg-fill $wall1 --bg-fill $wall2
+    else
+          feh --bg-fill $fx
+    fi
+}}
+
+map <a-f> wallpaper

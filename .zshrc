@@ -9,6 +9,10 @@ CASE_SENSITIVE="true"          # Case Sensitive Autocomplete
 HYPHEN_INSENSITIVE="false"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
 DISABLE_UPDATE_PROMPT="true"   # Enable Or Disable Update Prompt
 COMPLETION_WAITING_DOTS="true" # Dot Buffer
+
+#PATH
+export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify"
+
 # Plugins
 plugins=(
     copypath
@@ -42,6 +46,7 @@ export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
@@ -81,6 +86,8 @@ bindkey -v
 # Exa
 alias l="exa -la"
 alias ls="exa -a"
+# lf
+alias lf="lfub"
 # Vim 
 alias vim="nvim"
 # Git
@@ -95,6 +102,4 @@ alias cp='cp -vr'
 alias rm='rm -vr'
 alias dirs='dirs -v'
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin"
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
