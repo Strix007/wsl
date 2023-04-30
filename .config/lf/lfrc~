@@ -8,13 +8,10 @@ set shellopts '-euy'
 set ifs "\n"
 
 set drawbox
-set hidden false
+set hidden
 set icons
 # show the result of execution of previous commands
 map ` !true
-
-# show hidden files
-map <backspace> set hidden!
 
 # execute current file (must be executable)
 map x $$f
@@ -104,14 +101,3 @@ cmd wallpaper ${{
 }}
 
 map <a-f> wallpaper
-
-# Shortcuts
-map <a-1> cd ~
-map <a-2> cd ~/.emacs.d/
-map <a-3> cd ~/.config/
-map <a-4> cd ~/.xmonad/
-map <a-5> cd ~/projects/
-map <a-6> cd ~/Downloads/
-map <a-7> cd /media/Media/
-map <a-8> cd /media/Music/
-map <a-9> cd /media/Novels/
