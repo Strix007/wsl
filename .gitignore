@@ -23,6 +23,7 @@
 .emacs.d/transient
 .emacs.d/.emacs.desktop
 .emacs.d/var
+.emacs.d/history
 .emacs.d/custom-set-variables.el
 .emacs.d/OrgFiles
 .emacs.d/init.el~
