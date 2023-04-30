@@ -18,6 +18,7 @@
 .config/hypr/output
 .emacs.d/.cache
 .emacs.d/elpa
+.emacs.d/backups
 .emacs.d/etc
 .emacs.d/transient
 .emacs.d/.emacs.desktop
@@ -40,4 +41,3 @@ xmenu/xmenu.1
 xmenu/xmenu.c
 xmenu/xmenu.o
 xmenu/icons/.vscode
-~*

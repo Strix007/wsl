@@ -27,6 +27,9 @@
 
 (add-hook 'emacs-startup-hook #'arbab/display-startup-time)
 
+;; Make all "~" files go into a seperate backup directory
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups/")))
+
 ;; Make shebang (#!) file executable when saved
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
