@@ -9,6 +9,7 @@ import XMonad
 import Data.Ratio
 import Data.Monoid
 import System.Exit
+import Control.Monad
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86
 import qualified XMonad.StackSet as W
@@ -54,7 +55,6 @@ import XMonad.Layout.MultiToggle.Instances
 import XMonad.Util.EZConfig
 import XMonad.Util.SpawnOnce
 import XMonad.Util.NamedScratchpad
-
 import XMonad.Util.WorkspaceCompare
 
 -- For Polybar
@@ -66,15 +66,16 @@ import Text.XHtml (title)
 
 -- User Set Variables
 
-myEmacs, myGUIFileExplorer, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator :: String
-myTerminal        = "alacritty"     -- Global Terminal Variable
-myBrowser         = "firefox"       -- Global Browser Variable
-myGUIFileExplorer = "thunar"        -- Global GUI FileExplorer Variable
-myMPDClient       = "ncmpcpp"       -- Global MPD Client Variable
-myGUIMusicApp     = "spotify"       -- Global GUI Music App Variable
-myCalculator      = "qalculate-gtk" -- Global Calculator Variable
-myEmacs           = "emacsclient -c -a 'emacs'"
-
+myEmacs, myGUIFileManager, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator, myTUIFileManager :: String
+myTerminal       = "alacritty"     -- Global Terminal Variable
+myBrowser        = "firefox"       -- Global Browser Variable
+myGUIFileManager = "thunar"        -- Global GUI FileManager Variable
+myMPDClient      = "ncmpcpp"       -- Global MPD Client Variable
+myGUIMusicApp    = "spotify"       -- Global GUI Music App Variable
+myCalculator     = "qalculate-gtk" -- Global Calculator Variable
+myEmacs          = "emacsclient -c -a 'emacs'"
+-- Flags are to be changed depending on the terminal
+myTUIFileManager = myTerminal ++ " " ++ "-t" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf,LF" ++ " " ++ "-e" ++ " " ++ "$HOME/local/bin/lfub"
 
 -- Change Focus To The Window Where The Mouse Is
 
@@ -84,7 +85,7 @@ myFocusFollowsMouse =  True
 -- Weather To Only Focus With Mouse Click
 
 myClickJustFocuses :: Bool
-myClickJustFocuses =  False -- If myFocusFollowsMouse Is True Then This Should Be False By Default
+myClickJustFocuses =  False -- If myFocusFollowsMouse Is True Then This Should Be False
 
 myBorderWidth :: Dimension
 myBorderWidth =  2 -- Border Width
@@ -141,7 +142,7 @@ myScratchPads =
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
-    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "lf,LF" ++ " " ++ "-e" ++ " " ++ "$HOME/local/bin/lfub"
+    spawnFileManager  = myTerminal ++ " " ++ "-t" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "fileManager,FileManager" ++ " " ++ "-e" ++ " " ++ "$HOME/local/bin/lfub"
     findFileManager   = XMonad.ManageHook.title =? "FileManager"
     manageFileManager = customFloating $ W.RationalRect l t w h
 
@@ -241,7 +242,7 @@ myKeys =
 
                 -- FUNCTION KEYS
 
-                , ("<XF86Explorer>",   spawn myGUIFileExplorer)               -- Use "Fn+F1" To Open File Explorer
+                , ("<XF86Explorer>",   spawn myTUIFileManager)               -- Use "Fn+F1" To Open File Explorer
                 , ("<XF86Search>",     spawn "rofi -show drun -theme $HOME/.config/rofi/launcher/drun/launcher.rasi") -- Use "Fn+F2" To Launch Rofi
                 , ("<XF86Calculator>", spawn myCalculator)           -- Use "Fn+F3" To Launch Calculator
                 , ("<XF86Tools>",      spawn myGUIMusicApp)          -- Use "Fn+F4" To Launch Spotify
@@ -268,8 +269,8 @@ myKeys =
 
                 , ("M-<Return>", spawn myTerminal)                -- Spawn Terminal (Alacritty)
                 , ("M-a b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
-                , ("M-a z",      spawn myGUIFileExplorer)         -- Spawn FileManager (Nautilus)
-                , ("M-a S-z",    spawn "pcmanfm")                 -- Spawn Backup FileManager (Thunar)
+                , ("M-a z",      spawn myTUIFileManager)          -- Spawn FileManager (Nautilus)
+                , ("M-a S-z",    spawn myGUIFileManager)         -- Spawn Backup FileManager (Thunar)
                 , ("M-p r",      spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
@@ -405,7 +406,7 @@ myManageHook =
      , className                    =? "scratchpadterminal"                  --> hasBorder False
      , className                    =? "spt"                                 --> hasBorder False
      , className                    =? "qalculate-gtk"                       --> hasBorder False
-     , className                    =? "lf"                                  --> hasBorder False
+     , className                    =? "fileManager"                         --> hasBorder False
      , className                    =? "mpd-client"                          --> hasBorder False
      , className                    =? "Qalculate-gtk"                       --> hasBorder False
      , className                    =? "scrcpy"                              --> hasBorder False
@@ -416,16 +417,18 @@ myManageHook =
 
      -- ASSIGN WORKSPACES
 
-     , className                    =? "firefox"             --> doShift ( myWorkspaces !! 0 )
-     , className                    =? "Alacritty"           --> doShift ( myWorkspaces !! 1 )
-     , className                    =? "Thunar"              --> doShift ( myWorkspaces !! 2 )
-     , className                    =? "Pcmanfm"             --> doShift ( myWorkspaces !! 2 )
-     , className                    =? "Code"                --> doShift ( myWorkspaces !! 3 )
-     , className                    =? "Code - Insiders"     --> doShift ( myWorkspaces !! 3 )
-     , className                    =? "Steam"               --> doShift ( myWorkspaces !! 5 )
-     , className                    =? "Spotify"             --> doShift ( myWorkspaces !! 8 )
+     , className                    =? "firefox"             --> viewShift ( myWorkspaces !! 0 )
+     , className                    =? "Alacritty"           --> viewShift ( myWorkspaces !! 1 )
+     , className                    =? "lf"                  --> viewShift ( myWorkspaces !! 2 )
+     , className                    =? "Thunar"              --> viewShift ( myWorkspaces !! 2 )
+     , className                    =? "Pcmanfm"             --> viewShift ( myWorkspaces !! 2 )
+     , className                    =? "Code"                --> viewShift ( myWorkspaces !! 3 )
+     , className                    =? "Code - Insiders"     --> viewShift ( myWorkspaces !! 3 )
+     , className                    =? "Atom"                --> viewShift ( myWorkspaces !! 3 )
+     , className                    =? "Steam"               --> viewShift ( myWorkspaces !! 5 )
+     , className                    =? "Spotify"             --> viewShift ( myWorkspaces !! 8 )
 
-    ] <+> namedScratchpadManageHook myScratchPads
+    ] <+> namedScratchpadManageHook myScratchPads where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
 
 -- TOGGLE FLOAT FUNCTION
