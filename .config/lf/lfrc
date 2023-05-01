@@ -1,6 +1,6 @@
 # Ueberzug
 set cleaner '~/.config/lf/cleaner'
-set previewer '~/.config/lf/scope'
+set previewer '~/.config/lf/preview'
 
 # Zsh
 set shell zsh
