@@ -5,7 +5,7 @@ source "$HOME"/.env
 # Possible values are metric, imperial and kelvin.
 UNITS="metric"
 
-URL="http://api.openweathermap.org/data/2.5/weather?APPID="$API_KEY"&id="$CITY_ID"&units="$UNITS""
+URL="http://api.openweathermap.org/data/2.5/weather?APPID="$OPEN_WEATHER_API_KEY"&id="$OPEN_WEATHER_CITY_ID"&units="$UNITS""
 RESULTS=`curl -s $URL`
 ICON_CODE=`echo $RESULTS | jq -r ".weather[].icon"`
 RESULTS_PARSED=`echo $RESULTS | jq .main.temp | cut -f1 -d"."`
@@ -16,7 +16,7 @@ if [ "$ICON_CODE" == "01d"  ]; then
     CONDITION="Sunny"
     DAYTIME="Day"
 elif [ "$ICON_CODE" == "01n"  ]; then
-    ICON=""
+    ICON=" "
     ICON_HEX="#c6d0f5"
     CONDITION="Clear"
     DAYTIME="Night"
