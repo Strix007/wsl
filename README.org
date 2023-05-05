@@ -220,6 +220,7 @@ These programs are required to get you started with this config so make sure to 
 ** Others
 - [[https://github.com/Raymo111/i3lockcolor][i3lock]] 
 - [[https://github.com/alacritty/alacritty/blob/master/INSTALL.md][Alacritty]] 
+- [[https://sw.kovidgoyal.net/kitty/binary/#][kitty]]
 - [[https://github.com/dunstproject/dunst/wiki/Installation][Dunst]] 
 - [[https://mpv.io/installation/][Mpv]] 
 - [[https://github.com/ibhagwan/picom-ibhagwan-git][Picom]] *Note:* Make sure to install the given fork instead of other forks

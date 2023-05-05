@@ -87,7 +87,8 @@ bindkey -v
 alias l="exa -la"
 alias ls="exa -a"
 # lf
-alias lf="lfub"
+alias lf="kitty $HOME/local/bin/lfub"
+alias lfub="kitty $HOME/local/bin/lfub"
 # Vim 
 alias vim="nvim"
 # Git

@@ -438,7 +438,8 @@
 ;; Which-key
 (use-package which-key
   :defer t
-  :diminish which-key-mode
+  :diminish
+  which-key-mode
   :init
   (which-key-mode)
   :config
@@ -454,9 +455,9 @@
 ;; Counsel-spotify
 (use-package counsel-spotify
   :defer t
-  :config
-  (setq counsel-spotify-client-id spotify_class_id)
-  (setq counsel-spotify-client-secret spotify_class_secret)
+  :custom
+  (counsel-spotify-client-id spotify_class_id)
+  (counsel-spotify-client-secret spotify_class_secret)
   )
 
 ;; Company
@@ -928,7 +929,8 @@
 
 ;; Tldr
 (use-package tldr
-  :defer t
+  :commands
+  (tldr)
   )
 
 ;; Vterm
@@ -961,14 +963,16 @@
       (lsp-headerline-breadcrumb-mode)
       )
     )
-  :commands (lsp lsp-deferred)
+  :commands
+  (lsp lsp-deferred)
   :hook
   (prog-mode . arbab/lsp-mode-setup)
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-enable-which-key-integration t)
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (lsp-lens-enable nil)
+  :bind-keymap
+  ("C-c l" . lsp-command-map)
   )
 
 ;; Lsp-ivy
@@ -1353,8 +1357,8 @@
   :config
   (smart-hungry-delete-add-default-hooks)
   :bind
-   ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
   (
+   ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
 	 ([remap delete-backward-char] . smart-hungry-delete-backward-char)
 	 ([remap delete-char] . smart-hungry-delete-forward-char)
    )

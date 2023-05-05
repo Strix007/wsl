@@ -9,7 +9,7 @@ set ifs "\n"
 
 set drawbox
 set hidden false
-set icons
+set icons true
 # show the result of execution of previous commands
 map ` !true
 
