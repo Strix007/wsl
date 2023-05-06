@@ -47,7 +47,6 @@ export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
-export BAT_THEME="Nord"
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else

@@ -16,6 +16,7 @@
 .config/rofi/.history
 .config/rofi/bookmarks/.bookmarks
 .config/hypr/output
+.config/bat/syntaxes
 .emacs.d/.cache
 .emacs.d/elpa
 .emacs.d/backups
