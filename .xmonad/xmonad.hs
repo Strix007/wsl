@@ -444,7 +444,7 @@ toggleFloat w =
 
 -- EVENTHOOK
 
-myEventHook = fullscreenEventHook <+> docksEventHook <+> serverModeEventHook <+> swallowEventHook (className =? "Alacritty") (return True) <+> swallowEventHookSub (className =? "Alacritty") (return True)
+myEventHook = fullscreenEventHook <+> docksEventHook <+> serverModeEventHook <+> swallowEventHook (className =? "Alacritty" <||> className =? "kitty" <||> className =? "st-256color") (return True) <+> swallowEventHookSub (className =? "Alacritty" <||> className =? "kitty" <||> className =? "st-256color") (return True)
 
 -- LOGHOOK WITH DBUS FOR POLYBAR
 
