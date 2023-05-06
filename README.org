@@ -205,6 +205,13 @@ These programs are required to get you started with this config so make sure to 
 ** lf 
 - [[https://github.com/gokcehan/lf][lf]]  
 - [[https://github.com/jstkdng/ueberzugpp][uberzug++]]
+- [[https://github.com/sharkdp/bat#installation][bat]]
+- [[https://github.com/dirkvdb/ffmpegthumbnailer][ffmpegthumbnailer]]
+- [[https://imagemagick.org/script/download.php][imagemagick]]
+- [[https://poppler.freedesktop.org/][poppler]]
+- [[https://github.com/marianosimone/epub-thumbnailer][epub-thumbnailer]]
+- [[https://wkhtmltopdf.org/downloads.html][wkhtmltopdf]]
+- [[https://github.com/hpjansson/chafa#Installing][chafa]]
 ** Rofi
 - [[https://github.com/davatorium/rofiinstallation][Rofi]] 
 - [[https://github.com/ropery/FFcast][ffcast]] 

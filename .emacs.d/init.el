@@ -118,7 +118,8 @@
             (lambda (&rest _) (browse-url "https://github.com/Strix007"))
             font-lock-constant-face
             )
-           (" "
+           (
+            ,(all-the-icons-octicon "settings" :height 1.0 :v-adjust 0.0)
             "Configuration"
             "Open Configuration"
             (lambda (&rest _) (find-file ".emacs.d/init.el"))
