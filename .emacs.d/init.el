@@ -79,7 +79,7 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
   (setq dashboard-footer-icon (
-                               all-the-icons-octicon "person"
+                               all-the-icons-material "person"
                                :height 1.0
                                :v-adjust 0.0
                                :face 'font-lock-keyword-face
