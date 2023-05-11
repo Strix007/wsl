@@ -33,6 +33,8 @@
 .emacs.d/eln-cache
 .emacs.d/%backup%~
 .emacs.d/project-explorer-cache
+.emacs.d/places
+.emacs.d/url
 .emacs.d/nordic-night-theme.el
 .emacs.d/*~
 .emacs.d/qr*

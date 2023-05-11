@@ -199,7 +199,7 @@ myKeys =
                 , ("M-.",          warpToWindow (1%10) (1%10)) -- Move Pointer To Focused Window
                 , ("M-S-h S-h",    withFocused hideWindow)     -- Hide Focused Window
                 , ("M-S-h h",      popOldestHiddenWindow)      -- Pop Oldest Hidden Window
-                , ("M-f S-f",      spawn ("polybar-msg cmd toggle")) -- Toggle FULLSCREEN Layout Without Avoiding Struts
+                , ("M-f S-f",      spawn "polybar-msg cmd toggle") -- Toggle FULLSCREEN Layout Without Avoiding Struts
                 , ("M-f f",        sendMessage ( Toggle FULL ) >> sendMessage ToggleStruts) -- Toggle FULLSCREEN Layout And Avoid Struts
 
                 -- LAYOUT WINDOW FOCUS
@@ -505,7 +505,7 @@ myStartupHook =
     spawnOnce "feh --bg-fill $HOME/.xmonad/wallpapers/wallpaper1.png --bg-fill $HOME/.xmonad/wallpapers/wallpaper2.png"                                                                                                               -- Set Background Multi-Screen
     spawnOnce "xsetroot -cursor_name  left_ptr"                                                                                                                                                                                       -- Set Cursor
     spawnOnce "unclutter"                                                                                                                                                                                                             -- Unclutter-xfixes
-    -- spawnOnce "emacs --daemon"                                                                                                                                                                                                     -- Start Emacs Daemon
+    spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
     setWMName "LG3D"
 
 myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH

@@ -3,6 +3,27 @@
 
 ;; Enable server mode (daemon) for this Emacs session
 (server-start)
+(if (daemonp)
+    (message "Loading in the daemon!")
+  (message "Loading in regular Emacs!")
+  )
+
+;; Fonts
+(defun arbab/set-font-faces ()
+  (message "Setting faces!")
+  (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
+  )
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  ;; (setq doom-modeline-icon t)
+                  (with-selected-frame frame
+                    (arbab/set-font-faces))))
+    (arbab/set-font-faces))
+
+;; Disable dired alternate file warning
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; Set emacs window title

@@ -1,7 +1,3 @@
-;; Fonts
-(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
-(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
 ;; Make comments italic
 (add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
 ;; Make keywords italic
@@ -69,17 +65,26 @@
 ;; Dashboard
 (use-package dashboard
   :init
+  (setq dashboard-icon-type 'all-the-icons)
   (dashboard-setup-startup-hook)
   :config
   (dashboard-modify-heading-icons '((recents . "file-text")))
-  ;; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq initial-buffer-choice (lambda ()
+                                (get-buffer-create "*dashboard*")
+                                (dashboard-refresh-buffer)))
   (setq dashboard-center-content t)
   (setq dashboard-set-footer t)
+  ;; Icons
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
   (setq dashboard-footer-messages '("Personal configuration of Arbab Khan"))
-  (setq dashboard-footer-icon (all-the-icons-material "person"
-                                                      :height 1.0
-                                                      :v-adjust 0.0
-                                                      :face 'font-lock-keyword-face))
+  (setq dashboard-footer-icon (
+                               all-the-icons-octicon "person"
+                               :height 1.0
+                               :v-adjust 0.0
+                               :face 'font-lock-keyword-face
+                               )
+        )
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
   (setq dashboard-init-info "Welcome, Arbab")
