@@ -18,10 +18,14 @@
   (if (daemonp)
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
-                  ;; (setq doom-modeline-icon t)
+                  (setq doom-modeline-icon t)
                   (with-selected-frame frame
                     (arbab/set-font-faces))))
     (arbab/set-font-faces))
+;; Make comments italic
+(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
+;; Make keywords italic
+(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)))
 
 ;; Disable dired alternate file warning
 (put 'dired-find-alternate-file 'disabled nil)

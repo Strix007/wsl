@@ -102,5 +102,7 @@ alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
 alias dirs='dirs -v'
-
+# Emacs
+alias e="emacsclient -c -n -u -a 'emacs'"
+alias edr='killall emacs; emacs --daemon'
 

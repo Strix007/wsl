@@ -1,7 +1,7 @@
-;; Make comments italic
-(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
-;; Make keywords italic
-(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)))
+;; Set Fonts
+(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
+(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
 
 ;; Initialize package sources
 (require 'package)
@@ -204,6 +204,19 @@
   (evil-snipe-override-mode 1)
   )
 
+;; Evil-anzu
+(use-package evil-anzu
+  :after
+  (evil)
+  :config
+  (global-anzu-mode +1)
+  :bind
+  (
+   ([remap query-replace-regexp] . anzu-query-replace-regexp)
+   ([remap query-replace] . anzu-query-replace)
+   )
+  )
+
 ;; Evil-mc
 (use-package evil-mc
   :after
@@ -224,6 +237,10 @@
     (all-the-icons-install-fonts t)
     )
   )
+
+;; Nerd-icons
+;; Make sure to do M-x nerd-icons-install-fonts
+(use-package nerd-icons)
 
 ;; Projectile
 (use-package projectile
@@ -343,11 +360,13 @@
   :hook
   (doom-modeline-mode . minions-mode)
   )
+
 ;; Doom-modeline
 (use-package doom-modeline
   :config
   (doom-modeline-mode 1)
   :custom
+  (doom-modeline-icon t)
   (doom-modeline-support-imenu t)
   (doom-modeline-major-mode-icon t)
   (doom-modeline-github nil)
