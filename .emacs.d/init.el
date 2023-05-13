@@ -900,10 +900,24 @@
 
 ;; Org-babel-templates
 (require 'org-tempo)
-(add-to-list 'org-structure-template-alist '("sh"  . "src shell"))
-(add-to-list 'org-structure-template-alist '("el"  . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("py"  . "src python"))
-(add-to-list 'org-structure-template-alist '("lua" . "src lua"))
+(setq org-structure-template-alist
+      '(
+        ("lua" . "src lua")
+        ("py" . "src python")
+        ("el" . "src emacs-lisp")
+        ("sh" . "src shell")
+        ("a" . "export ascii")
+        ("c" . "center")
+        ("C" . "comment")
+        ("e" . "example")
+        ("E" . "export")
+        ("h" . "export html")
+        ("l" . "export latex")
+        ("q" . "quote")
+        ("s" . "src")
+        ("v" . "verse")
+        )
+      )
 
 ;; Visual-fill-column
 (use-package visual-fill-column
