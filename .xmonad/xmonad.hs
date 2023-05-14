@@ -506,6 +506,7 @@ myStartupHook =
     spawnOnce "xsetroot -cursor_name  left_ptr"                                                                                                                                                                                       -- Set Cursor
     spawnOnce "unclutter"                                                                                                                                                                                                             -- Unclutter-xfixes
     spawnOnce "emacs --daemon"                                                                                                                                                                                                        -- Start Emacs Daemon
+    spawnOnce "$HOME/.xmonad/scripts/sshfs_phone.sh"                                                                                                                                                                                  -- Start Script To Mount Android Phone Over SSH
     setWMName "LG3D"
 
 myFilter = filterOutWs [scratchpadWorkspaceTag] -- Scratchpad Filter For EWMH
