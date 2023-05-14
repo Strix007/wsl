@@ -206,6 +206,14 @@
   (evil-snipe-override-mode 1)
   )
 
+;; Evil-surround
+(use-package evil-surround
+  :after
+  (evil)
+  :config
+  (global-evil-surround-mode 1)
+)
+
 ;; Evil-anzu
 (use-package evil-anzu
   :after
