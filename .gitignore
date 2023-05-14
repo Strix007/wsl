@@ -38,6 +38,7 @@
 .emacs.d/nordic-night-theme.el
 .emacs.d/*~
 .emacs.d/qr*
+.emacs.d/undo
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu
