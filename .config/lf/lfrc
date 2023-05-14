@@ -111,7 +111,7 @@ map <a-2> cd ~/.emacs.d/
 map <a-3> cd ~/.config/
 map <a-4> cd ~/.xmonad/
 map <a-5> cd ~/projects/
-map <a-6> cd ~/Mount/arbabashruff@gmail.com/
+map <a-6> cd ~/Mount/
 map <a-7> cd ~/Downloads/
 map <a-8> cd /media/Media/
 map <a-9> cd /media/Music/
