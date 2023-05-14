@@ -15,13 +15,7 @@
   (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
   (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
   )
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (setq doom-modeline-icon t)
-                  (with-selected-frame frame
-                    (arbab/set-font-faces))))
-    (arbab/set-font-faces))
+(add-hook 'server-after-make-frame-hook 'arbab/set-font-faces)
 ;; Make comments italic
 (add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
 ;; Make keywords italic

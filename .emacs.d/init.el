@@ -45,8 +45,8 @@
 
 ;; Install doom-nord theme
 (use-package doom-themes
-  :init
-  (load-theme 'doom-nord t)
+  :hook
+  (server-after-make-frame . (lambda () (load-theme 'doom-nord t)))
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -55,6 +55,8 @@
   (doom-themes-treemacs-config)
   (doom-themes-neotree-config)
   (doom-themes-org-config)
+  :init
+  (load-theme 'doom-nord t)
   )
 
 ;; High contrast nord theme
@@ -1130,6 +1132,7 @@
   (undo-tree-visualizer-timestamps t)
   (undo-tree-auto-save-history t)
   (undo-tree-visualizer-diff t)
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   )
 
 ;; Try
