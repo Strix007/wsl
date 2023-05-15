@@ -21,6 +21,13 @@
 ;; Make keywords italic
 (add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)))
 
+;; Prettify-Symbols-mode
+(add-hook 'prog-mode-hook 'prettify-symbols-mode)
+
+;; Hl-line-mode
+(add-hook 'prog-mode-hook 'hl-line-mode)
+(add-hook 'text-mode-hook 'hl-line-mode)
+
 ;; Disable dired alternate file warning
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -137,12 +144,14 @@
 (dolist (mode '(
                 completion-list-mode-hook
                 org-mode-hook
+                vundo-mode-hook
                 dired-mode-hook
                 Info-mode-hook
                 tldr-mode-hook
                 calendar-mode-hook
                 org-agenda-mode-hook
                 dashboard-mode-hook
+                diff-mode-hook
                 vterm-mode-hook
                 compilation-mode-hook
                 backtrace-mode-hook

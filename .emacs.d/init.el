@@ -170,7 +170,7 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-set-undo-system 'undo-tree)
+  (evil-set-undo-system 'undo-fu)
   )
 
 ;; Evil-collection
@@ -329,7 +329,7 @@
 (use-package dirvish
   :init
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory
+    "h" 'dired-up-directory
     "l" 'dired-find-file
     )
   (dirvish-override-dired-mode)
@@ -763,9 +763,7 @@
 
 ;; Org-super-agenda
 (use-package org-super-agenda
-  :after
-  (org)
-  :config
+  :init
   (setq org-super-agenda-groups
         '(
           (
@@ -799,7 +797,7 @@
            )
           (
            :name "Plans"
-           :tag ("planning")
+                 :tag ("planning")
            :order 5
            )
           (
@@ -863,6 +861,17 @@
    org-modern-keyword t
    org-modern-statistics t
    org-modern-progress '("○" "◔" "◐" "◕" "●")
+   )
+  )
+
+;; Org-sidebar
+(use-package org-sidebar
+  :after
+  (org)
+  :commands
+  (
+   org-sidebar-tree-toggle
+   org-sidebar-toggle
    )
   )
 
@@ -1132,15 +1141,29 @@
   (html-mode . emmet-mode)
   )
 
-;; Undo-tree
-(use-package undo-tree
+;; Undo-fu
+(use-package undo-fu
+  :config
+  (setq undo-outer-limit 1006632960) ; 960mb
+  )
+
+;; Undo-fu-session
+(use-package undo-fu-session
   :init
-  (global-undo-tree-mode)
+  (undo-fu-session-global-mode)
+  :config
+  (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))
+  (setq undo-fu-session-linear nil)
+  )
+
+;; Vundo
+(use-package vundo
   :custom
-  (undo-tree-visualizer-timestamps t)
-  (undo-tree-auto-save-history t)
-  (undo-tree-visualizer-diff t)
-  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (vundo-glyph-alist vundo-unicode-symbols)
+  :bind
+  (
+   ("C-x u" . vundo)
+   )
   )
 
 ;; Try
@@ -1265,21 +1288,10 @@
   (minimap-hide-fringes t)
   )
 
-;; Hl-mode
-(use-package hl-mode
-  :ensure nil
+;; Puni
+(use-package puni
   :hook
-  (
-   (
-    prog-mode
-    text-mode
-    ) . hl-line-mode)
-  )
-
-;; Smartparens
-(use-package smartparens
-  :hook
-  (prog-mode . smartparens-mode)
+  (prog-mode . puni-mode)
   )
 
 ;; Prescient
@@ -1308,7 +1320,7 @@
   )
 
 ;; Smex
-(use-package smex
+(use-package amx
   :after
   (counsel)
   )
@@ -1357,13 +1369,7 @@
 ;; Diminish
 (use-package diminish)
 
-;; Prettify-symbols-mode
-(use-package prettify-symbols-mode
-  :ensure nil
-  :hook
-  (prog-mode . prettify-symbols-mode)
-  )
-
+;; Highlight-numbers
 (use-package highlight-numbers
   :hook
   (prog-mode . highlight-numbers-mode)
@@ -1502,4 +1508,34 @@
 (use-package centered-cursor-mode
   :commands
   (centered-cursor-mode global-centered-cursor-mode)
+  )
+
+;; Git-gutter
+(use-package git-gutter
+  :hook
+  (
+   (
+    prog-mode
+    text-mode
+    ) . git-gutter-mode)
+  :custom
+  (git-gutter:update-interval 2)
+  (git-gutter:window-width 2)
+  (git-gutter:modified-sign "󰈅")
+  (git-gutter:added-sign "")
+  (git-gutter:deleted-sign "")
+  )
+
+;; Goto-line-preview
+(use-package goto-line-preview
+  :bind
+  (
+   ([remap goto-line] . goto-line-preview)
+   )
+  )
+
+;; Fancy-compilation
+(use-package fancy-compilation
+  :hook
+  (compilation-mode . fancy-compilation-mode)
   )
