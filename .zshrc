@@ -1,9 +1,11 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# Antigen
+# Load Antigen
+source $HOME/antigen.zsh
+antigen init $HOME/.antigenrc
+
 # Source some envs
 source $HOME/.env
 # ZSH Prompt Theme
-ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="false"      # Autocorrection
 CASE_SENSITIVE="true"          # Case Sensitive Autocomplete
 HYPHEN_INSENSITIVE="false"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
@@ -13,17 +15,6 @@ COMPLETION_WAITING_DOTS="true" # Dot Buffer
 #PATH
 export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify"
 
-# Plugins
-plugins=(
-    copypath
-    copyfile
-    copybuffer
-    dirhistory
-    fast-syntax-highlighting
-    zsh-autosuggestions
-    you-should-use
-)
-source $ZSH/oh-my-zsh.sh
 # Plugins Configuration
 # Auto-notify
 # export AUTO_NOTIFY_THRESHOLD=15

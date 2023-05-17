@@ -197,11 +197,8 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/noctuid/zscroll][Zscroll]] 
 - [[https://stedolan.github.io/jq][jq]]
 ** Zsh
-- [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]] 
-- [[https://ohmyz.sh/install][Ohmyzsh]]
-- [[https://github.com/zdharma-continuum/fast-syntax-highlighting#Installation][fast-syntax-highlighting]]
-- [[https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md][zsh-autosuggestions]]
-- [[https://github.com/MichaelAquilina/zsh-you-should-use#installation][zsh-you-should-use]]
+- [[https://github.com/ohmyzsh/ohmyzsh/wiki/InstallingZSH][Zsh]]
+- [[https://github.com/zsh-users/antigen#Installation][Antigen]]
 ** lf 
 - [[https://github.com/gokcehan/lf][lf]]  
 - [[https://github.com/jstkdng/ueberzugpp][uberzug++]]

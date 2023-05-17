@@ -467,7 +467,11 @@
 ;; Rainbow-mode
 (use-package rainbow-mode
   :hook
-  (prog-mode . rainbow-mode)
+  (
+   (
+    prog-mode
+    text-mode
+    ) . rainbow-mode)
   )
 
 ;; Which-key
@@ -1289,9 +1293,9 @@
   )
 
 ;; Puni
-(use-package puni
+(use-package smartparens
   :hook
-  (prog-mode . puni-mode)
+  (prog-mode . smartparens-mode)
   )
 
 ;; Prescient
