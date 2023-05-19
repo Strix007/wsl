@@ -115,3 +115,6 @@ map <a-6> cd ~/Mount/
 map <a-7> cd ~/Downloads/
 map <a-8> cd /media/Media/
 map <a-9> cd /media/Music/
+
+# Reload
+map R reload
