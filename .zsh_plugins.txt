@@ -1,0 +1,25 @@
+# Oh-my-zsh
+# Plugins
+ohmyzsh/ohmyzsh path:lib/clipboard.zsh
+ohmyzsh/ohmyzsh path:plugins/copypath
+ohmyzsh/ohmyzsh path:plugins/copyfile
+ohmyzsh/ohmyzsh path:plugins/copybuffer
+ohmyzsh/ohmyzsh path:plugins/dirhistory
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+
+# Libraries
+ohmyzsh/ohmyzsh path:lib/git.zsh
+ohmyzsh/ohmyzsh path:lib/theme-and-appearance.zsh
+ohmyzsh/ohmyzsh path:themes/robbyrussell.zsh-theme
+
+# Git repositories plugins
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+MichaelAquilina/zsh-you-should-use
+
+# Zsh-utils
+belak/zsh-utils path:history
+belak/zsh-utils path:editor
+belak/zsh-utils path:completion
+
+Aloxaf/fzf-tab

@@ -1,7 +1,9 @@
-# Antigen
-# Load Antigen
-source $HOME/antigen.zsh
-antigen init $HOME/.antigenrc
+# Antidote
+# Source Antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
 
 # Source some envs
 source $HOME/.env
@@ -33,7 +35,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.
 
 # Enviorment Variables
 export MONITOR="HDMI-2"
-export LANG=en_US.UTF-8 
+export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
@@ -72,7 +74,7 @@ ex ()
 }
 
 # KEYBINDING TYPE
-bindkey -v 
+bindkey -v
 # ALIASES
 # Exa
 alias l="exa -la"
@@ -80,7 +82,7 @@ alias ls="exa -a"
 # lf
 alias lf="kitty $HOME/local/bin/lfub"
 alias lfub="kitty $HOME/local/bin/lfub"
-# Vim 
+# Vim
 alias vim="nvim"
 # Git
 alias g="git"
@@ -88,12 +90,11 @@ alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # Misc
 alias c="clear"
 alias xclass="xprop | grep WM_CLASS"
-# Verbose 
+# Verbose
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
 alias dirs='dirs -v'
 # Emacs
 alias e="emacsclient -c -n -u -a 'emacs'"
-alias edr='killall emacs; emacs --daemon'
-
+alias edr="killall emacs; emacs --daemon"

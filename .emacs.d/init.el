@@ -1215,7 +1215,8 @@
   ("M-{" . corral-braces-backward)
   ("M-}" . corral-braces-forward)
   ("M-/" . corral-double-quotes-forward)
-  ("M-1" . corral-backquote-forward)
+  ("M-`" . corral-backquote-forward)
+  ("M-'" . corral-single-quotes-forward)
   )
 
 ;; Nov
