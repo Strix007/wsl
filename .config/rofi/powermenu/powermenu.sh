@@ -10,8 +10,7 @@ dir="$HOME/.config/rofi/powermenu/"
 theme='powermenu'
 
 # CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+uptime="$(uptime -p | sed -e 's/up //g')"
 
 # Options
 shutdown=''
@@ -27,15 +26,17 @@ rofi_cmd() {
 	rofi -dmenu \
 		-p "Goodbye ${USER}" \
 		-mesg "Uptime: $uptime" \
-		-theme ${dir}/${theme}.rasi
+		-theme "${dir}"/${theme}.rasi
 }
+
+uptime=$(uptime --pretty | sed -e 's/^\w*\ *//')
 
 # Confirmation CMD
 confirm_cmd() {
 	rofi -dmenu \
 		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
-		-theme ${dir}/confirm.rasi
+		-mesg "$uptime" \
+		-theme "${dir}"/confirm.rasi
 }
 
 # Ask for confirmation
@@ -88,7 +89,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		$HOME/i3lock/lock.sh
+		"$HOME"/i3lock/lock.sh
         ;;
     $suspend)
 		run_cmd --suspend
