@@ -7,31 +7,9 @@ antidote load
 
 # Source some envs
 source $HOME/.env
-# ZSH Prompt Theme
-ENABLE_CORRECTION="false"      # Autocorrection
-CASE_SENSITIVE="true"          # Case Sensitive Autocomplete
-HYPHEN_INSENSITIVE="false"     # Hyphen Insensitive a.k.a "-" and "_" Will Be Interchangeable. CASE_SENSITIVE Must Be Set To False
-DISABLE_UPDATE_PROMPT="true"   # Enable Or Disable Update Prompt
-COMPLETION_WAITING_DOTS="true" # Dot Buffer
 
 #PATH
 export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify"
-
-# Plugins Configuration
-# Auto-notify
-# export AUTO_NOTIFY_THRESHOLD=15
-# export AUTO_NOTIFY_EXPIRE_TIME=20000
-# AUTO_NOTIFY_IGNORE+=("docker" "emacs" "eww" "firefox" "mpv")
-# Zsh-history-substring-search
-# bindkey '^[[1;5A' history-substring-search-up
-# bindkey '^[[1;5B' history-substring-search-down
-
-# Emacs Mode
-# bindkey -M emacs '^P' history-substring-search-up
-# bindkey -M emacs '^N' history-substring-search-down
-# Vi Mode
-# bindkey -M vicmd 'k' history-substring-search-up
-# bindkey -M vicmd 'j' history-substring-search-down
 
 # Enviorment Variables
 export MONITOR="HDMI-2"
@@ -41,9 +19,9 @@ export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
+    export EDITOR='nvim'
 else
-    export EDITOR='emacs'
+    export EDITOR='emacsclient -c -a "emacs"'
 fi
 export BROWSER="firefox"
 
