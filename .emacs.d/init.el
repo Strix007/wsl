@@ -1,15 +1,15 @@
 ;; Set Fonts
-(set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
-(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
-(set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
+(set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
+(set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono"  :height 150 :weight 'medium)
+(set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 125 :weight 'medium)
 
 ;; Initialize package sources
 (require 'package)
 (setq package-archives
       '(
-        ("melpa" . "https://melpa.org/packages/")
+        ("melpa"  . "https://melpa.org/packages/")
+        ("elpa"   . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-        ("elpa"  . "https://elpa.gnu.org/packages/")
         )
       )
 
@@ -24,7 +24,6 @@
   (package-install 'use-package)
   )
 (require 'use-package)
-
 (setq use-package-always-ensure t)
 (setq use-package-verbose nil)
 
@@ -295,17 +294,26 @@
 
 ;; Treemacs
 (use-package treemacs
+  :config
+  (setq aw-ignored-buffers (delete 'treemacs-mode aw-ignored-buffers))
   :custom
   (treemacs-display-current-project-exclusively t)
   (treemacs-follow-mode t)
   :bind
-  ("<f9>" . treemacs)
+  (
+   ("<f9>" . treemacs)
+   )
   )
 
 ;; Treemacs-evil
 (use-package treemacs-evil
   :after
   (treemacs)
+  :bind
+  (
+   :map evil-treemacs-state-map
+   ("C-w" . ace-window)
+   )
   )
 
 ;; Treemacs-projectile
@@ -656,7 +664,7 @@
   :preface
   (defun arbab/org-mode-setup ()
     (org-indent-mode)
-    ;; (variable-pitch-mode 1)
+    (variable-pitch-mode 1)
     (visual-line-mode 1)
     (font-lock-add-keywords 'org-mode
                             '(
@@ -1031,9 +1039,9 @@
   :hook
   (prog-mode . arbab/lsp-mode-setup)
   :custom
-  (lsp-keymap-prefix "C-c l")
   (lsp-enable-which-key-integration t)
   (lsp-lens-enable nil)
+  (lsp-enable-symbol-highlighting nil)
   :bind-keymap
   ("C-c l" . lsp-command-map)
   )
@@ -1053,7 +1061,7 @@
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header nil)
   (lsp-ui-doc-position 'top-right-corner)
-  (lsp-ui-doc-delay 0.0)
+  (lsp-ui-doc-delay 5)
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-show-with-mouse nil)
   (lsp-ui-doc-enhanced-markdown t)
@@ -1064,6 +1072,19 @@
   (lsp-ui-sideline-show-code-actions t)
   (lsp-ui-sideline-delay 0.0)
   )
+
+;; Sideline
+(use-package sideline
+  :hook
+  (flymake-mode . sideline-mode)
+  :custom
+  (sideline-flymake-display-mode 'line)
+  (sideline-backends-right '(
+                             sideline-flymake
+                             ))
+  )
+;; Sideline-flymake
+(use-package sideline-flymake)
 
 ;; LSP-Haskell
 (use-package lsp-haskell
@@ -1495,6 +1516,8 @@
 
 ;; Ace-window
 (use-package ace-window
+  :init
+  (ace-window-display-mode +1)
   :bind
   (
    :map evil-normal-state-map

@@ -243,6 +243,7 @@ These programs are required to get you started with this config so make sure to 
 There are the fonts that are used in my configuratuin for text and icons. Make sure to install them.
 - [[https://github.com/tonsky/FiraCode][FiraCode]]
 - [[https://github.com/ryanoasis/nerd-fonts][Nerd Fonts]]
+- [[https://fonts.google.com/specimen/Source+Sans+Pro][Source Sans Pro]]
 - [[https://fontawesome.com/v6/download][Font Awesome]]
 - [[https://github.com/google/material-design-icons][Material Design Icons]]
 - [[https://fonts.google.com/specimen/Grape+Nuts][Grape Nuts]]
