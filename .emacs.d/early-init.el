@@ -156,6 +156,7 @@
                 compilation-mode-hook
                 backtrace-mode-hook
                 term-mode-hook
+                imenu-list-major-mode-hook
                 eshell-mode-hook
                 shell-mode-hook
                 term-mode-hook
@@ -172,6 +173,7 @@
                 nov-mode-hook
                 project-explorer-mode-hook
                 nov-mode-hook
+                xref--xref-buffer-mode-hook
                 browse-kill-ring-mode-hook
                 )
               )

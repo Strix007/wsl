@@ -1568,3 +1568,14 @@
   :hook
   (compilation-mode . fancy-compilation-mode)
   )
+
+;; Imenu-list
+(use-package imenu-list
+  :custom
+  (imenu-list-focus-after-activation t)
+  (imenu-list-auto-resize t)
+  :bind
+  (
+   ("<f10>" . imenu-list-smart-toggle)
+   )
+  )
