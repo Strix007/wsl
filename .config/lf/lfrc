@@ -118,3 +118,15 @@ map <a-9> cd /media/Music/
 
 # Reload
 map R reload
+
+cmd fzf_bookmarks ${{
+    RESULT="$(find . -maxdepth 3 | fzf --reverse --header='Jump To Location')"
+    if [ -f "$RESULT" ]; then
+       cmd="select"
+    elif [ -d "$RESULT" ]; then
+       cmd="cd"
+    fi
+    lf -remote "send $id $cmd \"$RESULT\""
+}}
+
+map b fzf_bookmarks

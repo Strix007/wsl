@@ -165,6 +165,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-respect-visual-line-mode t)
+  (setq evil-undo-system 'undo-fu)
   (evil-mode 1)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)

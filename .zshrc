@@ -9,7 +9,7 @@ antidote load
 source $HOME/.env
 
 #PATH
-export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify"
+export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify:$HOME/.cargo/bin"
 
 # Enviorment Variables
 export MONITOR="HDMI-2"
@@ -24,6 +24,9 @@ else
     export EDITOR='emacsclient -c -a "emacs"'
 fi
 export BROWSER="firefox"
+
+# Install sccache
+export RUSTC_WRAPPER=sccache
 
 # Function for extracting archives
 ex ()
@@ -72,7 +75,10 @@ alias xclass="xprop | grep WM_CLASS"
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
+alias cat='bat'
 alias dirs='dirs -v'
 # Emacs
 alias e="emacsclient -c -n -u -a 'emacs'"
 alias edr="killall emacs; emacs --daemon"
+
+source /home/arbab/.config/broot/launcher/bash/br

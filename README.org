@@ -202,6 +202,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 ** lf 
 - [[https://github.com/gokcehan/lf][lf]]  
+- [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/jstkdng/ueberzugpp][uberzug++]]
 - [[https://github.com/sharkdp/bat#installation][bat]]
 - [[https://github.com/dirkvdb/ffmpegthumbnailer][ffmpegthumbnailer]]
