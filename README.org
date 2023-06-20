@@ -196,6 +196,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/altdesktop/playerctl][Playerctl]] 
 - [[https://github.com/noctuid/zscroll][Zscroll]] 
 - [[https://stedolan.github.io/jq][jq]]
+- [[https://github.com/Xfennec/progress][progress]]  
 ** Shell
 - [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][Zsh]]
 - [[https://getantidote.github.io/install][Antidote]] 
