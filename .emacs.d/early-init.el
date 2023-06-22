@@ -175,6 +175,7 @@
                 nov-mode-hook
                 xref--xref-buffer-mode-hook
                 browse-kill-ring-mode-hook
+                Custom-mode-hook
                 )
               )
   (add-hook mode (lambda () (display-line-numbers-mode 0)

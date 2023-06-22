@@ -136,7 +136,7 @@
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
             "Restore"
             "Restore Your Last Session"
-            (lambda (&rest _)(desktop-read "~/"))
+            (lambda (&rest _)(burly-open-last-bookmark))
             error
             )
            )
@@ -604,10 +604,10 @@
   "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
-  "xxf" '(counsel-switch-buffer-other-window :which-key "Open File In New Split")
+  "xxf" '(counsel-switch-buffer-other-window :which-key "Open Buffer In New Split")
   ;; Navigate tabs using centaur-tabs
-  "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
-  "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
+  ;; "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
+  ;; "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
   ;; Counsel Files
@@ -621,6 +621,12 @@
   "bb" '(counsel-bookmark :which-key "List Bookmarks")
   "bm" '(bookmark-set     :which-key "Add Bookmark")
   "br" '(bookmark-delete  :which-key "Remove Bookmark")
+  ;; Burly
+  "z"  '(:ignore t                :which-key "Burly")
+  "zb" '(burly-open-bookmark      :which-key "Open Burly Bookmarks")
+  "zB" '(burly-open-last-bookmark :which-key "Open Last Burly Bookmark")
+  "zf" '(burly-bookmark-frames    :which-key "Burly Bookmark Frame")
+  "zw" '(burly-bookmark-windows   :which-key "Burly Bookmark Windows")
   )
 
 ;; Hydra
@@ -1276,15 +1282,9 @@
   (evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
   )
 
-;; Save-visited-files
-(use-package workgroups2
-  :disabled t
+;; Burly
+(use-package burly
   :defer t
-  :config
-  (workgroups-mode 1)
-  :custom
-  (setq wg-prefix-key "C-c z")
-  (setq wg-session-file (concat user-emacs-directory ".workgroups"))
   )
 
 ;; Highlight-indentation
