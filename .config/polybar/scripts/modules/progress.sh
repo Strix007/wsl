@@ -6,6 +6,6 @@ do
     if [[ -z $PROGRESS ]]; then
         echo ""
     else
-        echo "|  $PROGRESS"
+        echo " $PROGRESS"
     fi
 done
