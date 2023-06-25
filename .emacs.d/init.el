@@ -1581,3 +1581,28 @@
    ("<f10>" . imenu-list-smart-toggle)
    )
   )
+
+;; Deadgrep
+;; Install ripgrep on your local system before using.
+(use-package deadgrep
+  :bind
+  (
+   ("<f5>" . deadgrep)
+   :map deadgrep-mode-map
+   ("M-c" . deadgrep-cycle-search-case)
+   ("M-t" . deadgrep-cycle-search-type)
+   ("M-s" . deadgrep-incremental)
+   ("M-j" . deadgrep-forward-match)
+   ("M-k" . deadgrep-backward-match)
+   ("M-f" . deadgrep-directory)
+   ("M-F" . deadgrep-toggle-file-results)
+   )
+  )
+
+;; Rg
+(use-package rg
+  :bind
+  (
+   ("C-c s" . rg-menu)
+   )
+  )
