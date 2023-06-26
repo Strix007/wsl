@@ -1317,7 +1317,7 @@
   (minimap-hide-fringes t)
   )
 
-;; Puni
+;; Smartparens
 (use-package smartparens
   :hook
   (prog-mode . smartparens-mode)
@@ -1605,4 +1605,31 @@
   (
    ("C-c s" . rg-menu)
    )
+  )
+
+;; Ligature
+(use-package ligature
+  :hook
+  (
+   (
+    prog-mode
+    text-mode
+    ) . ligature-mode)
+  :config
+  ;; This variable is based on the font your are using. For me it is ’JetBrains Mono Nerd Font'. If you use any other font, make sure to check this https://github.com/mickeynp/ligature.el/wiki
+  (ligature-set-ligatures 'prog-mode
+                          '(
+                            "-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->" "///" "/=" "/=="
+                            "/>" "//" "/*" "*>" "***" "*/" "<-" "<<-" "<=>" "<=" "<|" "<||"
+                            "<|||" "<|>" "<:" "<>" "<-<" "<<<" "<==" "<<=" "<=<" "<==>" "<-|"
+                            "<<" "<~>" "<=|" "<~~" "<~" "<$>" "<$" "<+>" "<+" "</>" "</" "<*"
+                            "<*>" "<->" "<!--" ":>" ":<" ":::" "::" ":?" ":?>" ":=" "::=" "=>>"
+                            "==>" "=/=" "=!=" "=>" "===" "=:=" "==" "!==" "!!" "!=" ">]" ">:"
+                            ">>-" ">>=" ">=>" ">>>" ">-" ">=" "&&&" "&&" "|||>" "||>" "|>" "|]"
+                            "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||" ".." ".?" ".=" ".-" "..<"
+                            "..." "+++" "+>" "++" "[||]" "[<" "[|" "{|" "??" "?." "?=" "?:" "##"
+                            "###" "####" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" ";;" "_|_"
+                            "__" "~~" "~~>" "~>" "~-" "~@" "$>" "^=" "]#"
+                            )
+                          )
   )
