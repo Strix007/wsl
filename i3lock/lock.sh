@@ -1,7 +1,7 @@
 #!/bin/bash
 ICON=$HOME/i3lock/lock.png
 TMPBG=/tmp/lock-state.png
-scrot /tmp/lock-state.png
+scrot $TMPBG
 convert $TMPBG -scale 10% -scale 1000% $TMPBG
 # convert $TMPBG $ICON -gravity Center -composite -matte $TMPBG
 STATUS=$(playerctl status)

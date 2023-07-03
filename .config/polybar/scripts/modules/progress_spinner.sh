@@ -11,7 +11,7 @@ do
         for i in "${mySpinners[@]}"
         do
             sleep 0.1
-            echo "$i"
+            echo "| $i"
         done
     fi
 done
