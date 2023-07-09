@@ -18,12 +18,13 @@
   (package-refresh-contents)
   )
 
-;; Use-package
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package)
+;; Initialize use-package-vc on non-Linux platforms
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package")
   )
-(require 'use-package)
+(require 'vc-use-package)
+
+;; Use-package
 (setq use-package-always-ensure t)
 (setq use-package-verbose nil)
 
@@ -129,7 +130,7 @@
             ,(all-the-icons-octicon "settings" :height 1.0 :v-adjust 0.0)
             "Configuration"
             "Open Configuration"
-            (lambda (&rest _) (find-file ".emacs.d/init.el"))
+            (lambda (&rest _) (find-file "~/.emacs.d/init.el"))
             warning
             )
            (
@@ -967,6 +968,9 @@
         )
       )
 
+;; Ob-async
+(use-package ob-async)
+
 ;; Visual-fill-column
 (use-package visual-fill-column
   :commands
@@ -1631,4 +1635,24 @@
                            "-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->" "///" "/=" "/==" "/>" "//" "/*" "*>" "***" "*/" "<-" "<<-" "<=>" "<=" "<|" "<||""<|||" "<|>" "<:" "<>" "<-<" "<<<" "<==" "<<=" "<=<" "<==>" "<-|" "<<" "<~>" "<=|" "<~~" "<~" "<$>" "<$" "<+>" "<+" "</>" "</" "<*""<*>" "<->" "<!--" ":>" ":<" ":::" "::" ":?" ":?>" ":=" "::=" "=>>" "==>" "=/=" "=!=" "=>" "===" "=:=" "==" "!==" "!!" "!=" ">]" ">:"">>-" ">>=" ">=>" ">>>" ">-" ">=" "&&&" "&&" "|||>" "||>" "|>" "|]" "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||" ".." ".?" ".=" ".-" "..<""..." "+++" "+>" "++" "[||]" "[<" "[|" "{|" "??" "?." "?=" "?:" "##" "###" "####" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" ";;" "_|_""__" "~~" "~~>" "~>" "~-" "~@" "$>" "^=" "]#"
                            )
                           )
+  )
+
+;; Hl-todo
+(use-package hl-todo
+  :defer t
+  :custom
+  (setq hl-todo-keyword-faces
+        '(
+          ("TODO"   . "#b48ead")
+          ("FIXME"  . "#bf616a")
+          ("DEBUG"  . "#d08770")
+          ("NOTE"   . "#a3be8c")
+          )
+        )
+  )
+
+;; Magit-todos
+(use-package magit-todos
+  :hook
+  (magit-status-mode . magit-todos-mode)
   )
