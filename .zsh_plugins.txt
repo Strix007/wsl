@@ -22,4 +22,6 @@ belak/zsh-utils path:history
 belak/zsh-utils path:editor
 belak/zsh-utils path:completion
 
+# Sourced
 Aloxaf/fzf-tab
+joshskidmore/zsh-fzf-history-search

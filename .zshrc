@@ -54,15 +54,22 @@ ex ()
     fi
 }
 
+# Function for disowning commands
+detach ()
+{
+    ( "$@" &> /dev/null & disown )
+}
+
 # KEYBINDING TYPE
-bindkey -v
+bindkey -e
+
 # ALIASES
 # Exa
 alias l="exa -la"
 alias ls="exa -a"
 # lf
-alias lf="kitty $HOME/local/bin/lfub"
-alias lfub="kitty $HOME/local/bin/lfub"
+alias lf="$HOME/local/bin/lfub"
+alias lfub="$HOME/local/bin/lfub"
 # Vim
 alias vim="nvim"
 # Git
