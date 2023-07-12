@@ -36,7 +36,7 @@ window:
   opacity: 0.75
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrains Mono Nerd Font
 theme: Nord
 cursor:
   style:
