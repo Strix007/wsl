@@ -75,7 +75,7 @@ myGUIMusicApp    = "spotify"       -- Global GUI Music App Variable
 myCalculator     = "qalculate-gtk" -- Global Calculator Variable
 myEmacs          = "emacsclient -c -a 'emacs'"
 -- Flags are to be changed depending on the terminal
-myTUIFileManager = "kitty" ++ " " ++ "--title" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf" ++ " " ++ "$HOME/local/bin/lfub"
+myTUIFileManager = "alacritty" ++ " " ++ "--title" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf" ++ " " ++ "-e" ++ "" ++ "$HOME/local/bin/lfub"
 
 -- Change Focus To The Window Where The Mouse Is
 
@@ -142,7 +142,7 @@ myScratchPads =
 
     -- The Flags Are To Be Changed Depending On The Terminal
 
-    spawnFileManager  = "kitty" ++ " " ++ "--title" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "fileManager" ++ " " ++ "$HOME/local/bin/lfub"
+    spawnFileManager  = "alacritty" ++ " " ++ "--title" ++ " " ++ "FileManager"  ++ " " ++ "--class" ++ " " ++ "fileManager" ++ " " ++ " " ++ "-e" ++ ""  ++ "$HOME/local/bin/lfub"
     findFileManager   = XMonad.ManageHook.title =? "FileManager"
     manageFileManager = customFloating $ W.RationalRect l t w h
 
