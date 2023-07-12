@@ -18,13 +18,19 @@
   (package-refresh-contents)
   )
 
+;; Emacs29
 ;; Initialize use-package-vc on non-Linux platforms
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package")
-  )
-(require 'vc-use-package)
+;; (unless (package-installed-p 'vc-use-package)
+;;   (package-vc-install "https://github.com/slotThe/vc-use-package")
+;;   )
+;; (require 'vc-use-package)
 
 ;; Use-package
+;; Initialize use-package on non-Linux platforms
+;; (unless (package-installed-p 'use-package)
+;;   (package-install 'use-package)
+;;   )
+;; (require 'use-package)
 (setq use-package-always-ensure t)
 (setq use-package-verbose nil)
 
