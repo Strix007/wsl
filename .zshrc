@@ -87,5 +87,3 @@ alias dirs='dirs -v'
 # Emacs
 alias e="emacsclient -c -n -u -a 'emacs'"
 alias edr="killall emacs; emacs --daemon"
-
-source /home/arbab/.config/broot/launcher/bash/br
