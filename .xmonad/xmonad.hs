@@ -425,7 +425,7 @@ myManageHook =
      , className                    =? "Code"                --> viewShift ( myWorkspaces !! 3 )
      , className                    =? "Code - Insiders"     --> viewShift ( myWorkspaces !! 3 )
      , className                    =? "Atom"                --> viewShift ( myWorkspaces !! 3 )
-     , className                    =? "Steam"               --> viewShift ( myWorkspaces !! 5 )
+     , className                    =? "qBittorrent"         --> viewShift ( myWorkspaces !! 7 )
      , className                    =? "Spotify"             --> viewShift ( myWorkspaces !! 8 )
 
     ] <+> namedScratchpadManageHook myScratchPads where viewShift = doF . liftM2 (.) W.greedyView W.shift
