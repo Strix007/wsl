@@ -7,24 +7,30 @@ set shell zsh
 set shellopts '-euy'
 set ifs "\n"
 
+# Set lf Options
 set drawbox
 set hidden false
 set icons true
+set period 1
+set info size
+set dircounts
 # show the result of execution of previous commands
 map ` !true
-
 # show hidden files
 map <backspace> set hidden!
 
-# execute current file (must be executable)
+# Execute current file (must be executable)
 map x $$f
 map X !$f
 
-# Map enter to j
+# Map enter to Open
 map <enter> open
 
+# Trash (Need trash-cli)
+cmd trash %trash-put $fx
+map D trash
+
 # Delete
-map D delete
 cmd delete ${{
     set -f
     printf "$fx\n"
@@ -32,11 +38,10 @@ cmd delete ${{
     read ans
     [ "$ans" = "y" ] && rm -rf $fx
 }}
+map <a-d> delete
 
 # Create new directory
 map o push %mkdir<space>
-# Create new file
-map O push %lf-mkfile
 
 # Backup files when moving
 # cmd paste %{{
@@ -119,6 +124,7 @@ map <a-9> cd /media/Music/
 # Reload
 map R reload
 
+# Map fzf
 cmd fzf_bookmarks ${{
     RESULT="$(find . -maxdepth 3 | fzf --reverse --header='Jump To Location')"
     if [ -f "$RESULT" ]; then
@@ -128,5 +134,7 @@ cmd fzf_bookmarks ${{
     fi
     lf -remote "send $id $cmd \"$RESULT\""
 }}
-
 map b fzf_bookmarks
+
+# Map Clear
+map c clear

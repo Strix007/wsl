@@ -827,7 +827,7 @@
            )
           (
            :name "Plans"
-                 :tag ("planning")
+           :tag ("planning")
            :order 5
            )
           (

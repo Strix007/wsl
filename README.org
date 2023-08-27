@@ -205,6 +205,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/gokcehan/lf][lf]]  
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
+- [[https://github.com/andreafrancia/trash-cli][trash-cli]] 
 - [[https://github.com/sharkdp/bat#installation][bat]]
 - [[https://github.com/dirkvdb/ffmpegthumbnailer][ffmpegthumbnailer]]
 - [[https://imagemagick.org/script/download.php][imagemagick]]

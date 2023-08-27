@@ -78,11 +78,12 @@ alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # Misc
 alias c="clear"
 alias xclass="xprop | grep WM_CLASS"
-# Verbose
-alias mv='mv -v'
-alias cp='cp -vr'
-alias rm='rm -vr'
 alias cat='bat'
+alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
+# Verbose
+alias mv='mv -vi'
+alias cp='cp -vri'
+alias rm='rm -vr'
 alias dirs='dirs -v'
 # Emacs
 alias e="emacsclient -c -n -u -a 'emacs'"
