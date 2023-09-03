@@ -63,6 +63,9 @@ detach ()
 # KEYBINDING TYPE
 bindkey -e
 
+# KEYBINDINGS
+bindkey '^ ' autosuggest-execute
+
 # ALIASES
 # Exa
 alias l="exa -la"
@@ -80,7 +83,7 @@ alias c="clear"
 alias xclass="xprop | grep WM_CLASS"
 alias cat='bat'
 alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
-alias fzf="fzf --preview='fzf-preview {}'"
+alias fzf="fzf --preview='fzf-preview {}' --bind alt-k:preview-page-up,alt-j:preview-page-down"
 # Verbose
 alias mv='mv -vi'
 alias cp='cp -vri'
