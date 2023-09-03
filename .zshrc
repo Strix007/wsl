@@ -80,6 +80,7 @@ alias c="clear"
 alias xclass="xprop | grep WM_CLASS"
 alias cat='bat'
 alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
+alias fzf="fzf --preview='fzf-preview {}'"
 # Verbose
 alias mv='mv -vi'
 alias cp='cp -vri'
