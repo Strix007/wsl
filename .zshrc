@@ -77,12 +77,12 @@ alias lfub="$HOME/local/bin/lfub"
 alias vim="nvim"
 # Git
 alias g="git"
-alias gdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # Misc
 alias c="clear"
 alias xclass="xprop | grep WM_CLASS"
 alias cat='bat'
 alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
+alias stow="stow -d $HOME/.dotfiles -t $HOME/"
 alias fzf="fzf --preview='fzf-preview {}' --bind alt-k:preview-page-up,alt-j:preview-page-down"
 # Verbose
 alias mv='mv -vi'

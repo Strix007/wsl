@@ -76,7 +76,7 @@ myCalculator     = "qalculate-gtk" -- Global Calculator Variable
 myEmacs          = "emacsclient -c -a 'emacs'"
 -- Flags are to be changed depending on the terminal
 myTUIFileManager = myTerminal ++ " " ++ "--title" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf" ++ " " ++ "-e" ++ "" ++ "$HOME/local/bin/lfub"
-myTmux           = myTerminal ++ " " ++ "-e" ++ " " ++ "tmux attach || tmux"
+myTmux           = myTerminal ++ " " ++ "-e" ++ " " ++ "tmux"
 
 -- Change Focus To The Window Where The Mouse Is
 
