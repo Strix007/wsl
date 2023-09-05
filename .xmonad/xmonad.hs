@@ -66,7 +66,7 @@ import Text.XHtml (title)
 
 -- User Set Variables
 
-myEmacs, myGUIFileManager, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator, myTUIFileManager :: String
+myEmacs, myGUIFileManager, myBrowser, myTerminal, myMPDClient, myGUIMusicApp, myCalculator, myTUIFileManager, myTmux :: String
 myTerminal       = "alacritty"     -- Global Terminal Variable
 myBrowser        = "firefox"       -- Global Browser Variable
 myGUIFileManager = "thunar"        -- Global GUI FileManager Variable
@@ -75,7 +75,8 @@ myGUIMusicApp    = "spotify"       -- Global GUI Music App Variable
 myCalculator     = "qalculate-gtk" -- Global Calculator Variable
 myEmacs          = "emacsclient -c -a 'emacs'"
 -- Flags are to be changed depending on the terminal
-myTUIFileManager = "alacritty" ++ " " ++ "--title" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf" ++ " " ++ "-e" ++ "" ++ "$HOME/local/bin/lfub"
+myTUIFileManager = myTerminal ++ " " ++ "--title" ++ " " ++ "lf"  ++ " " ++ "--class" ++ " " ++ "lf" ++ " " ++ "-e" ++ "" ++ "$HOME/local/bin/lfub"
+myTmux           = myTerminal ++ " " ++ "-e" ++ " " ++ "tmux attach || tmux"
 
 -- Change Focus To The Window Where The Mouse Is
 
@@ -267,11 +268,12 @@ myKeys =
 
                 -- APPLICATIONS
 
-                , ("M-<Return>", spawn myTerminal)                -- Spawn Terminal (Alacritty)
-                , ("M-a b",      spawn myBrowser)                 -- Spawn Browser (Firefox)
-                , ("M-a z",      spawn myTUIFileManager)          -- Spawn FileManager (Nautilus)
-                , ("M-a S-z",    spawn myGUIFileManager)         -- Spawn Backup FileManager (Thunar)
-                , ("M-p r",      spawn "polybar-msg cmd restart") -- Restart Polybar
+                , ("M-<Return> <Return>",   spawn myTerminal)                -- Spawn Terminal (Alacritty)
+                , ("M-<Return> S-<Return>", spawn myTmux)                    -- Spawn Terminal (Alacritty)
+                , ("M-a b",                 spawn myBrowser)                 -- Spawn Browser (Firefox)
+                , ("M-a z",                 spawn myTUIFileManager)          -- Spawn FileManager (Nautilus)
+                , ("M-a S-z",               spawn myGUIFileManager)          -- Spawn Backup FileManager (Thunar)
+                , ("M-p r",                 spawn "polybar-msg cmd restart") -- Restart Polybar
 
                 -- EMACS
 
