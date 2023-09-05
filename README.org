@@ -203,6 +203,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][Zsh]]
 - [[https://getantidote.github.io/install][Antidote]] 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
+- [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
 - [[https://github.com/ogham/exa][exa]]
 ** Tmux
 - [[https://github.com/tmux/tmux][tmux]]
