@@ -205,6 +205,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/ogham/exa][exa]]
 ** Tmux
+- [[https://github.com/tmux/tmux][tmux]]
 - [[https://github.com/tmux-plugins/tpm][tpm]]
 - [[https://github.com/mikefarah/yq][yq]] 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
