@@ -1656,3 +1656,28 @@
   :hook
   (magit-status-mode . magit-todos-mode)
   )
+
+;; Blamer
+(use-package blamer
+  :defer t
+  :config
+  (global-blamer-mode 1)
+  :bind
+  (
+   ("C-c i" . blamer-show-posframe-commit-info)
+   )
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 0)
+  (blamer-max-commit-message-length 30)
+  (blamer-view 'overlay)
+  (blamer-prettify-time-p t)
+  (blamer-type 'both)
+  (blamer-show-avatar-p nil)
+  :custom-face
+  (blamer-face ((t :foreground "#b48ead"
+                    :background nil
+                    :height 140
+                    :italic t))
+               )
+  )
