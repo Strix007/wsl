@@ -18,6 +18,8 @@
 .config/hypr/output
 .config/bat/syntaxes
 .config/tmux/plugins
+.config/nvim/.luarc.json
+.config/nvim/lazy-lock.json
 .emacs.d/.cache
 .emacs.d/elpa
 .emacs.d/backups
