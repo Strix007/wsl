@@ -543,7 +543,12 @@
     (add-to-list 'company-backends 'company-jedi)
     )
   :hook
-  (python-mode . arbab/python-company-setup)
+  (
+   (
+    python-mode
+    python-ts-mode
+    ) . arbab/python-company-setup
+   )
   )
 
 ;; Company-quickhelp
@@ -1058,12 +1063,16 @@
   (lsp lsp-deferred)
   :hook
   (prog-mode . arbab/lsp-mode-setup)
+  (lsp-mode . (lambda ()
+                (let ((lsp-keymap-prefix "C-c l"))
+                  (lsp-enable-which-key-integration))))
   :custom
   (lsp-enable-which-key-integration t)
   (lsp-lens-enable nil)
   (lsp-enable-symbol-highlighting nil)
-  :bind-keymap
-  ("C-c l" . lsp-command-map)
+  :config
+  (define-key lsp-mode-map (kbd lsp-keymap-prefix) nil)
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   )
 
 ;; Lsp-ivy
@@ -1253,7 +1262,7 @@
   ("M-9" . corral-parentheses-backward)
   ("M-0" . corral-parentheses-forward)
   ("M-[" . corral-brackets-backward)
-  ("M-]" . corral-brackets-forward)
+  ("m-]" . corral-brackets-forward)
   ("M-{" . corral-braces-backward)
   ("M-}" . corral-braces-forward)
   ("M-/" . corral-double-quotes-forward)
@@ -1366,25 +1375,11 @@
   (counsel)
   )
 
-;; Tree-sitter
-(use-package tree-sitter
-  :preface
-  (defun arbab/tree-sitter-mode-setup ()
-    (unless (derived-mode-p
-             'emacs-lisp-mode
-             'yuck-mode
-             )
-      (tree-sitter-hl-mode)
-      )
-    )
-  :hook
-  (prog-mode . arbab/tree-sitter-mode-setup)
-  )
-
-;; Tree-sitter-langs
-(use-package tree-sitter-langs
-  :after
-  (tree-sitter)
+;; Treesit-auto
+(use-package treesit-auto
+  :config
+  (setq treesit-auto-install t)
+  (global-treesit-auto-mode)
   )
 
 ;; Git-modes
@@ -1564,7 +1559,7 @@
   :custom
   (git-gutter:update-interval 2)
   (git-gutter:window-width 2)
-  (git-gutter:modified-sign "󰈅")
+  (git-gutter:modified-sign "!")
   (git-gutter:added-sign "")
   (git-gutter:deleted-sign "")
   )
@@ -1659,9 +1654,14 @@
 
 ;; Blamer
 (use-package blamer
-  :defer t
-  :config
-  (global-blamer-mode 1)
+  :commands
+  (blamer-mode)
+  :hook
+  (
+   (
+    prog-mode
+    text-mode
+    ) . blamer-mode)
   :bind
   (
    ("C-c i" . blamer-show-posframe-commit-info)
@@ -1675,9 +1675,12 @@
   (blamer-type 'both)
   (blamer-show-avatar-p nil)
   :custom-face
-  (blamer-face ((t :foreground "#b48ead"
-                    :background nil
-                    :height 140
-                    :italic t))
+  (blamer-face ((t
+                 :foreground "#b48ead"
+                 :background nil
+                 :height 125
+                 :italic t
+                 )
+                )
                )
   )

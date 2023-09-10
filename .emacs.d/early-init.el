@@ -13,7 +13,7 @@
   (message "Setting faces!")
   (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
   (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
+  (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 125 :weight 'bold)
   )
 (add-hook 'server-after-make-frame-hook 'arbab/set-font-faces)
 ;; Make comments italic
@@ -187,3 +187,51 @@
 ;; Specific modes for specific file extensions
 (add-to-list 'auto-mode-alist '("\\.rasi$" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\lfrc\\'" . sh-mode))
+
+;; Tree-sitter
+;; Tell emacs where to find the language grammers
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+     )
+   )
+
+;; Remap major mode list
+(setq major-mode-remap-alist
+      '(
+        (bash-mode . bash-ts-mode)
+        (c++-mode . c++-ts-mode)
+        (c-or-c++-mode . c-or-c++-ts-mode)
+        (c-mode . c-ts-mode)
+        (cmake-mode . cmake-ts-mode)
+        (csharp-mode . csharp-ts-mode)
+        (css-mode . css-ts-mode)
+        (dockerfile-mode . dockerfile-ts-mode)
+        (go-mod-mode . go-mod-ts-mode)
+        (go-mode . go-ts-mode)
+        (java-mode . java-ts-mode)
+        (js-mode . js-ts-mode)
+        (js2-mode . js-ts-mode)
+        (json-mode . json-ts-mode)
+        (python-mode . python-ts-mode)
+        (ruby-mode . ruby-ts-mode)
+        (rust-mode . rust-ts-mode)
+        (toml-mode . toml-ts-mode)
+        (tsx-mode . tsx-ts-mode)
+        (typescript-mode . typescript-ts-mode)
+        (yaml-mode . yaml-ts-mode)
+        )
+      )

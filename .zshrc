@@ -68,8 +68,8 @@ bindkey '^ ' autosuggest-execute
 
 # ALIASES
 # Exa
-alias l="exa -la"
-alias ls="exa -a"
+alias l="eza -lah"
+alias ls="eza -ah"
 # lf
 alias lf="$HOME/local/bin/lfub"
 alias lfub="$HOME/local/bin/lfub"

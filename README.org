@@ -204,7 +204,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://getantidote.github.io/install][Antidote]] 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
-- [[https://github.com/ogham/exa][exa]]
+- [[https://github.com/eza-community/eza][eza]]
 ** Tmux
 - [[https://github.com/tmux/tmux][tmux]]
 - [[https://github.com/tmux-plugins/tpm][tpm]]
@@ -229,7 +229,7 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/hpjansson/chafa#Installing][chafa]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
 - [[https://stedolan.github.io/jq][jq]]
-- [[https://github.com/ogham/exa][exa]]
+- [[https://github.com/eza-community/eza][eza]]
 - [[https://sourceforge.net/projects/w3m/][w3m]]
 - [[https://github.com/charmbracelet/glow][glow]]
 - [[https://github.com/transmission/transmission][transmission-cli]]
