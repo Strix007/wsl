@@ -641,6 +641,15 @@
   "zB" '(burly-open-last-bookmark :which-key "Open Last Burly Bookmark")
   "zf" '(burly-bookmark-frames    :which-key "Burly Bookmark Frame")
   "zw" '(burly-bookmark-windows   :which-key "Burly Bookmark Windows")
+  ;; Corral
+  "gr9" '(corral-parentheses-backward   :which-key "corral insert parentheses backward")
+  "gr0" '(corral-parentheses-forward    :which-key "corral insert parentheses forward")
+  "gr[" '(corral-brackets-backward      :which-key "corral insert brackets backward")
+  "gr]" '(corral-brackets-forward       :which-key "corral insert brackets forward")
+  "gr{" '(corral-braces-backward        :which-key "corral insert brackes backward")
+  "gr}" '(corral-braces-forward         :which-key "corral insert brackes forward")
+  "gr;" '(corral-double-quotes-backward :which-key "corral insert double quotes backward")
+  "gr:" '(corral-single-quotes-backward :which-key "corral insert double quotes backward")
   )
 
 ;; Hydra
@@ -1258,16 +1267,6 @@
 (use-package corral
   :custom
   (corral-preserve-point t)
-  :bind
-  ("M-9" . corral-parentheses-backward)
-  ("M-0" . corral-parentheses-forward)
-  ("M-[" . corral-brackets-backward)
-  ("m-]" . corral-brackets-forward)
-  ("M-{" . corral-braces-backward)
-  ("M-}" . corral-braces-forward)
-  ("M-/" . corral-double-quotes-forward)
-  ("M-`" . corral-backquote-forward)
-  ("M-'" . corral-single-quotes-forward)
   )
 
 ;; Nov
