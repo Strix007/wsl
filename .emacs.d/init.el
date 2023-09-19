@@ -1,3 +1,23 @@
+;; Straight.el
+;; Bootstrap Straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Integrate with use-package
+(straight-use-package 'use-package)
+;; Always use straight.el
+(setq straight-use-package-by-default 1)
+
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono"  :height 150 :weight 'medium)
@@ -25,7 +45,7 @@
 (require 'vc-use-package)
 
 ;; Use-package
-(setq use-package-always-ensure t)
+(setq use-package-always-ensure nil)
 (setq use-package-verbose nil)
 
 ;; No-littering
@@ -1682,4 +1702,45 @@
                  )
                 )
                )
+  )
+
+;; Ts-fold
+(use-package ts-fold
+  :preface
+  (defun arbab/ts-fold-mode ()
+    "Activate a minor mode only in buffers using tree-sitter-based major modes."
+    (when (derived-mode-p
+           'bash-ts-mode
+           'c++-ts-mode
+           'c-or-c++-mode-ts-mode
+           'c-ts-mode
+           'cmake-ts-mode
+           'csharp-ts-mode
+           'css-ts-mode
+           'dockerfile-ts-mode
+           'go-mod-ts-mode
+           'go-ts-mode
+           'java-ts-mode
+           'js-ts-mode
+           'json-ts-mode
+           'python-ts-mode
+           'ruby-ts-mode
+           'rust-ts-mode
+           'toml-ts-mode
+           'tsx-ts-mode
+           'typescript-ts-mode
+           'yaml-ts-mode
+           )
+      (ts-fold-mode))
+    )
+
+  :straight
+  (
+   :host github
+   :repo "AndrewSwerlick/ts-fold"
+   :branch "andrew-sw/treesit-el-support"
+   )
+  :hook
+  (prog-mode . arbab/ts-fold-mode)
+  (ts-fold-mode . (lambda () (evil-define-key 'normal 'local (kbd "<tab>") 'ts-fold-toggle)))
   )
