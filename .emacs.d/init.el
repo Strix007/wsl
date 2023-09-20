@@ -21,7 +21,7 @@
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono"  :height 150 :weight 'medium)
-(set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 125 :weight 'medium)
+(set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 150 :weight 'medium)
 
 ;; Initialize package sources
 (require 'package)
@@ -670,6 +670,19 @@
   "gr}" '(corral-braces-forward         :which-key "corral insert brackes forward")
   "gr;" '(corral-double-quotes-backward :which-key "corral insert double quotes backward")
   "gr:" '(corral-single-quotes-backward :which-key "corral insert double quotes backward")
+  ;; Harpoon
+  "hc" '(harpoon-clear       :which-key "Clear harpoon marks")
+  "hf" '(harpoon-toggle-file :which-key "Toggle harpoon mark")
+  "ha" '(harpoon-add-file    :which-key "Add File To Harpoon Mark")
+  "h1" '(harpoon-go-to-1     :which-key "Go To Harpoon Mark 1")
+  "h2" '(harpoon-go-to-2     :which-key "Go To Harpoon Mark 2")
+  "h3" '(harpoon-go-to-3     :which-key "Go To Harpoon Mark 3")
+  "h4" '(harpoon-go-to-4     :which-key "Go To Harpoon Mark 4")
+  "h5" '(harpoon-go-to-5     :which-key "Go To Harpoon Mark 5")
+  "h6" '(harpoon-go-to-6     :which-key "Go To Harpoon Mark 6")
+  "h7" '(harpoon-go-to-7     :which-key "Go To Harpoon Mark 7")
+  "h8" '(harpoon-go-to-8     :which-key "Go To Harpoon Mark 8")
+  "h9" '(harpoon-go-to-9     :which-key "Go To Harpoon Mark 9")
   )
 
 ;; Hydra
@@ -1020,6 +1033,33 @@
   ;; (org-mode . arbab/org-mode-visual-fill)
   )
 
+;; Org-remoteimg
+(use-package org-remoteimg
+  :straight
+  (
+   :type git
+   :host github
+   :repo "gaoDean/org-remoteimg"
+   )
+  :custom
+  (org-display-remote-inline-images 'cache)
+  (url-cache-directory "~/.cache/emacs/url")
+  (url-automatic-caching t)
+  )
+
+;; Org-imgtog
+(use-package org-imgtog
+  :disabled t
+  :straight
+  (
+   :type git
+   :host github
+   :repo "gaoDean/org-imgtog"
+   )
+  :hook
+  (org-mode . org-imgtog-mode)
+  )
+
 ;; Haskell-mode
 (use-package haskell-mode
   :mode
@@ -1322,6 +1362,16 @@
   (evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
   )
 
+;; Evil-numbers
+(use-package evil-numbers
+  :bind
+  (
+   :map evil-normal-state-map
+   ("C-c a" . evil-numbers/inc-at-pt)
+   ("C-c d" . evil-numbers/dec-at-pt)
+   )
+  )
+
 ;; Burly
 (use-package burly
   :defer t
@@ -1329,6 +1379,7 @@
 
 ;; Highlight-indentation
 (use-package highlight-indent-guides
+  :disabled t
   :hook
   (prog-mode . highlight-indent-guides-mode)
   :custom
@@ -1731,11 +1782,13 @@
            'typescript-ts-mode
            'yaml-ts-mode
            )
-      (ts-fold-mode))
+      (ts-fold-mode)
+      )
     )
 
   :straight
   (
+   :type git
    :host github
    :repo "AndrewSwerlick/ts-fold"
    :branch "andrew-sw/treesit-el-support"
@@ -1743,4 +1796,31 @@
   :hook
   (prog-mode . arbab/ts-fold-mode)
   (ts-fold-mode . (lambda () (evil-define-key 'normal 'local (kbd "<tab>") 'ts-fold-toggle)))
+  )
+
+;; Indent-bars
+(use-package indent-bars
+  :straight
+  (
+   :type git
+         :host github
+         :repo "jdtsmith/indent-bars"
+         )
+  :hook
+  (prog-mode . indent-bars-mode)
+  :config
+   (setq
+    indent-bars-color '(highlight :face-bg t :blend 0.3)
+    indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
+    indent-bars-width-frac 0.25
+    indent-bars-pad-frac 0.1)
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-no-descend-string t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  )
+
+;; Harpoon
+(use-package harpoon
+  :defer t
   )

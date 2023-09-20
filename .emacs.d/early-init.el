@@ -13,7 +13,7 @@
   (message "Setting faces!")
   (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
   (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 125 :weight 'bold)
+  (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
   )
 (add-hook 'server-after-make-frame-hook 'arbab/set-font-faces)
 ;; Make comments italic
