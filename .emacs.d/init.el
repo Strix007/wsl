@@ -255,10 +255,24 @@
   (evil)
   :config
   (global-evil-mc-mode 1)
-  :bind
-  ("C-M->" . evil-mc-make-cursor-in-visual-selection-end)
-  ("C-M-<" . evil-mc-make-cursor-in-visual-selection-beg)
-  ("C-M-/" . evil-mc-undo-all-cursors)
+  (evil-define-key '(normal visual) 'global
+    "g.m" #'evil-mc-make-all-cursors
+    "g.u" #'evil-mc-undo-all-cursors
+    "g.z" #'+evil/mc-toggle-cursors
+    "g.c" #'+evil/mc-make-cursor-here
+    "g.n" #'evil-mc-make-and-goto-next-cursor
+    "g.p" #'evil-mc-make-and-goto-prev-cursor
+    "g.N" #'evil-mc-make-and-goto-last-cursor
+    "g.P" #'evil-mc-make-and-goto-first-cursor
+    )
+  (with-eval-after-load 'evil-mc
+    (evil-define-key '(normal visual) evil-mc-key-map
+      (kbd "M-j") #'evil-mc-make-and-goto-next-cursor
+      (kbd "M-J") #'evil-mc-make-and-goto-last-cursor
+      (kbd "M-k") #'evil-mc-make-and-goto-prev-cursor
+      (kbd "M-K") #'evil-mc-make-and-goto-first-cursor
+      )
+    )
   )
 
 ;; All-the-icons
@@ -360,8 +374,24 @@
 (use-package dirvish
   :init
   (evil-collection-define-key 'normal 'dired-mode-map
+    "w" 'wdired-change-to-wdired-mode
     "h" 'dired-up-directory
-    "l" 'dired-find-file
+    "l" 'dired-open-file ; use dired-find-file instead of dired-open.
+    "m" 'dired-mark
+    "t" 'dired-toggle-marks
+    "u" 'dired-unmark
+    "C" 'dired-do-copy
+    "D" 'dired-do-delete
+    "J" 'dired-goto-file
+    "M" 'dired-do-chmod
+    "O" 'dired-do-chown
+    "P" 'dired-do-print
+    "R" 'dired-do-rename
+    "T" 'dired-do-touch
+    "Y" 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
+    "Z" 'dired-do-compress
+    "+" 'dired-create-directory
+    "-" 'dired-do-kill-lines
     )
   (dirvish-override-dired-mode)
   :bind
@@ -402,6 +432,29 @@
   (dirvish)
   :config
   (media-progress-dirvish-setup)
+  )
+
+;; Dired-preview
+(use-package dired-preview
+  :commands
+  (dired-preview-mode)
+  ;; :hook
+  ;; (dired-mode . dired-preview-mode)
+  :custom
+  (setq dired-preview-delay 0.0)
+  )
+
+;; Dired-open
+(use-package dired-open
+  :config
+  (setq dired-open-extensions '(
+                                ("gif" . "feh")
+                                ("jpg" . "feh")
+                                ("png" . "feh")
+                                ("mkv" . "mpv")
+                                ("mp4" . "mpv")
+                                )
+        )
   )
 
 ;; Minions
@@ -662,6 +715,7 @@
   "zf" '(burly-bookmark-frames    :which-key "Burly Bookmark Frame")
   "zw" '(burly-bookmark-windows   :which-key "Burly Bookmark Windows")
   ;; Corral
+  "gr"  '(:ignore t                     :which-key "Corral")
   "gr9" '(corral-parentheses-backward   :which-key "corral insert parentheses backward")
   "gr0" '(corral-parentheses-forward    :which-key "corral insert parentheses forward")
   "gr[" '(corral-brackets-backward      :which-key "corral insert brackets backward")
@@ -671,8 +725,9 @@
   "gr;" '(corral-double-quotes-backward :which-key "corral insert double quotes backward")
   "gr:" '(corral-single-quotes-backward :which-key "corral insert double quotes backward")
   ;; Harpoon
+  "h"  '(:ignore t           :which-key "Harpoon")
   "hc" '(harpoon-clear       :which-key "Clear harpoon marks")
-  "hf" '(harpoon-toggle-file :which-key "Toggle harpoon mark")
+  "hf" '(harpoon-toggle-file :which-key "Open harpoon mark file")
   "ha" '(harpoon-add-file    :which-key "Add File To Harpoon Mark")
   "h1" '(harpoon-go-to-1     :which-key "Go To Harpoon Mark 1")
   "h2" '(harpoon-go-to-2     :which-key "Go To Harpoon Mark 2")
@@ -1810,7 +1865,7 @@
   (prog-mode . indent-bars-mode)
   :config
    (setq
-    indent-bars-color '(highlight :face-bg t :blend 0.3)
+    indent-bars-color '(highlight :face-bg t :blend 0.6)
     indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
     indent-bars-width-frac 0.25
     indent-bars-pad-frac 0.1)
@@ -1821,6 +1876,32 @@
   )
 
 ;; Harpoon
-(use-package harpoon
-  :defer t
+(use-package harpoon)
+
+;; Evil-multiedit
+(use-package evil-multiedit
+  :config
+  (evil-define-key 'normal 'global
+    (kbd "C-q q")  #'evil-multiedit-match-symbol-and-next
+    (kbd "C-q Q")  #'evil-multiedit-match-symbol-and-prev
+    )
+  (evil-define-key 'visual 'global
+    (kbd "C-q r")  #'evil-multiedit-match-all
+    (kbd "C-q q")  #'evil-multiedit-match-and-next
+    (kbd "C-q Q" ) #'evil-multiedit-match-and-prev
+    )
+  (evil-define-key '(visual normal) 'global
+    (kbd "C-M-d") #'evil-multiedit-restore
+    )
+  (with-eval-after-load 'evil-mutliedit
+    (evil-define-key 'multiedit 'global
+      (kbd "C-q q") #'evil-multiedit-match-and-next
+      (kbd "C-q Q") #'evil-multiedit-match-and-prev
+      (kbd "RET")   #'evil-multiedit-toggle-or-restrict-region
+      )
+    (evil-define-key '(multiedit multiedit-insert) 'global
+      (kbd "M-j")  #'evil-multiedit-next
+      (kbd "M-k")  #'evil-multiedit-prev
+      )
+    )
   )
