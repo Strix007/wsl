@@ -235,3 +235,7 @@
         (yaml-mode . yaml-ts-mode)
         )
       )
+
+;; Html-mode
+;; Automatically close tags
+(setq sgml-quick-keys 'close)

@@ -725,19 +725,29 @@
   "gr;" '(corral-double-quotes-backward :which-key "corral insert double quotes backward")
   "gr:" '(corral-single-quotes-backward :which-key "corral insert double quotes backward")
   ;; Harpoon
-  "h"  '(:ignore t           :which-key "Harpoon")
-  "hc" '(harpoon-clear       :which-key "Clear harpoon marks")
-  "hf" '(harpoon-toggle-file :which-key "Open harpoon mark file")
-  "ha" '(harpoon-add-file    :which-key "Add File To Harpoon Mark")
-  "h1" '(harpoon-go-to-1     :which-key "Go To Harpoon Mark 1")
-  "h2" '(harpoon-go-to-2     :which-key "Go To Harpoon Mark 2")
-  "h3" '(harpoon-go-to-3     :which-key "Go To Harpoon Mark 3")
-  "h4" '(harpoon-go-to-4     :which-key "Go To Harpoon Mark 4")
-  "h5" '(harpoon-go-to-5     :which-key "Go To Harpoon Mark 5")
-  "h6" '(harpoon-go-to-6     :which-key "Go To Harpoon Mark 6")
-  "h7" '(harpoon-go-to-7     :which-key "Go To Harpoon Mark 7")
-  "h8" '(harpoon-go-to-8     :which-key "Go To Harpoon Mark 8")
-  "h9" '(harpoon-go-to-9     :which-key "Go To Harpoon Mark 9")
+  "h"   '(:ignore t           :which-key "Harpoon")
+  "hc"  '(harpoon-clear       :which-key "Clear harpoon marks")
+  "hf"  '(harpoon-toggle-file :which-key "Open harpoon mark file")
+  "ha"  '(harpoon-add-file    :which-key "Add File To Harpoon Mark")
+  "h1"  '(harpoon-go-to-1     :which-key "Go To Harpoon Mark 1")
+  "h2"  '(harpoon-go-to-2     :which-key "Go To Harpoon Mark 2")
+  "h3"  '(harpoon-go-to-3     :which-key "Go To Harpoon Mark 3")
+  "h4"  '(harpoon-go-to-4     :which-key "Go To Harpoon Mark 4")
+  "h5"  '(harpoon-go-to-5     :which-key "Go To Harpoon Mark 5")
+  "h6"  '(harpoon-go-to-6     :which-key "Go To Harpoon Mark 6")
+  "h7"  '(harpoon-go-to-7     :which-key "Go To Harpoon Mark 7")
+  "h8"  '(harpoon-go-to-8     :which-key "Go To Harpoon Mark 8")
+  "h9"  '(harpoon-go-to-9     :which-key "Go To Harpoon Mark 9")
+  "hdd" '(harpoon-delete-item :which-key "Harpoon delete item")
+  "hd1" '(harpoon-delete-1    :which-key "Delete Harpoon Mark 1")
+  "hd2" '(harpoon-delete-2    :which-key "Delete Harpoon Mark 2")
+  "hd3" '(harpoon-delete-3    :which-key "Delete Harpoon Mark 3")
+  "hd4" '(harpoon-delete-4    :which-key "Delete Harpoon Mark 4")
+  "hd5" '(harpoon-delete-5    :which-key "Delete Harpoon Mark 5")
+  "hd6" '(harpoon-delete-6    :which-key "Delete Harpoon Mark 6")
+  "hd7" '(harpoon-delete-7    :which-key "Delete Harpoon Mark 7")
+  "hd8" '(harpoon-delete-8    :which-key "Delete Harpoon Mark 8")
+  "hd9" '(harpoon-delete-9    :which-key "Delete Harpoon Mark 9")
   )
 
 ;; Hydra
@@ -1338,10 +1348,33 @@
 ;; Vundo
 (use-package vundo
   :custom
+  (vundo-compact-display t)
   (vundo-glyph-alist vundo-unicode-symbols)
+  :config
+  ;; Better contrasting highlight.
+  (custom-set-faces
+   '(vundo-node ((t (:foreground "#808080"))))
+   '(vundo-stem ((t (:foreground "#808080"))))
+   '(vundo-highlight ((t (:foreground "#FFFF00"))))
+   )
+  ;; Use `HJKL` VIM-like motion, also Home/End to jump around.
   :bind
   (
    ("C-x u" . vundo)
+   :map vundo-mode-map
+   ("l"       . vundo-forward)
+   ("h"       . vundo-backward)
+   ("j"       . vundo-next)
+   ("k"       . vundo-previous)
+   ("<right>" . vundo-forward)
+   ("<left>"  . vundo-backward)
+   ("<down>"  . vundo-next)
+   ("<up>"    . vundo-previous)
+   ("<home>"  . vundo-stem-root)
+   ("<end>"   . vundo-stem-end)
+   ("q"       . vundo-quit)
+   ("C-g"     . vundo-quit)
+   ("RET"     . vundo-confirm)
    )
   )
 
@@ -1544,6 +1577,8 @@
 
 ;; Popup-kill-ring
 (use-package popup-kill-ring
+  :custom
+  (popup-kill-ring-interactive-insert t)
   :bind
   (
    ("M-y" . popup-kill-ring)
@@ -1552,7 +1587,7 @@
    ("M-k" . popup-kill-ring-previous)
    ("<escape>" . keyboard-quit)
    )
-  )
+)
 
 ;; Browse-kill-ring
 (use-package browse-kill-ring
@@ -1904,4 +1939,15 @@
       (kbd "M-k")  #'evil-multiedit-prev
       )
     )
+  )
+
+;; Auto-rename-tag
+(use-package auto-rename-tag
+  :hook
+  (
+   (
+    html-mode
+    xml-mode
+    ) . auto-rename-tag-mode
+   )
   )

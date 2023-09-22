@@ -2,18 +2,26 @@ return {
    'VonHeikemen/lsp-zero.nvim',
    dependencies = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' },             -- Required
-      { 'williamboman/mason.nvim' },           -- Optional
-      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },     -- Required
-      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-      { 'L3MON4D3/LuaSnip' },     -- Required
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'L3MON4D3/LuaSnip' },
+      {
+         "SmiteshP/nvim-navbuddy",
+         dependencies = {
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim"
+         },
+      },
    },
    config = function()
       local lsp = require("lsp-zero")
-
+      local navbuddy = require("nvim-navbuddy")
+      local navic = require("nvim-navic")
       lsp.preset("recommended")
 
       lsp.ensure_installed({
@@ -43,7 +51,6 @@ return {
 
       lsp.on_attach(function(client, bufnr)
          local opts = { buffer = bufnr, remap = false }
-
          vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
          vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
          vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -54,8 +61,8 @@ return {
          vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
          vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
          vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+         navbuddy.attach(client, bufnr)
       end)
-
       lsp.setup()
 
       vim.diagnostic.config({
