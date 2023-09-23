@@ -84,7 +84,7 @@
 ;; Disable startup message
 (setq inhibit-startup-message t)
 ;; Restore the last location of the cursor in a file
-(save-place-mode 1)
+(save-place-mode +1)
 ;; Don’t warn for large files
 (setq large-file-warning-threshold nil)
 ;; Don’t warn for following symlinked files
@@ -123,11 +123,11 @@
 (windmove-default-keybindings)
 
 ;; Auto close brackets and quotes
-(electric-pair-mode 1)
-(electric-quote-mode 1)
+(electric-pair-mode +1)
+(electric-quote-mode +1)
 
 ;; Revert buffers when the underlying file has changed
-(global-auto-revert-mode 1)
+(global-auto-revert-mode +1)
 (setq global-auto-revert-non-file-buffers t)
 
 ;; Toggle automated performance mitigations for files with long lines
@@ -139,7 +139,10 @@
 
 ;; Line numbers
 (column-number-mode)
-(global-display-line-numbers-mode t)
+(global-display-line-numbers-mode +1)
+;; Relative line numbers
+(setq display-line-numbers-type 'visual)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(
                 completion-list-mode-hook

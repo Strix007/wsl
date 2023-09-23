@@ -28,13 +28,13 @@ local options = {
    tabstop = 2,
    cursorline = true,
    number = true,
-   relativenumber = false,
+   relativenumber = true,
    numberwidth = 4,
    signcolumn = "yes",
    wrap = true,
    scrolloff = 8,
    sidescrolloff = 8,
-   guifont = "monospace:h17",
+   guifont = "JetBrainsMono:h17",
 
 }
 
@@ -42,10 +42,11 @@ for option, value in pairs(options) do
   vim.opt[option] = value
 end
 
-vim.g.mapleader = " " -- Set leader to SPACE
+-- Set leader to SPACE
+vim.g.mapleader = " "
 
 vim.opt.shortmess:append "c"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.cmd [[set formatoptions-=cro]]

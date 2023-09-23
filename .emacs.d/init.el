@@ -16,7 +16,7 @@
 ;; Integrate with use-package
 (straight-use-package 'use-package)
 ;; Always use straight.el
-(setq straight-use-package-by-default 1)
+(setq straight-use-package-by-default +1)
 
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
@@ -67,7 +67,7 @@
 ;; Install doom-nord theme
 (use-package doom-themes
   :hook
-  (server-after-make-frame . (lambda () (load-theme 'doom-nord t)))
+  (server-after-make-frame . (lambda () (load-theme 'doom-nord-aurora t)))
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -77,7 +77,7 @@
   (doom-themes-neotree-config)
   (doom-themes-org-config)
   :init
-  (load-theme 'doom-nord t)
+  (load-theme 'doom-nord-aurora t)
   )
 
 ;; High contrast nord theme
@@ -187,7 +187,7 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-respect-visual-line-mode t)
   (setq evil-undo-system 'undo-fu)
-  (evil-mode 1)
+  (evil-mode +1)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -225,7 +225,7 @@
   :after
   (evil)
   :config
-  (evil-snipe-override-mode 1)
+  (evil-snipe-override-mode +1)
   )
 
 ;; Evil-surround
@@ -233,7 +233,7 @@
   :after
   (evil)
   :config
-  (global-evil-surround-mode 1)
+  (global-evil-surround-mode +1)
 )
 
 ;; Evil-anzu
@@ -314,7 +314,7 @@
 ;; Ace-pop-up menu
 (use-package ace-popup-menu
   :config
-  (ace-popup-menu-mode 1)
+  (ace-popup-menu-mode +1)
   :custom
   (ace-popup-menu-show-pane-header t)
   )
@@ -466,7 +466,7 @@
 ;; Doom-modeline
 (use-package doom-modeline
   :config
-  (doom-modeline-mode 1)
+  (doom-modeline-mode +1)
   :custom
   (doom-modeline-icon t)
   (doom-modeline-support-imenu t)
@@ -529,7 +529,7 @@
   :after
   (counsel)
   :config
-  (all-the-icons-ivy-rich-mode 1)
+  (all-the-icons-ivy-rich-mode +1)
   )
 
 ;; Ivy-rich
@@ -537,7 +537,7 @@
   :after
   (counsel all-the-icons-ivy-rich)
   :config
-  (ivy-rich-mode 1)
+  (ivy-rich-mode +1)
   :custom
   (ivy-rich-path-style 'abbrev)
   )
@@ -545,7 +545,7 @@
 ;; Ivy-posframe
 (use-package ivy-posframe
   :config
-  (ivy-posframe-mode 1)
+  (ivy-posframe-mode +1)
   :custom
   (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   )
@@ -1090,7 +1090,7 @@
   :preface
   (defun arbab/org-mode-visual-fill ()
     (setq visual-fill-column-width 150)
-    (visual-fill-column-mode 1)
+    (visual-fill-column-mode +1)
     )
   :config
   (setq-default visual-fill-column-center-text t)
@@ -1514,7 +1514,7 @@
   :after
   (counsel)
   :config
-  (ivy-prescient-mode 1)
+  (ivy-prescient-mode +1)
   :custom
   (ivy-prescient-retain-classic-highlighting nil)
   )
@@ -1524,7 +1524,7 @@
   :after
   (company)
   :config
-  (company-prescient-mode 1)
+  (company-prescient-mode +1)
   )
 
 ;; Smex
