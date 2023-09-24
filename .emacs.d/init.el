@@ -116,6 +116,7 @@
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
   (setq dashboard-banner-logo-title " ")
   (setq dashboard-startup-banner (concat user-emacs-directory "banner.jpg"))
+  ;; (setq dashboard-startup-banner (concat user-emacs-directory "banner.txt"))
   (setq dashboard-items '(
                           ;; (recents  . 5)
                           (bookmarks . 5)

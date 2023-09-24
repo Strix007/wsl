@@ -9,6 +9,10 @@ return {
             component_separators = '|',
             section_separators = '',
             theme = "nordic",
+            disabled_filetypes = {
+               statusline = { "alpha" },
+               winbar = {},
+            },
          },
          sections = {
             lualine_x = {
