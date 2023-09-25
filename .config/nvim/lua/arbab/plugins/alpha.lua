@@ -2,33 +2,6 @@ return {
    'goolord/alpha-nvim',
    dependencies = { 'nvim-tree/nvim-web-devicons' },
    config = function()
-      --       local alpha = require("alpha")
-      --       local dashboard = require("alpha.themes.dashboard")
-      --       dashboard.section.header.val = {
-      --          "                                            ",
-      --          "▄█▄    ████▄ ██▄   ▄███▄       ████▄    ▄   ",
-      --          "█▀ ▀▄  █   █ █  █  █▀   ▀      █   █     █  ",
-      --          "█   ▀  █   █ █   █ ██▄▄        █   █ ██   █ ",
-      --          "█▄  ▄▀ ▀████ █  █  █▄   ▄▀     ▀████ █ █  █ ",
-      --          "▀███▀        ███▀  ▀███▀             █  █ █ ",
-      --          "                                     █   ██ ",
-      --          "                                            ",
-      --       }
-      --       dashboard.section.buttons.val = {
-      --          dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
-      --          dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
-      --          dashboard.button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
-      --          dashboard.button("c", "  Configuration", ":Oil --float ~/.config/nvim<CR>"),
-      --          dashboard.button("s", "󰦛  Restore Session", ":SessionManager load_last_session<CR>"),
-      --          dashboard.button("q", "  Quit", ":qa<CR>"),
-      --       }
-
-      --       -- Send config to alpha
-      --       alpha.setup(dashboard.opts)
-      --       -- Disable folding on alpha buffer
-      --       vim.cmd([[
-      --     autocmd FileType alpha setlocal nofoldenable
-      -- ]])
       local if_nil = vim.F.if_nil
 
       local default_header = {

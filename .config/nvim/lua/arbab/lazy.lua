@@ -15,6 +15,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
       { import = "arbab.plugins" },
    },
+   -- Telescope
+   {
+      'nvim-telescope/telescope.nvim',
+      dependencies = {
+         'nvim-lua/plenary.nvim',
+         "BurntSushi/ripgrep",
+         "sharkdp/fd",
+         "nvim-tree/nvim-web-devicons",
+      },
+      -- Telescope Extensions
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+   },
    {
       install = {
          colorscheme = { "nordic" },
