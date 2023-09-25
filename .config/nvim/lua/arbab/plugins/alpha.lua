@@ -72,7 +72,8 @@ return {
          type = "group",
          val = {
             button("e", "  New File", ":ene <BAR> startinsert <CR>"),
-            button("f", "  Find File", ":Telescope find_files<CR>"),
+            button("f", "  Find File", ":lua require'telescope.builtin'.find_files({ hidden = true })<CR>"),
+            button("g", "  Live Grep", ":Telescope live_grep<CR>"),
             button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
             button("c", "  Configuration", ":Oil ~/.config/nvim<CR>"),
             button("s", "󰦛  Restore Session", ":SessionManager load_last_session<CR>"),

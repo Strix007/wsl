@@ -1231,7 +1231,7 @@
   (lsp-ui-doc-enhanced-markdown t)
   (lsp-ui-doc-use-childframe t)
   ;; Sideline
-  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-enable nil)
   (lsp-ui-sideline-show-diagnostics t)
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-sideline-show-code-actions t)
