@@ -334,7 +334,8 @@
   :config
   (setq aw-ignored-buffers (delete 'treemacs-mode aw-ignored-buffers))
   :custom
-  (treemacs-display-current-project-exclusively t)
+  (treemacs-display-current-project-exclusively nil)
+  (treemacs-project-follow-mode t)
   (treemacs-follow-mode t)
   :bind
   (
@@ -355,6 +356,7 @@
 
 ;; Treemacs-projectile
 (use-package treemacs-projectile
+  :disabled t
   :after
   (treemacs)
   )
@@ -907,6 +909,7 @@
 ;; Org-super-agenda
 (use-package org-super-agenda
   :init
+  (org-super-agenda-mode +1)
   (setq org-super-agenda-groups
         '(
           (
@@ -965,8 +968,6 @@
            )
           )
         )
-  :hook
-  (org-agenda-mode . org-super-agenda-mode)
   )
 
 ;; Org-wild-notifier
