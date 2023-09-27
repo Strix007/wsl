@@ -194,6 +194,10 @@
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-set-undo-system 'undo-fu)
+  (evil-define-key '(normal insert) 'global
+    (kbd "M-c") #'arbab/smart-flexing-at-point
+    (kbd "M-l") #'arbab/smart-casing-at-point
+    )
   )
 
 ;; Evil-collection
@@ -235,7 +239,7 @@
   (evil)
   :config
   (global-evil-surround-mode +1)
-)
+  )
 
 ;; Evil-anzu
 (use-package evil-anzu
@@ -311,8 +315,8 @@
   :config
   (counsel-projectile-mode)
   )
-
 ;; Ace-pop-up menu
+
 (use-package ace-popup-menu
   :config
   (ace-popup-menu-mode +1)
@@ -335,7 +339,7 @@
   (setq aw-ignored-buffers (delete 'treemacs-mode aw-ignored-buffers))
   :custom
   (treemacs-display-current-project-exclusively nil)
-  (treemacs-project-follow-mode t)
+  (treemacs-project-follow-mode nil)
   (treemacs-follow-mode t)
   :bind
   (
@@ -406,8 +410,8 @@
   :custom
   (dirvish-reuse-session nil)
   (delete-by-moving-to-trash t
-        trash-directory "~/.local/share/Trash/files"
-        )
+                             trash-directory "~/.local/share/Trash/files"
+                             )
   ;; Downloas "gls" and uncomment this line if you’re on OSX
   ;; (insert-directory-program "gls")
   )
@@ -609,6 +613,7 @@
    :map company-active-map
    ("M-<tab>" . company-complete-common)
    ("<tab>" . company-complete-selection)
+   ("C-<tab>" . yas-expand)
    )
   )
 
@@ -651,7 +656,7 @@
     )
   ;; Comment out when using centaur-tabs
   (general-define-key
-   :states 'normal
+   :states '(normal visual)
    "gt" 'next-buffer
    "gT" 'previous-buffer
    )
@@ -1415,7 +1420,7 @@
   ("C-c r e" . quickrun-replace-region)
   ("C-c r a" . quickrun-with-arg)
   ("C-c r s" . quickrun-select)
-)
+  )
 
 ;; Corral
 (use-package corral
@@ -1593,7 +1598,7 @@
    ("M-k" . popup-kill-ring-previous)
    ("<escape>" . keyboard-quit)
    )
-)
+  )
 
 ;; Browse-kill-ring
 (use-package browse-kill-ring
@@ -1899,17 +1904,17 @@
   :straight
   (
    :type git
-         :host github
-         :repo "jdtsmith/indent-bars"
-         )
+   :host github
+   :repo "jdtsmith/indent-bars"
+   )
   :hook
   (prog-mode . indent-bars-mode)
   :config
-   (setq
-    indent-bars-color '(highlight :face-bg t :blend 0.6)
-    indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
-    indent-bars-width-frac 0.25
-    indent-bars-pad-frac 0.1)
+  (setq
+   indent-bars-color '(highlight :face-bg t :blend 0.6)
+   indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
+   indent-bars-width-frac 0.25
+   indent-bars-pad-frac 0.1)
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)
@@ -1955,5 +1960,40 @@
     html-mode
     xml-mode
     ) . auto-rename-tag-mode
+   )
+  )
+
+;; Golden-ratio
+(use-package golden-ratio
+  :commands
+  (golden-ratio golden-ratio-mode)
+  )
+
+;; Yasnippet
+(use-package yasnippet
+  :hook
+  (
+   (
+    text-mode
+    prog-mode
+    ) . yas-minor-mode
+   )
+  :custom
+  (yas-snippet-dirs '("~/.emacs.d/snippets"))
+  )
+
+;; yasnippet-snippets
+(use-package yasnippet-snippets
+  :after
+  (yasnippet)
+  )
+
+;; Ivy-yasnippet
+(use-package ivy-yasnippet
+  :after
+  (yasnippet)
+  :bind
+  (
+   ("C-c y" . ivy-yasnippet)
    )
   )

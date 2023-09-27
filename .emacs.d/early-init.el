@@ -242,3 +242,39 @@
 ;; Html-mode
 ;; Automatically close tags
 (setq sgml-quick-keys 'close)
+
+;; Elisp functions
+;; Smart flexing at point
+(defun arbab/smart-flexing-at-point ()
+  "Perform smart flexing at point."
+  (interactive)
+  (let ((case-fold-search nil))
+    (call-interactively
+     (cond ((looking-at "[0-9]+") #'increment-number-at-point)
+           ((looking-at "[[:lower:]]") #'capitalize-word)
+           ((looking-at "==") (delete-char 1) (insert "!") (forward-char 2))
+           ((looking-at "!=") (delete-char 1) (insert "=") (forward-char 2))
+           ((looking-at "+") (delete-char 1) (insert "-") (forward-char 1))
+           ((looking-at "-") (delete-char 1) (insert "+") (forward-char 1))
+           ((looking-at "<=") (delete-char 2) (insert ">=") (forward-char 2))
+           ((looking-at ">=") (delete-char 2) (insert "<=") (forward-char 2))
+           ((looking-at "<") (delete-char 1) (insert ">") (forward-char 1))
+           ((looking-at ">") (delete-char 1) (insert "<") (forward-char 1))
+           (t #'downcase-word)
+           )
+     )
+    )
+  )
+;; Perform smart casing of word at point
+(defun arbab/smart-casing-at-point ()
+  "Perform smart casing of word at point."
+  (interactive)
+  (let ((case-fold-search nil))
+    (call-interactively
+     (cond
+      ((looking-at "[[:lower:]]") #'upcase-word)
+      (t #'downcase-word)
+      )
+     )
+    )
+  )

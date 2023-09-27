@@ -159,7 +159,7 @@ The wayland setup has only been tested on arch linux. I don’t know if it will 
 ** Applications
 | Keybind             | Function                    |
 |---------------------+-----------------------------|
-| super + enter       | Launch terminal (alacritty) |
+| super + enter enter | Launch terminal (alacritty) |
 | super + a z         | Open thunar                 |
 | super + a shift + z | Open pcmanfm                |
 | super + a b         | Open browser (firefox)      |
