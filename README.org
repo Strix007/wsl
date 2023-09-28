@@ -28,6 +28,7 @@ This is my personal configuration. This is not meant as a plug and play configur
   - [[#polybar][Polybar]]
   - [[#shell][Shell]]
   - [[#tmux][Tmux]]
+  - [[#neovim][NeoVim]]
   - [[#lf][lf]]
   - [[#fzf][fzf]]
   - [[#rofi-1][Rofi]]
@@ -213,6 +214,9 @@ These programs are required to get you started with this config so make sure to 
 - [[https://github.com/ajeetdsouza/zoxide][zoxide]]
 - [[https://github.com/facebook/pathpicker/][fpp]]
 - [[https://github.com/golang/go][go]]
+** NeoVim
+- [[https://github.com/neovim/neovim/wiki/Installing-Neovim][neovim]]
+- [[https://www.gnu.org/software/make/#download][make]]
 ** lf 
 - [[https://github.com/gokcehan/lf][lf]]  
 - [[https://github.com/junegunn/fzf#installation][fzf]]

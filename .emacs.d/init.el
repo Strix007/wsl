@@ -198,6 +198,10 @@
     (kbd "M-c") #'arbab/smart-flexing-at-point
     (kbd "M-l") #'arbab/smart-casing-at-point
     )
+  (evil-define-key '(normal visual) 'global
+    (kbd "gt") #'arbab/next-user-buffer
+    (kbd "gT") #'arbab/previous-user-buffer
+    )
   )
 
 ;; Evil-collection
@@ -611,8 +615,8 @@
   (
    ("M-<tab>" . company-complete)
    :map company-active-map
+   ("<tab>" . yas-next-field-or-maybe-expand)
    ("M-<tab>" . company-complete-common)
-   ("<tab>" . company-complete-selection)
    ("C-<tab>" . yas-expand)
    )
   )
@@ -654,12 +658,6 @@
     :keymaps '(normal visual)
     :prefix "g SPC"
     )
-  ;; Comment out when using centaur-tabs
-  (general-define-key
-   :states '(normal visual)
-   "gt" 'next-buffer
-   "gT" 'previous-buffer
-   )
   )
 ;; Define Keybindings
 ;; Define avy keybinding
@@ -1979,7 +1977,7 @@
     ) . yas-minor-mode
    )
   :custom
-  (yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   )
 
 ;; yasnippet-snippets

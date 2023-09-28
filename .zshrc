@@ -83,6 +83,7 @@ alias xclass="xprop | grep WM_CLASS"
 alias cat='bat'
 alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
 alias fzf="fzf --preview='fzf-preview {}' --bind alt-k:preview-page-up,alt-j:preview-page-down"
+alias tmux="tmux attach"
 # Verbose
 alias mv='mv -vi'
 alias cp='cp -vri'
