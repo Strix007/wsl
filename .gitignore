@@ -42,6 +42,7 @@
 .emacs.d/*~
 .emacs.d/qr*
 .emacs.d/undo
+!.emacs.d/etc/yasnippets/**/*
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu

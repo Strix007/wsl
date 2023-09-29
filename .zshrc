@@ -12,6 +12,26 @@ source $HOME/.env
 export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.spicetify:$HOME/.cargo/bin"
 
 # Enviorment Variables
+# XDG ENVs
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+export ANDROID_HOME='"$XDG_DATA_HOME"/android'
+export HISTFILE='"${XDG_STATE_HOME}"/bash/history'
+export CARGO_HOME='"$XDG_DATA_HOME"/cargo'
+export RUSTUP_HOME='"$XDG_DATA_HOME"/rustup'
+export DOCKER_CONFIG='"$XDG_CONFIG_HOME"/docker'
+export GNUPGHOME='"$XDG_DATA_HOME"/gnupg'
+export GOPATH='"$XDG_DATA_HOME"/go'
+export GRIPHOME='"$XDG_CONFIG_HOME/grip"'
+export GTK2_RC_FILES='"$XDG_CONFIG_HOME"/gtk-2.0/gtkrc'
+export ICEAUTHORITY='"$XDG_CACHE_HOME"/ICEauthority'
+export _JAVA_OPTIONS='-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java'
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export WINEPREFIX='"$XDG_DATA_HOME"/wine'
+export HISTFILE='"$XDG_STATE_HOME"/zsh/history'
+# User Defined
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
@@ -84,6 +104,7 @@ alias cat='bat'
 alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper1.png --bg-fill /home/arbab/.xmonad/wallpapers/wallpaper2.png"
 alias fzf="fzf --preview='fzf-preview {}' --bind alt-k:preview-page-up,alt-j:preview-page-down"
 alias tmux="tmux attach"
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 # Verbose
 alias mv='mv -vi'
 alias cp='cp -vri'

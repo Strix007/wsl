@@ -7,4 +7,7 @@ return {
       },
    },
    dependencies = { "nvim-tree/nvim-web-devicons" },
+   config = function ()
+      vim.keymap.set("n", "<C-x><C-f>", "<CMD>Oil<CR>")
+   end,
 }
