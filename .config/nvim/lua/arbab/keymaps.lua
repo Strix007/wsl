@@ -1,9 +1,13 @@
 local map = vim.keymap.set
 -- Cycle BufferS
-map('n', 'gt', ':bnext<CR>')
-map('n', 'gT', ':bprev<CR>')
-map('v', 'gt', ':bnext<CR>')
-map('v', 'gT', ':bprev<CR>')
+map('n', 'gt', ':bnext<CR>', { noremap = true, silent = true, nowait = true })
+map('n', 'gT', ':bprev<CR>', { noremap = true, silent = true, nowait = true })
 
 -- Kill Buffer
-map('n', '<Leader>xq', ':bd<CR>')
+map('n', '<Leader>xq', ':bd<CR>', { noremap = true, silent = true, nowait = true })
+
+-- Telescope
+map('n', '<Leader>ff', ":lua require'telescope.builtin'.find_files({ hidden = true })<CR>")
+map('n', '<leader>fg', ":lua require'telescope.builtin'.live_grep{}<CR>")
+map('n', '<leader>xb', ":lua require'telescope.builtin'.buffers{}<CR>")
+map('n', '<leader>fh', ":lua require'telescope.builtin'.help_tags{}<CR>")

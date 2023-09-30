@@ -41,11 +41,6 @@ return {
                },
             },
          }
-         local builtin = require('telescope.builtin')
-         vim.keymap.set('n', '<Leader>ff', ":lua require'telescope.builtin'.find_files({ hidden = true })<CR>")
-         vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-         vim.keymap.set('n', '<leader>xb', builtin.buffers, {})
-         vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
          -- Extensions
          require('telescope').load_extension('fzf')
       end

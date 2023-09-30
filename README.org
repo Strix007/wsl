@@ -304,6 +304,13 @@ Define variables for spotify-client-id and spotify-client-secret for counsel-spo
 
 If you don't know how to get your spotify client id and secret, refer to [[https://cran.r-project.org/web/packages/spotidy/vignettes/Connecting-with-the-Spotify-API.html][this article]].
 
+*** Yasnippets
+Make sure to set up the following symlink
+
+=ln -s ~/.emacs.d/yasnippet ~/emacs.d/etc=
+
+This is beacuase the =no-littering= package change the =yas-snippet-dirs= variable to =~/.emacs.d/etc/= instead to =~/.emacs.d=, causing the snippets to not be in included the git repository because =~/.emacs.d/etc= is in my =.gitignore=. The symlink fixes the issue.
+
 ** Xmodmap
 I have changed my caps key to ctrl and my right ctrl to caps key. If you don't want this behavior, delete =.Xmodmap=.
 

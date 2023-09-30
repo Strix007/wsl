@@ -11,7 +11,8 @@
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+  (load bootstrap-file nil 'nomessage)
+  )
 
 ;; Integrate with use-package
 (straight-use-package 'use-package)
@@ -525,7 +526,7 @@
    ("<f1> l"  . counsel-find-library)
    ("<f2> i"  . counsel-info-lookup-symbol)
    ("<f2> u"  . counsel-unicode-char)
-   ("C-c k"   . counsel-ag)
+   ("C-c k"   . counsel-rg)
    ("C-x C-i" . counsel-imenu)
    :map ivy-minibuffer-map
    ("<tab>" . ivy-alt-done)

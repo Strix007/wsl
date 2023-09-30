@@ -118,7 +118,6 @@ return {
             end,
          },
       }
-
       require("alpha").setup(config)
    end
 };

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Lazy New Plugin
+# key: lazyn
+# --
+return {
+    "${}",
+    config = function ()
+        $0
+    end,
+}
