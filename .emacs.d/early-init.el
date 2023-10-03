@@ -43,6 +43,7 @@
 ;; Kill emacs with processes running without asking
 (setq confirm-kill-processes nil)
 
+;; Startup time in buffer area
 (defun arbab/display-startup-time ()
   (message " Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
@@ -50,7 +51,6 @@
                     (time-subtract after-init-time before-init-time)))
            gcs-done)
   )
-
 (add-hook 'emacs-startup-hook #'arbab/display-startup-time)
 
 ;; Make all "~" files go into a seperate backup directory
@@ -65,6 +65,14 @@
 ;; Move customization variables to a separate file and load it
 (setq custom-file (concat user-emacs-directory "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
+
+;; Separate elpa directories for each Emacs version
+;; (setq package-user-dir (locate-user-emacs-file
+;;                         (concat
+;;                          (file-name-as-directory "elpa")
+;;                          emacs-version)
+;;                         )
+;;       )
 
 ;; Change the location of the native compilation cache
 (when (fboundp 'startup-redirect-eln-cache)

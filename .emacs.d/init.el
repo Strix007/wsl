@@ -18,6 +18,8 @@
 (straight-use-package 'use-package)
 ;; Always use straight.el
 (setq straight-use-package-by-default +1)
+;; Separate emacs package directories for different versions in straight
+(setq straight-build-dir (format "build-%s" emacs-version))
 
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
@@ -1283,6 +1285,12 @@
   (lsp-mode)
   )
 
+;; Apheleia
+(use-package apheleia
+  :hook
+  (prog-mode . apheleia-mode)
+  )
+
 ;; Ws-butler
 (use-package ws-butler
   :hook
@@ -2019,5 +2027,27 @@
    ("C-=" . er/expand-region)
    ("C-(" . er/mark-inside-pairs)
    ("C-)" . er/mark-outside-pairs)
+   )
+  )
+
+;; Atomic-chrome
+(use-package atomic-chrome
+  :commands
+  (atomic-chrome-start-server)
+  )
+
+;; Visual-regexp
+(use-package visual-regexp
+  :defer t
+  )
+
+;; Visual-regexp-steroids
+(use-package visual-regexp
+  :after
+  (visual-regexp)
+  :bind
+  (
+   ("C-M-r" . vr/isearch-backward)
+   ("C-M-s" . vr/isearch-forward)
    )
   )
