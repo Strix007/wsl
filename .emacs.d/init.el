@@ -88,6 +88,8 @@
 
 ;; Dashboard
 (use-package dashboard
+  :after
+  (all-the-icons)
   :init
   (setq dashboard-icon-type 'all-the-icons)
   (dashboard-setup-startup-hook)
@@ -300,7 +302,8 @@
 
 ;; Projectile
 (use-package projectile
-  :diminish projectile-mode
+  :diminish
+  projectile-mode
   :custom
   (
    (projectile-completion-system 'ivy)
@@ -320,8 +323,8 @@
   :config
   (counsel-projectile-mode)
   )
-;; Ace-pop-up menu
 
+;; Ace-pop-up menu
 (use-package ace-popup-menu
   :config
   (ace-popup-menu-mode +1)
@@ -516,6 +519,7 @@
   (ivy-ignore-buffers '("\\` " "\\`\\*"))
   (ivy-height 15)
   (ivy-initial-inputs-alist nil)
+  (ivy-wrap t)
   :bind
   (
    ("C-s"     . swiper)
@@ -552,10 +556,12 @@
   (ivy-rich-mode +1)
   :custom
   (ivy-rich-path-style 'abbrev)
+  (counsel-linux-app-format-function 'counsel-linux-app-format-function-name-pretty)
   )
 
 ;; Ivy-posframe
 (use-package ivy-posframe
+  :disabled t
   :config
   (ivy-posframe-mode +1)
   :custom
@@ -1832,15 +1838,15 @@
     prog-mode
     text-mode
     ) . blamer-mode)
-  :bind
-  (
-   ("C-c i" . blamer-show-posframe-commit-info)
-   )
+  ;; :bind
+  ;; (
+  ;;  ("C-c i" . blamer-show-posframe-commit-info)
+  ;;  )
   :custom
-  (blamer-idle-time 0.3)
+  (blamer-idle-time 5)
   (blamer-min-offset 0)
   (blamer-max-commit-message-length 30)
-  (blamer-view 'overlay)
+  (blamer-view 'overlay-right)
   (blamer-prettify-time-p t)
   (blamer-type 'both)
   (blamer-show-avatar-p nil)
@@ -1981,7 +1987,7 @@
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   )
 
-;; yasnippet-snippets
+;; Yasnippet-snippets
 (use-package yasnippet-snippets
   :after
   (yasnippet)
@@ -1994,5 +2000,24 @@
   :bind
   (
    ("C-c y" . ivy-yasnippet)
+   )
+  )
+
+;; Super-save
+(use-package super-save
+  :defer t
+  :config
+  (super-save-mode +1)
+  :custom
+  (super-save-auto-save-when-idle t)
+  )
+
+;; Expand-region
+(use-package expand-region
+  :bind
+  (
+   ("C-=" . er/expand-region)
+   ("C-(" . er/mark-inside-pairs)
+   ("C-)" . er/mark-outside-pairs)
    )
   )
