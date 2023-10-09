@@ -83,11 +83,6 @@
   (load-theme 'doom-nord-aurora t)
   )
 
-;; High contrast nord theme
-;; https://git.sr.ht/~ashton314/nordic-night
-;; (load-file "~/.emacs.d/nordic-night-theme.el")
-;; (load-theme 'nordic-night t)
-
 ;; Dashboard
 (use-package dashboard
   :after
@@ -115,11 +110,12 @@
         )
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
-  (setq dashboard-init-info "Welcome, Arbab")
+  ;; (setq dashboard-init-info "Welcome, Arbab")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  (setq dashboard-banner-logo-title " ")
+  (setq dashboard-banner-logo-title "Welcome, Arbab")
+  ;; (setq dashboard-banner-logo-title " ")
   (setq dashboard-startup-banner (concat user-emacs-directory "banner.jpg"))
   ;; (setq dashboard-startup-banner (concat user-emacs-directory "banner.txt"))
   (setq dashboard-items '(
@@ -349,7 +345,6 @@
   (setq aw-ignored-buffers (delete 'treemacs-mode aw-ignored-buffers))
   :custom
   (treemacs-display-current-project-exclusively nil)
-  (treemacs-project-follow-mode nil)
   (treemacs-follow-mode t)
   :bind
   (
@@ -1074,25 +1069,28 @@
   )
 
 ;; Org-babel-templates
-(require 'org-tempo)
-(setq org-structure-template-alist
-      '(
-        ("lua" . "src lua")
-        ("py" . "src python")
-        ("el" . "src emacs-lisp")
-        ("sh" . "src shell")
-        ("a" . "export ascii")
-        ("c" . "center")
-        ("C" . "comment")
-        ("e" . "example")
-        ("E" . "export")
-        ("h" . "export html")
-        ("l" . "export latex")
-        ("q" . "quote")
-        ("s" . "src")
-        ("v" . "verse")
+(use-package org-tempo
+  :straight nil
+  :config
+  (setq org-structure-template-alist
+        '(
+          ("lua" . "src lua")
+          ("py" . "src python")
+          ("el" . "src emacs-lisp")
+          ("sh" . "src shell")
+          ("a" . "export ascii")
+          ("c" . "center")
+          ("C" . "comment")
+          ("e" . "example")
+          ("E" . "export")
+          ("h" . "export html")
+          ("l" . "export latex")
+          ("q" . "quote")
+          ("s" . "src")
+          ("v" . "verse")
+          )
         )
-      )
+  )
 
 ;; Ob-async
 (use-package ob-async)
