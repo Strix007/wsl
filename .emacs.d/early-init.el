@@ -120,6 +120,15 @@
 ;; Save minibuffer history
 (savehist-mode +1)
 
+;; Save bookmarks automatically
+(setq bookmark-save-flag 1)
+
+;; Recentf
+;; Disable automatic cleanup at load time
+(setq recentf-auto-cleanup 'never)
+;; Change max recentf saved items to 50
+(setq recentf-max-saved-items 50)
+
 ;; Cache any web request
 (setq url-automatic-caching t)
 
@@ -337,3 +346,35 @@ version 2016-06-18"
       )
     )
   )
+;; Smarter Move Beginning Of Line
+(defun arbab/smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1)
+        )
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1)
+      )
+    )
+  )
+;; Remap to `smarter-move-beginning-of-line`
+;; Remap C-a to `smarter-move-beginning-of-line'
+(global-set-key [remap evil-first-non-blank] 'arbab/smarter-move-beginning-of-line)
+;; Remap ^ to `smarter-move-beginning-of-line'
+(global-set-key [remap move-beginning-of-line] 'arbab/smarter-move-beginning-of-line)

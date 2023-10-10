@@ -18,7 +18,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 export ANDROID_HOME='"$XDG_DATA_HOME"/android'
-export HISTFILE='"${XDG_STATE_HOME}"/bash/history'
 export CARGO_HOME='"$XDG_DATA_HOME"/cargo'
 export RUSTUP_HOME='"$XDG_DATA_HOME"/rustup'
 export DOCKER_CONFIG='"$XDG_CONFIG_HOME"/docker'
@@ -30,7 +29,6 @@ export ICEAUTHORITY='"$XDG_CACHE_HOME"/ICEauthority'
 export _JAVA_OPTIONS='-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java'
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 export WINEPREFIX='"$XDG_DATA_HOME"/wine'
-export HISTFILE='"$XDG_STATE_HOME"/zsh/history'
 # User Defined
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8
