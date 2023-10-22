@@ -1285,6 +1285,7 @@
 
 ;; Apheleia
 (use-package apheleia
+  :disabled t
   :hook
   (prog-mode . apheleia-mode)
   )
