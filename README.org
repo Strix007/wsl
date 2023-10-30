@@ -1,0 +1,94 @@
+#+TITLE: Arbab Khan’s Dotfiles
+#+AUTHOR: Arbab Khan   
+#+EMAIL: arbabashruff@gmail.com
+#+DESCRIPTION: These are the dotfiles for my arch wsl instance.
+
+* WSL Configuration Of Arbab Khan:noexport:
+This is my WSL configuration for my arch WSL instance.
+
+* Table of Contents :toc:
+- [[#caution][Caution]]
+- [[#about][About]]
+- [[#what-to-install][What To Install]]
+  - [[#windows-11][Windows 11]]
+  - [[#wsl][WSL]]
+  - [[#tmux][Tmux]]
+
+* Caution
+I have not tested these dotfiles on other WSL distributions and am not sure how will they work.
+
+You also need to do simple little tweaks here and there to get things working, there are too many to list but they are simple enough that a simple google search should help you.
+
+* About
+This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/VSWSL/Arch-WSL][Vineel Sai's Unofficial Arch-WSL]].
+
+This configuration uses WezTerm on the Windows side to spawn directly into the WSL instance without going through powershell though any terminal can work.
+
+* What To Install
+** Windows 11
+- [[https://learn.microsoft.com/en-us/windows/wsl/install][WSL2]]
+- [[https://wezfurlong.org/wezterm/install/windows.html][WezTerm]]
+- [[https://github.com/VSWSL/Arch-WSL#Installation][Arch-WSL]]
+** WSL
+*** Shell
+- [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][Zsh]]
+- [[https://getantidote.github.io/install][Antidote]] 
+- [[https://github.com/junegunn/fzf#installation][fzf]]
+- [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
+- [[https://github.com/eza-community/eza][eza]]
+** Tmux
+- [[https://github.com/tmux/tmux][tmux]]
+- [[https://github.com/tmux-plugins/tpm][tpm]]
+- [[https://github.com/mikefarah/yq][yq]] 
+- [[https://github.com/junegunn/fzf#installation][fzf]]
+- [[https://github.com/ajeetdsouza/zoxide][zoxide]]
+- [[https://github.com/facebook/pathpicker/][fpp]]
+- [[https://github.com/golang/go][go]]
+*** NeoVim
+- [[https://github.com/neovim/neovim/wiki/Installing-Neovim][neovim]]
+- [[https://www.gnu.org/software/make/#download][make]]
+*** lf 
+- [[https://github.com/gokcehan/lf][lf]]  
+- [[https://github.com/junegunn/fzf#installation][fzf]]
+- [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
+- [[https://github.com/andreafrancia/trash-cli][trash-cli]] 
+- [[https://github.com/sharkdp/bat#installation][bat]]
+- [[https://github.com/dirkvdb/ffmpegthumbnailer][ffmpegthumbnailer]]
+- [[https://imagemagick.org/script/download.php][imagemagick]]
+- [[https://poppler.freedesktop.org/][poppler]]
+- [[https://github.com/marianosimone/epub-thumbnailer][epub-thumbnailer]]
+- [[https://wkhtmltopdf.org/downloads.html][wkhtmltopdf]]
+- [[https://github.com/hpjansson/chafa#Installing][chafa]]
+*** fzf
+- [[https://github.com/hpjansson/chafa#Installing][chafa]]
+- [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
+- [[https://stedolan.github.io/jq][jq]]
+- [[https://github.com/eza-community/eza][eza]]
+- [[https://sourceforge.net/projects/w3m/][w3m]]
+- [[https://github.com/charmbracelet/glow][glow]]
+- [[https://github.com/transmission/transmission][transmission-cli]]
+- [[https://github.com/sharkdp/bat#installation][bat]]
+*** MPD
+- [[https://mpd.readthedocs.io/en/stable/user.html][mpd]] 
+- [[https://github.com/MusicPlayerDaemon/mpc][mpc]]   
+- [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
+*** Emacs
+Under WSLg, linux programs run under wayland, so to get the best possible experience with emacs, you need to compile emacs yourself
+#+begin_example
+# Install the necessary developement tools
+sudo pacman -S base-devel git --needed
+sudo pacman -S libxpm libjpeg libpng libtiff giflib librsvg libxml2 gnutls gtk3 webkit2gtk --needed
+# Clone the Emacs repository
+git clone git://git.sv.gnu.org/emacs.git
+# cd into the Emacs repository
+cd emacs
+# Generate build files
+./autogen
+# Configure the Emacs features you want
+./configure --with-native-compilation=auto --with-pgtk --with-xwidgets
+# Build Emacs
+make
+# Install Emacs
+sudo make install
+#+end_example
+- [[https://github.com/jgm/pandoc/blob/main/INSTALL.md][pandoc]] 
