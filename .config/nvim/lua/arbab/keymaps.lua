@@ -3,6 +3,9 @@ local map = vim.keymap.set
 map('n', 'gt', ':bnext<CR>', { noremap = true, silent = true, nowait = true })
 map('n', 'gT', ':bprev<CR>', { noremap = true, silent = true, nowait = true })
 
+-- Open link under cursor
+map("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
+
 -- Kill Buffer
 map('n', '<Leader>xq', ':bd<CR>', { noremap = true, silent = true, nowait = true })
 

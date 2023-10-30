@@ -19,7 +19,7 @@
 ;; Always use straight.el
 (setq straight-use-package-by-default +1)
 ;; Separate emacs package directories for different versions in straight
-(setq straight-build-dir (format "build-%s" emacs-version))
+;; (setq straight-build-dir (format "build-%s" emacs-version))
 
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
@@ -110,12 +110,12 @@
         )
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
-  ;; (setq dashboard-init-info "Welcome, Arbab")
+  (setq dashboard-init-info "Welcome, Arbab")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  (setq dashboard-banner-logo-title "Welcome, Arbab")
-  ;; (setq dashboard-banner-logo-title " ")
+  ;; (setq dashboard-banner-logo-title "Welcome, Arbab")
+  (setq dashboard-banner-logo-title " ")
   (setq dashboard-startup-banner (concat user-emacs-directory "banner.jpg"))
   ;; (setq dashboard-startup-banner (concat user-emacs-directory "banner.txt"))
   (setq dashboard-items '(
@@ -1285,7 +1285,6 @@
 
 ;; Apheleia
 (use-package apheleia
-  :disabled t
   :hook
   (prog-mode . apheleia-mode)
   )

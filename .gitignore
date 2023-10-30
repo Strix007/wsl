@@ -42,6 +42,8 @@
 .emacs.d/*~
 .emacs.d/qr*
 .emacs.d/undo
+.emacs.d/straight
+.emacs.d/tree-sitter
 xmenu/Makefile
 xmenu/texput.log
 xmenu/xmenu

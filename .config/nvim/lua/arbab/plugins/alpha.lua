@@ -25,7 +25,7 @@ return {
 
       local footer = {
          type = "text",
-         val = " Personal configuration of Arbab Khan",
+         val = " Personal configuration of Arbab Khan",
          opts = {
             position = "center",
             hl = "Number",
@@ -77,7 +77,7 @@ return {
             button("r", "  Recent Files", ":Telescope oldfiles<CR>"),
             button("c", "  Configuration", ":Oil ~/.config/nvim<CR>"),
             button("s", "󰦛  Restore Session", ":SessionManager load_last_session<CR>"),
-            button("q", "  Quit", ":qa<CR>"),
+            button("q", "  Quit", ":qa<CR>"),
          },
          opts = {
             spacing = 1,

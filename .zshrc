@@ -21,8 +21,6 @@ export ANDROID_HOME='"$XDG_DATA_HOME"/android'
 export CARGO_HOME='"$XDG_DATA_HOME"/cargo'
 export RUSTUP_HOME='"$XDG_DATA_HOME"/rustup'
 export DOCKER_CONFIG='"$XDG_CONFIG_HOME"/docker'
-export GNUPGHOME='"$XDG_DATA_HOME"/gnupg'
-export GOPATH='"$XDG_DATA_HOME"/go'
 export GRIPHOME='"$XDG_CONFIG_HOME/grip"'
 export GTK2_RC_FILES='"$XDG_CONFIG_HOME"/gtk-2.0/gtkrc'
 export ICEAUTHORITY='"$XDG_CACHE_HOME"/ICEauthority'
@@ -36,10 +34,11 @@ export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+export MOZ_ENABLE_WAYLAND=1 
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='nvim'
 else
-    export EDITOR='emacsclient -c -a "emacs"'
+    export EDITOR='nvim'
 fi
 export BROWSER="firefox"
 
@@ -85,9 +84,9 @@ bindkey -e
 bindkey '^ ' autosuggest-execute
 
 # ALIASES
-# Exa
-alias l="eza -lah"
-alias ls="eza -ah"
+# LSD
+alias l="lsd -lah"
+alias ls="lsd -ah"
 # lf
 alias lf="$HOME/local/bin/lfub"
 alias lfub="$HOME/local/bin/lfub"
