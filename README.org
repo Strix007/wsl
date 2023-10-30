@@ -73,7 +73,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/MusicPlayerDaemon/mpc][mpc]]   
 - [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
 *** Emacs
-Under WSLg, linux programs run under wayland, so to get the best possible experience with emacs, you need to compile emacs yourself
+Under WSLg, linux programs run under wayland, so to get the best possible experience with emacs, you need to compile emacs yourself with pgtk and native-compilation.
 #+begin_example
 # Install the necessary developement tools
 sudo pacman -S base-devel git --needed
@@ -85,7 +85,7 @@ cd emacs
 # Generate build files
 ./autogen
 # Configure the Emacs features you want
-./configure --with-native-compilation=auto --with-pgtk --with-xwidgets
+./configure --with-native-compilation=aot --with-pgtk --with-xwidgets
 # Build Emacs
 make
 # Install Emacs
