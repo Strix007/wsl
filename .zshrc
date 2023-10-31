@@ -45,6 +45,9 @@ export BROWSER="firefox"
 # Install sccache
 export RUSTC_WRAPPER=sccache
 
+# Nord dir colors
+eval $(dircolors ~/.dir_colors)
+
 # Function for extracting archives
 ex ()
 {
