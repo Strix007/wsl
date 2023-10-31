@@ -119,8 +119,8 @@ Description=Emacs text editor (daemon)
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/emacs --daemon
-ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook 'nil) (kill-emacs))"
+ExecStart=/usr/local/bin/emacs --daemon
+ExecStop=/usr/local/bin/emacsclient --eval "(progn (setq kill-emacs-hook 'nil) (kill-emacs))"
 Restart=always
 
 [Install]
