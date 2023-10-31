@@ -12,7 +12,10 @@ This is my WSL configuration for my arch WSL instance.
 - [[#what-to-install][What To Install]]
   - [[#windows-11][Windows 11]]
   - [[#wsl][WSL]]
-  - [[#tmux][Tmux]]
+- [[#setup-instructions][Setup Instructions]]
+  - [[#wezterm][WezTerm]]
+  - [[#archwsl][ArchWSL]]
+- [[#contributing][Contributing]]
 
 * Caution
 I have not tested these dotfiles on other WSL distributions and am not sure how will they work.
@@ -36,7 +39,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
 - [[https://github.com/eza-community/eza][eza]]
-** Tmux
+*** Tmux
 - [[https://github.com/tmux/tmux][tmux]]
 - [[https://github.com/tmux-plugins/tpm][tpm]]
 - [[https://github.com/mikefarah/yq][yq]] 
@@ -92,3 +95,41 @@ make
 sudo make install
 #+end_example
 - [[https://github.com/jgm/pandoc/blob/main/INSTALL.md][pandoc]] 
+
+* Setup Instructions
+** WezTerm
+To setup WezTerm with wezterm.lua, after installin wezterm you need to move to move wezterm.lua to where you have installed WezTerm, typically =C:\Program Files\WezTerm= . Doing so might require administrator privilages.
+** ArchWSL
+*** Systemd
+To enable systemd, you need to edit =/etc/wsl.conf= with sudo privileges i.e. =sudo vim /etc/wsl.conf= and add the following lines
+#+begin_example
+[boot]
+systemd=true
+#+end_example
+and then restart your WSL instance by going into the windows terminal and typing the followin command =wsl --shutdown= and then opening WezTerm.
+*** Emacs Daemon
+To enable Emacs daemon on WSL, we need to create a systemd user service for the Emacs daemon.
+We can do so by the following steps.
+**** Create a service unit file for the Emacs daemon
+=vim ~/.config/systemd/user/emacs.service=
+**** Add the following content to the file
+#+begin_example
+[Unit]
+Description=Emacs text editor (daemon)
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(progn (setq kill-emacs-hook 'nil) (kill-emacs))"
+Restart=always
+
+[Install]
+WantedBy=default.target
+#+end_example
+**** Reload systemd user manager
+=systemctl --user daemon-reload=
+**** Enable the systemd user manager
+=systemctl --user enable emacs.service=
+
+* Contributing
+If you see me doing anything inefficiently in this config or you think something would be useful to me or you want to correct some error on my part, feel free to open a pull request.
