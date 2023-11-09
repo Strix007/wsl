@@ -32,6 +32,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://learn.microsoft.com/en-us/windows/wsl/install][WSL2]]
 - [[https://wezfurlong.org/wezterm/install/windows.html][WezTerm]]
 - [[https://github.com/VSWSL/Arch-WSL#Installation][Arch-WSL]]
+- [[https://github.com/ryanoasis/nerd-fonts#font-installation][Nerd Font]]
 ** WSL
 *** Shell
 - [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][Zsh]]

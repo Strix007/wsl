@@ -1,26 +1,26 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
--- This table will hold the configuration.
+-- Configuration table
 local config = {}
 
+-- Cleaner error messages
+config = wezterm.config_builder()
 
--- In newer versions of wezterm, use the config_builder which will
--- help provide clearer error messages
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
-
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
+-- Colorscheme
 config.color_scheme = 'nord'
 
--- Spawn a arch wsl shell in login mode
-
+-- Spawn a arch wsl shell on login
 config.default_prog = { 'arch' }
 
+-- Transparency
 config.window_background_opacity = 0.95
 
--- and finally, return the configuration to wezterm
+-- Font
+config.font = wezterm.font('JetBrainsMono Nerd Font Mono', { weight = 'Regular', italic = false })
+
+-- Cursor
+config.default_cursor_style = 'BlinkingBar'
+
+-- Return config table
 return config
