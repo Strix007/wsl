@@ -19,7 +19,7 @@
 ;; Always use straight.el
 (setq straight-use-package-by-default +1)
 ;; Separate emacs package directories for different versions in straight
-;; (setq straight-build-dir (format "build-%s" emacs-version))
+(setq straight-build-dir (format "build-%s" emacs-version))
 
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
@@ -110,12 +110,12 @@
         )
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
-  (setq dashboard-init-info "Welcome, Arbab")
+  ;; (setq dashboard-init-info "Welcome, Arbab")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  ;; (setq dashboard-banner-logo-title "Welcome, Arbab")
-  (setq dashboard-banner-logo-title " ")
+  (setq dashboard-banner-logo-title "Welcome, Arbab")
+  ;; (setq dashboard-banner-logo-title " ")
   (setq dashboard-startup-banner (concat user-emacs-directory "banner.jpg"))
   ;; (setq dashboard-startup-banner (concat user-emacs-directory "banner.txt"))
   (setq dashboard-items '(
@@ -127,14 +127,14 @@
                           )
         )
   (setq dashboard-item-names '(
-                               ;; ("Recent Files:" . " Recent Files:")
-                               ;; ("Bookmarks:" . " Bookmarks:")
-                               ;; ("Projects:" . " Projects:")
-                               ("Recent Files:" . "Recent Files▾")
-                               ("Bookmarks:" . "Bookmarks▾")
-                               ("Projects:" . "Projects▾")
-                               ("Agenda for the coming week:" . "Agenda▾")
-                               ("Registers:" . "Registers▾")
+                               ;; ("Recent Files:" . "? Recent Files:")
+                               ;; ("Bookmarks:" . "? Bookmarks:")
+                               ;; ("Projects:" . "? Projects:")
+                               ("Recent Files:" . "Recent Files?")
+                               ("Bookmarks:" . "Bookmarks?")
+                               ("Projects:" . "Projects?")
+                               ("Agenda for the coming week:" . "Agenda?")
+                               ("Registers:" . "Registers?")
                                )
         )
   (setq dashboard-set-navigator t)
@@ -417,7 +417,7 @@
   (delete-by-moving-to-trash t
                              trash-directory "~/.local/share/Trash/files"
                              )
-  ;; Downloas "gls" and uncomment this line if you’re on OSX
+  ;; Downloas "gls" and uncomment this line if youre on OSX
   ;; (insert-directory-program "gls")
   )
 
@@ -808,7 +808,7 @@
     (font-lock-add-keywords 'org-mode
                             '(
                               ("^ *\\([-]\\) "
-                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "")
                                          )
                                   )
                                )
@@ -846,7 +846,7 @@
   (org-agenda-start-on-weekday nil)
   (org-agenda-start-with-log-mode t)
   (org-confirm-babel-evaluate nil)
-  (org-ellipsis "▾")
+  (org-ellipsis "?")
   (org-log-into-drawer t)
   (org-log-done 'time)
   (org-startup-with-inline-images nil)
@@ -986,7 +986,7 @@
   :custom
   (org-wild-notifier-alert-time '(1 15 30 60))
   (org-wild-notifier-notification-tile "Org Agenda")
-  (org-wild-notifier-notification-icon "")
+  (org-wild-notifier-notification-icon "?")
   (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
   )
 
@@ -998,8 +998,8 @@
   (org-mode . org-modern-mode)
   :config
   (setq
-   org-modern-star '("◉" "○" "●" "○" "●" "○" "●")
-   org-modern-list '((42 . "") (43 . "") (45 . ""))
+   org-modern-star '("?" "?" "?" "?" "?" "?" "?")
+   org-modern-list '((42 . "?") (43 . "?") (45 . "?"))
    org-modern-checkbox nil
    org-modern-hide-stars nil
    org-modern-tag t
@@ -1011,7 +1011,7 @@
    org-modern-block-fringe 0
    org-modern-keyword t
    org-modern-statistics t
-   org-modern-progress '("○" "◔" "◐" "◕" "●")
+   org-modern-progress '("?" "?" "?" "?" "?")
    )
   )
 
@@ -1140,25 +1140,25 @@
 ;; Haskell-mode
 (use-package haskell-mode
   :mode
-  ("\\.hs\\’")
+  ("\\.hs\\")
   )
 
 ;; Lua-mode
 (use-package lua-mode
   :mode
-  ("\\.lua\\’")
+  ("\\.lua\\")
   )
 
 ;; Rust-mode
 (use-package rust-mode
   :mode
-  ("\\.rs\\’")
+  ("\\.rs\\")
   )
 
 ;; Json-mode
 (use-package json-mode
   :mode
-  ("\\.json\\’")
+  ("\\.json\\")
   )
 
 ;; Typescript-mode
@@ -1285,6 +1285,7 @@
 
 ;; Apheleia
 (use-package apheleia
+  :disabled t
   :hook
   (prog-mode . apheleia-mode)
   )
@@ -1319,11 +1320,11 @@
   (centaur-tabs-cycle-scope 'default)
   (centaur-tabs-height 40)
   (centaur-tabs-set-icons t)
-  (centaur-tabs-close-button "")
+  (centaur-tabs-close-button "?")
   (centaur-tabs-set-modified-marker t)
-  (centaur-tabs-modified-marker "")
+  (centaur-tabs-modified-marker "?")
   (centaur-tabs-show-new-tab-button t)
-  (centaur-tabs-new-tab-text "  ")
+  (centaur-tabs-new-tab-text " ? ")
   (centaur-tabs-change-fonts "JetBrains Mono" 125)
   :bind
   (
@@ -1468,7 +1469,7 @@
   :config
   (global-evil-vimish-fold-mode)
   :custom
-  (evil-vimish-fold-mode-lighter "")
+  (evil-vimish-fold-mode-lighter "?")
   (evil-vimish-fold-target-modes '(prog-mode conf-mode text-mode))
   )
 
@@ -1502,7 +1503,7 @@
   :custom
   (sxhkd-mode-reload-config t)
   :mode
-  ("\\sxhkdrc\\’" . sxhkdrc-mode)
+  ("\\sxhkdrc\\" . sxhkdrc-mode)
   )
 
 ;; Minimap
@@ -1742,8 +1743,8 @@
   (git-gutter:update-interval 2)
   (git-gutter:window-width 2)
   (git-gutter:modified-sign "!")
-  (git-gutter:added-sign "")
-  (git-gutter:deleted-sign "")
+  (git-gutter:added-sign "?")
+  (git-gutter:deleted-sign "?")
   )
 
 ;; Goto-line-preview
@@ -1805,7 +1806,7 @@
     text-mode
     ) . ligature-mode)
   :config
-  ;; This variable is based on the font your are using. For me it is ’JetBrains Mono Nerd Font'. If you use any other font, make sure to check this https://github.com/mickeynp/ligature.el/wiki
+  ;; This variable is based on the font your are using. For me it is JetBrains Mono Nerd Font'. If you use any other font, make sure to check this https://github.com/mickeynp/ligature.el/wiki
   (ligature-set-ligatures 'prog-mode
                           '
                           (
@@ -2047,5 +2048,15 @@
   (
    ("C-M-r" . vr/isearch-backward)
    ("C-M-s" . vr/isearch-forward)
+   )
+  )
+
+;; Crux
+(use-package crux
+  :bind
+  (
+   ("C-x C-w" . crux-rename-file-and-buffer)
+   :map evil-normal-state-map
+   ("C-w e" . crux-transpose-windows)
    )
   )
