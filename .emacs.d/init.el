@@ -304,7 +304,7 @@
   projectile-mode
   :custom
   (
-   (projectile-completion-system 'ivy)
+   (projectile-completion-system 'auto)
    )
   :config
   (projectile-mode +1)
@@ -317,7 +317,7 @@
 ;; Counsel-projectile
 (use-package counsel-projectile
   :after
-  (:any counsel projectile)
+  (counsel projectile)
   :config
   (counsel-projectile-mode)
   )
@@ -499,14 +499,18 @@
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ("C-h f" . counsel-describe-function)
-  ("C-h c" . counsel-describe-symbol)
-  ("C-h v" . counsel-describe-variable)
+  ;; ("C-h f" . counsel-describe-function)
+  ;; ("C-h c" . counsel-describe-symbol)
+  ;; ("C-h v" . counsel-describe-variable)
+  ("C-h f" . describe-function)
+  ("C-h c" . describe-symbol)
+  ("C-h v" . describe-variable)
   ("C-h k" . helpful-key)
   )
 
 ;; Ivy
 (use-package counsel
+  :disabled t
   :init
   (ivy-mode)
   :custom
@@ -531,7 +535,7 @@
    ("C-x C-i" . counsel-imenu)
    :map ivy-minibuffer-map
    ("<tab>" . ivy-alt-done)
-   ("M-<tab>" . ivy-immediate-done)
+   ("C-<tab>" . ivy-immediate-done)
    ("M-k" . ivy-previous-line)
    ("M-j" . ivy-next-line)
    )
@@ -617,11 +621,11 @@
   (company-idle-delay 0.0)
   :bind
   (
-   ("M-<tab>" . company-complete)
+   ("C-<tab>" . company-complete)
    :map company-active-map
    ("<tab>" . yas-next-field-or-maybe-expand)
-   ("M-<tab>" . company-complete-common)
-   ("C-<tab>" . yas-expand)
+   ("C-<tab>" . company-complete-common)
+   ("C-<iso-lefttab>" . yas-expand)
    )
   )
 
@@ -694,28 +698,28 @@
   "xh" '(split-window-right :which-key "Split Horizontally")
   "xv" '(split-window-below :which-key "Split Vertically")
   "xq" '(kill-this-buffer   :which-key "Kill Buffer")
-  "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
-  "xb" '(counsel-switch-buffer :which-key "List Buffers")
-  "xB" '(counsel-ibuffer :which-key "List All Buffers")
+  "xb" '(consult-switch-buffer :which-key "List Buffers")
+  "xB" '(switch-to-buffer :which-key "List All Buffers")
   "xc" '(delete-window      :which-key "Kill Split")
   "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
   "xf" '(ffap-other-window  :which-key "Open File In New Split")
   "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
-  "xxf" '(counsel-switch-buffer-other-window :which-key "Open Buffer In New Split")
+  "xxf" '(switch-to-buffer-other-window :which-key "Open Buffer In New Split")
   ;; Navigate tabs using centaur-tabs
+  ;; "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
   ;; "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
   ;; "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Change theme
   "tt" '(load-theme :which-key "Load Theme")
-  ;; Counsel Files
-  "f"  '(:ignore t         :which-key "Files")
-  "fr" '(counsel-recentf   :which-key "Recent Files")
-  "ff" '(counsel-find-file :which-key "Find File")
-  "fd" '(dired-jump        :which-key "Open Dired")
-  "ft" '(ivy-resume        :which-key "Resume Ivy")
+  ;; Files
+  "f"  '(:ignore t      :which-key "Files")
+  "fr" '(recentf        :which-key "Recent Files")
+  "ff" '(find-file      :which-key "Find File")
+  "fd" '(dired-jump     :which-key "Open Dired")
+  "ft" '(vertico-repeat :which-key "Repeat Vertico")
   ;; Bookmarks
   "b"  '(:ignore t        :which-key "Bookmark")
-  "bb" '(counsel-bookmark :which-key "List Bookmarks")
+  "bb" '(bookmark-jump    :which-key "List Bookmarks")
   "bm" '(bookmark-set     :which-key "Add Bookmark")
   "br" '(bookmark-delete  :which-key "Remove Bookmark")
   ;; Burly
@@ -1056,7 +1060,7 @@
    ("C-c n f" . org-roam-node-find)
    ("C-c n i" . org-roam-node-insert)
    :map org-mode-map
-   ("M-<tab>"    . completion-at-point)
+   ("C-<tab>"    . completion-at-point)
    )
   )
 
@@ -1223,6 +1227,13 @@
 
 ;; Lsp-ivy
 (use-package lsp-ivy
+  :disabled
+  :after
+  (lsp-mode)
+  )
+
+;; Consult-lsp
+(use-package consult-lsp
   :after
   (lsp-mode)
   )
@@ -1550,10 +1561,10 @@
   (company-prescient-mode +1)
   )
 
-;; Smex
+;; Amx
 (use-package amx
   :after
-  (counsel)
+  (consult)
   )
 
 ;; Treesit-auto
@@ -2002,11 +2013,22 @@
 
 ;; Ivy-yasnippet
 (use-package ivy-yasnippet
+  :disabled
   :after
   (yasnippet)
   :bind
   (
    ("C-c y" . ivy-yasnippet)
+   )
+  )
+
+;; Consult-yasnippet
+(use-package consult-yasnippet
+  :after
+  (yasnippet)
+  :bind
+  (
+   ("C-c y" . consult-yasnippet)
    )
   )
 
@@ -2059,4 +2081,105 @@
    :map evil-normal-state-map
    ("C-w e" . crux-transpose-windows)
    )
+  )
+
+;; Consult
+(use-package consult
+  :bind
+  (
+   ("C-s" . consult-line)
+   ("C-c k" . consult-ripgrep)
+   ("C-x b"   . switch-to-buffer)
+   ("C-x C-i" . consult-imenu)
+   :map minibuffer-local-map
+   ("M-k" . vertico-previous)
+   ("M-j" . vertico-next)
+   )
+  )
+
+;; Vertico
+(use-package vertico
+  :preface
+  (defun arbab/minibuffer-backward-kill (arg)
+    "When minibuffer is completing a file name delete up to parent folder, otherwise delete a character backward"
+    (interactive "p")
+    (if minibuffer-completing-file-name
+        ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+        (if (string-match-p "/." (minibuffer-contents))
+            (zap-up-to-char (- arg) ?/)
+          (delete-minibuffer-contents))
+      (delete-backward-char arg)))
+  :init
+  (vertico-mode)
+  :custom
+  (vertico-count 15)
+  (vertico-resize t)
+  (vertico-cycle nil)
+  :bind
+  (
+   :map minibuffer-local-map
+   ("<backspace>" . arbab/minibuffer-backward-kill)
+   )
+  )
+
+;; Vertico-prescient
+(use-package vertico-prescient
+  :after
+  (vertico)
+  :config
+  (vertico-prescient-mode +1)
+  )
+
+;; Marginalia
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind
+  (
+   :map minibuffer-local-map
+   ("M-A" . marginalia-cycle)
+   )
+  :init
+  ;; Enable mode indicator in minibuffer
+  (defun marginalia--mode-state (mode)
+    "Return MODE state string."
+    (if (and (boundp mode) (symbol-value mode))
+        #(" [On]" 1 5 (face marginalia-on))
+      #(" [Off]" 1 6 (face marginalia-off))))
+  (defun marginalia--annotate-minor-mode-command (orig cand)
+    "Annotate minor-mode command CAND with mode state."
+    (concat
+     (when-let* ((sym (intern-soft cand))
+                 (mode (if (and sym (boundp sym))
+                           sym
+                         (lookup-minor-mode-from-indicator cand))))
+       (marginalia--mode-state mode))
+     (funcall orig cand)))
+  (advice-add #'marginalia-annotate-command
+              :around #'marginalia--annotate-minor-mode-command)
+
+  (marginalia-mode)
+  )
+
+;; Orderless
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  )
+
+(use-package all-the-icons-completion
+  :config
+  ;; Enable mode indicator in minibuffer
+  (cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql command)))
+    "Return the icon for the candidate CAND of completion category command."
+
+    (let* ((mode-p (string-suffix-p "-mode" cand))
+           (mode-symbol (intern cand))
+           (mode-enabled (and (boundp mode-symbol) (symbol-value mode-symbol)))
+           (icon-name (if mode-p "cogs" "cog"))
+           (icon-face (when (and mode-p mode-enabled) 'all-the-icons-blue)))
+      (concat (all-the-icons-faicon icon-name :height 0.95 :v-adjust -0.05 :face icon-face) " ")))
+  (all-the-icons-completion-mode)
   )
