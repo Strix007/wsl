@@ -62,6 +62,7 @@
   (auto-package-update-interval 7)
   (auto-package-update-prompt-before-update t)
   (auto-package-update-hide-results t)
+  (auto-package-update-delete-old-versions t)
   :config
   (auto-package-update-maybe)
   (auto-package-update-at-time "20:00")
@@ -316,10 +317,17 @@
 
 ;; Counsel-projectile
 (use-package counsel-projectile
+  :disabled t
   :after
   (counsel projectile)
   :config
   (counsel-projectile-mode)
+  )
+
+;; Consult-projectile
+(use-package consult-projectile
+  :after
+  (consult projectile)
   )
 
 ;; Ace-pop-up menu
@@ -516,7 +524,6 @@
   :custom
   (ivy-extra-directories nil)
   (ivy-use-virtual-buffers nil)
-  (enable-recursive-minibuffers t)
   (ivy-ignore-buffers '("\\` " "\\`\\*"))
   (ivy-height 15)
   (ivy-initial-inputs-alist nil)
@@ -682,7 +689,7 @@
 ;; Define keys using space as leader
 (arbab/leader-keys
   ;; Spotify keybinds using counsel-spotify
-  "s"  '(:ignore t :which-key "Spotify")
+  "s"  '(:ignore t                         :which-key "Spotify")
   "ss" '(counsel-spotify-toggle-play-pause :which-key "Play-Pause")
   "sa" '(counsel-spotify-search-artist     :which-key "Search Artist")
   "sd" '(counsel-spotify-search-album      :which-key "Search Album")
@@ -693,24 +700,25 @@
   "ts" '(hydra-text-scale/body :which-key "Scale")
   ;; Window Management
   ;; Manage Splits
-  "x"  '(:ignore t :which-key "Window Management")
-  "xw" '(hydra-splits/body  :which-key "Splits")
-  "xh" '(split-window-right :which-key "Split Horizontally")
-  "xv" '(split-window-below :which-key "Split Vertically")
-  "xq" '(kill-this-buffer   :which-key "Kill Buffer")
-  "xb" '(consult-switch-buffer :which-key "List Buffers")
-  "xB" '(switch-to-buffer :which-key "List All Buffers")
-  "xc" '(delete-window      :which-key "Kill Split")
-  "xC" '(delete-other-windows :which-key "Kill Splits Except Focused")
-  "xf" '(ffap-other-window  :which-key "Open File In New Split")
-  "xF" '(ffap-other-frame   :which-key "Open File In New Frame")
-  "xxf" '(switch-to-buffer-other-window :which-key "Open Buffer In New Split")
+  "x"  '(:ignore t                   :which-key "Window Management")
+  "xw" '(hydra-splits/body           :which-key "Splits")
+  "xh" '(split-window-right          :which-key "Split Horizontally")
+  "xv" '(split-window-below          :which-key "Split Vertically")
+  "xq" '(kill-this-buffer            :which-key "Kill Buffer")
+  "xb" '(arbab/consult-buffer        :which-key "List Buffers")
+  "xB" '(consult-buffer              :which-key "List All Buffers")
+  "xc" '(delete-window               :which-key "Kill Split")
+  "xC" '(delete-other-windows        :which-key "Kill Splits Except Focused")
+  "xf" '(ffap-other-window           :which-key "Open File In New Split")
+  "xF" '(ffap-other-frame            :which-key "Open File In New Frame")
+  "xxF" '(consult-buffer-other-split :which-key "Open Buffer In New Split")
+  "xxf" '(consult-buffer-other-frame :which-key "Open Buffer In New Frame")
   ;; Navigate tabs using centaur-tabs
   ;; "xQ" '(centaur-tabs-kill-all-buffers-in-current-group :which-key "Kill All Buffers In Tab Group")
   ;; "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
   ;; "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Change theme
-  "tt" '(load-theme :which-key "Load Theme")
+  "tt" '(consult-theme  :which-key "Load Theme")
   ;; Files
   "f"  '(:ignore t      :which-key "Files")
   "fr" '(recentf        :which-key "Recent Files")
@@ -719,7 +727,7 @@
   "ft" '(vertico-repeat :which-key "Repeat Vertico")
   ;; Bookmarks
   "b"  '(:ignore t        :which-key "Bookmark")
-  "bb" '(bookmark-jump    :which-key "List Bookmarks")
+  "bb" '(consult-bookmark :which-key "List Bookmarks")
   "bm" '(bookmark-set     :which-key "Add Bookmark")
   "br" '(bookmark-delete  :which-key "Remove Bookmark")
   ;; Burly
@@ -2085,11 +2093,24 @@
 
 ;; Consult
 (use-package consult
+  :preface
+  (defun arbab/custom-consult-buffer (regex-list)
+    "Make a function to invoke ’consult-buffer’ with a custom regex filter."
+    (let ((consult-buffer-filter regex-list))
+      (consult-buffer)
+      )
+    )
+
+  (defun arbab/consult-buffer ()
+    "Invoke consult-buffer without temperory and dired buffers."
+    (interactive)
+    (arbab/custom-consult-buffer '("\\` " "\\`\\*"))
+    )
   :bind
   (
-   ("C-s" . consult-line)
-   ("C-c k" . consult-ripgrep)
-   ("C-x b"   . switch-to-buffer)
+   ("C-s"     . consult-line)
+   ("C-c k"   . consult-ripgrep)
+   ("C-x b"   . arbab/consult-buffer)
    ("C-x C-i" . consult-imenu)
    :map minibuffer-local-map
    ("M-k" . vertico-previous)
@@ -2164,11 +2185,13 @@
 
 ;; Orderless
 (use-package orderless
+  :disabled t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
   )
 
+;; All-the-icons-completion
 (use-package all-the-icons-completion
   :config
   ;; Enable mode indicator in minibuffer
@@ -2179,7 +2202,21 @@
            (mode-symbol (intern cand))
            (mode-enabled (and (boundp mode-symbol) (symbol-value mode-symbol)))
            (icon-name (if mode-p "cogs" "cog"))
-           (icon-face (when (and mode-p mode-enabled) 'all-the-icons-blue)))
+           (icon-face (when (and mode-p mode-enabled) 'marginalia-on)))
       (concat (all-the-icons-faicon icon-name :height 0.95 :v-adjust -0.05 :face icon-face) " ")))
   (all-the-icons-completion-mode)
+  )
+
+;; Vertico-truncate
+(use-package vertico-truncate
+  :after
+  (vertico)
+  :straight
+  (
+   :type git
+   :host github
+   :repo "jdtsmith/vertico-truncate"
+   )
+  :config
+  (vertico-truncate-mode +1)
   )
