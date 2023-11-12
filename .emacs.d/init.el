@@ -13,6 +13,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage)
   )
+(straight-use-package 'org)
 
 ;; Integrate with use-package
 (straight-use-package 'use-package)
@@ -367,7 +368,7 @@
   :bind
   (
    :map evil-treemacs-state-map
-   ("C-x o" . ace-window)
+   ("M-o" . ace-window)
    )
   )
 
@@ -718,13 +719,14 @@
   ;; "xj" '(centaur-tabs-backward-group :which-key "Move To Left Tab Group")
   ;; "xk" '(centaur-tabs-forward-group  :which-key "Move To Right Tab Group")
   ;; Change theme
-  "tt" '(consult-theme  :which-key "Load Theme")
+  "tt" '(consult-theme :which-key "Load Theme")
   ;; Files
-  "f"  '(:ignore t      :which-key "Files")
-  "fr" '(recentf        :which-key "Recent Files")
-  "ff" '(find-file      :which-key "Find File")
-  "fd" '(dired-jump     :which-key "Open Dired")
-  "ft" '(vertico-repeat :which-key "Repeat Vertico")
+  "f"  '(:ignore t       :which-key "Files")
+  "fr" '(recentf         :which-key "Recent Files")
+  "ff" '(find-file       :which-key "Find File")
+  "fd" '(dired-jump      :which-key "Open Dired")
+  "ft" '(vertico-repeat  :which-key "Repeat Vertico Session")
+  "fT" '(vertico-suspend :which-key "Resume Vertico Suspended Session")
   ;; Bookmarks
   "b"  '(:ignore t        :which-key "Bookmark")
   "bb" '(consult-bookmark :which-key "List Bookmarks")
@@ -850,7 +852,6 @@
     (set-face-attribute 'org-meta-line       nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox        nil :inherit 'fixed-pitch)
     )
-  :ensure org-contrib
   :hook
   (org-mode . arbab/org-mode-setup)
   :custom
@@ -924,6 +925,9 @@
           )
         )
   )
+
+;; Org-contrib
+(use-package org-contrib)
 
 ;; Org-super-agenda
 (use-package org-super-agenda
@@ -1617,28 +1621,6 @@
   (prog-mode . hes-mode)
   )
 
-;; Popup-kill-ring
-(use-package popup-kill-ring
-  :custom
-  (popup-kill-ring-interactive-insert t)
-  :bind
-  (
-   ("M-y" . popup-kill-ring)
-   :map popup-kill-ring-keymap
-   ("M-j" . popup-kill-ring-next)
-   ("M-k" . popup-kill-ring-previous)
-   ("<escape>" . keyboard-quit)
-   )
-  )
-
-;; Browse-kill-ring
-(use-package browse-kill-ring
-  :bind
-  ("M-Y" . browse-kill-ring)
-  :custom
-  (browse-kill-ring-highlight-current-entry 'solid)
-  )
-
 ;; Drag-sutff
 (use-package drag-stuff
   :bind
@@ -1731,8 +1713,9 @@
   (ace-window-display-mode +1)
   :bind
   (
-   :map evil-normal-state-map
-   ("C-x o" . ace-window)
+   ("M-o" . ace-window)
+   :map minibuffer-local-map
+   ("M-o" . ace-window)
    )
   )
 
@@ -1764,14 +1747,6 @@
   (git-gutter:modified-sign "!")
   (git-gutter:added-sign "?")
   (git-gutter:deleted-sign "?")
-  )
-
-;; Goto-line-preview
-(use-package goto-line-preview
-  :bind
-  (
-   ([remap goto-line] . goto-line-preview)
-   )
   )
 
 ;; Fancy-compilation
@@ -2106,16 +2081,27 @@
     (interactive)
     (arbab/custom-consult-buffer '("\\` " "\\`\\*"))
     )
+
+  (defun arbab/get-project-root ()
+    (when (fboundp 'projectile-project-root)
+      (projectile-project-root)
+      )
+    )
   :bind
   (
    ("C-s"     . consult-line)
    ("C-c k"   . consult-ripgrep)
    ("C-x b"   . arbab/consult-buffer)
    ("C-x C-i" . consult-imenu)
+   ("M-y"     . consult-yank-from-kill-ring)
+   ([remap goto-line] . consult-goto-line)
    :map minibuffer-local-map
    ("M-k" . vertico-previous)
    ("M-j" . vertico-next)
+   ("C-r" . consult-history)
    )
+  :custom
+  (consult-project-root-function #'arbab/get-project-root)
   )
 
 ;; Vertico
@@ -2125,22 +2111,47 @@
     "When minibuffer is completing a file name delete up to parent folder, otherwise delete a character backward"
     (interactive "p")
     (if minibuffer-completing-file-name
-        ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
         (if (string-match-p "/." (minibuffer-contents))
             (zap-up-to-char (- arg) ?/)
           (delete-minibuffer-contents))
       (delete-backward-char arg)))
   :init
-  (vertico-mode)
+  (vertico-mode +1)
+  (vertico-mouse-mode +1)
+  :hook
+  (rfn-eshadow-update-overlay . vertico-directory-tidy)
+  (minibuffer-setup . vertico-repeat-save)
   :custom
   (vertico-count 15)
   (vertico-resize t)
   (vertico-cycle nil)
+  :config
+  ;; Input at bottom of completion list
+  (defun vertico-bottom--display-candidates (lines)
+    "Display LINES in bottom."
+    (move-overlay vertico--candidates-ov (point-min) (point-min))
+    (unless (eq vertico-resize t)
+      (setq lines (nconc (make-list (max 0 (- vertico-count (length lines))) "\n") lines)))
+    (let ((string (apply #'concat lines)))
+      (add-face-text-property 0 (length string) 'default 'append string)
+      (overlay-put vertico--candidates-ov 'before-string string)
+      (overlay-put vertico--candidates-ov 'after-string nil))
+    (vertico--resize-window (length lines)))
+  (advice-add #'vertico--display-candidates :override #'vertico-bottom--display-candidates)
   :bind
   (
    :map minibuffer-local-map
    ("<backspace>" . arbab/minibuffer-backward-kill)
+   ("M-q" . vertico-quick-insert)
+   ("C-q" . vertico-quick-exit)
+   ("C-g" . vertico-suspend)
+   :map vertico-map
+   ("RET" . vertico-directory-enter)
+   ("DEL" . vertico-directory-delete-char)
+   ("M-DEL" . vertico-directory-delete-word)
    )
+  :custom-face
+  (vertico-current ((t (:background "#5e81ac"))))
   )
 
 ;; Vertico-prescient
@@ -2151,17 +2162,30 @@
   (vertico-prescient-mode +1)
   )
 
+;; Vertico-truncate
+(use-package vertico-truncate
+  :after
+  (vertico)
+  :straight
+  (
+   :type git
+   :host github
+   :repo "jdtsmith/vertico-truncate"
+   )
+  :config
+  (vertico-truncate-mode +1)
+  )
+
 ;; Marginalia
 (use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
-  :bind
-  (
-   :map minibuffer-local-map
-   ("M-A" . marginalia-cycle)
-   )
+  :after
+  (vertico)
   :init
+  (marginalia-mode +1)
+  :hook
+  (server-after-make-frame . (lambda () (set-face-foreground 'marginalia-documentation "#4c566a")))
+  :config
+  (set-face-foreground 'marginalia-documentation "#4c566a")
   ;; Enable mode indicator in minibuffer
   (defun marginalia--mode-state (mode)
     "Return MODE state string."
@@ -2179,20 +2203,22 @@
      (funcall orig cand)))
   (advice-add #'marginalia-annotate-command
               :around #'marginalia--annotate-minor-mode-command)
-
-  (marginalia-mode)
-  )
-
-;; Orderless
-(use-package orderless
-  :disabled t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind
+  (
+   :map minibuffer-local-map
+   ("M-A" . marginalia-cycle)
+   )
   )
 
 ;; All-the-icons-completion
 (use-package all-the-icons-completion
+  :after
+  (marginalia)
+  :init
+  (all-the-icons-completion-mode +1)
   :config
   ;; Enable mode indicator in minibuffer
   (cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql command)))
@@ -2202,21 +2228,128 @@
            (mode-symbol (intern cand))
            (mode-enabled (and (boundp mode-symbol) (symbol-value mode-symbol)))
            (icon-name (if mode-p "cogs" "cog"))
-           (icon-face (when (and mode-p mode-enabled) 'marginalia-on)))
+           (icon-face (when (and mode-p mode-enabled) 'all-the-icons-green)))
       (concat (all-the-icons-faicon icon-name :height 0.95 :v-adjust -0.05 :face icon-face) " ")))
-  (all-the-icons-completion-mode)
   )
 
-;; Vertico-truncate
-(use-package vertico-truncate
-  :after
-  (vertico)
-  :straight
+;; Embark
+(use-package embark
+  :preface
+  (defun arbab/embark-google-search (term)
+    (interactive "sSearch Term: ")
+    (browse-url
+     (format "http://google.com/search?q=%s" term)
+     )
+    )
+  :bind
   (
-   :type git
-   :host github
-   :repo "jdtsmith/vertico-truncate"
+   ("C-." . embark-act)
+   ("M-." . embark-dwim)
+   ("C-h B" . embark-bindings)
+   :map embark-general-map
+   ("G" . arbab/embark-google-search)
    )
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
   :config
-  (vertico-truncate-mode +1)
+  ;; Package actions using straight.el
+  (defvar-keymap embark-straight-map
+    :parent embark-general-map
+    "u" #'straight-visit-package-website
+    "r" #'straight-get-recipe
+    "i" #'straight-use-package
+    "c" #'straight-check-package
+    "F" #'straight-pull-package
+    "f" #'straight-fetch-package
+    "p" #'straight-push-package
+    "n" #'straight-normalize-package
+    "m" #'straight-merge-package)
+  (add-to-list 'embark-keymap-alist '(straight . embark-straight-map))
+  (add-to-list 'marginalia-prompt-categories '("recipe\\|package" . straight))
+
+  ;; Use whichkey as a key menu prompt
+  (defun embark-which-key-indicator ()
+    "An embark indicator that displays keymaps using which-key.
+The which-key help message will show the type and value of the
+current target followed by an ellipsis if there are further
+targets."
+    (lambda (&optional keymap targets prefix)
+      (if (null keymap)
+          (which-key--hide-popup-ignore-command)
+        (which-key--show-keymap
+         (if (eq (plist-get (car targets) :type) 'embark-become)
+             "Become"
+           (format "Act on %s '%s'%s"
+                   (plist-get (car targets) :type)
+                   (embark--truncate-target (plist-get (car targets) :target))
+                   (if (cdr targets) "" "")))
+         (if prefix
+             (pcase (lookup-key keymap prefix 'accept-default)
+               ((and (pred keymapp) km) km)
+               (_ (key-binding prefix 'accept-default)))
+           keymap)
+         nil nil t (lambda (binding)
+                     (not (string-suffix-p "-argument" (cdr binding))))))))
+
+  (setq embark-indicators
+        '(embark-which-key-indicator
+          embark-highlight-indicator
+          embark-isearch-highlight-indicator))
+
+  (defun embark-hide-which-key-indicator (fn &rest args)
+    "Hide the which-key indicator immediately when using the completing-read prompter."
+    (which-key--hide-popup-ignore-command)
+    (let ((embark-indicators
+           (remq #'embark-which-key-indicator embark-indicators)))
+      (apply fn args)))
+
+  (advice-add #'embark-completing-read-prompter
+              :around #'embark-hide-which-key-indicator)
+  ;; Automatically resizing auto-updating Embark Collect buffers to fit their contents
+  (add-hook 'embark-collect-post-revert-hook
+            (defun resize-embark-collect-window (&rest _)
+              (when (memq embark-collect--kind '(:live :completions))
+                (fit-window-to-buffer (get-buffer-window)
+                                      (floor (frame-height) 2) 1))))
+
+  ;; Show the current Embark target types in the modeline
+  (defvar embark--target-mode-timer nil)
+  (defvar embark--target-mode-string "")
+
+  (defun embark--target-mode-update ()
+    (setq embark--target-mode-string
+          (if-let (targets (embark--targets))
+              (format "[%s%s] "
+                      (propertize (symbol-name (plist-get (car targets) :type)) 'face 'bold)
+                      (mapconcat (lambda (x) (format ", %s" (plist-get x :type)))
+                                 (cdr targets)
+                                 ""))
+            "")))
+
+  (define-minor-mode embark-target-mode
+    "Shows the current targets in the modeline."
+    :global t
+    (setq mode-line-misc-info (assq-delete-all 'embark-target-mode mode-line-misc-info))
+    (when embark--target-mode-timer
+      (cancel-timer embark--target-mode-timer)
+      (setq embark--target-mode-timer nil))
+    (when embark-target-mode
+      (push '(embark-target-mode (:eval embark--target-mode-string)) mode-line-misc-info)
+      (setq embark--target-mode-timer
+            (run-with-idle-timer 0.1 t #'embark--target-mode-update))))
+  )
+
+;; Embark-consult
+(use-package embark-consult
+  :after
+  (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
+  )
+
+;; Orderless
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
   )
