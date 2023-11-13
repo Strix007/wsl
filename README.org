@@ -99,7 +99,7 @@ sudo make install
 
 * Setup Instructions
 ** WezTerm
-To setup WezTerm with wezterm.lua, after installin wezterm you need to move to move wezterm.lua to where you have installed WezTerm, typically =C:\Program Files\WezTerm= . Doing so might require administrator privilages.
+To setup WezTerm with =wezterm.lua=, after installing wezterm you need to move to move =wezterm.lua= to where you have installed WezTerm, typically =C:\Program Files\WezTerm= . Doing so might require administrator privilages.
 ** ArchWSL
 *** Systemd
 To enable systemd, you need to edit =/etc/wsl.conf= with sudo privileges i.e. =sudo vim /etc/wsl.conf= and add the following lines
