@@ -19,8 +19,6 @@
 (straight-use-package 'use-package)
 ;; Always use straight.el
 (setq straight-use-package-by-default +1)
-;; Separate emacs package directories for different versions in straight
-(setq straight-build-dir (format "build-%s" emacs-version))
 
 ;; Set Fonts
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
@@ -1154,25 +1152,25 @@
 ;; Haskell-mode
 (use-package haskell-mode
   :mode
-  ("\\.hs\\")
+  ("\\.hs\\'")
   )
 
 ;; Lua-mode
 (use-package lua-mode
   :mode
-  ("\\.lua\\")
+  ("\\.lua\\'")
   )
 
 ;; Rust-mode
 (use-package rust-mode
   :mode
-  ("\\.rs\\")
+  ("\\.rs\\'")
   )
 
 ;; Json-mode
 (use-package json-mode
   :mode
-  ("\\.json\\")
+  ("\\.json\\'")
   )
 
 ;; Typescript-mode
@@ -1524,7 +1522,7 @@
   :custom
   (sxhkd-mode-reload-config t)
   :mode
-  ("\\sxhkdrc\\" . sxhkdrc-mode)
+  ("\\sxhkdrc\\’" . sxhkdrc-mode)
   )
 
 ;; Minimap
