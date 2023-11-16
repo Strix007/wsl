@@ -513,6 +513,7 @@
   ("C-h c" . describe-symbol)
   ("C-h v" . describe-variable)
   ("C-h k" . helpful-key)
+  ("C-h z" . describe-face)
   )
 
 ;; Ivy
@@ -1549,6 +1550,9 @@
   :custom
   (prescient-persist-mode t)
   (prescient-sort-length-enable nil)
+  :config
+  (set-face-foreground 'prescient-primary-highlight "#b48ead")
+  (set-face-foreground 'prescient-secondary-highlight "#a3be8c")
   )
 
 ;; Ivy-prescient
@@ -1567,12 +1571,6 @@
   (company)
   :config
   (company-prescient-mode +1)
-  )
-
-;; Amx
-(use-package amx
-  :after
-  (consult)
   )
 
 ;; Treesit-auto
@@ -1647,6 +1645,15 @@
   :defer t
   :custom
   (avy-all-windows t)
+  )
+
+;; Avy-zap
+(use-package avy-zap
+  :bind
+  (
+   ("M-z" . avy-zap-to-char-dwim)
+   ("M-Z" . avy-zap-up-to-char-dwim)
+   )
   )
 
 ;; Link-hint
@@ -1898,7 +1905,7 @@
    )
   :hook
   (prog-mode . arbab/ts-fold-mode)
-  (ts-fold-mode . (lambda () (evil-define-key 'normal 'local (kbd "<tab>") 'ts-fold-toggle)))
+  (ts-fold-mode . (lambda () (evil-define-key 'normal 'local (kbd "<backtab>") 'ts-fold-toggle)))
   )
 
 ;; Indent-bars
@@ -2138,13 +2145,13 @@
   (
    :map minibuffer-local-map
    ("<backspace>" . arbab/minibuffer-backward-kill)
-   ("M-q" . vertico-quick-insert)
-   ("C-q" . vertico-quick-exit)
-   ("C-g" . vertico-suspend)
    :map vertico-map
    ("RET" . vertico-directory-enter)
    ("DEL" . vertico-directory-delete-char)
    ("M-DEL" . vertico-directory-delete-word)
+   ("M-q" . vertico-quick-insert)
+   ("C-q" . vertico-quick-exit)
+   ("C-g" . vertico-suspend)
    )
   :custom-face
   (vertico-current ((t (:background "#5e81ac"))))
@@ -2153,7 +2160,7 @@
 ;; Vertico-prescient
 (use-package vertico-prescient
   :after
-  (vertico)
+  (vertico prescient)
   :config
   (vertico-prescient-mode +1)
   )
@@ -2348,4 +2355,5 @@ targets."
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
+  (orderless-matching-styles '(orderless-literal orderless-initialism orderless-regexp))
   )
