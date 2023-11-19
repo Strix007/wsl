@@ -24,6 +24,10 @@
 (set-face-attribute 'default nil        :font "JetBrains Mono"  :height 125 :weight 'medium)
 (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono"  :height 150 :weight 'medium)
 (set-face-attribute 'variable-pitch nil :font "Source Sans Pro" :height 150 :weight 'medium)
+;; Make comments italic
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+;; Make keywords italic
+(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
 ;; Initialize package sources
 (require 'package)
@@ -497,7 +501,7 @@
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-indent-info nil)
   (doom-modeline-minor-modes t)
-  (doom-modeline-buffer-file-name-style 'truncate-except-project)
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project)
   )
 
 ;; Helpful
@@ -700,17 +704,17 @@
   "ts" '(hydra-text-scale/body :which-key "Scale")
   ;; Window Management
   ;; Manage Splits
-  "x"  '(:ignore t                   :which-key "Window Management")
-  "xw" '(hydra-splits/body           :which-key "Splits")
-  "xh" '(split-window-right          :which-key "Split Horizontally")
-  "xv" '(split-window-below          :which-key "Split Vertically")
-  "xq" '(kill-this-buffer            :which-key "Kill Buffer")
-  "xb" '(arbab/consult-buffer        :which-key "List Buffers")
-  "xB" '(consult-buffer              :which-key "List All Buffers")
-  "xc" '(delete-window               :which-key "Kill Split")
-  "xC" '(delete-other-windows        :which-key "Kill Splits Except Focused")
-  "xf" '(ffap-other-window           :which-key "Open File In New Split")
-  "xF" '(ffap-other-frame            :which-key "Open File In New Frame")
+  "x"   '(:ignore t                  :which-key "Window Management")
+  "xw"  '(hydra-splits/body          :which-key "Splits")
+  "xh"  '(split-window-right         :which-key "Split Horizontally")
+  "xv"  '(split-window-below         :which-key "Split Vertically")
+  "xq"  '(kill-this-buffer           :which-key "Kill Buffer")
+  "xb"  '(arbab/consult-buffer       :which-key "List Buffers")
+  "xB"  '(consult-buffer             :which-key "List All Buffers")
+  "xc"  '(delete-window              :which-key "Kill Split")
+  "xC"  '(delete-other-windows       :which-key "Kill Splits Except Focused")
+  "xf"  '(ffap-other-window          :which-key "Open File In New Split")
+  "xF"  '(ffap-other-frame           :which-key "Open File In New Frame")
   "xxF" '(consult-buffer-other-split :which-key "Open Buffer In New Split")
   "xxf" '(consult-buffer-other-frame :which-key "Open Buffer In New Frame")
   ;; Navigate tabs using centaur-tabs
@@ -726,6 +730,17 @@
   "fd" '(dired-jump      :which-key "Open Dired")
   "ft" '(vertico-repeat  :which-key "Repeat Vertico Session")
   "fT" '(vertico-suspend :which-key "Resume Vertico Suspended Session")
+  ;; Zoxide
+  "fz"  '(:ignore t                   :which-key "Zoxide")
+  "fzf" '(zoxide-find-file            :which-key "Zoxide Find File")
+  "fzF" '(zoxide-find-file-with-query :which-key "Find File With Query")
+  "fzt" '(zoxide-travel               :which-key "Find Directory")
+  "fzT" '(zoxide-travel-with-query    :which-key "Find Directory With Query")
+  "fzc" '(zoxide-cd                   :which-key "Change Working Directory")
+  "fzC" '(zoxide-cd-with-query        :which-key "Change Working Directory With Query")
+  "fza" '(zoxide-add                  :which-key "Add Path Into Database")
+  "fzd" '(zoxide-remove               :which-key "Remove Path From Database")
+  "fzl" '(zoxide-query-with           :which-key "List All Paths In Database Matching Query")
   ;; Bookmarks
   "b"  '(:ignore t        :which-key "Bookmark")
   "bb" '(consult-bookmark :which-key "List Bookmarks")
@@ -1745,11 +1760,19 @@
     text-mode
     ) . git-gutter-mode)
   :custom
-  (git-gutter:update-interval 2)
-  (git-gutter:window-width 2)
-  (git-gutter:modified-sign "!")
-  (git-gutter:added-sign "")
-  (git-gutter:deleted-sign "") 
+  (git-gutter:update-interval 0.01)
+  ;; (git-gutter:window-width 2)
+  ;; (git-gutter:modified-sign "!")
+  ;; (git-gutter:added-sign "")
+  ;; (git-gutter:deleted-sign "")
+  )
+
+;; Git-gutter-fringe
+(use-package git-gutter-fringe
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
   )
 
 ;; Fancy-compilation
@@ -1987,8 +2010,6 @@
     prog-mode
     ) . yas-minor-mode
    )
-  :custom
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   )
 
 ;; Yasnippet-snippets
@@ -2356,4 +2377,28 @@ targets."
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
   (orderless-matching-styles '(orderless-literal orderless-initialism orderless-regexp))
+  )
+
+;; Zoxide
+(use-package zoxide
+  :defer t
+  :config
+  (add-hook 'find-file-hook 'zoxide-add)
+  (add-hook 'projectile-after-switch-project-hook 'zoxide-add)
+  )
+
+;; Auto-yasnippet
+(use-package auto-yasnippet
+  :bind
+  (
+   ("C-c C-y w"   . aya-create)
+   ("C-c C-y TAB" . aya-expand)
+   ("C-c C-y SPC" . aya-expand-from-history)
+   ("C-c C-y d"   . aya-delete-from-history)
+   ("C-c C-y c"   . aya-clear-history)
+   ("C-c C-y n"   . aya-next-in-history)
+   ("C-c C-y p"   . aya-previous-in-history)
+   ("C-c C-y s"   . aya-persist-snippet)
+   ("C-c C-y o"   . aya-open-line)
+   )
   )

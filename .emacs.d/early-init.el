@@ -14,12 +14,12 @@
   (set-face-attribute 'default nil        :font "JetBrains Mono" :height 125 :weight 'medium)
   (set-face-attribute 'fixed-pitch nil    :font "JetBrains Mono" :height 150 :weight 'medium)
   (set-face-attribute 'variable-pitch nil :font "Cantarell"      :height 150 :weight 'bold)
+  ;; Make comments italic
+  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+  ;; Make keywords italic
+  (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
   )
 (add-hook 'server-after-make-frame-hook 'arbab/set-font-faces)
-;; Make comments italic
-(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-comment-face nil :slant 'italic)))
-;; Make keywords italic
-(add-hook 'find-file-hook (lambda () (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)))
 
 ;; Prettify-Symbols-mode
 (add-hook 'prog-mode-hook 'prettify-symbols-mode)
@@ -259,6 +259,7 @@
         (tsx-mode . tsx-ts-mode)
         (typescript-mode . typescript-ts-mode)
         (yaml-mode . yaml-ts-mode)
+        (lua-ts-mode . lua-mode)
         )
       )
 
