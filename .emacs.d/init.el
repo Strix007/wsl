@@ -293,7 +293,8 @@
 (use-package all-the-icons
   :config
   (when (and (not (member "all-the-icons" (font-family-list)))
-             (window-system))
+             (window-system)
+             )
     (all-the-icons-install-fonts t)
     )
   )
@@ -305,7 +306,7 @@
 ;; Projectile
 (use-package projectile
   :diminish
-  projectile-mode
+  (projectile-mode)
   :custom
   (
    (projectile-completion-system 'auto)
@@ -428,7 +429,7 @@
   (delete-by-moving-to-trash t
                              trash-directory "~/.local/share/Trash/files"
                              )
-  ;; Downloas "gls" and uncomment this line if youre on OSX
+  ;; Downloas "gls" and uncomment this line if you are on OSX
   ;; (insert-directory-program "gls")
   )
 
@@ -446,7 +447,8 @@
   (dirvish)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode)
+    "H" 'dired-hide-dotfiles-mode
+    )
   )
 
 ;; Media-progress-dirvish
@@ -600,7 +602,7 @@
 (use-package which-key
   :defer t
   :diminish
-  which-key-mode
+  (which-key-mode)
   :init
   (which-key-mode)
   :config
@@ -791,22 +793,23 @@
 ;; Hydra
 (use-package hydra
   :defer t
-  )
-;; Define a hydra for text scale
-(defhydra hydra-text-scale (:color t)
-  "Scale Text"
-  ("=" text-scale-increase "Zoom In")
-  ("-" text-scale-decrease "Zoom Out")
-  ("ESC" nil "Finished" :exit t)
-  )
-;; Define a hydra for split resizing
-(defhydra hydra-splits (:color t)
-  "Manage Splits"
-  ("[" shrink-window-horizontally  10 "Shrink Window Horizontally")
-  ("]" enlarge-window-horizontally 10 "Enlarge Window Horizontally")
-  ("-" shrink-window 10 "Shrink Window Vertically")
-  ("=" balance-windows "Balance Windows")
-  ("ESC" nil "Finished" :exit t)
+  :config
+  ;; Define a hydra for text scale
+  (defhydra hydra-text-scale (:color t)
+    "Scale Text"
+    ("=" text-scale-increase "Zoom In")
+    ("-" text-scale-decrease "Zoom Out")
+    ("ESC" nil "Finished" :exit t)
+    )
+  ;; Define a hydra for split resizing
+  (defhydra hydra-splits (:color t)
+    "Manage Splits"
+    ("[" shrink-window-horizontally  10 "Shrink Window Horizontally")
+    ("]" enlarge-window-horizontally 10 "Enlarge Window Horizontally")
+    ("-" shrink-window 10 "Shrink Window Vertically")
+    ("=" balance-windows "Balance Windows")
+    ("ESC" nil "Finished" :exit t)
+    )
   )
 
 ;; Magit
@@ -1239,7 +1242,10 @@
   (prog-mode . arbab/lsp-mode-setup)
   (lsp-mode . (lambda ()
                 (let ((lsp-keymap-prefix "C-c l"))
-                  (lsp-enable-which-key-integration))))
+                  (lsp-enable-which-key-integration)
+                  )
+                )
+            )
   :custom
   (lsp-enable-which-key-integration t)
   (lsp-lens-enable nil)
@@ -1335,7 +1341,7 @@
 (use-package centaur-tabs
   :disabled t
   :init
-  (centaur-tabs-mode t)
+  (centaur-tabs-mode +1)
   :hook
   (
    (

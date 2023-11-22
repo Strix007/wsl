@@ -27,7 +27,6 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.
 # Enviorment Variables
 # XDG ENVs
 export ANDROID_HOME='$XDG_DATA_HOME/android'
-export CARGO_HOME='$XDG_DATA_HOME/cargo'
 export DOCKER_CONFIG='$XDG_CONFIG_HOME/docker'
 export GRIPHOME='$XDG_CONFIG_HOME/grip'
 export GTK2_RC_FILES='$XDG_CONFIG_HOME/gtk-2.0/gtkrc'
@@ -39,7 +38,6 @@ export WINEPREFIX='$XDG_DATA_HOME/wine'
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
-export PAGER="most"
 export ANDROID_ADB_SERVER_PORT=12345
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 export MOZ_ENABLE_WAYLAND=1 
