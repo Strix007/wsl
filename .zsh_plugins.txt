@@ -6,7 +6,7 @@ ohmyzsh/ohmyzsh path:plugins/copyfile
 ohmyzsh/ohmyzsh path:plugins/copybuffer
 ohmyzsh/ohmyzsh path:plugins/dirhistory
 ohmyzsh/ohmyzsh path:plugins/command-not-found
-ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # Libraries
 ohmyzsh/ohmyzsh path:lib/git.zsh

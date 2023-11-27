@@ -26,21 +26,22 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/doom-emacs/bin:$HOME/.
 
 # Enviorment Variables
 # XDG ENVs
-export ANDROID_HOME='$XDG_DATA_HOME/android'
-export DOCKER_CONFIG='$XDG_CONFIG_HOME/docker'
-export GRIPHOME='$XDG_CONFIG_HOME/grip'
-export GTK2_RC_FILES='$XDG_CONFIG_HOME/gtk-2.0/gtkrc'
-export ICEAUTHORITY='$XDG_CACHE_HOME/ICEauthority'
-export _JAVA_OPTIONS='-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java'
-export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
-export WINEPREFIX='$XDG_DATA_HOME/wine'
+export ANDROID_HOME=$XDG_DATA_HOME/android
+export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
+export GRIPHOME=$XDG_CONFIG_HOME/grip
+export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+export ICEAUTHORITY=$XDG_CACHE_HOME/ICEauthority
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+export WINEPREFIX=$XDG_DATA_HOME/wine
+export MOZ_ENABLE_WAYLAND=1 
+export PARU_CONF=$HOME/.config/paru/paru.conf
 # User Defined
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export ANDROID_ADB_SERVER_PORT=12345
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
-export MOZ_ENABLE_WAYLAND=1 
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='nvim'
 else

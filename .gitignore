@@ -30,6 +30,7 @@
 .emacs.d/history
 .emacs.d/custom-set-variables.el
 .emacs.d/OrgFiles
+.emacs.d/projects
 .emacs.d/init.el~
 .emacs.d/.workgroups
 .emacs.d/env.el
