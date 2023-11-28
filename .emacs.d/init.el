@@ -433,6 +433,11 @@
   ;; (insert-directory-program "gls")
   )
 
+;; Wdired
+(use-package wdired
+  :straight nil
+  )
+
 ;; All-the-icons-dired
 (use-package all-the-icons-dired
   :hook
@@ -1177,7 +1182,7 @@
 ;; Lua-mode
 (use-package lua-mode
   :mode
-  ("\\.lua\\'")
+  ("\\.lua\\'" . lua-mode)
   )
 
 ;; Rust-mode
@@ -2407,4 +2412,29 @@ targets."
    ("C-c C-y s"   . aya-persist-snippet)
    ("C-c C-y o"   . aya-open-line)
    )
+  )
+
+;; Devdocs
+(use-package devdocs
+  :bind
+  (
+   ("C-h D" . devdocs-lookup)
+   )
+  )
+
+(use-package selection-highlight-mode
+  :straight
+  (
+   :type git
+   :host github
+   :repo "balloneij/selection-highlight-mode"
+   )
+  :config
+  (selection-highlight-mode)
+  )
+
+;; Smartscan
+(use-package smartscan
+  :config
+  (smartscan-mode +1)
   )
