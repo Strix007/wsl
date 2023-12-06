@@ -2435,6 +2435,6 @@ targets."
 
 ;; Smartscan
 (use-package smartscan
-  :config
-  (smartscan-mode +1)
+  :hook
+  (prog-mode . smartscan-mode)
   )
