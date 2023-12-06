@@ -2422,6 +2422,7 @@ targets."
    )
   )
 
+;; Selection-highlight-mode
 (use-package selection-highlight-mode
   :straight
   (
@@ -2437,4 +2438,40 @@ targets."
 (use-package smartscan
   :hook
   (prog-mode . smartscan-mode)
+  )
+
+;; Consult-dir
+(use-package consult-dir
+  :bind
+  (
+   ("C-x C-d" . consult-dir)
+   :map vertico-map
+   ("C-x C-d" . consult-dir)
+   ("C-x C-j" . consult-dir-jump-file)
+   )
+  :custom
+  (consult-dir-project-list-function nil)
+  )
+
+;; Repeat-help
+(use-package repeat-help
+  :hook
+  (repeat-mode . repeat-help-mode)
+  :custom
+  (repeat-help-auto t)
+  )
+
+;; Dired-hist
+(use-package dired-hist
+  :straight
+  (
+   :type git
+   :host github
+   :repo "karthink/dired-hist"
+   )
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "gt" 'dired-hist-go-forward
+    "gT" 'dired-hist-go-back
+    )
   )
