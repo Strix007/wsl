@@ -6,35 +6,71 @@
 * WSL Configuration Of Arbab Khan:noexport:
 This is my WSL configuration for my arch WSL instance.
 
-* Table of Contents :toc:
+* Table of Contents
+:PROPERTIES:
+:TOC:      :include all :ignore this
+:END:
+:CONTENTS:
 - [[#caution][Caution]]
 - [[#about][About]]
 - [[#what-to-install][What To Install]]
   - [[#windows-11][Windows 11]]
   - [[#wsl][WSL]]
+    - [[#shell][Shell]]
+    - [[#tmux][Tmux]]
+    - [[#neovim][NeoVim]]
+    - [[#lf][lf]]
+    - [[#fzf][fzf]]
+    - [[#mpd][MPD]]
+    - [[#emacs][Emacs]]
 - [[#setup-instructions][Setup Instructions]]
   - [[#wezterm][WezTerm]]
   - [[#archwsl][ArchWSL]]
+    - [[#systemd][Systemd]]
+    - [[#emacs-daemon][Emacs Daemon]]
+      - [[#create-a-service-unit-file-for-the-emacs-daemon][Create a service unit file for the Emacs daemon]]
+      - [[#add-the-following-content-to-the-file][Add the following content to the file]]
+      - [[#reload-systemd-user-manager][Reload systemd user manager]]
+      - [[#enable-the-systemd-user-manager][Enable the systemd user manager]]
 - [[#contributing][Contributing]]
+:END:
 
 * Caution
+:PROPERTIES:
+:CUSTOM_ID: caution
+:END:
 I have not tested these dotfiles on other WSL distributions and am not sure how will they work.
 
 You also need to do simple little tweaks here and there to get things working, there are too many to list but they are simple enough that a simple google search should help you.
 
 * About
+:PROPERTIES:
+:CUSTOM_ID: about
+:END:
 This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/VSWSL/Arch-WSL][Vineel Sai's Unofficial Arch-WSL]].
 
 This configuration uses WezTerm on the Windows side to spawn directly into the WSL instance without going through powershell though any terminal can work.
 
 * What To Install
+:PROPERTIES:
+:CUSTOM_ID: what-to-install
+:END:
 ** Windows 11
+:PROPERTIES:
+:CUSTOM_ID: windows-11
+:END:
 - [[https://learn.microsoft.com/en-us/windows/wsl/install][WSL2]]
 - [[https://wezfurlong.org/wezterm/install/windows.html][WezTerm]]
 - [[https://github.com/VSWSL/Arch-WSL#Installation][Arch-WSL]]
 - [[https://github.com/ryanoasis/nerd-fonts#font-installation][Nerd Font]]
 ** WSL
+:PROPERTIES:
+:CUSTOM_ID: wsl
+:END:
 *** Shell
+:PROPERTIES:
+:CUSTOM_ID: shell
+:END:
 - [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][Zsh]]
 - [[https://getantidote.github.io/install][Antidote]] 
 - [[https://github.com/junegunn/fzf#installation][fzf]]
@@ -42,6 +78,9 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/eza-community/eza][eza]]
 - [[https://github.com/ajeetdsouza/zoxide#installation][zoxide]]
 *** Tmux
+:PROPERTIES:
+:CUSTOM_ID: tmux
+:END:
 - [[https://github.com/tmux/tmux][tmux]]
 - [[https://github.com/tmux-plugins/tpm][tpm]]
 - [[https://github.com/mikefarah/yq][yq]] 
@@ -50,9 +89,15 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/facebook/pathpicker/][fpp]]
 - [[https://github.com/golang/go][go]]
 *** NeoVim
+:PROPERTIES:
+:CUSTOM_ID: neovim
+:END:
 - [[https://github.com/neovim/neovim/wiki/Installing-Neovim][neovim]]
 - [[https://www.gnu.org/software/make/#download][make]]
 *** lf 
+:PROPERTIES:
+:CUSTOM_ID: lf
+:END:
 - [[https://github.com/gokcehan/lf][lf]]  
 - [[https://github.com/junegunn/fzf#installation][fzf]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
@@ -65,6 +110,9 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://wkhtmltopdf.org/downloads.html][wkhtmltopdf]]
 - [[https://github.com/hpjansson/chafa#Installing][chafa]]
 *** fzf
+:PROPERTIES:
+:CUSTOM_ID: fzf
+:END:
 - [[https://github.com/hpjansson/chafa#Installing][chafa]]
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
 - [[https://stedolan.github.io/jq][jq]]
@@ -74,10 +122,16 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/transmission/transmission][transmission-cli]]
 - [[https://github.com/sharkdp/bat#installation][bat]]
 *** MPD
+:PROPERTIES:
+:CUSTOM_ID: mpd
+:END:
 - [[https://mpd.readthedocs.io/en/stable/user.html][mpd]] 
 - [[https://github.com/MusicPlayerDaemon/mpc][mpc]]   
 - [[https://rybczak.net/ncmpcpp/installation][ncmpcpp]]
 *** Emacs
+:PROPERTIES:
+:CUSTOM_ID: emacs
+:END:
 Under WSLg, linux programs run under wayland, so to get the best possible experience with emacs, you need to compile emacs yourself with pgtk and native-compilation.
 #+begin_example
 # Install the necessary developement tools
@@ -99,10 +153,22 @@ sudo make install
 - [[https://github.com/jgm/pandoc/blob/main/INSTALL.md][pandoc]] 
 
 * Setup Instructions
+:PROPERTIES:
+:CUSTOM_ID: setup-instructions
+:END:
 ** WezTerm
+:PROPERTIES:
+:CUSTOM_ID: wezterm
+:END:
 To setup WezTerm with =wezterm.lua=, after installing wezterm you need to move to move =wezterm.lua= to where you have installed WezTerm, typically =C:\Program Files\WezTerm= . Doing so might require administrator privilages.
 ** ArchWSL
+:PROPERTIES:
+:CUSTOM_ID: archwsl
+:END:
 *** Systemd
+:PROPERTIES:
+:CUSTOM_ID: systemd
+:END:
 To enable systemd, you need to edit =/etc/wsl.conf= with sudo privileges i.e. =sudo vim /etc/wsl.conf= and add the following lines
 #+begin_example
 [boot]
@@ -110,11 +176,20 @@ systemd=true
 #+end_example
 and then restart your WSL instance by going into the windows terminal and typing the followin command =wsl --shutdown= and then opening WezTerm.
 *** Emacs Daemon
+:PROPERTIES:
+:CUSTOM_ID: emacs-daemon
+:END:
 To enable Emacs daemon on WSL, we need to create a systemd user service for the Emacs daemon.
 We can do so by the following steps.
 **** Create a service unit file for the Emacs daemon
+:PROPERTIES:
+:CUSTOM_ID: create-a-service-unit-file-for-the-emacs-daemon
+:END:
 =vim ~/.config/systemd/user/emacs.service=
 **** Add the following content to the file
+:PROPERTIES:
+:CUSTOM_ID: add-the-following-content-to-the-file
+:END:
 #+begin_example
 [Unit]
 Description=Emacs text editor (daemon)
@@ -129,9 +204,18 @@ Restart=always
 WantedBy=default.target
 #+end_example
 **** Reload systemd user manager
+:PROPERTIES:
+:CUSTOM_ID: reload-systemd-user-manager
+:END:
 =systemctl --user daemon-reload=
 **** Enable the systemd user manager
+:PROPERTIES:
+:CUSTOM_ID: enable-the-systemd-user-manager
+:END:
 =systemctl --user enable emacs.service=
 
 * Contributing
+:PROPERTIES:
+:CUSTOM_ID: contributing
+:END:
 If you see me doing anything inefficiently in this config or you think something would be useful to me or you want to correct some error on my part, feel free to open a pull request.
