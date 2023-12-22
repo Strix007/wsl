@@ -87,6 +87,14 @@
   (load-theme 'doom-nord-aurora t)
   )
 
+;; Workgroups2
+(use-package workgroups2
+  :init
+  (workgroups-mode +1)
+  :config
+  (add-hook 'delete-frame-functions (lambda () (wg-create-workgroup "Last Session")))
+  )
+
 ;; Dashboard
 (use-package dashboard
   :after
@@ -163,7 +171,7 @@
             ,(all-the-icons-material "restore" :height 1.0 :v-adjust 0.0)
             "Restore"
             "Restore Your Last Session"
-            (lambda (&rest _)(burly-open-last-bookmark))
+            (lambda (&rest _) (wg-open-workgroup "Last Session"))
             error
             )
            )
@@ -1594,6 +1602,12 @@
    )
   )
 
+;; Evil-smartparens
+(use-package evil-smartparens
+  :hook
+  (smartparens-enabled . evil-smartparens-mode)
+  )
+
 ;; Prescient
 (use-package prescient
   :custom
@@ -2572,7 +2586,7 @@ targets."
    :type git
    :host github
    :repo "jdtsmith/mode-minder"
-
+   )
   :commands
   (mode-minder)
   )
@@ -2586,8 +2600,8 @@ targets."
       (window-resize (selected-window) (- 30 (window-total-width)) t t)
       )
     )
-  :config
-  (zoom-mode +1)
+  :hook
+  (after-init . zoom-mode)
   :custom
   (zoom-minibuffer-preserve-layout nil)
   :hook
