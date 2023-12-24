@@ -148,6 +148,9 @@
 ;; Move point from window to window using Shift and the arrow keys
 (windmove-default-keybindings)
 
+;; Undo Window Configurations
+(winner-mode +1)
+
 ;; Auto close brackets and quotes
 (electric-pair-mode +1)
 (electric-quote-mode +1)

@@ -87,14 +87,6 @@
   (load-theme 'doom-nord-aurora t)
   )
 
-;; Workgroups2
-(use-package workgroups2
-  :init
-  (workgroups-mode +1)
-  :config
-  (add-hook 'delete-frame-functions (lambda () (wg-create-workgroup "Last Session")))
-  )
-
 ;; Dashboard
 (use-package dashboard
   :after
@@ -1604,6 +1596,7 @@
 
 ;; Evil-smartparens
 (use-package evil-smartparens
+  :disabled
   :hook
   (smartparens-enabled . evil-smartparens-mode)
   )
@@ -2606,4 +2599,27 @@ targets."
   (zoom-minibuffer-preserve-layout nil)
   :hook
   (imenu-list-update . arbab/zoom-fix-imenu-size)
+  )
+
+;; Workgroups2
+(use-package workgroups2
+  :init
+  (workgroups-mode +1)
+  :config
+  (add-hook 'delete-frame-functions (lambda () (wg-create-workgroup "Last Session")))
+  )
+
+;; Lipsy
+(use-package lispy
+  :disabled t
+  :hook
+  (emacs-lisp-mode . lispy-mode)
+  )
+
+;; Lispyville
+(use-package lispyville
+  :after
+  (lipsy)
+  :hook
+  (lispy-mode . lispyville-mode)
   )
