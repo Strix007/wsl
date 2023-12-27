@@ -498,6 +498,7 @@
   :config
   (doom-modeline-mode +1)
   :custom
+  (doom-modeline-battery t)
   (doom-modeline-icon t)
   (doom-modeline-support-imenu t)
   (doom-modeline-major-mode-icon t)
@@ -1181,7 +1182,19 @@
   (org-mode . org-imgtog-mode)
   )
 
-;; Haskell-mode
+;; Org-bars
+(use-package org-bars
+  :straight
+  (
+   :type git
+   :host github
+   :repo "tonyaldon/org-bars"
+   )
+  :hook
+  (org-mode . org-bars-mode)
+  )
+
+;; haskell-mode
 (use-package haskell-mode
   :mode
   ("\\.hs\\'")
@@ -2622,4 +2635,10 @@ targets."
   (lipsy)
   :hook
   (lispy-mode . lispyville-mode)
+  )
+
+;; Git-timemachine
+(use-package git-timemachine
+  :commands
+  (git-timemachine-toggle)
   )

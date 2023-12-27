@@ -115,6 +115,9 @@
 (menu-bar-mode -1)   ; Disable the menu bar
 (fset 'yes-or-no-p 'y-or-n-p) ; Change yes/no to y/n
 
+;; Display battery on modeline
+(display-battery-mode +1)
+
 ;; Disable scratch buffer message
 (setq initial-scratch-message nil)
 
