@@ -1,0 +1,133 @@
+#!/usr/bin/env sh
+
+# Author: niksingh710
+# This was taken from https://github.com/niksingh710/cli
+# Requirements:
+# - chafa for image
+# - jq for json
+# - exa for directory
+# - w3m for html
+# - glow for markdown
+# - transmission-show for torrent
+# - bat for text files
+# - atool for viewing zips
+# - exiftool for videos and gifs
+# - readelf for viewing binaries
+
+[ "$1" = "" ] && exit 1
+FIFO="/tmp/fzf_preview_fifo"
+
+cleanup() {
+	pkill ueberzugpp
+	rm /tmp/ueberzugpp-*.socket 2>/dev/null
+	rm -f "$FIFO"
+}
+
+if [ "$1" = "--cleanup" ]; then
+	cleanup
+	exit 0
+fi
+
+case "$1" in
+"--ueberzugpp")
+	set -- "$2" >/dev/null
+	ueberzugpp_x="$(($(tput cols) / 2 + 1))"
+	ueberzugpp_y="1"
+	ueberzugpp_width="$FZF_PREVIEW_COLUMNS"
+	ueberzugpp_height="$FZF_PREVIEW_LINES"
+	ueberzug_image="wayland"
+	image_previewer="ueberuzgpp"
+	[ -p "$FIFO" ] || mkfifo "$FIFO"
+	;;
+esac
+
+start_preview() {
+	echo '{"path": "'"$1"'", "action": "add", "identifier": "fzfpreview", "x": "'"$ueberzugpp_x"'", "y": "'"$ueberzugpp_y"'", "width": "'"$ueberzugpp_width"'", "height": "'"$ueberzugpp_height"'"}' >"$FIFO"
+}
+
+handle_image() {
+	case "$1" in
+	image/*)
+		case "$image_previewer" in
+		"ueberuzgpp")
+			mediainfo "$2"
+			ueberzugpp layer -o "$ueberzug_image" --silent <"$FIFO" &
+			exec 3>"${FIFO}"
+			start_preview "$2"
+			wait
+			;;
+		*)
+			chafa "$2" -f symbols
+			;;
+		esac
+		;;
+	*) exiftool -All "$2" ;;
+	esac
+}
+
+handle_text() {
+	case "$2" in
+	*.md) glow --style=auto "$2" ;;
+	# *.htm | *.html) elinks -dump "$2" ;;
+	*.htm | *.html) w3m -T text/html -dump "$2" ;;
+	*) bat -p --color=always "$2" ;;
+	esac
+}
+
+test -d "$HOME/.cache/fzf" || mkdir -p "$HOME/.cache/fzf"
+cache="$HOME/.cache/fzf/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
+mime="$(file --brief --mime-type "$1")"
+
+case "$mime" in
+text/*) handle_text "$mime" "$1" ;;
+inode/directory) exa -ahFT -L=1 --color=auto --icons --sort=size --group-directories-first "$1" ;;
+inode/symlink) printf "Symbolic link to: \e[34m%s\e[0m." "$(readlink "$1")" ;;
+application/json) jq --color-output <"$1" ;;
+application/x-bittorrent) transmission-show --unsorted "$1" ;;
+application/x-executable | application/x-pie-executable | application/x-sharedlib) readelf --wide --demangle=auto --all "$1" ;;
+application/zip) atool --list "$1" ;;
+application/x-x509-ca-cert) openssl x509 -text -noout -in "$1" ;;
+application/pdf)
+	pdftoppm -jpeg -f 1 -singlefile "$1" "$cache"
+	handle_image "image/*" "$cache.jpg"
+	;;
+image/*)
+	handle_image "$mime" "$1"
+	;;
+video/*)
+	ffmpegthumbnailer -i "$1" -o "${cache}.jpg" -s 1200
+	handle_image "image/*" "${cache}.jpg"
+	;;
+*)
+	case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
+	*.tgz | *.tar.gz) tar tzf "$1" ;;
+	*.tar.bz2 | *.tbz2) tar tjf "$1" ;;
+	*.tar.txz | *.txz) xz --list "$1" ;;
+	*.tar) tar tf "$1" ;;
+	*.zip | *.jar | *.war | *.ear | *.oxt) unzip -l "$1" ;;
+	*.rar) unrar l "$1" ;;
+	*.7z) 7z l "$1" ;;
+	*.[1-8]) man "$1" | col -b ;;
+	*.o) nm "$1" ;;
+	*.torrent) transmission-show "$1" ;;
+	*.iso) iso-info --no-header -l "$1" ;;
+	*.odt | *.ods | *.odp | *.sxw) odt2txt "$1" ;;
+	*.doc) catdoc "$1" ;;
+	*.docx) docx2txt "$1" - ;;
+	*.xls | *.xlsx)
+		ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | batorcat --language=csv
+		;;
+	*.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx] | *.mka)
+		exiftool "$1"
+		;;
+	*.svg)
+		[ ! -f "${cache}.jpg" ] &&
+			convert "$1" "${cache}.jpg"
+		handle_image "image/*" "${cache}.jpg"
+		;;
+	*)
+		exit 1
+		;;
+	esac
+	;;
+esac
