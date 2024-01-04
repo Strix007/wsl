@@ -779,12 +779,12 @@
   "hd7" '(harpoon-delete-7    :which-key "Delete Harpoon Mark 7")
   "hd8" '(harpoon-delete-8    :which-key "Delete Harpoon Mark 8")
   "hd9" '(harpoon-delete-9    :which-key "Delete Harpoon Mark 9")
-  ;; Popper
-  "pp" '(popper-toggle            :which-key "Popper Toggle")
-  "pj" '(popper-cycle             :which-key "Popper Cycle Forward")
-  "pk" '(popper-cycle-backwards   :which-key "Popper Cycle Backward")
-  "pt" '(popper-toggle-type       :which-key "Popper Toggle Type")
-  "px" '(popper-kill-latest-popup :which-key "Popper Kill Latest Popup")
+  ;; ;; Popper
+  ;; "pp" '(popper-toggle            :which-key "Popper Toggle")
+  ;; "pj" '(popper-cycle             :which-key "Popper Cycle Forward")
+  ;; "pk" '(popper-cycle-backwards   :which-key "Popper Cycle Backward")
+  ;; "pt" '(popper-toggle-type       :which-key "Popper Toggle Type")
+  ;; "px" '(popper-kill-latest-popup :which-key "Popper Kill Latest Popup")
   )
 
 ;; Hydra
@@ -1609,7 +1609,7 @@
 
 ;; Evil-smartparens
 (use-package evil-smartparens
-  :disabled
+  :disabled t
   :hook
   (smartparens-enabled . evil-smartparens-mode)
   )
@@ -2173,6 +2173,9 @@
    ("C-x C-i" . consult-imenu)
    ("M-y"     . consult-yank-from-kill-ring)
    ([remap goto-line] . consult-goto-line)
+   :map org-mode-map
+   ("C-x C-i" . consult-org-heading)
+   ("C-x TAB" . consult-org-heading)
    :map minibuffer-local-map
    ("M-k" . vertico-previous)
    ("M-j" . vertico-next)
@@ -2525,6 +2528,7 @@ targets."
 
 ;; Epithet
 (use-package epithet
+  :disabled t
   :config
   (add-hook 'Info-selection-hook #'epithet-rename-buffer)
   (add-hook 'eww-after-render-hook #'epithet-rename-buffer)
@@ -2544,6 +2548,7 @@ targets."
 
 ;; Popper
 (use-package popper
+  :disabled t
   :config
   (setq popper-reference-buffers '(
                                    "\\*Messages\\*"
@@ -2641,4 +2646,59 @@ targets."
 (use-package git-timemachine
   :commands
   (git-timemachine-toggle)
+  )
+
+;; Rmsbolt
+(use-package rmsbolt
+  :defer t
+  )
+
+;; Indent-control
+(use-package indent-control
+  :config
+  (setq indent-control-records
+        '(
+          (actionscript-mode     . 4)
+          (c-mode                . 4)
+          (c++-mode              . 4)
+          (csharp-mode           . 4)
+          (emacs-lisp-mode       . 2)
+          (sql-mode              . 1)
+          (typescript-mode       . 4)
+          (web-mode              . 2)
+          (yaml-mode             . 2)
+          )
+        )
+  :hook
+  (prog-mode . indent-control-mode)
+  )
+
+;; Diff-hl
+(use-package diff-hl
+  :disabled t
+  :hook
+  (
+   (
+    prog-mode
+    text-mode
+    ) . diff-hl-mode)
+  )
+
+;; Gumshoe
+(use-package gumshoe
+  :straight
+  (
+   :type git
+   :host github
+   :repo "Overdr0ne/gumshoe"
+   :branch "master"
+   )
+  :hook
+  (after-init . global-gumshoe-mode)
+  )
+
+;; Info-colors
+(use-package info-colors
+  :hook
+  (Info-selection . info-colors-fontify-node)
   )

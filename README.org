@@ -27,11 +27,6 @@ This is my WSL configuration for my arch WSL instance.
   - [[#wezterm][WezTerm]]
   - [[#archwsl][ArchWSL]]
     - [[#systemd][Systemd]]
-    - [[#emacs-daemon][Emacs Daemon]]
-      - [[#create-a-service-unit-file-for-the-emacs-daemon][Create a service unit file for the Emacs daemon]]
-      - [[#add-the-following-content-to-the-file][Add the following content to the file]]
-      - [[#reload-systemd-user-manager][Reload systemd user manager]]
-      - [[#enable-the-systemd-user-manager][Enable the systemd user manager]]
 - [[#contributing][Contributing]]
 :END:
 
@@ -77,6 +72,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/jstkdng/ueberzugpp][ueberzug++]]
 - [[https://github.com/eza-community/eza][eza]]
 - [[https://github.com/ajeetdsouza/zoxide#installation][zoxide]]
+- [[https://github.com/mozilla/sccache#installation][sccache]]
 *** Tmux
 :PROPERTIES:
 :CUSTOM_ID: tmux
@@ -178,17 +174,20 @@ and then restart your WSL instance by going into the windows terminal and typing
 *** Emacs Daemon
 :PROPERTIES:
 :CUSTOM_ID: emacs-daemon
+:TOC:      :ignore this
 :END:
 To enable Emacs daemon on WSL, we need to create a systemd user service for the Emacs daemon.
 We can do so by the following steps.
 **** Create a service unit file for the Emacs daemon
 :PROPERTIES:
 :CUSTOM_ID: create-a-service-unit-file-for-the-emacs-daemon
+:TOC:      :ignore this
 :END:
 =vim ~/.config/systemd/user/emacs.service=
 **** Add the following content to the file
 :PROPERTIES:
 :CUSTOM_ID: add-the-following-content-to-the-file
+:TOC:      :ignore this
 :END:
 #+begin_example
 [Unit]
@@ -206,11 +205,13 @@ WantedBy=default.target
 **** Reload systemd user manager
 :PROPERTIES:
 :CUSTOM_ID: reload-systemd-user-manager
+:TOC:      :ignore this
 :END:
 =systemctl --user daemon-reload=
 **** Enable the systemd user manager
 :PROPERTIES:
 :CUSTOM_ID: enable-the-systemd-user-manager
+:TOC:      :ignore this
 :END:
 =systemctl --user enable emacs.service=
 

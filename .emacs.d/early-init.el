@@ -399,3 +399,21 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Control buffer placement
 (setq even-window-sizes nil)
+
+;; Change cursor color during repeat
+(add-hook 'post-command-hook
+          (defalias 'arbab/repeat-change-cursor
+            (let (repeat-p (ccol (face-background 'cursor)))
+		          (lambda ()
+                (unless (eq repeat-p repeat-in-progress)
+                  (setq repeat-p repeat-in-progress)
+                  (set-cursor-color
+		               (if repeat-in-progress
+			                 (face-foreground 'success)
+		                 ccol)
+                   )
+                  )
+                )
+              )
+            )
+          90)
