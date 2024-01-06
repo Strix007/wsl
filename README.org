@@ -27,6 +27,7 @@ This is my WSL configuration for my arch WSL instance.
   - [[#wezterm][WezTerm]]
   - [[#archwsl][ArchWSL]]
     - [[#systemd][Systemd]]
+    - [[#emacs-daemon][Emacs Daemon]]
 - [[#contributing][Contributing]]
 :END:
 
@@ -174,7 +175,6 @@ and then restart your WSL instance by going into the windows terminal and typing
 *** Emacs Daemon
 :PROPERTIES:
 :CUSTOM_ID: emacs-daemon
-:TOC:      :ignore this
 :END:
 To enable Emacs daemon on WSL, we need to create a systemd user service for the Emacs daemon.
 We can do so by the following steps.
