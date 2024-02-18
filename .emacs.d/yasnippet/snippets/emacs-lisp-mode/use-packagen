@@ -1,7 +1,0 @@
-# name: use-packagen
-# key: upn
-# --
-(use-package ${}
-  :hook
-  (${} . ${})
-  )

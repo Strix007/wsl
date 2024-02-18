@@ -224,6 +224,8 @@
 ;; Specific modes for specific file extensions
 (add-to-list 'auto-mode-alist '("\\.rasi$" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\lfrc\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 
 ;; Tree-sitter
 ;; Tell emacs where to find the language grammers

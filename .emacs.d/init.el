@@ -1204,6 +1204,12 @@
 (use-package lua-mode
   :mode
   ("\\.lua\\'" . lua-mode)
+  :straight
+  (
+   :type git
+   :host github
+   :repo "immerrr/lua-mode"
+   )
   )
 
 ;; Rust-mode
@@ -1216,14 +1222,6 @@
 (use-package json-mode
   :mode
   ("\\.json\\'")
-  )
-
-;; Typescript-mode
-(use-package typescript-mode
-  :mode
-  ("\\.ts\\'")
-  :custom
-  (typescript-indent-level 2)
   )
 
 ;; Tldr
@@ -1561,7 +1559,6 @@
 
 ;; Highlight-indentation
 (use-package highlight-indent-guides
-  :disabled t
   :hook
   (prog-mode . highlight-indent-guides-mode)
   :custom
@@ -1593,7 +1590,7 @@
 ;; Smartparens
 (use-package smartparens
   :hook
-  (prog-mode . smartparens-strict-mode)
+  (prog-mode . smartparens-mode)
   :bind
   (
    ("C-M-a" . sp-beginning-of-sexp)
@@ -1987,6 +1984,7 @@
 
 ;; Indent-bars
 (use-package indent-bars
+  :disabled t
   :straight
   (
    :type git
@@ -2664,9 +2662,11 @@ targets."
           (csharp-mode           . 4)
           (emacs-lisp-mode       . 2)
           (sql-mode              . 1)
-          (typescript-mode       . 4)
+          (typescript-mode       . 2)
           (web-mode              . 2)
           (yaml-mode             . 2)
+          (js-ts-mode            . 2)
+          (js-mode               . 2)
           )
         )
   :hook
