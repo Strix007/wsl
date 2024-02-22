@@ -1559,6 +1559,7 @@
 
 ;; Highlight-indentation
 (use-package highlight-indent-guides
+  :disabled t
   :hook
   (prog-mode . highlight-indent-guides-mode)
   :custom
@@ -1984,7 +1985,6 @@
 
 ;; Indent-bars
 (use-package indent-bars
-  :disabled t
   :straight
   (
    :type git
@@ -1994,15 +1994,23 @@
   :hook
   (prog-mode . indent-bars-mode)
   :config
+  ;; (setq
+  ;;  indent-bars-color '(highlight :face-bg t :blend 0.6)
+  ;;  indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
+  ;;  indent-bars-width-frac 0.25
+  ;;  indent-bars-pad-frac 0.1
+  ;; )
   (setq
-   indent-bars-color '(highlight :face-bg t :blend 0.6)
-   indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
-   indent-bars-width-frac 0.25
-   indent-bars-pad-frac 0.1)
+   indent-bars-color '(highlight :face-bg t :blend 0.75)
+   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)
+   indent-bars-unspecified-fg-color "white"
+   indent-bars-unspecified-bg-color "black"
+   )
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)
   (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  (indent-bars-prefer-character t)
   )
 
 ;; Harpoon
