@@ -1994,23 +1994,23 @@
   :hook
   (prog-mode . indent-bars-mode)
   :config
-  ;; (setq
-  ;;  indent-bars-color '(highlight :face-bg t :blend 0.6)
-  ;;  indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
-  ;;  indent-bars-width-frac 0.25
-  ;;  indent-bars-pad-frac 0.1
-  ;; )
   (setq
-   indent-bars-color '(highlight :face-bg t :blend 0.75)
-   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)
-   indent-bars-unspecified-fg-color "white"
-   indent-bars-unspecified-bg-color "black"
-   )
-  :custom
-  (indent-bars-treesit-support t)
-  (indent-bars-no-descend-string t)
-  (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  (indent-bars-prefer-character t)
+   indent-bars-color '(highlight :face-bg t :blend 0.6)
+   indent-bars-pattern " . . . . ." ; play with the number of dots for your usual font size
+   indent-bars-width-frac 0.25
+   indent-bars-pad-frac 0.1
+  )
+  ;; (setq
+  ;;  indent-bars-color '(highlight :face-bg t :blend 0.75)
+  ;;  indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)
+  ;;  indent-bars-unspecified-fg-color "white"
+  ;;  indent-bars-unspecified-bg-color "black"
+  ;;  )
+  ;; :custom
+  ;; (indent-bars-treesit-support t)
+  ;; (indent-bars-no-descend-string t)
+  ;; (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;; (indent-bars-prefer-character t)
   )
 
 ;; Harpoon
@@ -2330,7 +2330,7 @@
     )
   :bind
   (
-   ("C-." . embark-act)
+   ("C-," . embark-act)
    ("M-." . embark-dwim)
    ("C-h B" . embark-bindings)
    :map embark-general-map
@@ -2424,6 +2424,8 @@ targets."
       (push '(embark-target-mode (:eval embark--target-mode-string)) mode-line-misc-info)
       (setq embark--target-mode-timer
             (run-with-idle-timer 0.1 t #'embark--target-mode-update))))
+  :custom
+  (embark-quit-after-action nil)
   )
 
 ;; Embark-consult

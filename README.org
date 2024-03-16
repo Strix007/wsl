@@ -24,10 +24,15 @@ This is my WSL configuration for my arch WSL instance.
     - [[#mpd][MPD]]
     - [[#emacs][Emacs]]
 - [[#setup-instructions][Setup Instructions]]
-  - [[#wezterm][WezTerm]]
-  - [[#archwsl][ArchWSL]]
-    - [[#systemd][Systemd]]
-    - [[#emacs-daemon][Emacs Daemon]]
+  - [[#windows][Windows]]
+    - [[#wezterm][WezTerm]]
+    - [[#vcxsrv][VcXsrv]]
+      - [[#firewall][Firewall]]
+      - [[#startup][Startup]]
+      - [[#blurry-fonts][Blurry Fonts]]
+- [[#archwsl][ArchWSL]]
+  - [[#systemd][Systemd]]
+  - [[#emacs-daemon][Emacs Daemon]]
 - [[#contributing][Contributing]]
 :END:
 
@@ -43,7 +48,9 @@ You also need to do simple little tweaks here and there to get things working, t
 :PROPERTIES:
 :CUSTOM_ID: about
 :END:
-This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/VSWSL/Arch-WSL][Vineel Sai's Unofficial Arch-WSL]].
+This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/yuk7/ArchWSL][yuk7's ArchWSL]].
+
+This configuration also heavily relies on [[https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj][Aitor Alono's article on how to use GUI apps in WSL2]].
 
 This configuration uses WezTerm on the Windows side to spawn directly into the WSL instance without going through powershell though any terminal can work.
 
@@ -59,6 +66,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://wezfurlong.org/wezterm/install/windows.html][WezTerm]]
 - [[https://github.com/VSWSL/Arch-WSL#Installation][Arch-WSL]]
 - [[https://github.com/ryanoasis/nerd-fonts#font-installation][Nerd Font]]
+- [[https://sourceforge.net/projects/vcxsrv][VcXsrv]]
 ** WSL
 :PROPERTIES:
 :CUSTOM_ID: wsl
@@ -129,7 +137,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 :PROPERTIES:
 :CUSTOM_ID: emacs
 :END:
-Under WSLg, linux programs run under wayland, so to get the best possible experience with emacs, you need to compile emacs yourself with pgtk and native-compilation.
+Under WSLg, you would need to compile emacs yourself with =pgtk= and =native-comp= but due to some hibernation issues I faced with WSLg, I switched over to forwarding a X server with VcXsrv. So you don’t need to compile emacs from scratch anymore, but it is still the prefered method to install emacs as compared to a distro repository.
 #+begin_example
 # Install the necessary developement tools
 sudo pacman -S base-devel git --needed
@@ -140,8 +148,8 @@ git clone git://git.sv.gnu.org/emacs.git
 cd emacs
 # Generate build files
 ./autogen
-# Configure the Emacs features you want
-./configure --with-native-compilation=aot --with-pgtk --with-xwidgets --with-tree-sitter --with-json --with-imagemagick --with-mailutils
+# Configure the Emacs features per your needs
+./configure --with-native-compilation=aot  --with-xwidgets --with-tree-sitter --with-json --with-imagemagick --with-mailutils
 # Build Emacs
 make
 # Install Emacs
@@ -153,12 +161,39 @@ sudo make install
 :PROPERTIES:
 :CUSTOM_ID: setup-instructions
 :END:
-** WezTerm
+** Windows
+:PROPERTIES:
+:CUSTOM_ID: windows
+:END:
+*** WezTerm
 :PROPERTIES:
 :CUSTOM_ID: wezterm
 :END:
 To setup WezTerm with =wezterm.lua=, after installing wezterm you need to move to move =wezterm.lua= to where you have installed WezTerm, typically =C:\Program Files\WezTerm= . Doing so might require administrator privilages.
-** ArchWSL
+*** VcXsrv
+:PROPERTIES:
+:CUSTOM_ID: vcxsrv
+:END:
+**** Firewall
+:PROPERTIES:
+:CUSTOM_ID: firewall
+:END:
+After VcxSrv is installed, we need to ensure the proper rules for VcxSrv on our firewall. These steps assume you do not have custom firewall rules(like an antivirus). If you do have custom rules set, you may need to configure it manually.
+
+To ensure the proper firewall rules, open =Windows Security= ,go to =Firewall & network protection= -> =Allow an app through firewall= and ensure =VcXsrv windows xserver= has both =Private networks= and =Public networks= permissions.
+**** Startup
+:PROPERTIES:
+:CUSTOM_ID: startup
+:END:
+To automatically start VcXsrv on startup, move the =Windows/config.xlaunch= file to the =%AppData%\Microsoft\Windows\Start Menu\Programs\Startup= folder and enable it in =TaskManager=
+:CUSTOM_ID: startup
+:END:
+**** Blurry Fonts
+:PROPERTIES:
+:CUSTOM_ID: blurry-fonts
+:END:
+If you experience blurry fonts, follow [[https://superuser.com/questions/1370361/blurry-fonts-on-using-windows-default-scaling-with-wsl-gui-applications-hidpi/1550608#1550608][this]] answer.
+* ArchWSL
 :PROPERTIES:
 :CUSTOM_ID: archwsl
 :END:

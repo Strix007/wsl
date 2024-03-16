@@ -36,6 +36,11 @@ export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 export WINEPREFIX=$XDG_DATA_HOME/wine
 export MOZ_ENABLE_WAYLAND=1 
 export PARU_CONF=$HOME/.config/paru/paru.conf
+# DISPLAY VAR FOR VCXSRV
+export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
+# GTK SCALING
+export GDK_SCALE=0.5
+export GDK_DPI_SCALE=2
 # User Defined
 export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8

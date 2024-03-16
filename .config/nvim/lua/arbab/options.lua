@@ -35,6 +35,7 @@ local options = {
    scrolloff = 8,
    sidescrolloff = 8,
    guifont = "JetBrainsMono:h17",
+   fillchars = { eob = " " },
 
 }
 
