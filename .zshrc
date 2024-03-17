@@ -117,6 +117,8 @@ alias xmo="xmonad --recompile; startx /bin/xmonad; feh --bg-fill /home/arbab/.xm
 alias fzf="fzf --preview='fzf-preview {}' --bind alt-k:preview-page-up,alt-j:preview-page-down"
 alias tmux="tmux attach"
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
+alias wo="wsl-open"
+alias wp="wslpath"
 # Verbose
 alias mv='mv -vi'
 alias cp='cp -vri'

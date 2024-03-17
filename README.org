@@ -30,6 +30,7 @@ This is my WSL configuration for my arch WSL instance.
       - [[#firewall][Firewall]]
       - [[#startup][Startup]]
       - [[#blurry-fonts][Blurry Fonts]]
+      - [[#shortcut][Shortcut]]
 - [[#archwsl][ArchWSL]]
   - [[#systemd][Systemd]]
   - [[#emacs-daemon][Emacs Daemon]]
@@ -40,6 +41,7 @@ This is my WSL configuration for my arch WSL instance.
 :PROPERTIES:
 :CUSTOM_ID: caution
 :END:
+
 I have not tested these dotfiles on other WSL distributions and am not sure how will they work.
 
 You also need to do simple little tweaks here and there to get things working, there are too many to list but they are simple enough that a simple google search should help you.
@@ -83,6 +85,9 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/eza-community/eza][eza]]
 - [[https://github.com/ajeetdsouza/zoxide#installation][zoxide]]
 - [[https://github.com/mozilla/sccache#installation][sccache]]
+- [[https://github.com/4U6U57/wsl-open][wsl-open]]
+- [[https://github.com/laurent22/wslpath][wslpath]]
+- [[https://github.com/nullpo-head/WSL-Hello-sudo][WSL-Hello-sudo]]
 *** Tmux
 :PROPERTIES:
 :CUSTOM_ID: tmux
@@ -188,14 +193,22 @@ To ensure the proper firewall rules, open =Windows Security= ,go to =Firewall & 
 :PROPERTIES:
 :CUSTOM_ID: startup
 :END:
-To automatically start VcXsrv on startup, move the =Windows/config.xlaunch= file to the =%AppData%\Microsoft\Windows\Start Menu\Programs\Startup= folder and enable it in =TaskManager=
+To automatically start VcXsrv on startup, move the =Windows/config.xlaunch= file to the =%AppData%\Microsoft\Windows\Start Menu\Programs\Startup= directory and enable it in =TaskManager=
 :CUSTOM_ID: startup
 :END:
+
 **** Blurry Fonts
 :PROPERTIES:
 :CUSTOM_ID: blurry-fonts
 :END:
 If you experience blurry fonts, follow [[https://superuser.com/questions/1370361/blurry-fonts-on-using-windows-default-scaling-with-wsl-gui-applications-hidpi/1550608#1550608][this]] answer.
+
+**** Shortcut
+:PROPERTIES:
+:CUSTOM_ID: shortcut
+:END:
+To make a shortcut for any GUI application for VcXsrv, right-click on desktop, click =New= -> =Shortcut= and put the shortcut command as such =C:\Windows\System32\wsl.exe --distribution Arch zsh -ic "/your command here/"=
+
 * ArchWSL
 :PROPERTIES:
 :CUSTOM_ID: archwsl
