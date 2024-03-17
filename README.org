@@ -48,9 +48,10 @@ You also need to do simple little tweaks here and there to get things working, t
 :PROPERTIES:
 :CUSTOM_ID: about
 :END:
-This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/yuk7/ArchWSL][yuk7's ArchWSL]]. \\
 
-This configuration also heavily relies on [[https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj][Aitor Alono's article on how to use GUI apps in WSL2]]. \\
+This is a very basic configuration for WSL2 on Windows 11 using [[https://github.com/yuk7/ArchWSL][yuk7's ArchWSL]]. 
+
+This configuration also heavily relies on [[https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj][Aitor Alono's article on how to use GUI apps in WSL2]]. 
 
 This configuration uses WezTerm on the Windows side to spawn directly into the WSL instance without going through powershell though any terminal can work.
 
@@ -178,9 +179,11 @@ To setup WezTerm with =wezterm.lua=, after installing wezterm you need to move t
 :PROPERTIES:
 :CUSTOM_ID: firewall
 :END:
-After VcxSrv is installed, we need to ensure the proper rules for VcxSrv on our firewall. These steps assume you do not have custom firewall rules(like an antivirus). If you do have custom rules set, you may need to configure it manually. \\
+
+After VcxSrv is installed, we need to ensure the proper rules for VcxSrv on our firewall. These steps assume you do not have custom firewall rules(like an antivirus). If you do have custom rules set, you may need to configure it manually. 
 
 To ensure the proper firewall rules, open =Windows Security= ,go to =Firewall & network protection= -> =Allow an app through firewall= and ensure =VcXsrv windows xserver= has both =Private networks= and =Public networks= permissions.
+
 **** Startup
 :PROPERTIES:
 :CUSTOM_ID: startup
