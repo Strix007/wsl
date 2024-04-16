@@ -1,8 +1,11 @@
 return {
-    'AlexvZyl/nordic.nvim',
+  {
+    "gbprod/nord.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme nordic]])
-    end
+      require("nord").setup({})
+      vim.cmd.colorscheme("nord")
+    end,
+  },
 }

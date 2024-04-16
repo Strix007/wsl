@@ -655,6 +655,26 @@
    )
   )
 
+;; Numpydoc
+(use-package numpydoc
+  :bind 
+  (
+   :map python-mode-map
+   ("C-c C-n" . numpydoc-generate)
+   )
+  :custom
+  (numpydoc-insertion-style 'yas)
+  )
+
+;; Poetry
+(use-package poetry
+  :defer t
+  :hook
+  (python-mode . poetry-tracking-mode)
+  :config
+  (setq poetry-tracking-strategy 'switch-buffer)
+  )
+
 ;; Company-quickhelp
 (use-package company-quickhelp
   :hook
@@ -1182,6 +1202,23 @@
   (org-mode . org-imgtog-mode)
   )
 
+;; Gif-screencast
+(use-package gif-screencast
+  :bind
+  (
+   ("<f6>" . gif-screencast-toggle-pause)
+   ("<f7>" . gif-screencast-stop)
+   )
+  ;; For OSX
+  ;; :config
+  ;; ;; To shut up the shutter sound of `screencapture' (see `gif-screencast-command').
+  ;; (setq gif-screencast-args '("-x")) 
+  ;; ;; Optional: Used to crop the capture to the Emacs frame.
+  ;; (setq gif-screencast-cropping-program "mogrify") 
+  ;; ;; To shut up the shutter sound of `screencapture' (see `gif-screencast-command').
+  ;; (setq gif-screencast-capture-format "ppm")
+  )
+
 ;; Org-bars
 (use-package org-bars
   :straight
@@ -1194,10 +1231,27 @@
   (org-mode . org-bars-mode)
   )
 
-;; haskell-mode
+;; Haskell-mode
 (use-package haskell-mode
   :mode
   ("\\.hs\\'")
+  )
+
+;; Docker
+(use-package docker
+  :defer t
+  )
+
+;; Dockerfile-mode
+(use-package dockerfile-mode
+  :mode
+  ("Dockerfile")
+  )
+
+;; Zig-mode
+(use-package zig-mode
+  :mode
+  ("\\.zig\\'")
   )
 
 ;; Lua-mode
@@ -1218,6 +1272,21 @@
   ("\\.rs\\'")
   )
 
+;; Rustic
+(use-package rustic
+  :defer t
+  )
+
+;; Cargo
+(use-package cargo
+  :hook
+  (
+   (
+    rust-ts-mode-hook
+    rustic-mode-hook
+    ) . cargo-minior-mode )
+  )
+
 ;; Json-mode
 (use-package json-mode
   :mode
@@ -1233,7 +1302,9 @@
 ;; Vterm
 (use-package vterm
   :bind
-  ("M-RET" . vterm)
+  (
+   ("M-RET" . vterm)
+   )
   :custom
   (vterm-max-scrollback 10000)
   )
@@ -1258,7 +1329,7 @@
              )
       (lsp-deferred)
       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-      (lsp-headerline-breadcrumb-mode)
+      (lsp-headerline-breadcrumb-mode +1)
       )
     )
   :commands
@@ -1291,6 +1362,11 @@
 (use-package consult-lsp
   :after
   (lsp-mode)
+  :bind
+  (
+   :map lsp-mode-map
+   ("C-c i" . consult-lsp-diagnostics)
+   )
   )
 
 ;; LSP-UI
@@ -1301,8 +1377,8 @@
   ;; Ui-doc
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header nil)
-  (lsp-ui-doc-position 'top-right-corner)
-  (lsp-ui-doc-delay 5)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 0)
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-show-with-mouse nil)
   (lsp-ui-doc-enhanced-markdown t)
@@ -1703,6 +1779,7 @@
 
 ;; Highlight-parentheses
 (use-package highlight-parentheses
+  :disabled t
   :hook
   (prog-mode . highlight-parentheses-mode)
   )
@@ -2712,3 +2789,11 @@ targets."
   :hook
   (Info-selection . info-colors-fontify-node)
   )
+
+;; ;; Envrc
+;; (use-package envrc
+;;   :ensure
+;;   (direnv)
+;;   :config
+;;   (envrc-global-mode)
+;;   )

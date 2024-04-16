@@ -8,20 +8,20 @@ return {
             icons_enabled = true,
             component_separators = '|',
             section_separators = '',
-            theme = "nordic",
+            theme = "nord",
             disabled_filetypes = {
                statusline = { "alpha" },
                winbar = {},
             },
          },
          sections = {
-            lualine_x = {
-               {
-                  require("noice").api.statusline.mode.get,
-                  cond = require("noice").api.statusline.mode.has,
-                  color = { fg = "#ff9e64" },
-               }
-            },
+            -- lualine_x = {
+            --    {
+            --       require("noice").api.statusline.mode.get,
+            --       cond = require("noice").api.statusline.mode.has,
+            --       color = { fg = "#ff9e64" },
+            --    }
+            -- },
             lualine_a = {
                {
                   'buffers',
