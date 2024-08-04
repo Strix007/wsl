@@ -20,7 +20,12 @@ return {
                 min_height = 0,
                 prompt_position = 'bottom',
                 reverse = 1, -- if 1, shows the candidates from bottom to top
-            })
+            }),
+            {
+                highlights = {
+                accent = wilder.make_hl('WilderAccent', 'Pmenu', {{a = 1}, {a = 1}, {foreground = '#f4468f'}}),
+                },
+            }
         ))
     end,
 }
