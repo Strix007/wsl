@@ -46,7 +46,7 @@ export MONITOR="HDMI-2"
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64" # Compilation Flag
 export ANDROID_ADB_SERVER_PORT=12345
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+export ZSH_COMPDUMP=$HOME/cache/.zcompdump-$HOST
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='nvim'
 else

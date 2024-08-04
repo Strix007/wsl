@@ -19,10 +19,10 @@ This is my WSL configuration for my arch WSL instance.
     - [[#shell][Shell]]
     - [[#tmux][Tmux]]
     - [[#neovim][NeoVim]]
-- [[#lf][lf]]
-  - [[#fzf][fzf]]
-  - [[#mpd][MPD]]
-  - [[#emacs][Emacs]]
+    - [[#lf][lf]]
+    - [[#fzf][fzf]]
+    - [[#mpd][MPD]]
+    - [[#emacs][Emacs]]
 - [[#setup-instructions][Setup Instructions]]
   - [[#windows][Windows]]
     - [[#wezterm][WezTerm]]
@@ -106,7 +106,7 @@ This configuration uses WezTerm on the Windows side to spawn directly into the W
 - [[https://github.com/neovim/neovim/wiki/Installing-Neovim][neovim]]
 - [[https://www.gnu.org/software/make/#download][make]]
 - [[https://github.com/mah0x211/lua-pcre2][lua-pcre2]]
-* lf 
+*** lf 
 :PROPERTIES:
 :CUSTOM_ID: lf
 :END:

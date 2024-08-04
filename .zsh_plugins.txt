@@ -10,6 +10,7 @@ ohmyzsh/ohmyzsh path:plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # Libraries
 ohmyzsh/ohmyzsh path:lib/git.zsh
+ohmyzsh/ohmyzsh path:lib/async_prompt.zsh
 ohmyzsh/ohmyzsh path:lib/theme-and-appearance.zsh
 ohmyzsh/ohmyzsh path:themes/robbyrussell.zsh-theme
 
