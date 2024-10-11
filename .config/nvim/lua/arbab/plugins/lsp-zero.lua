@@ -7,10 +7,13 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'L3MON4D3/LuaSnip' },
-      { 'folke/neodev.nvim' },
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-nvim-lua'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'L3MON4D3/LuaSnip'},
       {
          "SmiteshP/nvim-navbuddy",
          dependencies = {
@@ -24,17 +27,35 @@ return {
       local navbuddy = require("nvim-navbuddy")
       local navic = require("nvim-navic")
       lsp.preset("recommended")
-
-      lsp.ensure_installed({
-         'tsserver',
-         'rust_analyzer',
+      require('mason').setup()
+      require('mason-lspconfig').setup({
+        ensure_installed = { 
+          "lua_ls", 
+          "pyright", 
+          "ts_ls" 
+        },
       })
 
       -- Fix Undefined global 'vim'
-      lsp.nvim_workspace()
-
+      local lspconfig = require('lspconfig')
+      lspconfig.lua_ls.setup {
+        settings = {
+          Lua = {
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { 'vim' },
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,  -- Prevent prompts about third-party libraries
+            },
+          },
+        },
+      }
 
       local cmp = require('cmp')
+      local luasnip = require('luasnip')
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
       local cmp_mappings = lsp.defaults.cmp_mappings({
          ['<A-j>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -46,8 +67,44 @@ return {
       cmp_mappings['<Tab>'] = nil
       cmp_mappings['<S-Tab>'] = nil
 
-      lsp.setup_nvim_cmp({
-         mapping = cmp_mappings
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp_mappings,
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' }, 
+          { name = 'luasnip' }, 
+        }, {
+          { name = 'buffer' }, 
+        })
+      })
+
+      cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+          { name = 'cmp_git' },  -- Git completion
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        })
       })
 
       lsp.on_attach(function(client, bufnr)
